@@ -15,6 +15,10 @@ p {
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 .particles {
   position: fixed;
   top: 0;
@@ -22,4 +26,6 @@ p {
   bottom: 0;
   left: 0;
   z-index: -1;
+  height: 100vh;
+  background-color: grey;
 }
