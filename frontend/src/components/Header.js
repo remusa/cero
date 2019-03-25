@@ -17,31 +17,34 @@ const particlesOptions = {
 
 const HeaderStyles = styled.header`
     nav {
+        background-color: var(--color-primary);
         width: 100%;
+        height: 40px;
         text-align: center;
         display: flex;
         flex-flow: row wrap;
         justify-content: flex-end;
+        align-content: center;
     }
 
     a {
-        margin-left: 8px;
+        padding: 8px;
+        margin: 8px;
         flex: 0 1 20px;
+        color: #fff;
     }
 
     @media all and (max-width: 800px) {
         nav {
-            /* justify-content: space-around; */
+            /* justify-content: flex-end; */
+            min-height: 40px;
+            height: auto;
         }
     }
 
     @media all and (max-width: 500px) {
         nav {
             flex-direction: column;
-        }
-
-        a {
-            margin-top: 8px;
         }
     }
 `

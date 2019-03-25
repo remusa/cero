@@ -4,10 +4,11 @@ import styled from 'styled-components'
 
 const FooterStyles = styled.div`
     footer {
+        background-color: var(--color-primary);
         position: absolute;
         bottom: 0;
         left: 0;
-        background-color: #fff;
+        right: 0;
         width: 100%;
         text-align: center;
         display: flex;
@@ -16,9 +17,10 @@ const FooterStyles = styled.div`
     }
 
     a {
-        padding: 8px;
-        margin: 8px;
+        padding: 4px;
+        margin: 4px;
         flex: 0 1 20px;
+        color: #fff;
     }
 
     @media all and (max-width: 800px) {
@@ -33,7 +35,7 @@ const FooterStyles = styled.div`
         }
 
         a {
-            margin-top: 8px;
+            /* margin-top: 8px; */
         }
     }
 `

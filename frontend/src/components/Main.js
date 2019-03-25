@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { Switch, Route } from "react-router-dom";
-
 import Home from './Home'
 import Login from './Login'
 import Register from './Register'
-
 
 class Main extends Component {
     render () {
