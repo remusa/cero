@@ -66,7 +66,11 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
                 )}
 
                 {isSignedIn && (
-                    <Link to="/logout">Logout</Link>
+                    <>
+                        <Link to="/fast">Fast</Link>
+
+                        <Link to="/logout">Logout</Link>
+                    </>
                 )}
             </nav>
         </HeaderStyles>
