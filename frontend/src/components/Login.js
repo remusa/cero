@@ -11,8 +11,7 @@ class Login extends Component {
     state = initialState
 
     handleChange = e => {
-        const name = e.target.name
-        const value = e.target.value
+        const { name, value } = e.target
 
         this.setState({
             [name]: value,
@@ -28,45 +27,47 @@ class Login extends Component {
     }
 
     render() {
+        const { email, name, password } = this.state
+
         return (
-            <Form method="POST" onSubmit={this.handleSubmit}>
+            <Form method='POST' onSubmit={this.handleSubmit}>
                 <fieldset>
                     <h2>Login to your account</h2>
 
-                    <label htmlFor="email">
+                    <label htmlFor='email'>
                         Email
                         <input
-                            type="email"
-                            name="email"
-                            placeholder="email"
-                            value={this.state.email}
+                            type='email'
+                            name='email'
+                            placeholder='email'
+                            value={email}
                             onChange={this.handleChange}
                         />
                     </label>
 
-                    <label htmlFor="name">
+                    <label htmlFor='name'>
                         Name
                         <input
-                            type="text"
-                            name="name"
-                            placeholder="name"
-                            value={this.state.name}
+                            type='text'
+                            name='name'
+                            placeholder='name'
+                            value={name}
                             onChange={this.handleChange}
                         />
                     </label>
 
-                    <label htmlFor="password">
+                    <label htmlFor='password'>
                         Password
                         <input
-                            type="password"
-                            name="password"
-                            placeholder="*****"
-                            value={this.state.password}
+                            type='password'
+                            name='password'
+                            placeholder='*****'
+                            value={password}
                             onChange={this.handleChange}
                         />
                     </label>
 
-                    <button type="submit">Login</button>
+                    <button type='submit'>Login</button>
                 </fieldset>
             </Form>
         )
