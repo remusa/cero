@@ -9,26 +9,29 @@ import repeatIcon from '../assets/repeat.svg'
 import upIcon from '../assets/up-arrow.svg'
 import downIcon from '../assets/down-arrow.svg'
 
-const Button = props => (
-    <button id={props.id} className="button" onClick={props.onClick}>
-        <img src={props.icon} alt={props.id} className="icon" />
+const Button = ({ id, onClick, icon }) => (
+    <button type='button' id={id} className='button' onClick={onClick}>
+        <img src={icon} alt={id} className='icon' />
     </button>
 )
 
 Button.propTypes = {
     id: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    icon: PropTypes.string.isRequired,
 }
 
-const Label = props => (
-    <div id={props.label} className="container__length__label">
-        <h3>{props.name}</h3>
-        <div className="container__length__label__children">{props.children}</div>
+const Label = ({ label, name, children }) => (
+    <div id={label} className='container__length__label'>
+        <h3>{name}</h3>
+        <div className='container__length__label__children'>{children}</div>
     </div>
 )
 
 Label.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    children: PropTypes.element.isRequired,
 }
 
 const initialState = {
@@ -55,13 +58,10 @@ class FastTimer extends Component {
     timerControl = () => {
         const { timerState } = this.state
 
-        // stopped
         if (timerState === 'stopped') {
             this.beginCountDown()
             this.setState({ timerState: 'running' })
-        }
-        // running
-        else {
+        } else {
             this.setState({ timerState: 'stopped' })
             clearInterval(this.interval)
         }
@@ -95,27 +95,27 @@ class FastTimer extends Component {
 
     render() {
         const { timerState } = this.state
-        let playPauseIcon = timerState === 'stopped' ? playIcon : pauseIcon
+        const playPauseIcon = timerState === 'stopped' ? playIcon : pauseIcon
 
         return (
-            <div className="container">
-                <div className="container__header">
-                    <img src={tomato} alt="Pomodoro Clock" className="icon-header" />
+            <div className='container'>
+                <div className='container__header'>
+                    <img src={tomato} alt='Pomodoro Clock' className='icon-header' />
                 </div>
 
-                <div className="container__session">
-                    <div id="time-left">{this.clockify()}</div>
+                <div className='container__session'>
+                    <div id='time-left'>{this.clockify()}</div>
                 </div>
 
-                <div className="container__buttons">
-                    <Button id="start_stop" icon={playPauseIcon} onClick={this.timerControl} />
-                    <Button id="reset" icon={repeatIcon} onClick={this.handleReset} />
+                <div className='container__buttons'>
+                    <Button id='start_stop' icon={playPauseIcon} onClick={this.timerControl} />
+                    <Button id='reset' icon={repeatIcon} onClick={this.handleReset} />
                 </div>
 
                 <audio
-                    id="beep"
-                    preload="auto"
-                    src="https://goo.gl/65cBl1"
+                    id='beep'
+                    preload='auto'
+                    src='https://goo.gl/65cBl1'
                     ref={audio => {
                         this.audioBeep = audio
                     }}

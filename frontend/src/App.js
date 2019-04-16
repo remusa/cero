@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route } from 'react-router-dom'
 
 import './App.scss'
 
@@ -43,15 +43,14 @@ class App extends Component {
         const { isSignedIn } = this.state
 
         return (
-            <div className="App">
-
-                <Header isSignedIn={isSignedIn}/>
+            <div className='App'>
+                <Header isSignedIn={isSignedIn} />
 
                 <Switch>
-                    <Route path='/' exact component={Home}/>
-                    <Route path="/fast" component={Fast} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
+                    <Route path='/' exact component={Home} />
+                    <Route path='/fast' component={Fast} />
+                    <Route path='/login' component={Login} />
+                    <Route path='/register' component={Register} />
                 </Switch>
 
                 {/* <Main /> */}

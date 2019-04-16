@@ -1,5 +1,18 @@
 import React, { Component } from 'react'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
 import Form from './Form'
+import { CURRENT_USER_QUERY } from './User'
+
+const SIGNIN_MUTATION = gql`
+    mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+        signin(email: $email, password: $password) {
+            id
+            email
+            name
+        }
+    }
+`
 
 const initialState = {
     email: '',
@@ -12,17 +25,14 @@ class Login extends Component {
 
     handleChange = e => {
         const { name, value } = e.target
-
         this.setState({
             [name]: value,
         })
     }
 
-    handleSubmit = e => {
+    handleSubmit = async (e, signup) => {
         e.preventDefault()
-
-        // const res = await signup()
-
+        await signup()
         this.setState = initialState
     }
 
@@ -30,48 +40,48 @@ class Login extends Component {
         const { email, name, password } = this.state
 
         return (
-            <Form method='POST' onSubmit={this.handleSubmit}>
-                <fieldset>
-                    <h2>Login to your account</h2>
+            <Mutation
+                mutation={SIGNIN_MUTATION}
+                variables={this.state}
+                refethQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
+                {(signup, { error, loading }) => (
+                    <Form method='POST' onSubmit={this.handleSubmit(signup)}>
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <h2>Login to your account</h2>
 
-                    <label htmlFor='email'>
-                        Email
-                        <input
-                            type='email'
-                            name='email'
-                            placeholder='email'
-                            value={email}
-                            onChange={this.handleChange}
-                        />
-                    </label>
+                            {error && <div>Error: {error}</div>}
 
-                    <label htmlFor='name'>
-                        Name
-                        <input
-                            type='text'
-                            name='name'
-                            placeholder='name'
-                            value={name}
-                            onChange={this.handleChange}
-                        />
-                    </label>
+                            <label htmlFor='email'>
+                                Email
+                                <input
+                                    type='email'
+                                    name='email'
+                                    placeholder='email'
+                                    value={email}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
 
-                    <label htmlFor='password'>
-                        Password
-                        <input
-                            type='password'
-                            name='password'
-                            placeholder='*****'
-                            value={password}
-                            onChange={this.handleChange}
-                        />
-                    </label>
+                            <label htmlFor='password'>
+                                Password
+                                <input
+                                    type='password'
+                                    name='password'
+                                    placeholder='*****'
+                                    value={password}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
 
-                    <button type='submit'>Login</button>
-                </fieldset>
-            </Form>
+                            <button type='submit'>Login</button>
+                        </fieldset>
+                    </Form>
+                )}
+            </Mutation>
         )
     }
 }
 
 export default Login
+export { SIGNIN_MUTATION }

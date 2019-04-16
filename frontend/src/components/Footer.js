@@ -10,6 +10,7 @@ const FooterStyles = styled.div`
         left: 0;
         right: 0;
         width: 100%;
+        /* height: 40px; */
         text-align: center;
         display: flex;
         flex-flow: row wrap;
@@ -26,6 +27,7 @@ const FooterStyles = styled.div`
     @media all and (max-width: 800px) {
         footer {
             /* justify-content: space-around; */
+            display: none;
         }
     }
 
@@ -40,20 +42,18 @@ const FooterStyles = styled.div`
     }
 `
 
-const Footer = () => {
-    return (
-        <FooterStyles>
-            <footer>
-                <Link to="/">Home</Link>
+const Footer = () => (
+    <FooterStyles>
+        <footer>
+            <Link to='/'>Home</Link>
 
-                <Link to="/login">Login</Link>
+            <Link to='/login'>Login</Link>
 
-                <Link to="/register">Register</Link>
+            <Link to='/register'>Register</Link>
 
-                <Link to="/logout">Logout</Link>
-            </footer>
-        </FooterStyles>
-    )
-}
+            <Link to='/logout'>Logout</Link>
+        </footer>
+    </FooterStyles>
+)
 
 export default Footer

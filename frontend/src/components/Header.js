@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Particles from 'react-particles-js'
@@ -49,32 +50,36 @@ const HeaderStyles = styled.header`
     }
 `
 
-const Navigation = ({ onRouteChange, isSignedIn }) => {
-    return (
-        <HeaderStyles>
-            {/* <Particles className='particles' params={particlesOptions} /> */}
+const Navigation = ({ onRouteChange, isSignedIn }) => (
+    <HeaderStyles>
+        {/* <Particles className='particles' params={particlesOptions} /> */}
 
-            <nav>
-                <Link to="/">Home</Link>
+        <nav>
+            <Link to='/'>Home</Link>
 
-                {!isSignedIn && (
-                    <>
-                        <Link to="/login">Login</Link>
+            {/* TODO: remove comments */}
+            {/* {!isSignedIn && ( */}
+            <>
+                <Link to='/register'>Register</Link>
 
-                        <Link to="/register">Register</Link>
-                    </>
-                )}
+                <Link to='/login'>Login</Link>
+            </>
+            {/* )} */}
 
-                {isSignedIn && (
-                    <>
-                        <Link to="/fast">Fast</Link>
+            {/* {isSignedIn && ( */}
+            <>
+                <Link to='/fast'>Fast</Link>
 
-                        <Link to="/logout">Logout</Link>
-                    </>
-                )}
-            </nav>
-        </HeaderStyles>
-    )
+                <Link to='/logout'>Logout</Link>
+            </>
+            {/* )} */}
+        </nav>
+    </HeaderStyles>
+)
+
+Navigation.propTypes = {
+    onRouteChange: PropTypes.func.isRequired,
+    isSignedIn: PropTypes.func.isRequired,
 }
 
 export default Navigation

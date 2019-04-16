@@ -3,7 +3,8 @@ type User {
     name: String!
     email: String! @unique
     password: String!
-    allFasts: [Fast]!
+    resetToken: String
+    resetTokenExpiry: Float
 }
 
 type Fast {
@@ -12,6 +13,4 @@ type Fast {
     endDate: DateTime
     isActive: Boolean @default(value: "true")
     user: User!
-    # createdAt: DateTime!
-    # updatedAt: DateTime!
 }
