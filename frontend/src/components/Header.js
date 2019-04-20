@@ -19,33 +19,32 @@ const particlesOptions = {
 const HeaderStyles = styled.header`
     nav {
         background-color: var(--color-primary);
-        width: 100%;
-        height: 40px;
+        width: 100vw;
         text-align: center;
         display: flex;
         flex-flow: row wrap;
-        justify-content: flex-end;
+        justify-content: space-between; /* flex-end */
         align-content: center;
-    }
 
-    a {
-        padding: 8px;
-        margin: 8px;
-        flex: 0 1 20px;
-        color: #fff;
+        a {
+            padding: 4px;
+            margin: 4px;
+            flex: 0 1 20px;
+            color: #fff;
+        }
     }
 
     @media all and (max-width: 800px) {
         nav {
-            /* justify-content: flex-end; */
-            min-height: 40px;
-            height: auto;
+            justify-content: space-evenly;
+            /* min-height: 40px; */
+            /* height: auto; */
         }
     }
 
     @media all and (max-width: 500px) {
         nav {
-            flex-direction: column;
+            flex-flow: column wrap;
         }
     }
 `
@@ -57,22 +56,23 @@ const Navigation = ({ onRouteChange, isSignedIn }) => (
         <nav>
             <Link to='/'>Home</Link>
 
-            {/* TODO: remove comments */}
-            {/* {!isSignedIn && ( */}
             <>
-                <Link to='/register'>Register</Link>
+                {/* TODO: remove comments */}
 
-                <Link to='/login'>Login</Link>
+                {/* {isSignedIn && ( */}
+                <>
+                    <Link to='/fast'>Fast</Link>
+                    <Link to='/logout'>Logout</Link>
+                </>
+                {/* )} */}
+
+                {/* {!isSignedIn && ( */}
+                <>
+                    <Link to='/login'>Login</Link>
+                    <Link to='/register'>Register</Link>
+                </>
+                {/* )} */}
             </>
-            {/* )} */}
-
-            {/* {isSignedIn && ( */}
-            <>
-                <Link to='/fast'>Fast</Link>
-
-                <Link to='/logout'>Logout</Link>
-            </>
-            {/* )} */}
         </nav>
     </HeaderStyles>
 )

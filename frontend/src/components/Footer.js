@@ -10,18 +10,23 @@ const FooterStyles = styled.div`
         left: 0;
         right: 0;
         width: 100%;
-        /* height: 40px; */
+        max-height: 40px;
         text-align: center;
         display: flex;
-        flex-flow: row wrap;
-        justify-content: space-evenly;
-    }
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
 
-    a {
-        padding: 4px;
-        margin: 4px;
-        flex: 0 1 20px;
-        color: #fff;
+        a,
+        p {
+            color: #fff;
+        }
+
+        a {
+            padding: 4px;
+            margin: 4px;
+            flex: 0 1 20px;
+        }
     }
 
     @media all and (max-width: 800px) {
@@ -45,13 +50,11 @@ const FooterStyles = styled.div`
 const Footer = () => (
     <FooterStyles>
         <footer>
-            <Link to='/'>Home</Link>
+            <p>RMS 2019</p>
 
-            <Link to='/login'>Login</Link>
-
-            <Link to='/register'>Register</Link>
-
-            <Link to='/logout'>Logout</Link>
+            <a href='https://github.com/remusa/cero' target='_blank' rel='noopener noreferrer'>
+                Github
+            </a>
         </footer>
     </FooterStyles>
 )

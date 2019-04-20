@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Form from './Form'
-// import { CURRENT_USER_QUERY } from './User'
+import { CURRENT_USER_QUERY } from './User'
 
 const SIGNUP_MUTATION = gql`
     mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
@@ -39,10 +39,12 @@ class Register extends Component {
     render() {
         const { email, name, password } = this.state
 
-        // refethQueries={[{query: CURRENT_USER_QUERY}]}
-
         return (
-            <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+            <Mutation
+                mutation={SIGNUP_MUTATION}
+                variables={this.state}
+                refethQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
                 {(signup, { error, loading }) => (
                     <Form method='POST' onSubmit={this.handleSubmit(signup)}>
                         <fieldset disabled={loading} aria-busy={loading}>

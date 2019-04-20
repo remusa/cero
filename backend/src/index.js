@@ -47,21 +47,18 @@ server.express.user((req, res, next) => {
 server.express.use(async (req, res, next) => {
     if (!req.userId) return next()
 
-    const user = await db.query.user({
-       { where: { id: req.userId }},
-       '{ id, email, name }'
-    })
-
+    const user = await db.query.user({ where: { id: req.userId } }, '{ id, email, name }')
     req.user = user
+
     next()
 })
 
 // Not Found Middleware
-// server.app.use((req, res, next) => {
-//     res.status(404)
-//         .type('text')
-//         .send('Not Found')
-// })
+server.app.use((req, res, next) => {
+    res.status(404)
+        .type('text')
+        .send('Not Found')
+})
 
 // server.express.use(cors({ origin: '*' }))
 server.start(

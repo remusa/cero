@@ -37,7 +37,7 @@ class Login extends Component {
     }
 
     render() {
-        const { email, name, password } = this.state
+        const { email, password } = this.state
 
         return (
             <Mutation
