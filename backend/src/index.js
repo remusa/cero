@@ -54,7 +54,7 @@ server.express.use(async (req, res, next) => {
 })
 
 // Not Found Middleware
-server.app.use((req, res, next) => {
+server.express.use((req, res, next) => {
     res.status(404)
         .type('text')
         .send('Not Found')

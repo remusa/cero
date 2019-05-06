@@ -15,11 +15,11 @@ const createEmail = text => `
       padding: 20px;
       font-family: sans-serif;
       line-height: 2;
-      font-size: 20px;
-    ">
-      <h2>Hello There!</h2>
+      font-size: 20px;"
+    >
+      <h2>Hello!</h2>
       <p>${text}</p>
-      <p>😘, Wes Bos</p>
+      <p>See You Later!</p>
     </div>
   `
 
