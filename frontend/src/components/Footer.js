@@ -39,6 +39,9 @@ const FooterStyles = styled.div`
     @media all and (max-width: 500px) {
         footer {
             flex-direction: column;
+            /* display: none; */
+            position: absolute;
+            bottom: 0;
         }
 
         a {

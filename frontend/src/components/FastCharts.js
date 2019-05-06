@@ -20,6 +20,7 @@ const ChartStyles = styled.div`
 
     @media all and (max-width: 800px) {
         width: 90%;
+        /* height: 400px; */
     }
 `
 
