@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Particles from 'react-particles-js'
+// import logo from '../logo.svg'
+import logo from '../static/icons/tomato.svg'
 
 const particlesOptions = {
     particles: {
@@ -20,11 +22,28 @@ const HeaderStyles = styled.header`
     nav {
         background-color: var(--color-primary);
         width: 100vw;
+        height: 40px;
         text-align: center;
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-between; /* flex-end */
+        justify-content: space-between;
         align-content: center;
+        align-items: center;
+
+        .nav__toggle__container {
+            padding: 2px;
+            margin-bottom: 4px;
+
+            & .logo {
+                /* width: auto; */
+                height: 25px;
+            }
+
+            .nav__toggle {
+                display: none;
+                cursor: pointer;
+            }
+        }
 
         a {
             padding: 4px;
@@ -36,50 +55,121 @@ const HeaderStyles = styled.header`
 
     @media all and (max-width: 800px) {
         nav {
-            justify-content: space-evenly;
-            /* min-height: 40px; */
-            /* height: auto; */
+            justify-content: space-between;
+
+            .nav__toggle {
+                order: 1;
+            }
         }
     }
 
     @media all and (max-width: 500px) {
         nav {
             flex-flow: column wrap;
+
+            .nav__toggle {
+                display: block;
+            }
+
+            .nav__links {
+                display: flex;
+                flex-flow: column wrap;
+            }
         }
     }
 `
 
-const Navigation = ({ onRouteChange, isSignedIn }) => (
-    <HeaderStyles>
-        {/* <Particles className='particles' params={particlesOptions} /> */}
+// const HamburguerStyles = styled.div`
+//     width: 7px;
+//     cursor: pointer;
+//     color: red;
 
-        <nav>
-            <Link to='/'>Home</Link>
+//     /* visibility: hidden; */
 
-            <>
-                {/* TODO: remove comments */}
+//     @media all and (max-width: 500px) {
+//         visibility: visible;
+//     }
+// `
 
-                {/* {isSignedIn && ( */}
-                <>
-                    <Link to='/fast'>Fast</Link>
-                    <Link to='/logout'>Logout</Link>
-                </>
-                {/* )} */}
+class Navigation extends Component {
+    static propTypes = {
+        // onRouteChange: PropTypes.func.isRequired,
+        isSignedIn: PropTypes.bool.isRequired,
+    }
 
-                {/* {!isSignedIn && ( */}
-                <>
-                    <Link to='/login'>Login</Link>
-                    <Link to='/register'>Register</Link>
-                </>
-                {/* )} */}
-            </>
-        </nav>
-    </HeaderStyles>
-)
+    state = {
+        isToggled: false,
+        width: window.innerWidth,
+    }
 
-Navigation.propTypes = {
-    onRouteChange: PropTypes.func.isRequired,
-    isSignedIn: PropTypes.func.isRequired,
+    toggleMenu = (e) => {
+        const {isToggled} = this.state
+
+        this.setState({
+            isToggled: !isToggled,
+        })
+    }
+
+    componentDidMount() {
+        this.updateWindowDimensions()
+        window.addEventListener('resize', this.updateWindowDimensions)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions)
+    }
+
+    updateWindowDimensions = () => {
+        this.setState({ width: window.innerWidth})
+    }
+
+    render() {
+        const { isSignedIn } = this.props //onRouteChange
+        const { isToggled, width } = this.state
+
+        return (
+            <HeaderStyles>
+                {/* <Particles className='particles' params={particlesOptions} /> */}
+
+                <nav>
+                       <div className='nav__toggle__container' style={isToggled ? {marginBottom: '4px'} : {marginBottom: 0}}>
+                            <a href='#' className="nav__toggle" onClick={this.toggleMenu}
+                            >☰</a>
+
+                            {(isToggled || width > 500) && (
+                            <Link to='/'><img src={logo} alt="logo" className='logo'/></Link>)}
+                       </div>
+
+                        <div className='nav__links'>
+                            {(isToggled || width > 500) && (
+                                <>
+                                    {/* <Link to='/'>Home</Link> */}
+
+                                    <>
+                                        {/* TODO: remove comments */}
+
+                                        {/* {isSignedIn && ( */}
+                                        <>
+                                            <Link to='/fast'>Fast</Link>
+                                            <Link to='/logout'>Logout</Link>
+                                        </>
+                                        {/* )} */}
+
+                                        {/* {!isSignedIn && ( */}
+                                        <>
+                                            <Link to='/login'>Login</Link>
+                                            <Link to='/register'>Register</Link>
+                                        </>
+                                        {/* )} */}
+                                    </>
+                                </>
+                            )}
+                        </div>
+
+                </nav>
+            </HeaderStyles>
+        )
+    }
 }
 
 export default Navigation

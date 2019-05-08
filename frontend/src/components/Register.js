@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Form from './Form'
+import Form from './styled/Form'
 import { CURRENT_USER_QUERY } from './User'
 
 const SIGNUP_MUTATION = gql`
@@ -25,6 +25,7 @@ class Register extends Component {
 
     handleChange = e => {
         const { name, value } = e.target
+
         this.setState({
             [name]: value,
         })
@@ -32,6 +33,7 @@ class Register extends Component {
 
     handleSubmit = async (e, signup) => {
         e.preventDefault()
+
         await signup()
         this.setState = initialState
     }

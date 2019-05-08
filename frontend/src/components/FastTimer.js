@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import tomato from '../assets/tomato.svg'
-import playIcon from '../assets/play.svg'
-import pauseIcon from '../assets/pause.svg'
-// import stopIcon from '../assets/stop.svg'
-import repeatIcon from '../assets/repeat.svg'
-import upIcon from '../assets/up-arrow.svg'
-import downIcon from '../assets/down-arrow.svg'
+import tomato from '../static/icons/tomato.svg'
+import playIcon from '../static/icons/play.svg'
+import pauseIcon from '../static/icons/pause.svg'
+// import stopIcon from '../static/icons/stop.svg'
+import repeatIcon from '../static/icons/repeat.svg'
+// import upIcon from '../static/icons/up-arrow.svg'
+// import downIcon from '../static/icons/down-arrow.svg'
 
 const Button = ({ id, onClick, icon }) => (
     <button type='button' id={id} className='button' onClick={onClick}>

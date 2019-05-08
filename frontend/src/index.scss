@@ -2,11 +2,9 @@
   --color-primary: #00c957;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
-
 @font-face {
   font-family: 'Lato-Regular';
-  src: url('/static/Lato-Regular.woff2');
+  src: url('./static/fonts/Lato-Regular.woff2');
   format: 'woff2';
   font-weight: normal;
 }
@@ -25,9 +23,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  // height: calc(100% - 40px);
-  // font-family: -apple-system, BlinkMacSystemFont, "Lato", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-family: "Lato-Regular", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lato-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
   line-height: 2;
   text-rendering: optimizeLegibility;
@@ -35,6 +31,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
+}
+
+p {
+  text-align: center;
 }
