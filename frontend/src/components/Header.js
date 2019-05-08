@@ -2,27 +2,13 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Particles from 'react-particles-js'
-// import logo from '../logo.svg'
-import logo from '../static/icons/tomato.svg'
-
-const particlesOptions = {
-    particles: {
-        number: {
-            value: 100,
-            density: {
-                enable: true,
-                value_area: 400,
-            },
-        },
-    },
-}
+import logo from '../logo.svg'
+// import logo from '../static/icons/tomato.svg'
 
 const HeaderStyles = styled.header`
     nav {
         background-color: var(--color-primary);
         width: 100vw;
-        height: 40px;
         text-align: center;
         display: flex;
         flex-flow: row wrap;
@@ -34,13 +20,14 @@ const HeaderStyles = styled.header`
             padding: 2px;
             margin-bottom: 4px;
 
-            & .logo {
+            .logo {
                 /* width: auto; */
                 height: 25px;
             }
 
             .nav__toggle {
-                display: none;
+                /* display: none; */
+                visibility: hidden;
                 cursor: pointer;
             }
         }
@@ -67,8 +54,11 @@ const HeaderStyles = styled.header`
         nav {
             flex-flow: column wrap;
 
-            .nav__toggle {
-                display: block;
+            & .nav__toggle__container  {
+                & .nav__toggle {
+                    display: block;
+                    visibility: visible;
+                }
             }
 
             .nav__links {
@@ -79,22 +69,10 @@ const HeaderStyles = styled.header`
     }
 `
 
-// const HamburguerStyles = styled.div`
-//     width: 7px;
-//     cursor: pointer;
-//     color: red;
-
-//     /* visibility: hidden; */
-
-//     @media all and (max-width: 500px) {
-//         visibility: visible;
-//     }
-// `
-
 class Navigation extends Component {
     static propTypes = {
-        // onRouteChange: PropTypes.func.isRequired,
         isSignedIn: PropTypes.bool.isRequired,
+        // onRouteChange: PropTypes.func.isRequired,
     }
 
     state = {
@@ -120,7 +98,7 @@ class Navigation extends Component {
     }
 
     updateWindowDimensions = () => {
-        this.setState({ width: window.innerWidth})
+        this.setState({ width: window.innerWidth })
     }
 
     render() {
@@ -129,39 +107,36 @@ class Navigation extends Component {
 
         return (
             <HeaderStyles>
-                {/* <Particles className='particles' params={particlesOptions} /> */}
-
                 <nav>
-                       <div className='nav__toggle__container' style={isToggled ? {marginBottom: '4px'} : {marginBottom: 0}}>
-                            <a href='#' className="nav__toggle" onClick={this.toggleMenu}
-                            >☰</a>
+                    <div className='nav__toggle__container' style={isToggled ? {marginBottom: '4px'} : {marginBottom: 0}}>
+                        <a href='#' className="nav__toggle" onClick={this.toggleMenu}
+                        >☰</a>
 
-                            {(isToggled || width > 500) && (
-                            <Link to='/'><img src={logo} alt="logo" className='logo'/></Link>)}
-                       </div>
+                        {(isToggled || width > 500) && (
+                        <Link to='/'>Home
+                        {/* <img src={logo} alt="logo" className='logo'/> */}
+                        </Link>
+                        )}
+                    </div>
 
                         <div className='nav__links'>
                             {(isToggled || width > 500) && (
                                 <>
-                                    {/* <Link to='/'>Home</Link> */}
+                                    {/* TODO: remove comments */}
 
+                                    {/* {isSignedIn && ( */}
                                     <>
-                                        {/* TODO: remove comments */}
-
-                                        {/* {isSignedIn && ( */}
-                                        <>
-                                            <Link to='/fast'>Fast</Link>
-                                            <Link to='/logout'>Logout</Link>
-                                        </>
-                                        {/* )} */}
-
-                                        {/* {!isSignedIn && ( */}
-                                        <>
-                                            <Link to='/login'>Login</Link>
-                                            <Link to='/register'>Register</Link>
-                                        </>
-                                        {/* )} */}
+                                        <Link to='/fast'>Fast</Link>
+                                        <Link to='/logout'>Logout</Link>
                                     </>
+                                    {/* )} */}
+
+                                    {/* {!isSignedIn && ( */}
+                                    <>
+                                        <Link to='/login'>Login</Link>
+                                        <Link to='/register'>Register</Link>
+                                    </>
+                                    {/* )} */}
                                 </>
                             )}
                         </div>
