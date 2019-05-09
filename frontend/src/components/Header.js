@@ -26,8 +26,7 @@ const HeaderStyles = styled.header`
             }
 
             .nav__toggle {
-                /* display: none; */
-                visibility: hidden;
+                display: none;
                 cursor: pointer;
             }
         }
@@ -57,7 +56,6 @@ const HeaderStyles = styled.header`
             & .nav__toggle__container  {
                 & .nav__toggle {
                     display: block;
-                    visibility: visible;
                 }
             }
 
@@ -113,8 +111,9 @@ class Navigation extends Component {
                         >☰</a>
 
                         {(isToggled || width > 500) && (
-                        <Link to='/'>Home
-                        {/* <img src={logo} alt="logo" className='logo'/> */}
+                        <Link to='/'>
+                        {/* Home */}
+                        <img src={logo} alt="logo" className='logo'/>
                         </Link>
                         )}
                     </div>

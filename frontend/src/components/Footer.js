@@ -32,7 +32,7 @@ const FooterStyles = styled.div`
     @media all and (max-width: 800px) {
         footer {
             /* justify-content: space-around; */
-            display: none;
+            /* display: none; */
         }
     }
 

@@ -1,7 +1,7 @@
 {
     "name": "cero-backend",
     "version": "1.0.0",
-    "description": "Backend for the Cero App",
+    "description": "Backend for Cero",
     "author": "rms",
     "license": "ISC",
     "keywords": [
@@ -18,9 +18,7 @@
         "test": "jest",
         "deploy": "prisma deploy"
     },
-    "devDependencies": {
-        "graphql-cli": "^3.0.11"
-    },
+    "devDependencies": {},
     "dependencies": {
         "babel-preset-env": "^1.7.0",
         "bcryptjs": "^2.4.3",
@@ -29,6 +27,7 @@
         "cors": "^2.8.5",
         "dotenv": "^7.0.0",
         "graphql": "^14.3.0",
+        "graphql-cli": "^3.0.11",
         "graphql-yoga": "^1.17.4",
         "helmet": "^3.18.0",
         "jsonwebtoken": "^8.5.1",
