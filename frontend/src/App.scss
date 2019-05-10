@@ -4,7 +4,7 @@
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  // grid-template-columns: minmax(auto, 1fr) 1fr minmax(auto, 1fr);
+  grid-template-columns: auto 1fr auto;
   grid-template-areas: "header header header"". main .""footer footer footer";
 }
 

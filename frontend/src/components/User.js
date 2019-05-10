@@ -9,11 +9,16 @@ const CURRENT_USER_QUERY = gql`
             id
             email
             name
+            permissions
         }
     }
 `
 
-const User = props => <Query query={CURRENT_USER_QUERY}>{payload => props.children(payload)}</Query>
+const User = props => (
+    <Query {...props} query={CURRENT_USER_QUERY}>
+        {payload => props.children(payload)}
+    </Query>
+)
 
 User.propTypes = {
     children: PropTypes.func.isRequired,

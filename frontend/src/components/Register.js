@@ -41,10 +41,11 @@ class Register extends Component {
     render() {
         const { email, name, password } = this.state
 
-        // refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-
         return (
-            <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+            <Mutation
+                mutation={SIGNUP_MUTATION}
+                variables={this.state}
+                refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
                 {(signup, { error, loading }) => (
                     <Main>
                         <Form

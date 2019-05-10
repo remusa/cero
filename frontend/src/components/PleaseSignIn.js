@@ -8,6 +8,7 @@ const PleaseSignIn = props => (
     <Query query={CURRENT_USER_QUERY}>
         {({ data, loading }) => {
             if (loading) return <p>Loading...</p>
+
             if (!data.me) {
                 return (
                     <div>

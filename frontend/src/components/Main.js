@@ -10,12 +10,8 @@ const MainStyles = styled.main`
     /* align-items: center; */
 `
 
-const Main = (props) => {
-    return (
-        <MainStyles>
-            {props.children}
-        </MainStyles>
-    )
+const Main = props => {
+    return <MainStyles>{props.children}</MainStyles>
 }
 
 export default Main

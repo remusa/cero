@@ -23,3 +23,5 @@ const Query = {
         return ctx.db.query.users({}, info)
     },
 }
+
+module.exports = Query

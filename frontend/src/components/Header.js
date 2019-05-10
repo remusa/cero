@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import User from './User'
+import Logout from './Logout'
 import logo from '../logo.svg'
-// import logo from '../static/icons/tomato.svg'
 
 const HeaderStyles = styled.header`
     grid-area: header;
@@ -72,11 +72,6 @@ const HeaderStyles = styled.header`
 `
 
 class Navigation extends Component {
-    static propTypes = {
-        isSignedIn: PropTypes.bool.isRequired,
-        // onRouteChange: PropTypes.func.isRequired,
-    }
-
     state = {
         isToggled: false,
         width: window.innerWidth,
@@ -84,7 +79,6 @@ class Navigation extends Component {
 
     toggleMenu = e => {
         const { isToggled } = this.state
-
         this.setState({
             isToggled: !isToggled,
         })
@@ -104,50 +98,57 @@ class Navigation extends Component {
     }
 
     render() {
-        const { isSignedIn } = this.props //onRouteChange
         const { isToggled, width } = this.state
 
         return (
-            <HeaderStyles>
-                <nav>
-                    <div
-                        className="nav__toggle__container"
-                        style={isToggled ? { marginBottom: '4px' } : { marginBottom: 0 }}>
-                        <a href="#" className="nav__toggle" onClick={this.toggleMenu}>
-                            ☰
-                        </a>
+            <User>
+                {({ data }) => {
+                    const me = data ? data.me : null
+                    return (
+                        <HeaderStyles>
+                            <nav>
+                                <div
+                                    className="nav__toggle__container"
+                                    style={
+                                        isToggled ? { marginBottom: '4px' } : { marginBottom: 0 }
+                                    }>
+                                    <a href="#" className="nav__toggle" onClick={this.toggleMenu}>
+                                        ☰
+                                    </a>
 
-                        {(isToggled || width > 500) && (
-                            <Link to="/" className="logo">
-                                {/* Home */}
-                                <img src={logo} alt="logo" />
-                            </Link>
-                        )}
-                    </div>
+                                    {(isToggled || width > 500) && (
+                                        <Link to="/" className="logo">
+                                            {/* Home */}
+                                            <img src={logo} alt="logo" />
+                                        </Link>
+                                    )}
+                                </div>
 
-                    <div className="nav__links">
-                        {(isToggled || width > 500) && (
-                            <>
-                                {/* TODO: remove comments */}
+                                <div className="nav__links">
+                                    {(isToggled || width > 500) && (
+                                        <>
+                                            {me && (
+                                                <>
+                                                    <Link to="/fast">Fast</Link>
+                                                    {/* <Link to="/logout">Logout</Link> */}
+                                                    <Logout />
+                                                </>
+                                            )}
 
-                                {/* {isSignedIn && ( */}
-                                <>
-                                    <Link to="/fast">Fast</Link>
-                                    <Link to="/logout">Logout</Link>
-                                </>
-                                {/* )} */}
-
-                                {/* {!isSignedIn && ( */}
-                                <>
-                                    <Link to="/login">Login</Link>
-                                    <Link to="/register">Register</Link>
-                                </>
-                                {/* )} */}
-                            </>
-                        )}
-                    </div>
-                </nav>
-            </HeaderStyles>
+                                            {!me && (
+                                                <>
+                                                    <Link to="/login">Login</Link>
+                                                    <Link to="/register">Register</Link>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            </nav>
+                        </HeaderStyles>
+                    )
+                }}
+            </User>
         )
     }
 }
