@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -9,9 +9,7 @@ const HeaderStyles = styled.header`
     grid-area: header;
 
     nav {
-
         background-color: var(--color-primary);
-        /* width: 100vw; */
         text-align: center;
 
         display: flex;
@@ -20,26 +18,18 @@ const HeaderStyles = styled.header`
         align-content: center;
         align-items: center;
 
-        .nav__toggle__container {
-            padding: 2px;
-            margin-bottom: 4px;
-
-            .logo {
-                /* width: auto; */
-                height: 25px;
-            }
-
-            .nav__toggle {
-                display: none;
-                cursor: pointer;
-            }
-        }
-
         a {
             padding: 4px;
             margin: 4px;
             flex: 0 1 20px;
             color: #fff;
+        }
+
+        .nav__toggle__container {
+            .nav__toggle {
+                display: none;
+                cursor: pointer;
+            }
         }
     }
 
@@ -57,9 +47,19 @@ const HeaderStyles = styled.header`
         nav {
             flex-flow: column wrap;
 
-            & .nav__toggle__container  {
-                & .nav__toggle {
+            .nav__toggle__container {
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: center;
+                align-content: center;
+
+                .nav__toggle {
                     display: block;
+                    order: 1;
+                }
+
+                .logo {
+                    order: 2;
                 }
             }
 
@@ -82,8 +82,8 @@ class Navigation extends Component {
         width: window.innerWidth,
     }
 
-    toggleMenu = (e) => {
-        const {isToggled} = this.state
+    toggleMenu = e => {
+        const { isToggled } = this.state
 
         this.setState({
             isToggled: !isToggled,
@@ -110,40 +110,42 @@ class Navigation extends Component {
         return (
             <HeaderStyles>
                 <nav>
-                    <div className='nav__toggle__container' style={isToggled ? {marginBottom: '4px'} : {marginBottom: 0}}>
-                        <a href='#' className="nav__toggle" onClick={this.toggleMenu}
-                        >☰</a>
+                    <div
+                        className="nav__toggle__container"
+                        style={isToggled ? { marginBottom: '4px' } : { marginBottom: 0 }}>
+                        <a href="#" className="nav__toggle" onClick={this.toggleMenu}>
+                            ☰
+                        </a>
 
                         {(isToggled || width > 500) && (
-                        <Link to='/'>
-                        {/* Home */}
-                        <img src={logo} alt="logo" className='logo'/>
-                        </Link>
+                            <Link to="/" className="logo">
+                                {/* Home */}
+                                <img src={logo} alt="logo" />
+                            </Link>
                         )}
                     </div>
 
-                        <div className='nav__links'>
-                            {(isToggled || width > 500) && (
+                    <div className="nav__links">
+                        {(isToggled || width > 500) && (
+                            <>
+                                {/* TODO: remove comments */}
+
+                                {/* {isSignedIn && ( */}
                                 <>
-                                    {/* TODO: remove comments */}
-
-                                    {/* {isSignedIn && ( */}
-                                    <>
-                                        <Link to='/fast'>Fast</Link>
-                                        <Link to='/logout'>Logout</Link>
-                                    </>
-                                    {/* )} */}
-
-                                    {/* {!isSignedIn && ( */}
-                                    <>
-                                        <Link to='/login'>Login</Link>
-                                        <Link to='/register'>Register</Link>
-                                    </>
-                                    {/* )} */}
+                                    <Link to="/fast">Fast</Link>
+                                    <Link to="/logout">Logout</Link>
                                 </>
-                            )}
-                        </div>
+                                {/* )} */}
 
+                                {/* {!isSignedIn && ( */}
+                                <>
+                                    <Link to="/login">Login</Link>
+                                    <Link to="/register">Register</Link>
+                                </>
+                                {/* )} */}
+                            </>
+                        )}
+                    </div>
                 </nav>
             </HeaderStyles>
         )

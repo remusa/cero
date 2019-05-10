@@ -7,10 +7,11 @@ const FooterStyles = styled.div`
     footer {
         background-color: var(--color-primary);
         text-align: center;
+        line-height: 1;
 
         display: flex;
         flex-flow: row wrap;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
 
         a,

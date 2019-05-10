@@ -44,43 +44,44 @@ class Login extends Component {
         // refetchQueries={[{ query: CURRENT_USER_QUERY }]}
 
         return (
-            <Mutation
-                mutation={SIGNIN_MUTATION}
-                variables={this.state}
-            >
+            <Mutation mutation={SIGNIN_MUTATION} variables={this.state}>
                 {(signup, { error, loading }) => (
                     <Main>
-                        <Form styles={{gridArea: 'main'}} method='POST' onSubmit={(e) => {this.handleSubmit(e, signup)}}>
+                        <Form
+                            method="POST"
+                            onSubmit={e => {
+                                this.handleSubmit(e, signup)
+                            }}>
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <h2>Login to your account</h2>
 
                                 <Error error={error} />
 
-                                <label htmlFor='email'>
+                                <label htmlFor="email">
                                     Email
                                     <input
                                         required
-                                        type='email'
-                                        name='email'
-                                        placeholder='email'
+                                        type="email"
+                                        name="email"
+                                        placeholder="email"
                                         value={email}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <label htmlFor='password'>
+                                <label htmlFor="password">
                                     Password
                                     <input
                                         required
-                                        type='password'
-                                        name='password'
-                                        placeholder='*****'
+                                        type="password"
+                                        name="password"
+                                        placeholder="*****"
                                         value={password}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <button type='submit'>Login</button>
+                                <button type="submit">Login</button>
                             </fieldset>
                         </Form>
                     </Main>
