@@ -5,9 +5,9 @@ const MainStyles = styled.main`
     grid-area: main;
 
     display: flex;
-    flex-flow: row;
+    flex-flow: column wrap;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
 `
 
 const Main = props => {

@@ -7,33 +7,13 @@ import Fast from './components/Fast'
 import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
+import RequestReset from './components/RequestReset'
+import Reset from './components/Reset'
 
 // const END_POINT='https://ceroapp.herokuapp.com'
 const END_POINT = 'http://localhost:3000'
 
-const initialState = {
-    user: {
-        id: '',
-        name: '',
-        email: '',
-        joined: new Date(),
-    },
-}
-
 class App extends Component {
-    state = initialState
-
-    loadUser = data => {
-        this.setState({
-            user: {
-                id: data.id,
-                name: data.name,
-                email: data.email,
-                joined: data.joined,
-            },
-        })
-    }
-
     render() {
         return (
             <div className="App">
@@ -44,6 +24,8 @@ class App extends Component {
                     <Route path="/fast" component={Fast} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <Route path="/requestreset" component={RequestReset} />
+                    <Route path="/reset" component={Reset} />
                 </Switch>
 
                 <Footer />

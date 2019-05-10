@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
+import styled from 'styled-components'
 import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
@@ -13,6 +15,17 @@ const SIGNIN_MUTATION = gql`
             email
             name
         }
+    }
+`
+
+const ResetStyles = styled.div`
+    padding: 4px;
+    margin-top: 8px;
+    font-size: 1.3rem;
+    color: var(--color-grey);
+
+    &:active {
+        color: var(--color-grey);
     }
 `
 
@@ -83,6 +96,10 @@ class Login extends Component {
                                 </label>
 
                                 <button type="submit">Login</button>
+
+                                <Link to="/requestreset">
+                                    <ResetStyles>Reset password</ResetStyles>
+                                </Link>
                             </fieldset>
                         </Form>
                     </Main>

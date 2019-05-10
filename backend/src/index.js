@@ -15,20 +15,20 @@ server.express.use(bodyParser.urlencoded({ extended: true }))
 server.express.use(cookieParser())
 
 // Security features
-// server.express.use(
-//     helmet({
-//         hidePoweredBy: { setTo: 'PHP 4.2.0' },
-//         frameguard: { action: 'deny' },
-//         xssFilter: { setOnOldIE: true },
-//         contentSecurityPolicy: {
-//             directives: {
-//                 defaultSrc: ["'self'"],
-//                 scriptSrc: ["'self'"],
-//                 styleSrc: ["'self'"],
-//             },
-//         },
-//     })
-// )
+server.express.use(
+    helmet({
+        hidePoweredBy: { setTo: 'PHP 4.2.0' },
+        frameguard: { action: 'deny' },
+        xssFilter: { setOnOldIE: true },
+        // contentSecurityPolicy: {
+        //     directives: {
+        //         defaultSrc: ["'self'"],
+        //         scriptSrc: ["'self'"],
+        //         styleSrc: ["'self'"],
+        //     },
+        // },
+    })
+)
 
 // Decode JWT and pass it to each request
 server.express.use((req, res, next) => {

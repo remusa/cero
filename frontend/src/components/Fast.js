@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
+import PleaseSignIn from './PleaseSignIn'
 import FastTimer from './FastTimer'
 import FastCharts from './FastCharts'
 
@@ -16,13 +16,13 @@ const MainStyles = styled.main`
 class Fast extends Component {
     render() {
         return (
-            <MainStyles>
-                <h2>Fast!</h2>
-
-                <FastTimer />
-
-                <FastCharts />
-            </MainStyles>
+            <PleaseSignIn>
+                <MainStyles>
+                    <h2>Fast!</h2>
+                    <FastTimer />
+                    <FastCharts />
+                </MainStyles>
+            </PleaseSignIn>
         )
     }
 }
