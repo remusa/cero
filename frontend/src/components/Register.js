@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Form from './styled/Form'
+import Error from './ErrorMessage'
 import { CURRENT_USER_QUERY } from './User'
 
 const SIGNUP_MUTATION = gql`
@@ -25,7 +26,6 @@ class Register extends Component {
 
     handleChange = e => {
         const { name, value } = e.target
-
         this.setState({
             [name]: value,
         })
@@ -33,7 +33,6 @@ class Register extends Component {
 
     handleSubmit = async (e, signup) => {
         e.preventDefault()
-
         await signup()
         this.setState = initialState
     }
@@ -41,22 +40,24 @@ class Register extends Component {
     render() {
         const { email, name, password } = this.state
 
+        // refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+
         return (
             <Mutation
                 mutation={SIGNUP_MUTATION}
                 variables={this.state}
-                refethQueries={[{ query: CURRENT_USER_QUERY }]}
             >
                 {(signup, { error, loading }) => (
-                    <Form method='POST' onSubmit={this.handleSubmit(signup)}>
+                    <Form method='POST' onSubmit={(e) => {this.handleSubmit(e, signup)}}>
                         <fieldset disabled={loading} aria-busy={loading}>
                             <h2>Register a new account</h2>
 
-                            {error && <div>Error: {error}</div>}
+                            <Error error={error} />
 
                             <label htmlFor='email'>
                                 Email
                                 <input
+                                    required
                                     type='email'
                                     name='email'
                                     placeholder='email'
@@ -68,6 +69,7 @@ class Register extends Component {
                             <label htmlFor='name'>
                                 Name
                                 <input
+                                    required
                                     type='text'
                                     name='name'
                                     placeholder='name'
@@ -79,6 +81,7 @@ class Register extends Component {
                             <label htmlFor='password'>
                                 Password
                                 <input
+                                    required
                                     type='password'
                                     name='password'
                                     placeholder='*****'

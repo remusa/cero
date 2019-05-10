@@ -18,7 +18,6 @@ const Logout = () => (
                 Logout
             </button>
         )}
-        }
     </Mutation>
 )
 

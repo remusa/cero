@@ -1,5 +1,11 @@
+enum Permission {
+    ADMIN
+    USER
+    PERMISSIONUPDATE
+}
+
 type User {
-    id: ID! @id @unique
+    id: ID! @id
     name: String!
     email: String! @unique
     password: String!
@@ -7,14 +13,15 @@ type User {
     resetTokenExpiry: Float
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
+    permissions: [Permission] @scalarList(strategy: RELATION)
 }
 
-type Fast {
-    id: ID! @id @unique
-    startDate: DateTime!
-    endDate: DateTime
-    isActive: Boolean @default(value: true)
-    user: User!
-    createdAt: DateTime! @createdAt
-    updatedAt: DateTime! @updatedAt
-}
+# type Fast {
+#     id: ID! @id(strategy: AUTO) @unique
+#     startDate: DateTime!
+#     endDate: DateTime
+#     isActive: Boolean @default(value: true)
+#     user: User!
+#     createdAt: DateTime! @createdAt
+#     updatedAt: DateTime! @updatedAt
+# }

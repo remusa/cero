@@ -1,18 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import './index.scss'
 import * as serviceWorker from './serviceWorker'
+import { ENDPOINT } from './config'
+import gql from 'graphql-tag'
 
-const apollo = new ApolloClient({
-    uri: 'https://48p1r2roz4.sse.codesandbox.io',
+const client = new ApolloClient({
+    uri: process.env.NODE_ENV === 'dev' ? ENDPOINT : ENDPOINT,
+    request: operation => {
+        operation.setContext({
+            fetchOptions: {
+                credentials: 'include',
+            },
+            headers: {
+                authorization: `Bearer your-personal-access-token`
+            },
+        });
+    }
 })
 
 ReactDOM.render(
-    <ApolloProvider client={apollo}>
+    <ApolloProvider client={client}>
         <Router>
             <App />
         </Router>

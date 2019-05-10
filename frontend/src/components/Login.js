@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Form from './styled/Form'
+import Error from './ErrorMessage'
 import { CURRENT_USER_QUERY } from './User'
 
 const SIGNIN_MUTATION = gql`
@@ -32,7 +33,6 @@ class Login extends Component {
 
     handleSubmit = async (e, signup) => {
         e.preventDefault()
-
         await signup()
         this.setState = initialState
     }
@@ -40,22 +40,24 @@ class Login extends Component {
     render() {
         const { email, password } = this.state
 
+        // refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+
         return (
             <Mutation
                 mutation={SIGNIN_MUTATION}
                 variables={this.state}
-                refethQueries={[{ query: CURRENT_USER_QUERY }]}
             >
                 {(signup, { error, loading }) => (
-                    <Form method='POST' onSubmit={this.handleSubmit(signup)}>
+                    <Form method='POST' onSubmit={(e) => {this.handleSubmit(e, signup)}}>
                         <fieldset disabled={loading} aria-busy={loading}>
                             <h2>Login to your account</h2>
 
-                            {error && <div>Error: {error}</div>}
+                            <Error error={error} />
 
                             <label htmlFor='email'>
                                 Email
                                 <input
+                                    required
                                     type='email'
                                     name='email'
                                     placeholder='email'
@@ -67,6 +69,7 @@ class Login extends Component {
                             <label htmlFor='password'>
                                 Password
                                 <input
+                                    required
                                     type='password'
                                     name='password'
                                     placeholder='*****'

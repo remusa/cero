@@ -16,7 +16,8 @@
         "dev": "nodemon -e js,graphql -x node --inspect src/index.js",
         "dev-win": "set NODE_ENV=dev & nodemon -e js,graphql -x node --inspect src/index.js",
         "test": "jest",
-        "deploy": "prisma deploy"
+        "deploy": "prisma deploy",
+        "deploy-win": "prisma generate & prisma deploy"
     },
     "devDependencies": {
         "graphql-cli": "^3.0.11"
@@ -29,6 +30,7 @@
         "cors": "^2.8.5",
         "dotenv": "^7.0.0",
         "graphql": "^14.3.0",
+        "graphql-import": "^0.7.1",
         "graphql-yoga": "^1.17.4",
         "helmet": "^3.18.0",
         "jsonwebtoken": "^8.5.1",
