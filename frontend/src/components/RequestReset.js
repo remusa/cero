@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
-import { CURRENT_USER_QUERY } from './User'
 
 const REQUEST_RESET_MUTATION = gql`
     mutation REQUEST_RESET_MUTATION($email: String!) {
@@ -35,7 +34,7 @@ class RequestReset extends Component {
     }
 
     render() {
-        const { email, password } = this.state
+        const { email } = this.state
 
         return (
             <Mutation mutation={REQUEST_RESET_MUTATION} variables={this.state}>
@@ -66,6 +65,7 @@ class RequestReset extends Component {
                                         onChange={this.handleChange}
                                     />
                                 </label>
+
                                 <button type="submit">Reset password</button>
                             </fieldset>
                         </Form>

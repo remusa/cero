@@ -20,6 +20,7 @@ const initialState = {
     email: '',
     name: '',
     password: '',
+    // confirmPassword: '',
 }
 
 class Register extends Component {
@@ -94,13 +95,13 @@ class Register extends Component {
                                     />
                                 </label>
 
-                                {/* <label htmlFor='password'>
+                                {/* <label htmlFor='confirmPassword'>
                                     Confirm Password
                                     <input
                                         type='password'
-                                        name='password'
+                                        name='confirmPassword'
                                         placeholder='*****'
-                                        value={password}
+                                        value={confirmPassword}
                                         onChange={this.handleChange}
                                     />
                                 </label> */}

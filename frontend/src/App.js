@@ -26,6 +26,7 @@ class App extends Component {
                     <Route path="/register" component={Register} />
                     <Route path="/requestreset" component={RequestReset} />
                     <Route path="/reset" component={Reset} />
+                    {/* <Route path="/reset?resetToken=" component={Reset}/> */}
                 </Switch>
 
                 <Footer />

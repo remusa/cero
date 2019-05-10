@@ -30,7 +30,7 @@ const initialState = {
 
 class Reset extends Component {
     static propTypes = {
-        // resetToken: PropTypes.string.isRequired,
+        resetToken: PropTypes.string.isRequired,
     }
 
     state = initialState
