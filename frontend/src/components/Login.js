@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
+import Main from './Main'
 import { CURRENT_USER_QUERY } from './User'
 
 const SIGNIN_MUTATION = gql`
@@ -48,39 +49,41 @@ class Login extends Component {
                 variables={this.state}
             >
                 {(signup, { error, loading }) => (
-                    <Form method='POST' onSubmit={(e) => {this.handleSubmit(e, signup)}}>
-                        <fieldset disabled={loading} aria-busy={loading}>
-                            <h2>Login to your account</h2>
+                    <Main>
+                        <Form styles={{gridArea: 'main'}} method='POST' onSubmit={(e) => {this.handleSubmit(e, signup)}}>
+                            <fieldset disabled={loading} aria-busy={loading}>
+                                <h2>Login to your account</h2>
 
-                            <Error error={error} />
+                                <Error error={error} />
 
-                            <label htmlFor='email'>
-                                Email
-                                <input
-                                    required
-                                    type='email'
-                                    name='email'
-                                    placeholder='email'
-                                    value={email}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
+                                <label htmlFor='email'>
+                                    Email
+                                    <input
+                                        required
+                                        type='email'
+                                        name='email'
+                                        placeholder='email'
+                                        value={email}
+                                        onChange={this.handleChange}
+                                    />
+                                </label>
 
-                            <label htmlFor='password'>
-                                Password
-                                <input
-                                    required
-                                    type='password'
-                                    name='password'
-                                    placeholder='*****'
-                                    value={password}
-                                    onChange={this.handleChange}
-                                />
-                            </label>
+                                <label htmlFor='password'>
+                                    Password
+                                    <input
+                                        required
+                                        type='password'
+                                        name='password'
+                                        placeholder='*****'
+                                        value={password}
+                                        onChange={this.handleChange}
+                                    />
+                                </label>
 
-                            <button type='submit'>Login</button>
-                        </fieldset>
-                    </Form>
+                                <button type='submit'>Login</button>
+                            </fieldset>
+                        </Form>
+                    </Main>
                 )}
             </Mutation>
         )

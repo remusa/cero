@@ -5,7 +5,6 @@ import './App.scss'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Main from './components/Main'
 import Fast from './components/Fast'
 
 import Home from './components/Home'
@@ -43,17 +42,15 @@ class App extends Component {
         const { isSignedIn } = this.state
 
         return (
-            <div className='App'>
+            <div className="App">
                 <Header isSignedIn={isSignedIn} />
 
                 <Switch>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/fast' component={Fast} />
-                    <Route path='/login' component={Login} />
-                    <Route path='/register' component={Register} />
+                    <Route path="/" exact component={Home} />
+                    <Route path="/fast" component={Fast} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
                 </Switch>
-
-                {/* <Main /> */}
 
                 <Footer />
             </div>

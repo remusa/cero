@@ -6,10 +6,14 @@ import logo from '../logo.svg'
 // import logo from '../static/icons/tomato.svg'
 
 const HeaderStyles = styled.header`
+    grid-area: header;
+
     nav {
+
         background-color: var(--color-primary);
-        width: 100vw;
+        /* width: 100vw; */
         text-align: center;
+
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;

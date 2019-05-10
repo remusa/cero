@@ -7,7 +7,6 @@ import App from './App'
 import './index.scss'
 import * as serviceWorker from './serviceWorker'
 import { ENDPOINT } from './config'
-import gql from 'graphql-tag'
 
 const client = new ApolloClient({
     uri: process.env.NODE_ENV === 'dev' ? ENDPOINT : ENDPOINT,

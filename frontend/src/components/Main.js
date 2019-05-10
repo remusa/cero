@@ -1,26 +1,21 @@
-import React, { Component } from 'react'
-// import { Switch, Route } from "react-router-dom";
-// import Home from './Home'
-// import Login from './Login'
-// import Register from './Register'
+import React from 'react'
+import styled from 'styled-components'
 
-class Main extends Component {
-    render () {
-        return (
-            <>
-                {/* <Switch>
-                    <Route path='/' exact component={Home}/>
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
-                </Switch> */}
+const MainStyles = styled.main`
+    grid-area: main;
 
-                <main>
-                    <h1>Cero</h1>
-                </main>
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    /* align-items: center; */
+`
 
-            </>
-        )
-    }
+const Main = (props) => {
+    return (
+        <MainStyles>
+            {props.children}
+        </MainStyles>
+    )
 }
 
 export default Main
