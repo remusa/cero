@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
 import queryString from 'query-string'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -104,8 +103,6 @@ class Reset extends Component {
         )
     }
 }
-
-// const ShowTheLocationWithRouter = withRouter(Reset)
 
 export default Reset
 export { RESET_MUTATION }

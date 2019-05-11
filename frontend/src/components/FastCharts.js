@@ -1,7 +1,7 @@
 import React from 'react'
+import styled from 'styled-components'
 import Chart from 'chart.js'
 import ReactChartkick, { ColumnChart } from 'react-chartkick'
-import styled from 'styled-components'
 
 ReactChartkick.addAdapter(Chart)
 
@@ -19,14 +19,14 @@ const ChartStyles = styled.div`
     margin: 0 auto;
 
     @media all and (max-width: 800px) {
-        width: 90%;
+        /* width: 90%; */
         /* height: 400px; */
     }
 `
 
 const FastCharts = () => (
     <ChartStyles>
-        <ColumnChart data={testdata} max={24} colors={['#00c957', '#666']} stacked={true}/>
+        <ColumnChart data={testdata} max={24} colors={['#00c957', '#666']} stacked={true} />
     </ChartStyles>
 )
 

@@ -1,42 +1,68 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import styled from 'styled-components'
 import tomato from '../static/icons/tomato.svg'
 import playIcon from '../static/icons/play.svg'
-import pauseIcon from '../static/icons/pause.svg'
-// import stopIcon from '../static/icons/stop.svg'
+import stopIcon from '../static/icons/stop.svg'
 import repeatIcon from '../static/icons/repeat.svg'
+// import pauseIcon from '../static/icons/pause.svg'
 // import upIcon from '../static/icons/up-arrow.svg'
 // import downIcon from '../static/icons/down-arrow.svg'
 
-const Button = ({ id, onClick, icon }) => (
-    <button type='button' id={id} className='button' onClick={onClick}>
-        <img src={icon} alt={id} className='icon' />
-    </button>
-)
+const ContainerStyles = styled.div`
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-Button.propTypes = {
-    id: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
-    icon: PropTypes.string.isRequired,
-}
+    .container__header {
+        &__icon {
+            max-width: 75px;
+        }
+    }
 
-const Label = ({ label, name, children }) => (
-    <div id={label} className='container__length__label'>
-        <h3>{name}</h3>
-        <div className='container__length__label__children'>{children}</div>
-    </div>
-)
+    .container__timer {
+        line-height: 1;
+        margin: 4px;
 
-Label.propTypes = {
-    label: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired,
-}
+        &__time-left {
+            font-size: 2.5rem;
+        }
+    }
+
+    .container__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__button {
+            &__icon {
+                max-width: 40px;
+            }
+        }
+    }
+`
+
+const ButtonStyles = styled.button`
+    padding: 4px;
+    border: 4px solid transparent;
+    border-radius: 3px;
+    background-color: transparent;
+    transition: 0.2s;
+
+    &:hover,
+    &:active {
+        /* border: 1px solid var(--color-primary); */
+        background-color: var(--color-primary-lighter);
+    }
+`
 
 const initialState = {
     timer: 0,
     timerState: 'stopped',
+    startDate: new Date('2019-05-11T03:00:00'),
+    endDate: null,
 }
 
 class FastTimer extends Component {
@@ -44,10 +70,8 @@ class FastTimer extends Component {
 
     handleReset = () => {
         this.setState(initialState)
-
         this.audioBeep.pause()
         this.audioBeep.currentTime = 0
-
         clearInterval(this.interval)
     }
 
@@ -57,7 +81,6 @@ class FastTimer extends Component {
 
     timerControl = () => {
         const { timerState } = this.state
-
         if (timerState === 'stopped') {
             this.beginCountDown()
             this.setState({ timerState: 'running' })
@@ -69,7 +92,6 @@ class FastTimer extends Component {
 
     beginCountDown = () => {
         const { timer } = this.state
-
         this.interval = setInterval(() => {
             this.incrementTimer()
         }, timer)
@@ -77,50 +99,80 @@ class FastTimer extends Component {
 
     incrementTimer = () => {
         const { timer } = this.state
-
         this.setState({ timer: timer + 1 })
     }
 
     clockify = () => {
         const { timer } = this.state
-
+        let hours = timer
         let minutes = Math.floor(timer / 60)
         let seconds = timer - minutes * 60
-
         seconds = seconds < 10 ? `0${seconds}` : seconds
         minutes = minutes < 10 ? `0${minutes}` : minutes
+        return `${hours} hrs. : ${minutes} min : ${seconds} sec`
+    }
 
-        return `${minutes}:${seconds}`
+    startStopFast = () => {
+        const { startDate } = this.state
+        const endDate = new Date('2019-05-12T02:59:00')
+
+        this.setState({ endDate })
+
+        console.log('startDate: ', startDate)
+        console.log('endDate: ', endDate)
+
+        const diffMs = Math.abs(endDate - startDate)
+        const diffDays = Math.floor(diffMs / 86400000)
+        const diffHrs = Math.floor((diffMs % 86400000) / 3600000)
+        const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000)
+
+        console.log(diffDays + ' days, ' + diffHrs + ' hours, ' + diffMins + ' minutes')
     }
 
     render() {
         const { timerState } = this.state
-        const playPauseIcon = timerState === 'stopped' ? playIcon : pauseIcon
+        const startStopIcon = timerState === 'stopped' ? playIcon : stopIcon
 
         return (
-            <div className='container'>
-                <div className='container__header'>
-                    <img src={tomato} alt='Pomodoro Clock' className='icon-header' />
+            <ContainerStyles className="container">
+                <div className="container__header">
+                    <img src={tomato} alt="Pomodoro Clock" className="container__header__icon" />
                 </div>
 
-                <div className='container__session'>
-                    <div id='time-left'>{this.clockify()}</div>
+                <div className="container__timer">
+                    <p className="container__timer__time-left">{/* {this.clockify()} */}</p>
                 </div>
 
-                <div className='container__buttons'>
-                    <Button id='start_stop' icon={playPauseIcon} onClick={this.timerControl} />
-                    <Button id='reset' icon={repeatIcon} onClick={this.handleReset} />
+                <div className="container__buttons">
+                    <ButtonStyles
+                        className="container__buttons__button"
+                        onClick={this.startStopFast}>
+                        {/* // onClick={this.timerControl}> */}
+                        <img
+                            src={startStopIcon}
+                            alt="startStopIcon"
+                            className="container__buttons__button__icon"
+                        />
+                    </ButtonStyles>
+
+                    {/* <ButtonStyles className="container__buttons__button" onClick={this.handleReset}>
+                        <img
+                            src={repeatIcon}
+                            alt="repeatIcon"
+                            className="container__buttons__button__icon"
+                        />
+                    </ButtonStyles> */}
                 </div>
 
                 <audio
-                    id='beep'
-                    preload='auto'
-                    src='https://goo.gl/65cBl1'
+                    id="beep"
+                    preload="auto"
+                    src="https://goo.gl/65cBl1"
                     ref={audio => {
                         this.audioBeep = audio
                     }}
                 />
-            </div>
+            </ContainerStyles>
         )
     }
 }

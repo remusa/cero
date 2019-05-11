@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import './App.scss'
+import styled from 'styled-components'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Fast from './components/Fast'
@@ -13,10 +13,20 @@ import Reset from './components/Reset'
 // const END_POINT='https://ceroapp.herokuapp.com'
 const END_POINT = 'http://localhost:3000'
 
+const AppStyles = styled.div`
+    text-align: center;
+    // padding-bottom: 60px;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'header header header' '. main .' 'footer footer footer';
+`
+
 class App extends Component {
     render() {
         return (
-            <div className="App">
+            <AppStyles className="App">
                 <Header />
 
                 <Switch>
@@ -30,7 +40,7 @@ class App extends Component {
                 </Switch>
 
                 <Footer />
-            </div>
+            </AppStyles>
         )
     }
 }
