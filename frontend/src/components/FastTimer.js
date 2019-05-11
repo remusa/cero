@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import tomato from '../static/icons/tomato.svg'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
-import repeatIcon from '../static/icons/repeat.svg'
+// import repeatIcon from '../static/icons/repeat.svg'
 // import pauseIcon from '../static/icons/pause.svg'
 // import upIcon from '../static/icons/up-arrow.svg'
 // import downIcon from '../static/icons/down-arrow.svg'
@@ -61,8 +60,9 @@ const ButtonStyles = styled.button`
 const initialState = {
     timer: 0,
     timerState: 'stopped',
-    startDate: new Date('2019-05-11T03:00:00'),
+    startDate: new Date('2019-05-11T03:0:55.986Z'),
     endDate: null,
+    fast: {},
 }
 
 class FastTimer extends Component {
@@ -112,25 +112,37 @@ class FastTimer extends Component {
         return `${hours} hrs. : ${minutes} min : ${seconds} sec`
     }
 
+    componentDidMount = () => {
+        this.startStopFast()
+    }
+
     startStopFast = () => {
         const { startDate } = this.state
         const endDate = new Date('2019-05-12T02:59:00')
+        // const endDate = new Date()
+        console.log(startDate, endDate)
 
         this.setState({ endDate })
 
-        console.log('startDate: ', startDate)
-        console.log('endDate: ', endDate)
-
         const diffMs = Math.abs(endDate - startDate)
-        const diffDays = Math.floor(diffMs / 86400000)
+        // const diffDays = Math.floor(diffMs / 86400000)
         const diffHrs = Math.floor((diffMs % 86400000) / 3600000)
         const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000)
+        const diffSecs = Math.round((((diffMs % 86400000) % 3600000) % 60000) / 60000)
 
-        console.log(diffDays + ' days, ' + diffHrs + ' hours, ' + diffMins + ' minutes')
+        console.log(`${diffHrs}:${diffMins}:${diffSecs}`)
+
+        this.setState({
+            fast: {
+                hours: diffHrs,
+                minutes: diffMins,
+                seconds: diffSecs,
+            },
+        })
     }
 
     render() {
-        const { timerState } = this.state
+        const { fast, timerState } = this.state
         const startStopIcon = timerState === 'stopped' ? playIcon : stopIcon
 
         return (
@@ -140,7 +152,10 @@ class FastTimer extends Component {
                 </div>
 
                 <div className="container__timer">
-                    <p className="container__timer__time-left">{/* {this.clockify()} */}</p>
+                    <p className="container__timer__time-left">
+                        {/* {this.clockify()} */}
+                        {fast.hours} hours {fast.minutes} minutes {fast.seconds} seconds
+                    </p>
                 </div>
 
                 <div className="container__buttons">
