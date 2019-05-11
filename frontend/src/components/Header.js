@@ -118,7 +118,6 @@ class Navigation extends Component {
 
                                     {(isToggled || width > 500) && (
                                         <Link to="/" className="logo">
-                                            {/* Home */}
                                             <img src={logo} alt="logo" />
                                         </Link>
                                     )}

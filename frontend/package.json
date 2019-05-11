@@ -8,6 +8,7 @@
         "chart.js": "^2.8.0",
         "graphql": "^14.3.0",
         "graphql-tag": "^2.10.1",
+        "normalize.css": "^8.0.1",
         "prop-types": "^15.7.2",
         "query-string": "^6.5.0",
         "react": "^16.8.6",
@@ -16,17 +17,19 @@
         "react-dom": "^16.8.6",
         "react-particles-js": "^2.6.0",
         "react-router-dom": "^5.0.0",
-        "react-scripts": "^2.1.8",
+        "react-scripts": "3.0.1",
         "styled-components": "^4.2.0"
     },
     "devDependencies": {
+        "enzyme": "^3.9.0",
+        "enzyme-adapter-react-16": "^1.13.0",
         "enzyme-to-json": "^3.3.4",
         "eslint-config-wesbos": "0.0.19",
         "graphql-tools": "^4.0.0",
         "node-sass": "^4.12.0"
     },
     "jest": {
-        "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
+        "setupTestFrameworkScriptFile": "<rootDir>/src/jest.setup.js",
         "testPathIgnorePatterns": [
             "<rootDir>/node_modules/"
         ],
@@ -40,10 +43,10 @@
         "build": "react-scripts build",
         "test2": "react-scripts test",
         "eject": "react-scripts eject",
-        "dev": "NODE_ENV=development react-scripts start",
+        "dev": "NODE_ENV=dev react-scripts start",
         "dev-win": "set NODE_ENV=dev & react-scripts start",
         "test": "NODE_ENV=test jest --watch",
-        "test-win": "SET NODE_ENV=test && jest --watch",
+        "test-win": "set NODE_ENV=test & jest --watch",
         "heroku-postbuild": "next build"
     },
     "eslintConfig": {
