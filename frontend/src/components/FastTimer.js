@@ -3,10 +3,6 @@ import styled from 'styled-components'
 import tomato from '../static/icons/tomato.svg'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
-// import repeatIcon from '../static/icons/repeat.svg'
-// import pauseIcon from '../static/icons/pause.svg'
-// import upIcon from '../static/icons/up-arrow.svg'
-// import downIcon from '../static/icons/down-arrow.svg'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -44,16 +40,32 @@ const ContainerStyles = styled.div`
 `
 
 const ButtonStyles = styled.button`
-    padding: 4px;
+    /* padding: 4px;
     border: 4px solid transparent;
     border-radius: 3px;
     background-color: transparent;
-    transition: 0.2s;
+    transition: 0.2s; */
+
+    background-image: linear-gradient(98.88deg, #ff00c7 0, #bd00ff 52.08%, #30f 100%);
+    box-shadow: 0 0 20px rgba(112, 0, 255, 0.8);
+    border-radius: 100px;
+    padding: 17px 0;
+    font-size: 16px;
+    line-height: 20px;
+    color: #fff;
+    border: none;
+    outline: 0;
+    display: block;
+    margin: auto;
+    transition: background-image 0.3s;
+    cursor: pointer;
+    width: 320px;
+    text-align: center;
 
     &:hover,
     &:active {
         /* border: 1px solid var(--color-primary); */
-        background-color: var(--color-primary-lighter);
+        /* background-color: var(--color-primary-lighter); */
     }
 `
 
@@ -68,49 +80,49 @@ const initialState = {
 class FastTimer extends Component {
     state = initialState
 
-    handleReset = () => {
-        this.setState(initialState)
-        this.audioBeep.pause()
-        this.audioBeep.currentTime = 0
-        clearInterval(this.interval)
-    }
+    // handleReset = () => {
+    //     this.setState(initialState)
+    //     this.audioBeep.pause()
+    //     this.audioBeep.currentTime = 0
+    //     clearInterval(this.interval)
+    // }
 
-    playAudio = () => {
-        this.audioBeep.play()
-    }
+    // playAudio = () => {
+    //     this.audioBeep.play()
+    // }
 
-    timerControl = () => {
-        const { timerState } = this.state
-        if (timerState === 'stopped') {
-            this.beginCountDown()
-            this.setState({ timerState: 'running' })
-        } else {
-            this.setState({ timerState: 'stopped' })
-            clearInterval(this.interval)
-        }
-    }
+    // timerControl = () => {
+    //     const { timerState } = this.state
+    //     if (timerState === 'stopped') {
+    //         this.beginCountDown()
+    //         this.setState({ timerState: 'running' })
+    //     } else {
+    //         this.setState({ timerState: 'stopped' })
+    //         clearInterval(this.interval)
+    //     }
+    // }
 
-    beginCountDown = () => {
-        const { timer } = this.state
-        this.interval = setInterval(() => {
-            this.incrementTimer()
-        }, timer)
-    }
+    // beginCountDown = () => {
+    //     const { timer } = this.state
+    //     this.interval = setInterval(() => {
+    //         this.incrementTimer()
+    //     }, timer)
+    // }
 
-    incrementTimer = () => {
-        const { timer } = this.state
-        this.setState({ timer: timer + 1 })
-    }
+    // incrementTimer = () => {
+    //     const { timer } = this.state
+    //     this.setState({ timer: timer + 1 })
+    // }
 
-    clockify = () => {
-        const { timer } = this.state
-        let hours = timer
-        let minutes = Math.floor(timer / 60)
-        let seconds = timer - minutes * 60
-        seconds = seconds < 10 ? `0${seconds}` : seconds
-        minutes = minutes < 10 ? `0${minutes}` : minutes
-        return `${hours} hrs. : ${minutes} min : ${seconds} sec`
-    }
+    // clockify = () => {
+    //     const { timer } = this.state
+    //     let hours = timer
+    //     let minutes = Math.floor(timer / 60)
+    //     let seconds = timer - minutes * 60
+    //     seconds = seconds < 10 ? `0${seconds}` : seconds
+    //     minutes = minutes < 10 ? `0${minutes}` : minutes
+    //     return `${hours} hrs. : ${minutes} min : ${seconds} sec`
+    // }
 
     componentDidMount = () => {
         this.startStopFast()
