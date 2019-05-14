@@ -82,27 +82,34 @@ class FastTimer extends Component {
     state = initialState
 
     componentDidMount = () => {
+        // this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
         this.startStopFast()
     }
 
+    componentWillUnmount() {
+        clearInterval(this.interval)
+    }
+
     startStopFast = () => {
-        const { startDate } = this.state
-        const endDate = new Date('2019-05-12T02:59:00')
+        const { startDate, endDate } = this.state
+        // const endDate = new Date('2019-05-12T02:59:00')
         // const endDate = new Date()
+        // this.setState({ endDate })
         console.log(startDate, endDate)
 
-        this.setState({ endDate })
-
         const diffMs = Math.abs(endDate - startDate)
-        // const diffDays = Math.floor(diffMs / 86400000)
+        const diffDays = Math.floor(diffMs / 86400000)
         const diffHrs = Math.floor((diffMs % 86400000) / 3600000)
         const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000)
-        const diffSecs = Math.round((((diffMs % 86400000) % 3600000) % 60000) / 60000)
+        const diffSecs = Math.round(((((diffMs % 86400000) % 3600000) % 60000) % 60000) / 1000)
 
         console.log(`${diffHrs}:${diffMins}:${diffSecs}`)
 
+        this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
+
         this.setState({
             fast: {
+                days: diffDays,
                 hours: diffHrs,
                 minutes: diffMins,
                 seconds: diffSecs,

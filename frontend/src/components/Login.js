@@ -49,17 +49,16 @@ class Login extends Component {
 
     handleSubmit = async (e, signin) => {
         e.preventDefault()
-        const res = await signin()
+        await signin()
         this.setState = initialState
 
         // redirect
         const { history } = this.props
         history.push('/fast')
-        console.log( 'redirecting!!!!')
     }
 
     render() {
-        const { redirect, email, password } = this.state
+        const { email, password } = this.state
 
         return (
             <Mutation
