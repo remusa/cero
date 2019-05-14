@@ -14,14 +14,15 @@ type User {
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
     permissions: [Permission] @scalarList(strategy: RELATION)
+    fasts: [Fast] @scalarList(strategy: RELATION)
 }
 
-# type Fast {
-#     id: ID! @id(strategy: AUTO) @unique
-#     startDate: DateTime!
-#     endDate: DateTime
-#     isActive: Boolean @default(value: true)
-#     user: User!
-#     createdAt: DateTime! @createdAt
-#     updatedAt: DateTime! @updatedAt
-# }
+type Fast {
+    id: ID! @id @unique
+    user: User!
+    startDate: DateTime!
+    endDate: DateTime
+    isActive: Boolean @default(value: false)
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}

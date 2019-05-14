@@ -6,20 +6,20 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import './index.scss'
 import * as serviceWorker from './serviceWorker'
-import { ENDPOINT } from './config'
+import { END_POINT } from './config'
 
 const client = new ApolloClient({
-    uri: process.env.NODE_ENV === 'dev' ? ENDPOINT : ENDPOINT,
+    uri: process.env.NODE_ENV === 'dev' ? END_POINT : END_POINT,
     request: operation => {
         operation.setContext({
             fetchOptions: {
                 credentials: 'include',
             },
             headers: {
-                authorization: `Bearer your-personal-access-token`
+                authorization: `Bearer your-personal-access-token`,
             },
-        });
-    }
+        })
+    },
 })
 
 ReactDOM.render(

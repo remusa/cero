@@ -70,7 +70,7 @@ const HeaderStyles = styled.header`
         }
     }
 `
-
+// TODO: refactor to use hooks
 class Navigation extends Component {
     state = {
         isToggled: false,

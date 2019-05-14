@@ -49,9 +49,9 @@ const ButtonStyles = styled.button`
     background-image: linear-gradient(98.88deg, #ff00c7 0, #bd00ff 52.08%, #30f 100%);
     box-shadow: 0 0 20px rgba(112, 0, 255, 0.8);
     border-radius: 100px;
-    padding: 8px 0; /* 17px 0 */
-    font-size: 1rem; /* 1.6rem */
-    line-height: 1rem; /* 20px */
+    padding: 17px 0;
+    font-size: 16px;
+    line-height: 20px;
     color: #fff;
     border: none;
     outline: 0;
@@ -59,7 +59,7 @@ const ButtonStyles = styled.button`
     margin: auto;
     transition: background-image 0.3s;
     cursor: pointer;
-    width: 160px; /* 320px */
+    width: 320px;
     text-align: center;
 
     &:hover,
@@ -77,9 +77,52 @@ const initialState = {
     fast: {},
 }
 
-// TODO: refactor to use hooks
 class FastTimer extends Component {
     state = initialState
+
+    // handleReset = () => {
+    //     this.setState(initialState)
+    //     this.audioBeep.pause()
+    //     this.audioBeep.currentTime = 0
+    //     clearInterval(this.interval)
+    // }
+
+    // playAudio = () => {
+    //     this.audioBeep.play()
+    // }
+
+    // timerControl = () => {
+    //     const { timerState } = this.state
+    //     if (timerState === 'stopped') {
+    //         this.beginCountDown()
+    //         this.setState({ timerState: 'running' })
+    //     } else {
+    //         this.setState({ timerState: 'stopped' })
+    //         clearInterval(this.interval)
+    //     }
+    // }
+
+    // beginCountDown = () => {
+    //     const { timer } = this.state
+    //     this.interval = setInterval(() => {
+    //         this.incrementTimer()
+    //     }, timer)
+    // }
+
+    // incrementTimer = () => {
+    //     const { timer } = this.state
+    //     this.setState({ timer: timer + 1 })
+    // }
+
+    // clockify = () => {
+    //     const { timer } = this.state
+    //     let hours = timer
+    //     let minutes = Math.floor(timer / 60)
+    //     let seconds = timer - minutes * 60
+    //     seconds = seconds < 10 ? `0${seconds}` : seconds
+    //     minutes = minutes < 10 ? `0${minutes}` : minutes
+    //     return `${hours} hrs. : ${minutes} min : ${seconds} sec`
+    // }
 
     componentDidMount = () => {
         this.startStopFast()
@@ -122,6 +165,7 @@ class FastTimer extends Component {
 
                 <div className="container__timer">
                     <p className="container__timer__time-left">
+                        {/* {this.clockify()} */}
                         {fast.hours} hours {fast.minutes} minutes {fast.seconds} seconds
                     </p>
                 </div>
@@ -130,13 +174,31 @@ class FastTimer extends Component {
                     <ButtonStyles
                         className="container__buttons__button"
                         onClick={this.startStopFast}>
+                        {/* // onClick={this.timerControl}> */}
                         <img
                             src={startStopIcon}
                             alt="startStopIcon"
                             className="container__buttons__button__icon"
                         />
                     </ButtonStyles>
+
+                    {/* <ButtonStyles className="container__buttons__button" onClick={this.handleReset}>
+                        <img
+                            src={repeatIcon}
+                            alt="repeatIcon"
+                            className="container__buttons__button__icon"
+                        />
+                    </ButtonStyles> */}
                 </div>
+
+                <audio
+                    id="beep"
+                    preload="auto"
+                    src="https://goo.gl/65cBl1"
+                    ref={audio => {
+                        this.audioBeep = audio
+                    }}
+                />
             </ContainerStyles>
         )
     }

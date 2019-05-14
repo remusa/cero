@@ -27,6 +27,7 @@ const initialState = {
     confirmPassword: '',
 }
 
+// TODO: refactor to use hooks
 class Reset extends Component {
     static propTypes = {
         resetToken: PropTypes.string.isRequired,

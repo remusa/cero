@@ -11,11 +11,8 @@ import Register from './components/Register'
 import RequestReset from './components/RequestReset'
 import Reset from './components/Reset'
 
-const END_POINT = 'https://ceroapp.herokuapp.com' || 'http://localhost:3000'
-
 const AppStyles = styled.div`
     text-align: center;
-    // padding-bottom: 60px;
     height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;

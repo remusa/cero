@@ -17,6 +17,7 @@ const initialState = {
     email: '',
 }
 
+// TODO: refactor to use hooks
 class RequestReset extends Component {
     state = initialState
 

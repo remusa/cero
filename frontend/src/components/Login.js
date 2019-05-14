@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
@@ -36,6 +36,7 @@ const initialState = {
     password: '',
 }
 
+// TODO: refactor to use hooks
 class Login extends Component {
     state = initialState
 
@@ -48,25 +49,17 @@ class Login extends Component {
 
     handleSubmit = async (e, signin) => {
         e.preventDefault()
-        await signin()
+        const res = await signin()
         this.setState = initialState
-    }
 
-    handleRedirect = () => {
-        // console.log( 'redirecting!!!')
-        // const { history } = this.props
-
-        const { redirect } = this.state
-        this.setState({ redirect: true })
-        // history.push('/fast')
-
-        console.log('redirect: ', redirect)
+        // redirect
+        const { history } = this.props
+        history.push('/fast')
+        console.log( 'redirecting!!!!')
     }
 
     render() {
         const { redirect, email, password } = this.state
-
-        if (redirect) return <Redirect to="/fast" push />
 
         return (
             <Mutation
@@ -109,7 +102,6 @@ class Login extends Component {
                                     />
                                 </label>
 
-                                {/* <button type="submit" onClick={this.handleRedirect}> */}
                                 <button type="submit">Login</button>
 
                                 <Link to="/requestreset">

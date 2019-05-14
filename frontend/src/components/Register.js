@@ -23,6 +23,7 @@ const initialState = {
     // confirmPassword: '',
 }
 
+// TODO: refactor to use hooks
 class Register extends Component {
     state = initialState
 
@@ -37,6 +38,10 @@ class Register extends Component {
         e.preventDefault()
         await signup()
         this.setState = initialState
+
+        // redirect
+        const { history } = this.props
+        history.push('/fast')
     }
 
     render() {
