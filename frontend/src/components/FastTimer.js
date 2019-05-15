@@ -46,7 +46,9 @@ const ButtonStyles = styled.button`
     background-color: transparent;
     transition: 0.2s; */
 
-    background-image: linear-gradient(98.88deg, #ff00c7 0, #bd00ff 52.08%, #30f 100%);
+    /* background-image: linear-gradient(98.88deg, #ff00c7 0, #bd00ff 52.08%, #30f 100%);
+    box-shadow: 0 0 20px rgba(112, 0, 255, 0.8); */
+    background-image: linear-gradient(98.88deg, var(--color-primary-lighter) 0, var(--color-primary) 52.08%, var(--color-primary-darker) 100%);
     box-shadow: 0 0 20px rgba(112, 0, 255, 0.8);
     border-radius: 100px;
     padding: 8px 0; /* 17px 0 */
@@ -73,6 +75,7 @@ const initialState = {
     timer: 0,
     timerState: 'stopped',
     startDate: new Date('2019-05-11T03:0:55.986Z'),
+    // startDate: new Date(),
     endDate: null,
     fast: {},
 }
@@ -83,36 +86,41 @@ class FastTimer extends Component {
 
     componentDidMount = () => {
         // this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
-        this.startStopFast()
+        const endDate = new Date()
+        this.setState({ endDate })
+        this.interval = setInterval(() => this.startStopFast(), 1000)
     }
 
     componentWillUnmount() {
         clearInterval(this.interval)
     }
 
-    startStopFast = () => {
-        const { startDate, endDate } = this.state
-        // const endDate = new Date('2019-05-12T02:59:00')
-        // const endDate = new Date()
-        // this.setState({ endDate })
-        console.log(startDate, endDate)
-
+    timeConversion = (startDate, endDate) => {
         const diffMs = Math.abs(endDate - startDate)
         const diffDays = Math.floor(diffMs / 86400000)
         const diffHrs = Math.floor((diffMs % 86400000) / 3600000)
         const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000)
         const diffSecs = Math.round(((((diffMs % 86400000) % 3600000) % 60000) % 60000) / 1000)
 
-        console.log(`${diffHrs}:${diffMins}:${diffSecs}`)
+        return {
+            days: diffDays,
+            hours: diffHrs < 10 ? `0${diffHrs}` : diffHrs,
+            minutes: diffMins < 10 ? `0${diffMins}` : diffMins,
+            seconds: diffSecs < 10 ? `0${diffSecs}` : diffSecs,
+        }
+    }
 
-        this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
+    startStopFast = () => {
+        const { startDate, endDate } = this.state
+        const timeConversion = this.timeConversion(startDate, endDate)
 
         this.setState({
+            endDate: Date.now(),
             fast: {
-                days: diffDays,
-                hours: diffHrs,
-                minutes: diffMins,
-                seconds: diffSecs,
+                days: timeConversion.days,
+                hours: timeConversion.hours,
+                minutes: timeConversion.minutes,
+                seconds: timeConversion.seconds,
             },
         })
     }
@@ -129,7 +137,7 @@ class FastTimer extends Component {
 
                 <div className="container__timer">
                     <p className="container__timer__time-left">
-                        {fast.hours} hours {fast.minutes} minutes {fast.seconds} seconds
+                        {fast.hours}:{fast.minutes}:{fast.seconds}
                     </p>
                 </div>
 

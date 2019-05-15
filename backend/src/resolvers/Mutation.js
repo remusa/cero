@@ -8,7 +8,7 @@ const { hasPermission } = require('../utils')
 // const stripe = require('../stripe')
 
 const Mutations = {
-    async createFast(parent, args, ctx, info) {
+    async startFast(parent, args, ctx, info) {
         // TODO: check if user is logged in
         // if (!ctx.request.userId) {
         //     throw new Error('You must be logged in to do that!')

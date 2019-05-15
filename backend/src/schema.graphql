@@ -7,7 +7,7 @@ type Mutation {
     signout: SuccessMessage
     requestReset(email: String!): SuccessMessage
     resetPassword(resetToken: String!, password: String!, confirmPassword: String!): User!
-    createFast(startDate: DateTime!, isActive: Boolean): Fast!
+    startFast(startDate: DateTime!, isActive: Boolean): Fast!
 }
 
 type Query {
