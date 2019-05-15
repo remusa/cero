@@ -46,10 +46,13 @@ const ButtonStyles = styled.button`
     background-color: transparent;
     transition: 0.2s; */
 
-    /* background-image: linear-gradient(98.88deg, #ff00c7 0, #bd00ff 52.08%, #30f 100%);
-    box-shadow: 0 0 20px rgba(112, 0, 255, 0.8); */
-    background-image: linear-gradient(98.88deg, var(--color-primary-lighter) 0, var(--color-primary) 52.08%, var(--color-primary-darker) 100%);
-    box-shadow: 0 0 20px rgba(112, 0, 255, 0.8);
+    background-image: linear-gradient(
+        98.88deg,
+        var(--color-primary-lighter) 0,
+        var(--color-primary) 52.08%,
+        var(--color-primary-darker) 100%
+    );
+    box-shadow: 0 0 20px var(--color-primary-lighter);
     border-radius: 100px;
     padding: 8px 0; /* 17px 0 */
     font-size: 1rem; /* 1.6rem */
@@ -68,12 +71,18 @@ const ButtonStyles = styled.button`
     &:active {
         /* border: 1px solid var(--color-primary); */
         /* background-color: var(--color-primary-lighter); */
+        box-shadow: 0 0 20px var(--color-primary-darker);
+        background-image: linear-gradient(
+            45deg,
+            var(--color-primary-lighter) 0,
+            var(--color-primary-darker) 100%
+        );
     }
 `
 
 const initialState = {
     timer: 0,
-    timerState: 'stopped',
+    timerActive: '',
     startDate: new Date('2019-05-11T03:0:55.986Z'),
     // startDate: new Date(),
     endDate: null,
@@ -86,9 +95,12 @@ class FastTimer extends Component {
 
     componentDidMount = () => {
         // this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
-        const endDate = new Date()
-        this.setState({ endDate })
-        this.interval = setInterval(() => this.startStopFast(), 1000)
+        const { timerActive, startDate } = this.state
+        // if (timerActive === 'started') {
+            const endDate = new Date()
+            this.setState({ endDate })
+            this.interval = setInterval(() => this.timerControl(), 1000)
+        // }
     }
 
     componentWillUnmount() {
@@ -103,6 +115,7 @@ class FastTimer extends Component {
         const diffSecs = Math.round(((((diffMs % 86400000) % 3600000) % 60000) % 60000) / 1000)
 
         return {
+            milliseconds: diffMs,
             days: diffDays,
             hours: diffHrs < 10 ? `0${diffHrs}` : diffHrs,
             minutes: diffMins < 10 ? `0${diffMins}` : diffMins,
@@ -110,13 +123,16 @@ class FastTimer extends Component {
         }
     }
 
-    startStopFast = () => {
+    timerControl = () => {
         const { startDate, endDate } = this.state
         const timeConversion = this.timeConversion(startDate, endDate)
+
+        localStorage.setItem('startDate', startDate)
 
         this.setState({
             endDate: Date.now(),
             fast: {
+                milliseconds: timeConversion.milliseconds,
                 days: timeConversion.days,
                 hours: timeConversion.hours,
                 minutes: timeConversion.minutes,
@@ -125,9 +141,21 @@ class FastTimer extends Component {
         })
     }
 
+    startFast = () => {
+        this.setState({ timerActive: true, startDate: Date.now() })
+        this.interval = setInterval(() => this.timerControl(), 1000)
+    }
+
+    stopFast = e => {
+        if (window.confirm('Stop fasting period?')) {
+            this.setState({ timerActive: false, endDate: Date.now() })
+            clearInterval(this.interval)
+        }
+    }
+
     render() {
-        const { fast, timerState } = this.state
-        const startStopIcon = timerState === 'stopped' ? playIcon : stopIcon
+        const { fast, timerActive: timerActive } = this.state
+        const startStopIcon = timerActive === false ? playIcon : stopIcon
 
         return (
             <ContainerStyles className="container">
@@ -144,7 +172,7 @@ class FastTimer extends Component {
                 <div className="container__buttons">
                     <ButtonStyles
                         className="container__buttons__button"
-                        onClick={this.startStopFast}>
+                        onClick={timerActive === false ? this.startFast : e => this.stopFast(e)}>
                         <img
                             src={startStopIcon}
                             alt="startStopIcon"
