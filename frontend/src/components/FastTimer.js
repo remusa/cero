@@ -37,6 +37,11 @@ const ContainerStyles = styled.div`
             }
         }
     }
+
+    @media all and (max-width: 500px) {
+        justify-content: center;
+        align-items: center;
+    }
 `
 
 const ButtonStyles = styled.button`
@@ -80,27 +85,30 @@ const ButtonStyles = styled.button`
     }
 `
 
-const initialState = {
-    timer: 0,
-    timerActive: '',
-    startDate: new Date('2019-05-11T03:0:55.986Z'),
-    // startDate: new Date(),
-    endDate: null,
-    fast: {},
-}
-
 // TODO: refactor to use hooks
 class FastTimer extends Component {
-    state = initialState
+    state = {
+        timerActive: '',
+        startDate: new Date('2019-05-11T03:0:55.986Z'),
+        endDate: null,
+        fast: {
+            milliseconds: '00',
+            days: '00',
+            hours: '00',
+            minutes: '00',
+            seconds: '00',
+        },
+    }
 
     componentDidMount = () => {
         // this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
         const { timerActive, startDate } = this.state
         // if (timerActive === 'started') {
-            const endDate = new Date()
-            this.setState({ endDate })
-            this.interval = setInterval(() => this.timerControl(), 1000)
+        const endDate = Date.now()
+        this.setState({ endDate })
+        this.interval = setInterval(() => this.timerControl(), 1000)
         // }
+        localStorage.setItem('startDate', startDate)
     }
 
     componentWillUnmount() {
@@ -127,8 +135,6 @@ class FastTimer extends Component {
         const { startDate, endDate } = this.state
         const timeConversion = this.timeConversion(startDate, endDate)
 
-        localStorage.setItem('startDate', startDate)
-
         this.setState({
             endDate: Date.now(),
             fast: {
@@ -142,19 +148,33 @@ class FastTimer extends Component {
     }
 
     startFast = () => {
-        this.setState({ timerActive: true, startDate: Date.now() })
+        const startDate = Date.now()
+        this.setState({ timerActive: true, startDate })
         this.interval = setInterval(() => this.timerControl(), 1000)
+        localStorage.setItem('startDate', startDate)
     }
 
     stopFast = e => {
         if (window.confirm('Stop fasting period?')) {
-            this.setState({ timerActive: false, endDate: Date.now() })
+            const endDate = Date.now()
+            this.setState({
+                timerActive: false,
+                startDate: '',
+                endDate,
+                fast: {
+                    milliseconds: '00',
+                    days: '00',
+                    hours: '00',
+                    minutes: '00',
+                    seconds: '00',
+                },
+            })
             clearInterval(this.interval)
         }
     }
 
     render() {
-        const { fast, timerActive: timerActive } = this.state
+        const { fast, timerActive } = this.state
         const startStopIcon = timerActive === false ? playIcon : stopIcon
 
         return (

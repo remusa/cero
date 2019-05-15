@@ -14,9 +14,10 @@ import Reset from './components/Reset'
 const AppStyles = styled.div`
     text-align: center;
     height: 100vh;
+
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(1fr, auto) auto;
     grid-template-areas: 'header header header' '. main .' 'footer footer footer';
 `
 
@@ -25,7 +26,6 @@ class App extends Component {
         return (
             <AppStyles className="App">
                 <Header />
-
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/fast" component={Fast} />
@@ -35,7 +35,6 @@ class App extends Component {
                     <Route path="/reset" component={Reset} />
                     {/* <Route path="/reset?resetToken=" component={Reset}/> */}
                 </Switch>
-
                 <Footer />
             </AppStyles>
         )
