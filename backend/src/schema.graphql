@@ -7,11 +7,31 @@ type Mutation {
     signout: SuccessMessage
     requestReset(email: String!): SuccessMessage
     resetPassword(resetToken: String!, password: String!, confirmPassword: String!): User!
+    createFast(startDate: DateTime!, isActive: Boolean): Fast!
 }
 
 type Query {
     me: User
     users: [User]!
+    fast(where: FastWhereUniqueInput!): Fast
+    fasts(
+        where: FastWhereInput
+        orderBy: FastOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): [Fast]!
+    fastsConnection(
+        where: FastWhereInput
+        orderBy: FastOrderByInput
+        skip: Int
+        after: String
+        before: String
+        first: Int
+        last: Int
+    ): FastConnection!
 }
 
 type SuccessMessage {
@@ -23,4 +43,5 @@ type User {
     name: String!
     email: String!
     permissions: [Permission!]!
+    fasts: [Fast]
 }

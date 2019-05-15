@@ -2,6 +2,9 @@ const { forwardTo } = require('prisma-binding')
 const { hasPermission } = require('../utils')
 
 const Query = {
+    fast: forwardTo('db'),
+    fasts: forwardTo('db'),
+    fastsConnection: forwardTo('db'),
     me(parent, args, ctx, info) {
         if (!ctx.request.userId) {
             return null
@@ -13,12 +16,10 @@ const Query = {
             info
         )
     },
-    // users: forwardTo('db'),
     async users(parent, args, ctx, info) {
-        // if (!ctx.request.userId) {
-        //     throw new Error('You must be logged in!')
-        // }
-        console.log(ctx.request.userId)
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in!')
+        }
         hasPermission(ctx.request.user, ['ADMIN', 'PERMISSIONUPDATE'])
         return ctx.db.query.users({}, info)
     },

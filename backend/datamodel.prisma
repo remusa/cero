@@ -18,11 +18,11 @@ type User {
 }
 
 type Fast {
-    id: ID! @id @unique
-    user: User!
+    id: ID! @id
     startDate: DateTime!
     endDate: DateTime
     isActive: Boolean @default(value: false)
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
+    user: User!
 }
