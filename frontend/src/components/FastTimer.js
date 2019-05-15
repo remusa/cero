@@ -6,6 +6,7 @@ import stopIcon from '../static/icons/stop.svg'
 
 const ContainerStyles = styled.div`
     text-align: center;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +34,8 @@ const ContainerStyles = styled.div`
 
         &__button {
             &__icon {
-                max-width: 40px;
+                max-width: 60px;
+                max-width: 60px;
             }
         }
     }
@@ -41,16 +43,20 @@ const ContainerStyles = styled.div`
     @media all and (max-width: 500px) {
         justify-content: center;
         align-items: center;
+
+        .container__buttons__button {
+            width: 100px;
+            height: 100px;
+
+            &__icon {
+                max-width: 40px;
+                max-height: 40px;
+            }
+        }
     }
 `
 
 const ButtonStyles = styled.button`
-    /* padding: 4px;
-    border: 4px solid transparent;
-    border-radius: 3px;
-    background-color: transparent;
-    transition: 0.2s; */
-
     background-image: linear-gradient(
         98.88deg,
         var(--color-primary-lighter) 0,
@@ -58,24 +64,23 @@ const ButtonStyles = styled.button`
         var(--color-primary-darker) 100%
     );
     box-shadow: 0 0 20px var(--color-primary-lighter);
-    border-radius: 100px;
-    padding: 8px 0; /* 17px 0 */
+    border-radius: 50%;
+    margin: auto;
+    padding: 16px; /* 17px 0 */
     font-size: 1rem; /* 1.6rem */
     line-height: 1rem; /* 20px */
-    color: #fff;
+    color: var(--color-white);
     border: none;
     outline: 0;
     display: block;
-    margin: auto;
     transition: background-image 0.3s;
     cursor: pointer;
-    width: 160px; /* 320px */
+    width: 160px;
+    height: 160px;
     text-align: center;
 
     &:hover,
     &:active {
-        /* border: 1px solid var(--color-primary); */
-        /* background-color: var(--color-primary-lighter); */
         box-shadow: 0 0 20px var(--color-primary-darker);
         background-image: linear-gradient(
             45deg,
