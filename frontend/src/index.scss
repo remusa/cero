@@ -5,12 +5,15 @@
     --color-green: #00c957;
     --color-green-dark: #007d36;
     --color-green-light: #17ff7b;
+    --color-green-lightest: #63fca5;
+    --color-green-form: #19ce67;
 
     --color-background: var(--color-white);
     --color-font: var(--color-black);
     --color-primary: var(--color-green);
     --color-primary-darker: var(--color-green-dark);
     --color-primary-lighter: var(--color-green-light);
+    --color-primary-lightest: var(--color-green-lightest);
 }
 
 @font-face {

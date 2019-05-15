@@ -67,7 +67,9 @@ class RequestReset extends Component {
                                     />
                                 </label>
 
-                                <button type="submit">Reset password</button>
+                                <button type="submit" className='reset'>Reset password</button>
+
+                                <div className='divider' />
                             </fieldset>
                         </Form>
                     </Main>

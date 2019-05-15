@@ -23,6 +23,7 @@ const ResetStyles = styled.div`
     margin-top: 8px;
     font-size: 1.3rem;
     color: var(--color-grey);
+    text-decoration: underline;
 
     &:active {
         color: var(--color-grey);
@@ -106,6 +107,8 @@ class Login extends Component {
                                 <Link to="/requestreset">
                                     <ResetStyles>Reset password</ResetStyles>
                                 </Link>
+
+                                <div className='divider' />
                             </fieldset>
                         </Form>
                     </Main>

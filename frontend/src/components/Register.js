@@ -112,6 +112,8 @@ class Register extends Component {
                                 </label> */}
 
                                 <button type="submit">Register</button>
+
+                                <div className='divider' />
                             </fieldset>
                         </Form>
                     </Main>

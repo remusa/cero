@@ -50,7 +50,7 @@ const ContainerStyles = styled.div`
 
             &__icon {
                 max-width: 40px;
-                max-height: 40px;
+                max-height: 0px;
             }
         }
     }

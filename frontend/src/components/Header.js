@@ -9,9 +9,9 @@ const HeaderStyles = styled.header`
     grid-area: header;
 
     nav {
-        background-color: var(--color-primary);
+        /* background-image: radial-gradient(circle, var(--color-primary), var(--color-primary-darker)); */
+        background: var(--color-primary);
         text-align: center;
-
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
