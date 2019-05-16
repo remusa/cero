@@ -1,5 +1,5 @@
 const { forwardTo } = require('prisma-binding')
-const { hasPermission } = require('../utils')
+const { hasPermission } = require('../utils/utils')
 
 const Query = {
     fast: forwardTo('db'),

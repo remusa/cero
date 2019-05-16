@@ -15,13 +15,13 @@ const PleaseSignIn = props => (
                         <p>Loading...</p>
                     </Main>
                 )
-            else if (error)
+            if (error)
                 return (
                     <Main>
                         <Error error={error} />
                     </Main>
                 )
-            else if (!data.me) {
+            if (!data.me) {
                 return (
                     <Main>
                         <p>Please login before continuing</p>

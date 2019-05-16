@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Main from './Main'
 import PleaseSignIn from './PleaseSignIn'
 import FastTimer from './FastTimer'
 import FastCharts from './FastCharts'

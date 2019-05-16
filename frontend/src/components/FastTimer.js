@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import tomato from '../static/icons/tomato.svg'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
+import timeConversion from '../lib/timeConversion'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -50,7 +51,7 @@ const ContainerStyles = styled.div`
 
             &__icon {
                 max-width: 40px;
-                max-height: 0px;
+                max-height: 40px;
             }
         }
     }
@@ -94,7 +95,7 @@ const ButtonStyles = styled.button`
 class FastTimer extends Component {
     state = {
         timerActive: '',
-        startDate: new Date('2019-05-11T03:0:55.986Z'),
+        startDate: new Date('2019-05-11T03:0:55.986Z'), // .getTime() for ms
         endDate: null,
         fast: {
             milliseconds: '00',
@@ -108,7 +109,7 @@ class FastTimer extends Component {
     componentDidMount = () => {
         // this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
         const { timerActive, startDate } = this.state
-        // if (timerActive === 'started') {
+        // if (timerActive === true) {
         const endDate = Date.now()
         this.setState({ endDate })
         this.interval = setInterval(() => this.timerControl(), 1000)
@@ -120,34 +121,19 @@ class FastTimer extends Component {
         clearInterval(this.interval)
     }
 
-    timeConversion = (startDate, endDate) => {
-        const diffMs = Math.abs(endDate - startDate)
-        const diffDays = Math.floor(diffMs / 86400000)
-        const diffHrs = Math.floor((diffMs % 86400000) / 3600000)
-        const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000)
-        const diffSecs = Math.round(((((diffMs % 86400000) % 3600000) % 60000) % 60000) / 1000)
-
-        return {
-            milliseconds: diffMs,
-            days: diffDays,
-            hours: diffHrs < 10 ? `0${diffHrs}` : diffHrs,
-            minutes: diffMins < 10 ? `0${diffMins}` : diffMins,
-            seconds: diffSecs < 10 ? `0${diffSecs}` : diffSecs,
-        }
-    }
-
     timerControl = () => {
         const { startDate, endDate } = this.state
-        const timeConversion = this.timeConversion(startDate, endDate)
+        const duration = timeConversion(startDate, new Date(endDate)) // .getTime()
+        // console.log(new Date(endDate).toISOString())
 
         this.setState({
-            endDate: Date.now(),
+            endDate: new Date(), // number -> Date.now()
             fast: {
-                milliseconds: timeConversion.milliseconds,
-                days: timeConversion.days,
-                hours: timeConversion.hours,
-                minutes: timeConversion.minutes,
-                seconds: timeConversion.seconds,
+                milliseconds: duration.milliseconds,
+                days: duration.days,
+                hours: duration.hours,
+                minutes: duration.minutes,
+                seconds: duration.seconds,
             },
         })
     }

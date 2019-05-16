@@ -4,12 +4,17 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const CURRENT_USER_QUERY = gql`
-    query {
+    query CURRENT_USER_QUERY {
         me {
             id
             email
             name
             permissions
+            # fasts(orderBy: { field: createdAt, direction: DESC }) {
+            #     startDate
+            #     endDate
+            #     isActive
+            # }
         }
     }
 `

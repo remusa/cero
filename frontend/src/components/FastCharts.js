@@ -1,7 +1,12 @@
 import React from 'react'
+import { Query } from 'react-apollo'
+import { gql } from 'apollo-boost'
 import styled from 'styled-components'
 import Chart from 'chart.js'
 import ReactChartkick, { ColumnChart } from 'react-chartkick'
+import Error from './ErrorMessage'
+import { CURRENT_USER_QUERY } from './User'
+import timeConversion from '../lib/timeConversion'
 
 ReactChartkick.addAdapter(Chart)
 
@@ -15,8 +20,20 @@ const testdata = [
     ['Sat 7', 12],
 ]
 
+const ALL_FASTS_QUERY = gql`
+    query ALL_FASTS_QUERY {
+        fasts(last: 7, orderBy: startDate_ASC) {
+            startDate
+            endDate
+            isActive
+        }
+    }
+`
+
 const ChartStyles = styled.div`
     margin: 0 auto;
+    /* width: auto; */
+    /* height: auto; */
 
     @media all and (max-width: 800px) {
         /* width: 90%; */
@@ -25,9 +42,34 @@ const ChartStyles = styled.div`
 `
 
 const FastCharts = () => (
-    <ChartStyles>
-        <ColumnChart data={testdata} max={24} colors={['#00c957', '#666']} stacked={true} />
-    </ChartStyles>
+    <Query query={ ALL_FASTS_QUERY } refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+        {({ data, loading, error }) => {
+            if (loading) return <p>Loading...</p>
+            if (error) return <Error error={error} />
+
+            const fasts = data.fasts
+                ? data.fasts.map(fast => {
+                      const startDate = new Date(fast.startDate)
+                      const endDate = new Date(fast.endDate)
+                      const duration = timeConversion(startDate, endDate)
+                      const dayName = startDate.toString().split(' ')[0]
+                      const dayNumber = startDate.toString().split(' ')[2]
+                      return [`${dayName}/${dayNumber}`, Number.parseInt(duration.hours)]
+                  })
+                : testdata
+
+            return (
+                <ChartStyles>
+                    <ColumnChart
+                        data={fasts}
+                        max={24}
+                        colors={['#00c957', '#666']}
+                        stacked={false}
+                    />
+                </ChartStyles>
+            )
+        }}
+    </Query>
 )
 
 export default FastCharts

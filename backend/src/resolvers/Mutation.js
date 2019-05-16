@@ -3,15 +3,16 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
 const { promisify } = require('util')
-const { transport, createEmail } = require('../mail')
-const { hasPermission } = require('../utils')
-// const stripe = require('../stripe')
+const { transport, createEmail } = require('../utils/mail')
+const { hasPermission } = require('../utils/utils')
+const { timeConversion } = require('../utils/timeConversion')
+// const stripe = require('../utils/stripe')
 
 const Mutations = {
-    async startFast(parent, args, ctx, info) {
+    async createFast(parent, args, ctx, info) {
         // TODO: check if user is logged in
         // if (!ctx.request.userId) {
-        //     throw new Error('You must be logged in to do that!')
+        // throw new Error('You must be logged in to do that!')
         // }
         const fast = await ctx.db.mutation.createFast(
             {
@@ -29,6 +30,45 @@ const Mutations = {
             info
         )
         return fast
+    },
+    async stopFast(parent, args, ctx, info) {
+        // TODO: check if user is logged in
+        // if (!ctx.request.userId) {
+        // throw new Error('You must be logged in to do that!')
+        // }
+        const fastInfo = await ctx.db.query.fast({
+            where: { id: args.id },
+        })
+        const startDate = new Date(fastInfo.startDate)
+        const endDate = new Date()
+        const { hours } = timeConversion(startDate, endDate)
+        const updates = { ...args, endDate, isActive: false, duration: hours }
+        delete updates.id
+        const updatedFast = await ctx.db.mutation.updateFast(
+            {
+                data: updates,
+                where: { id: args.id },
+            },
+            info
+        )
+        return updatedFast
+    },
+    async updateFast(parent, args, ctx, info) {
+        // TODO: check if user is logged in
+        // if (!ctx.request.userId) {
+        // throw new Error('You must be logged in to do that!')
+        // }
+        const updates = { ...args }
+        delete updates.id
+        console.log('UPDATING FAST: ', updates)
+        const updatedFast = await ctx.db.mutation.updateFast(
+            {
+                data: updates,
+                where: { id: args.id },
+            },
+            info
+        )
+        return updatedFast
     },
     async signup(parent, args, ctx, info) {
         args.email = args.email.toLowerCase()

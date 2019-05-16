@@ -21,6 +21,7 @@ type Fast {
     id: ID! @id
     startDate: DateTime!
     endDate: DateTime
+    duration: Int @default(value: 0)
     isActive: Boolean @default(value: false)
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
