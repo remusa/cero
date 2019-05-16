@@ -113,7 +113,7 @@ class Register extends Component {
 
                                 <button type="submit">Register</button>
 
-                                <div className='divider' />
+                                <div className="divider" />
                             </fieldset>
                         </Form>
                     </Main>

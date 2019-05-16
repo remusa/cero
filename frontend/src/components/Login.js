@@ -108,7 +108,7 @@ class Login extends Component {
                                     <ResetStyles>Reset password</ResetStyles>
                                 </Link>
 
-                                <div className='divider' />
+                                <div className="divider" />
                             </fieldset>
                         </Form>
                     </Main>

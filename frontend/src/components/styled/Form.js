@@ -43,6 +43,7 @@ const Form = styled.form`
         &:focus {
             outline: 0;
             border-color: var(--color-primary);
+            box-shadow: 0 0 10px var(--color-primary);
         }
     }
 
