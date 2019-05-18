@@ -42,7 +42,7 @@ const ChartStyles = styled.div`
 `
 
 const FastCharts = () => (
-    <Query query={ ALL_FASTS_QUERY } refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+    <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
         {({ data, loading, error }) => {
             if (loading) return <p>Loading...</p>
             if (error) return <Error error={error} />

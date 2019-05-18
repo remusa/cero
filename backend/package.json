@@ -19,7 +19,7 @@
         "deploy": "prisma deploy",
         "deploy-win": "prisma generate & prisma deploy",
         "deploy-backend": "git subtree push --prefix backend heroku master",
-        "deploy-backend-2": "git subtree push --prefix backend heroku-backend master"
+        "deploy-backend-2": "git push backend master"
     },
     "devDependencies": {
         "graphql-cli": "^3.0.11"

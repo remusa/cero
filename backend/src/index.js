@@ -18,8 +18,8 @@ server.express.use(cookieParser())
 server.express.use(
     helmet({
         hidePoweredBy: { setTo: 'PHP 4.2.0' },
-        frameguard: { action: 'deny' },
         xssFilter: { setOnOldIE: true },
+        // frameguard: { action: 'deny' },
         // contentSecurityPolicy: {
         //     directives: {
         //         defaultSrc: ["'self'"],
