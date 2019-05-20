@@ -80,7 +80,7 @@ const Navigation = props => {
 
     const updateWindowDimensions = () => {
         setWidth(window.innerWidth)
-        if (width > 500) {
+        if (width >= 500) {
             setToggled(false)
         }
     }
