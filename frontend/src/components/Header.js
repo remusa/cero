@@ -70,7 +70,7 @@ const HeaderStyles = styled.header`
         }
     }
 `
-const Navigation = props => {
+const Navigation = () => {
     const [toggled, setToggled] = useState(false)
     const [width, setWidth] = useState(window.innerWidth)
 
