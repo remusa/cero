@@ -1,5 +1,5 @@
 :root {
-    --color-white: rgb(245, 245, 245);
+    --color-white: hsl(0, 0%, 96%);
     --color-grey: rgb(73, 73, 73);
     --color-black: rgb(43, 43, 43);
     --color-green: #00c957;
@@ -7,7 +7,6 @@
     --color-green-light: #17ff7b;
     --color-green-lightest: #63fca5;
     --color-green-form: #19ce67;
-
     --color-background: var(--color-white);
     --color-font: var(--color-black);
     --color-primary: var(--color-green);
@@ -17,9 +16,9 @@
 }
 
 @font-face {
-    font-family: 'Lato-Regular';
-    src: url('./static/fonts/Lato-Regular.woff2');
     format: 'woff2';
+    src: url('./static/fonts/Lato-Regular.woff2');
+    font-family: 'Lato-Regular';
     font-weight: normal;
 }
 

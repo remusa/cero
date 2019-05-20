@@ -169,25 +169,25 @@ class FastTimer extends Component {
         const startStopIcon = timerActive === false ? playIcon : stopIcon
 
         return (
-            <ContainerStyles className="container">
-                <div className="container__header">
-                    <img src={tomato} alt="Pomodoro Clock" className="container__header__icon" />
+            <ContainerStyles className='container'>
+                <div className='container__header'>
+                    <img src={tomato} alt='Pomodoro Clock' className='container__header__icon' />
                 </div>
 
-                <div className="container__timer">
-                    <p className="container__timer__time-left">
+                <div className='container__timer'>
+                    <p className='container__timer__time-left'>
                         {fast.hours}:{fast.minutes}:{fast.seconds}
                     </p>
                 </div>
 
-                <div className="container__buttons">
+                <div className='container__buttons'>
                     <ButtonStyles
-                        className="container__buttons__button"
+                        className='container__buttons__button'
                         onClick={timerActive === false ? this.startFast : e => this.stopFast(e)}>
                         <img
                             src={startStopIcon}
-                            alt="startStopIcon"
-                            className="container__buttons__button__icon"
+                            alt='startStopIcon'
+                            className='container__buttons__button__icon'
                         />
                     </ButtonStyles>
                 </div>
