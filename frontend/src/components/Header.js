@@ -80,17 +80,20 @@ const Navigation = props => {
 
     const updateWindowDimensions = () => {
         setWidth(window.innerWidth)
+        if (width > 500) {
+            setToggled(false)
+        }
     }
 
-    // componentDidMount() {
     useEffect(() => {
-        window.addEventListener('resize', updateWindowDimensions())
+        // componentDidMount()
         updateWindowDimensions()
-    })
+        window.addEventListener('resize', updateWindowDimensions)
 
-    // componentWillUnmount
-    useEffect(() => {
-        window.removeEventListener('resize', updateWindowDimensions())
+        // componentWillUnmount
+        return () => {
+            window.removeEventListener('resize', updateWindowDimensions)
+        }
     })
 
     return (
@@ -120,7 +123,6 @@ const Navigation = props => {
                                         {me && (
                                             <>
                                                 <Link to="/fast">Fast</Link>
-                                                {/* <Link to="/logout">Logout</Link> */}
                                                 <Logout />
                                             </>
                                         )}
