@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import User from './User'
@@ -70,86 +70,76 @@ const HeaderStyles = styled.header`
         }
     }
 `
-// TODO: refactor to use hooks
-class Navigation extends Component {
-    state = {
-        isToggled: false,
-        width: window.innerWidth,
+const Navigation = props => {
+    const [toggled, setToggled] = useState(false)
+    const [width, setWidth] = useState(window.innerWidth)
+
+    const toggleMenu = e => {
+        setToggled(!toggled)
     }
 
-    toggleMenu = e => {
-        const { isToggled } = this.state
-        this.setState({
-            isToggled: !isToggled,
-        })
+    const updateWindowDimensions = () => {
+        setWidth(window.innerWidth)
     }
 
-    componentDidMount() {
-        this.updateWindowDimensions()
-        window.addEventListener('resize', this.updateWindowDimensions)
-    }
+    // componentDidMount() {
+    useEffect(() => {
+        window.addEventListener('resize', updateWindowDimensions())
+        updateWindowDimensions()
+    })
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWindowDimensions)
-    }
+    // componentWillUnmount
+    useEffect(() => {
+        window.removeEventListener('resize', updateWindowDimensions())
+    })
 
-    updateWindowDimensions = () => {
-        this.setState({ width: window.innerWidth })
-    }
+    return (
+        <User>
+            {({ data }) => {
+                const me = data ? data.me : null
+                return (
+                    <HeaderStyles>
+                        <nav>
+                            <div
+                                className="nav__toggle__container"
+                                style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}>
+                                <a href="#" className="nav__toggle" onClick={toggleMenu}>
+                                    ☰
+                                </a>
 
-    render() {
-        const { isToggled, width } = this.state
+                                {(toggled || width > 500) && (
+                                    <Link to="/" className="logo">
+                                        <img src={logo} alt="logo" />
+                                    </Link>
+                                )}
+                            </div>
 
-        return (
-            <User>
-                {({ data }) => {
-                    const me = data ? data.me : null
-                    return (
-                        <HeaderStyles>
-                            <nav>
-                                <div
-                                    className="nav__toggle__container"
-                                    style={
-                                        isToggled ? { marginBottom: '4px' } : { marginBottom: 0 }
-                                    }>
-                                    <a href="#" className="nav__toggle" onClick={this.toggleMenu}>
-                                        ☰
-                                    </a>
+                            <div className="nav__links">
+                                {(toggled || width > 500) && (
+                                    <>
+                                        {me && (
+                                            <>
+                                                <Link to="/fast">Fast</Link>
+                                                {/* <Link to="/logout">Logout</Link> */}
+                                                <Logout />
+                                            </>
+                                        )}
 
-                                    {(isToggled || width > 500) && (
-                                        <Link to="/" className="logo">
-                                            <img src={logo} alt="logo" />
-                                        </Link>
-                                    )}
-                                </div>
-
-                                <div className="nav__links">
-                                    {(isToggled || width > 500) && (
-                                        <>
-                                            {me && (
-                                                <>
-                                                    <Link to="/fast">Fast</Link>
-                                                    {/* <Link to="/logout">Logout</Link> */}
-                                                    <Logout />
-                                                </>
-                                            )}
-
-                                            {!me && (
-                                                <>
-                                                    <Link to="/login">Login</Link>
-                                                    <Link to="/register">Register</Link>
-                                                </>
-                                            )}
-                                        </>
-                                    )}
-                                </div>
-                            </nav>
-                        </HeaderStyles>
-                    )
-                }}
-            </User>
-        )
-    }
+                                        {!me && (
+                                            <>
+                                                <Link to="/login">Login</Link>
+                                                <Link to="/register">Register</Link>
+                                            </>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </nav>
+                    </HeaderStyles>
+                )
+            }}
+        </User>
+    )
 }
 
 export default Navigation
