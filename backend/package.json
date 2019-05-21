@@ -16,6 +16,8 @@
         "dev": "nodemon -e js,graphql -x node --inspect src/index.js",
         "dev-win": "set NODE_ENV=dev & nodemon -e js,graphql -x node --inspect src/index.js",
         "test": "jest",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "deploy": "prisma deploy",
         "deploy-win": "prisma generate & prisma deploy",
         "deploy-backend": "git subtree push --prefix backend heroku master",

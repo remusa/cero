@@ -87,14 +87,14 @@ const Navigation = () => {
 
     useEffect(() => {
         // componentDidMount()
-        updateWindowDimensions()
         window.addEventListener('resize', updateWindowDimensions)
+        updateWindowDimensions()
 
         // componentWillUnmount
         return () => {
             window.removeEventListener('resize', updateWindowDimensions)
         }
-    })
+    }, [width]) // re-render only when width changes
 
     return (
         <User>
