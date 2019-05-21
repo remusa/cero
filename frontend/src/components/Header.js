@@ -71,30 +71,31 @@ const HeaderStyles = styled.header`
     }
 `
 const Navigation = () => {
-    const [toggled, setToggled] = useState(false)
+    const initialToggle = () => localStorage.getItem('toggled') || false // only called on the first render
+    const [toggled, setToggled] = useState(initialToggle)
     const [width, setWidth] = useState(window.innerWidth)
 
-    const toggleMenu = e => {
+    const handleToggle = e => {
         setToggled(!toggled)
     }
 
-    const updateWindowDimensions = () => {
-        setWidth(window.innerWidth)
-        if (width >= 500) {
-            setToggled(false)
-        }
-    }
-
     useEffect(() => {
+        function updateWindowDimensions()  {
+            setWidth(window.innerWidth)
+            if (width >= 500) {
+                setToggled(false)
+            }
+        }
+
         // componentDidMount()
-        updateWindowDimensions()
         window.addEventListener('resize', updateWindowDimensions)
+        updateWindowDimensions()
 
         // componentWillUnmount
         return () => {
             window.removeEventListener('resize', updateWindowDimensions)
         }
-    })
+    }, [width]) // re-render only when width changes
 
     return (
         <User>
@@ -106,7 +107,7 @@ const Navigation = () => {
                             <div
                                 className="nav__toggle__container"
                                 style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}>
-                                <a href="#" className="nav__toggle" onClick={toggleMenu}>
+                                <a href="#" className="nav__toggle" onClick={handleToggle}>
                                     ☰
                                 </a>
 
