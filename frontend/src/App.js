@@ -10,6 +10,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import RequestReset from './components/RequestReset'
 import Reset from './components/Reset'
+import PermissionsPage from './components/PermissionsPage'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -33,6 +34,7 @@ class App extends Component {
                     <Route path="/register" component={Register} />
                     <Route path="/requestreset" component={RequestReset} />
                     <Route path="/reset" component={Reset} />
+                    <Route path="/permissions" component={PermissionsPage} />
                     {/* <Route path="/reset?resetToken=" component={Reset}/> */}
                 </Switch>
                 <Footer />

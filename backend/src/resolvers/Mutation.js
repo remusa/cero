@@ -1,4 +1,4 @@
-const { forwardTo } = require('prisma-binding')
+// const { forwardTo } = require('prisma-binding')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
@@ -8,20 +8,23 @@ const { hasPermission } = require('../utils/utils')
 const { timeConversion } = require('../utils/timeConversion')
 // const stripe = require('../utils/stripe')
 
+const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+
 const Mutations = {
     async createFast(parent, args, ctx, info) {
         // TODO: check if user is logged in
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
+        // TODO: get id from context
+        // const userId = ctx.request.userId
+        const userId = 'cjvifoe55b2ct0b733fieqq3x'
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
                     user: {
                         connect: {
-                            // TODO: get id from context
-                            // id: ctx.request.userId,
-                            id: 'cjvifoe55b2ct0b733fieqq3x',
+                            id: userId,
                         },
                     },
                     ...args,
@@ -86,7 +89,7 @@ const Mutations = {
         const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET)
         ctx.response.cookie('token', token, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+            maxAge: COOKIE_LENGTH,
         })
         return user
     },
@@ -102,7 +105,7 @@ const Mutations = {
         const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET)
         ctx.response.cookie('token', token, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+            maxAge: COOKIE_LENGTH,
         })
         return user
     },
@@ -159,9 +162,36 @@ const Mutations = {
         const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET)
         ctx.response.cookie('token', token, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 365,
+            maxAge: COOKIE_LENGTH,
         })
         return updatedUser
+    },
+    async updatePermissions(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
+        const currentUser = await ctx.db.query.user(
+            {
+                where: {
+                    id: ctx.request.userId,
+                },
+            },
+            info
+        )
+        hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE'])
+        return ctx.db.mutation.updateUser(
+            {
+                data: {
+                    permissions: {
+                        set: args.permissions,
+                    },
+                },
+                where: {
+                    id: args.userId,
+                },
+            },
+            info
+        )
     },
 }
 

@@ -94,9 +94,9 @@ const ButtonStyles = styled.button`
 // TODO: refactor to use hooks
 class FastTimer extends Component {
     state = {
-        timerActive: '',
-        startDate: new Date('2019-05-11T03:0:55.986Z'), // .getTime() for ms
+        startDate: new Date('2019-04-07T08:00:55.986Z'), // .getTime() for ms
         endDate: null,
+        timerActive: null,
         fast: {
             milliseconds: '00',
             days: '00',
@@ -107,13 +107,10 @@ class FastTimer extends Component {
     }
 
     componentDidMount = () => {
-        // this.interval = setInterval(() => this.setState({ endDate: Date.now() }), 1000)
-        const { timerActive, startDate } = this.state
-        // if (timerActive === true) {
+        const { startDate } = this.state
         const endDate = Date.now()
         this.setState({ endDate })
         this.interval = setInterval(() => this.timerControl(), 1000)
-        // }
         localStorage.setItem('startDate', startDate)
     }
 
@@ -166,7 +163,8 @@ class FastTimer extends Component {
 
     render() {
         const { fast, timerActive } = this.state
-        const startStopIcon = timerActive === false ? playIcon : stopIcon
+        // const startStopIcon = timerActive === false ? playIcon : stopIcon
+        const startStopIcon = timerActive ? stopIcon : playIcon
 
         return (
             <ContainerStyles className='container'>

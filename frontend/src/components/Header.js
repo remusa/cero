@@ -9,7 +9,7 @@ const HeaderStyles = styled.header`
     grid-area: header;
 
     nav {
-        /* background-image: radial-gradient(circle, var(--color-primary), var(--color-primary-darker)); */
+        height: 40px;
         background: var(--color-primary);
         text-align: center;
         display: flex;
@@ -31,6 +31,12 @@ const HeaderStyles = styled.header`
                 cursor: pointer;
             }
         }
+
+        .nav__links > span {
+            font-weight: 600;
+            color: var(--color-white);
+            margin-right: 8px;
+        }
     }
 
     @media all and (max-width: 800px) {
@@ -45,6 +51,7 @@ const HeaderStyles = styled.header`
 
     @media all and (max-width: 500px) {
         nav {
+            height: auto;
             flex-flow: column wrap;
 
             .nav__toggle__container {
@@ -66,6 +73,10 @@ const HeaderStyles = styled.header`
             .nav__links {
                 display: flex;
                 flex-flow: column wrap;
+
+                &>span {
+                    padding-bottom: 8px;
+                }
             }
         }
     }
@@ -75,12 +86,12 @@ const Navigation = () => {
     const [toggled, setToggled] = useState(initialToggle)
     const [width, setWidth] = useState(window.innerWidth)
 
-    const handleToggle = e => {
+    const handleToggle = () => {
         setToggled(!toggled)
     }
 
     useEffect(() => {
-        function updateWindowDimensions()  {
+        function updateWindowDimensions() {
             setWidth(window.innerWidth)
             if (width >= 500) {
                 setToggled(false)
@@ -105,33 +116,35 @@ const Navigation = () => {
                     <HeaderStyles>
                         <nav>
                             <div
-                                className="nav__toggle__container"
-                                style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}>
-                                <a href="#" className="nav__toggle" onClick={handleToggle}>
+                                className='nav__toggle__container'
+                                style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}
+                            >
+                                <a href='#' className='nav__toggle' onClick={handleToggle}>
                                     ☰
                                 </a>
 
                                 {(toggled || width > 500) && (
-                                    <Link to="/" className="logo">
-                                        <img src={logo} alt="logo" />
+                                    <Link to='/' className='logo'>
+                                        <img src={logo} alt='logo' />
                                     </Link>
                                 )}
                             </div>
 
-                            <div className="nav__links">
+                            <div className='nav__links'>
                                 {(toggled || width > 500) && (
                                     <>
                                         {me && (
                                             <>
-                                                <Link to="/fast">Fast</Link>
+                                                <span>{me.name}</span>
+                                                <Link to='/fast'>Fast</Link>
                                                 <Logout />
                                             </>
                                         )}
 
                                         {!me && (
                                             <>
-                                                <Link to="/login">Login</Link>
-                                                <Link to="/register">Register</Link>
+                                                <Link to='/login'>Login</Link>
+                                                <Link to='/register'>Register</Link>
                                             </>
                                         )}
                                     </>
