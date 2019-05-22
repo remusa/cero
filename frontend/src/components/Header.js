@@ -31,6 +31,12 @@ const HeaderStyles = styled.header`
                 cursor: pointer;
             }
         }
+
+        .nav__links > span {
+            font-weight: 600;
+            color: var(--color-white);
+            margin-right: 8px;
+        }
     }
 
     @media all and (max-width: 800px) {
@@ -67,6 +73,10 @@ const HeaderStyles = styled.header`
             .nav__links {
                 display: flex;
                 flex-flow: column wrap;
+
+                &>span {
+                    padding-bottom: 8px;
+                }
             }
         }
     }
@@ -125,6 +135,7 @@ const Navigation = () => {
                                     <>
                                         {me && (
                                             <>
+                                                <span>{me.name}</span>
                                                 <Link to='/fast'>Fast</Link>
                                                 <Logout />
                                             </>

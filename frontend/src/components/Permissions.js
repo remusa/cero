@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 import Error from './ErrorMessage'
 import Table from './styled/Table'
 import PermissionsButton from './styled/PermissionsButton'
+import checkmarkIcon from '../static/icons/checkmark.svg'
 
 const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 
@@ -46,7 +47,9 @@ const Permissions = props => (
                                 {POSSIBLE_PERMISSIONS.map(permission => (
                                     <th key={permission}>{permission}</th>
                                 ))}
-                                <th>👇🏻</th>
+                                <th>
+                                    <img src={checkmarkIcon} alt='startStopIcon' />
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
