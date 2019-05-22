@@ -3,8 +3,7 @@ import styled from 'styled-components';
 const Table = styled.table`
   border-spacing: 0;
   width: 100%;
-  /* border: 1px solid ${props => props.theme.offWhite}; */
-  border: 1px solid var(--color-white);
+  border: 1px solid var(--color-black);
 
   thead {
     font-size: 10px;
@@ -12,10 +11,8 @@ const Table = styled.table`
 
   td,
   th {
-    /* border-bottom: 1px solid ${props => props.theme.offWhite}; */
-    border-bottom: 1px solid var(--color-white);
-    /* border-right: 1px solid ${props => props.theme.offWhite}; */
-    border-right: 1px solid var(--color-white);
+    border-bottom: 1px solid var(--color-black);
+    border-right: 1px solid var(--color-black);
     padding: 5px;
     position: relative;
 
@@ -36,8 +33,7 @@ const Table = styled.table`
 
   tr {
     &:hover {
-      /* background: ${props => props.theme.offWhite}; */
-      background: var(--color-white);
+      background: var(--color-primary);
     }
   }
 `;

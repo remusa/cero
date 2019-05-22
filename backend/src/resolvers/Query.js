@@ -17,12 +17,11 @@ const Query = {
         )
     },
     async users(parent, args, ctx, info) {
-        // TODO: check if user is logged in
-        // if (!ctx.request.userId) {
-        // throw new Error('You must be logged in to do that!')
-        // }
-        // TODO: check if user has permission to check users
-        // hasPermission(ctx.request.user, ['ADMIN', 'PERMISSIONUPDATE'])
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
+        const currentUser = ctx.request.user
+        hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE'])
         return ctx.db.query.users({}, info)
     },
 }

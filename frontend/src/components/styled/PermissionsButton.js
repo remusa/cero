@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SickButton = styled.button`
+const PermissionsButton = styled.button`
   background: red;
   color: white;
   font-weight: 500;
@@ -18,4 +18,4 @@ const SickButton = styled.button`
   }
 `;
 
-export default SickButton;
+export default PermissionsButton;

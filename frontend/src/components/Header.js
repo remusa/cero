@@ -9,7 +9,7 @@ const HeaderStyles = styled.header`
     grid-area: header;
 
     nav {
-        /* background-image: radial-gradient(circle, var(--color-primary), var(--color-primary-darker)); */
+        height: 40px;
         background: var(--color-primary);
         text-align: center;
         display: flex;
@@ -45,6 +45,7 @@ const HeaderStyles = styled.header`
 
     @media all and (max-width: 500px) {
         nav {
+            height: auto;
             flex-flow: column wrap;
 
             .nav__toggle__container {

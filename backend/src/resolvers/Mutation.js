@@ -16,14 +16,15 @@ const Mutations = {
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
+        // TODO: get id from context
+        // const userId = ctx.request.userId
+        const userId = 'cjvifoe55b2ct0b733fieqq3x'
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
                     user: {
                         connect: {
-                            // TODO: get id from context
-                            // id: ctx.request.userId,
-                            id: 'cjvifoe55b2ct0b733fieqq3x',
+                            id: userId,
                         },
                     },
                     ...args,
@@ -166,10 +167,9 @@ const Mutations = {
         return updatedUser
     },
     async updatePermissions(parent, args, ctx, info) {
-        // TODO: check if user is logged in
-        // if (!ctx.request.userId) {
-        // throw new Error('You must be logged in to do that!')
-        // }
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
         const currentUser = await ctx.db.query.user(
             {
                 where: {
@@ -178,8 +178,7 @@ const Mutations = {
             },
             info
         )
-        // TODO: check if user has permission to check users
-        // hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE'])
+        hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE'])
         return ctx.db.mutation.updateUser(
             {
                 data: {

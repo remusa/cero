@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Error from './ErrorMessage'
 import Table from './styled/Table'
-import SickButton from './styled/SickButton'
+import PermissionsButton from './styled/PermissionsButton'
 
-const possiblePermissions = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
+const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 
 const UPDATE_PERMISSIONS_MUTATION = gql`
-    mutation updatePermissions($permissions: [Permission], $userId: ID!) {
+    mutation updatePermissions($userId: ID!, $permissions: [Permission]) {
         updatePermissions(userId: $userId, permissions: $permissions) {
             id
             permissions
@@ -43,7 +43,7 @@ const Permissions = props => (
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                {possiblePermissions.map(permission => (
+                                {POSSIBLE_PERMISSIONS.map(permission => (
                                     <th key={permission}>{permission}</th>
                                 ))}
                                 <th>👇🏻</th>
@@ -94,8 +94,7 @@ const UserPermissions = props => {
                     <tr>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
-
-                        {possiblePermissions.map(permission => (
+                        {POSSIBLE_PERMISSIONS.map(permission => (
                             <td key={permission}>
                                 <label htmlFor={`${user.id}-permission-${permission}`}>
                                     <input
@@ -108,14 +107,13 @@ const UserPermissions = props => {
                                 </label>
                             </td>
                         ))}
-
                         <td>
-                            <SickButton
+                            <PermissionsButton
                                 type='button'
                                 disabled={loading}
                                 onClick={updatePermissions}>
                                 Updat{loading ? 'ing' : 'e'}
-                            </SickButton>
+                            </PermissionsButton>
                         </td>
                     </tr>
                 </>
