@@ -16,15 +16,14 @@ const Mutations = {
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
-        // TODO: get id from context
-        // const userId = ctx.request.userId
-        const userId = 'cjvifoe55b2ct0b733fieqq3x'
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
                     user: {
                         connect: {
-                            id: userId,
+                            // TODO: get id from context
+                            // id:  ctx.request.userId,
+                            id: 'cjvifoe55b2ct0b733fieqq3x',
                         },
                     },
                     ...args,
