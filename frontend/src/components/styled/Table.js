@@ -3,7 +3,9 @@ import styled from 'styled-components';
 const Table = styled.table`
   border-spacing: 0;
   width: 100%;
-  border: 1px solid var(--color-black);
+  /* border: 1px solid var(--color-black); */
+  box-shadow: 0 0 20px var(--color-primary-darker);
+  border-radius: 20px;
 
   thead {
     font-size: 10px;
@@ -11,8 +13,8 @@ const Table = styled.table`
 
   td,
   th {
-    border-bottom: 1px solid var(--color-black);
-    border-right: 1px solid var(--color-black);
+    /* border-bottom: 1px solid var(--color-black);
+    border-right: 1px solid var(--color-black); */
     padding: 5px;
     position: relative;
 
@@ -34,6 +36,7 @@ const Table = styled.table`
   tr {
     &:hover {
       background: var(--color-primary);
+      border-radius: 20px;
     }
   }
 `;

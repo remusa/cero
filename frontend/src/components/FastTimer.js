@@ -96,7 +96,7 @@ class FastTimer extends Component {
     state = {
         startDate: new Date('2019-04-07T08:00:55.986Z'), // .getTime() for ms
         endDate: null,
-        timerActive: null,
+        timerActive: '',
         fast: {
             milliseconds: '00',
             days: '00',
@@ -163,8 +163,7 @@ class FastTimer extends Component {
 
     render() {
         const { fast, timerActive } = this.state
-        // const startStopIcon = timerActive === false ? playIcon : stopIcon
-        const startStopIcon = timerActive ? stopIcon : playIcon
+        const startStopIcon = timerActive === false ? playIcon : stopIcon
 
         return (
             <ContainerStyles className='container'>
