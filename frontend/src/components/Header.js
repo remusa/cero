@@ -7,6 +7,7 @@ import logo from '../logo.svg'
 
 const HeaderStyles = styled.header`
     grid-area: header;
+    transition: 0.3s ease-in-out;
 
     nav {
         height: 40px;
@@ -23,6 +24,11 @@ const HeaderStyles = styled.header`
             margin: 4px;
             flex: 0 1 20px;
             color: #fff;
+
+            &:hover {
+                /* font-weight: 600; */
+                text-decoration: underline;
+            }
         }
 
         .nav__toggle__container {

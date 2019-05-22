@@ -17,7 +17,14 @@ const FooterStyles = styled.div`
 
         a,
         p {
+            /* padding: 4px;
+            margin: 4px; */
             color: #fff;
+        }
+
+        a:hover {
+            /* font-weight: 600; */
+            text-decoration: underline;
         }
     }
 
