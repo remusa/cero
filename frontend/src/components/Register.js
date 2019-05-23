@@ -51,50 +51,52 @@ class Register extends Component {
             <Mutation
                 mutation={SIGNUP_MUTATION}
                 variables={this.state}
-                refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+                refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
                 {(signup, { error, loading }) => (
                     <Main>
                         <Form
-                            method="POST"
+                            method='POST'
                             onSubmit={e => {
                                 this.handleSubmit(e, signup)
-                            }}>
+                            }}
+                        >
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <h2>Register a new account</h2>
 
                                 <Error error={error} />
 
-                                <label htmlFor="email">
-                                    Email
-                                    <input
-                                        required
-                                        type="email"
-                                        name="email"
-                                        placeholder="email"
-                                        value={email}
-                                        onChange={this.handleChange}
-                                    />
-                                </label>
-
-                                <label htmlFor="name">
+                                <label htmlFor='name'>
                                     Name
                                     <input
                                         required
-                                        type="text"
-                                        name="name"
-                                        placeholder="name"
+                                        type='text'
+                                        name='name'
+                                        placeholder='name'
                                         value={name}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <label htmlFor="password">
+                                <label htmlFor='email'>
+                                    Email
+                                    <input
+                                        required
+                                        type='email'
+                                        name='email'
+                                        placeholder='email'
+                                        value={email}
+                                        onChange={this.handleChange}
+                                    />
+                                </label>
+
+                                <label htmlFor='password'>
                                     Password
                                     <input
                                         required
-                                        type="password"
-                                        name="password"
-                                        placeholder="*****"
+                                        type='password'
+                                        name='password'
+                                        placeholder='*****'
                                         value={password}
                                         onChange={this.handleChange}
                                     />
@@ -111,9 +113,9 @@ class Register extends Component {
                                     />
                                 </label> */}
 
-                                <button type="submit">Register</button>
+                                <button type='submit'>Register</button>
 
-                                <div className="divider" />
+                                <div className='divider' />
                             </fieldset>
                         </Form>
                     </Main>

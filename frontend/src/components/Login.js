@@ -23,7 +23,10 @@ const ResetStyles = styled.div`
     margin-top: 8px;
     font-size: 1.3rem;
     color: var(--color-grey);
-    text-decoration: underline;
+
+    &:hover {
+        text-decoration: underline;
+    }
 
     &:active {
         color: var(--color-grey);
@@ -31,9 +34,8 @@ const ResetStyles = styled.div`
 `
 
 const initialState = {
-    redirect: false,
-    email: '',
     name: '',
+    email: '',
     password: '',
 }
 
@@ -65,50 +67,52 @@ class Login extends Component {
             <Mutation
                 mutation={SIGNIN_MUTATION}
                 variables={this.state}
-                refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+                refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
                 {(signin, { error, loading }) => (
                     <Main>
                         <Form
-                            method="POST"
+                            method='POST'
                             onSubmit={e => {
                                 this.handleSubmit(e, signin)
-                            }}>
+                            }}
+                        >
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <h2>Login to your account</h2>
 
                                 <Error error={error} />
 
-                                <label htmlFor="email">
+                                <label htmlFor='email'>
                                     Email
                                     <input
                                         required
-                                        type="email"
-                                        name="email"
-                                        placeholder="email"
+                                        type='email'
+                                        name='email'
+                                        placeholder='email'
                                         value={email}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <label htmlFor="password">
+                                <label htmlFor='password'>
                                     Password
                                     <input
                                         required
-                                        type="password"
-                                        name="password"
-                                        placeholder="*****"
+                                        type='password'
+                                        name='password'
+                                        placeholder='*****'
                                         value={password}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <button type="submit">Login</button>
+                                <button type='submit'>Login</button>
 
-                                <Link to="/requestreset">
+                                <Link to='/requestreset'>
                                     <ResetStyles>Reset password</ResetStyles>
                                 </Link>
 
-                                <div className="divider" />
+                                <div className='divider' />
                             </fieldset>
                         </Form>
                     </Main>
