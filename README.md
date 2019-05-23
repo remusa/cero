@@ -1,8 +1,16 @@
-# Cero - A fasting tracker
+# [Cero - A fasting tracker](https://cero.netlify.com/)
 
 Cero is a fasting tracker built in React, Node.js (Express.js).
 
-## URLs
+## Front-end
 
-* [Front-end](https://cero.netlify.com/)
-* [Back-end](https://ceroapp.herokuapp.com)
+* React
+* Apollo Client
+* Styled Components
+
+## [Back-end](https://ceroapp.herokuapp.com)
+
+* Node.js
+* GraphQL
+* GraphQL Yoga (Express server)
+* Prisma (Database interface)
