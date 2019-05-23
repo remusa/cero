@@ -7,7 +7,7 @@ function timeConversion(startDate, endDate) {
 
     return {
         milliseconds: diffMs,
-        days: diffDays,
+        days: diffDays < 10 ? `0${diffDays}` : diffDays,
         hours: diffHrs < 10 ? `0${diffHrs}` : diffHrs,
         minutes: diffMins < 10 ? `0${diffMins}` : diffMins,
         seconds: diffSecs < 10 ? `0${diffSecs}` : diffSecs,

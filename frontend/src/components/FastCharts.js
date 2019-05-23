@@ -23,9 +23,11 @@ const testdata = [
 const ALL_FASTS_QUERY = gql`
     query ALL_FASTS_QUERY {
         fasts(last: 7, orderBy: startDate_ASC) {
+            id
             startDate
             endDate
             isActive
+            duration
         }
     }
 `
@@ -41,35 +43,50 @@ const ChartStyles = styled.div`
     }
 `
 
-const FastCharts = () => (
-    <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
-        {({ data, loading, error }) => {
-            if (loading) return <p>Loading...</p>
-            if (error) return <Error error={error} />
 
-            const fasts = data.fasts
-                ? data.fasts.map(fast => {
-                      const startDate = new Date(fast.startDate)
-                      const endDate = new Date(fast.endDate)
-                      const duration = timeConversion(startDate, endDate)
-                      const dayName = startDate.toString().split(' ')[0]
-                      const dayNumber = startDate.toString().split(' ')[2]
-                      return [`${dayName}/${dayNumber}`, Number.parseInt(duration.hours)]
-                  })
-                : testdata
+const FastCharts = () => {
+    const handleClick = () => {
+        console.log("clicked")
+    }
 
-            return (
-                <ChartStyles>
-                    <ColumnChart
-                        data={fasts}
-                        max={24}
-                        colors={['#00c957', '#666']}
-                        stacked={false}
-                    />
-                </ChartStyles>
-            )
-        }}
-    </Query>
-)
+    return (
+        <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+            {({ data, loading, error }) => {
+                if (loading) return <p>Loading...</p>
+                if (error) return <Error error={error} />
+
+                const latestActiveFast = data.fasts.filter(fast => fast.endDate === null && fast.isActive === true)[0]
+                // TODO: set local startDate to latest fast
+                const startDate = new Date(latestActiveFast.startDate)
+                localStorage.setItem('startDate', startDate)
+    
+                const fasts = data.fasts
+                    ? data.fasts.map(fast => {
+                          const startDate = new Date(fast.startDate)
+                          const endDate = new Date(fast.endDate)
+                          const duration = timeConversion(startDate, endDate)
+                          const dayName = startDate.toString().split(' ')[0]
+                          const dayNumber = startDate.toString().split(' ')[2]
+                          return [`${dayName}/${dayNumber}`, Number.parseInt(duration.hours)]
+                      })
+                    : testdata
+    
+                return (
+                    <ChartStyles>
+                        <ColumnChart
+                            data={fasts}
+                            max={24}
+                            colors={['#00c957', '#666']}
+                            stacked={false}
+                            onClick={handleClick}
+                        />
+                    </ChartStyles>
+                )
+            }}
+        </Query>
+    )
+}
+
 
 export default FastCharts
+export { ALL_FASTS_QUERY }
