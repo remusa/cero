@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import 'normalize.css'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Fast from './components/Fast'

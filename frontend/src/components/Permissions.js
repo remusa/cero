@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Query, Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
 import Error from './ErrorMessage'
 import PermissionsTable from './styled/PermissionsTable'
 import PermissionsButton from './styled/PermissionsButton'

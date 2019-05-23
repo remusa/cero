@@ -49,7 +49,7 @@ const Footer = () => (
     <FooterStyles>
         <footer>
             <p>RMS 2019</p>
-            <a href="https://github.com/remusa/cero" target="_blank" rel="noopener noreferrer">
+            <a href='https://github.com/remusa/cero' target='_blank' rel='noopener noreferrer'>
                 Github
             </a>
         </footer>

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
-import {REQUEST_RESET_MUTATION} from '../gql/Mutation'
+import { REQUEST_RESET_MUTATION } from '../gql/Mutation'
 
 const initialState = {
     email: '',

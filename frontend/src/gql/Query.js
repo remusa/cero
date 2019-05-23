@@ -29,6 +29,7 @@ const ALL_USERS_QUERY = gql`
 
 const ALL_FASTS_QUERY = gql`
     query ALL_FASTS_QUERY {
+        # last: 7
         fasts(last: 7, orderBy: startDate_ASC) {
             id
             startDate

@@ -28,7 +28,7 @@ const Fast = () => (
         {/* <Main> */}
         <FastStyles>
             <h2>Fast!</h2>
-            <div className="fast__info">
+            <div className='fast__info'>
                 <FastTimer />
                 <FastCharts />
             </div>

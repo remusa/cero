@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'

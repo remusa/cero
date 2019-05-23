@@ -146,9 +146,12 @@ const Navigation = () => {
                                                     <Link to='/fast'>{me.name}</Link>
                                                 </span>
 
-                                                {(me.permissions.includes('ADMIN') || me.permissions.includes('PERMISSIONUPDATE')) &&
+                                                {(me.permissions.includes('ADMIN') ||
+                                                    me.permissions.includes(
+                                                        'PERMISSIONUPDATE'
+                                                    )) && (
                                                     <Link to='/permissions'>Permissions</Link>
-                                                }
+                                                )}
 
                                                 <Link to='/fast'>Fast</Link>
                                                 <Logout />

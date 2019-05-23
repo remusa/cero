@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
 import { CURRENT_USER_QUERY } from '../gql/Query'
-import {RESET_MUTATION} from '../gql/Mutation'
+import { RESET_MUTATION } from '../gql/Mutation'
 
 const initialState = {
     password: '',

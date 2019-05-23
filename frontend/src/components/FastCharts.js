@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Query } from 'react-apollo'
-import { gql } from 'apollo-boost'
 import styled from 'styled-components'
-import { Bar } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2'
 import Error from './ErrorMessage'
 import timeConversion from '../lib/timeConversion'
-import { CURRENT_USER_QUERY } from '../gql/Query'
-import { ALL_FASTS_QUERY } from '../gql/Query'
+import { CURRENT_USER_QUERY, ALL_FASTS_QUERY } from '../gql/Query'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -27,7 +25,7 @@ const FastCharts = () => {
         localStorage.setItem('startDate', startDate)
     }, [activeFast])
 
-    const handleClick = (e) => {
+    const handleClick = e => {
         const data = e[0]
         console.log('CLICK: ', data)
     }
@@ -58,15 +56,17 @@ const FastCharts = () => {
 
                 const chartData = {
                     labels,
-                    datasets: [{
-                        data: fasts,
-                        label: 'Fast',
-                        backgroundColor: '#17ff7b',
-                        borderColor: '#00c957',
-                        borderWidth: 1,
-                        hoverBackgroundColor: '#00c957',
-                        hoverBorderColor: '#007d36',
-                    }]
+                    datasets: [
+                        {
+                            data: fasts,
+                            label: 'Fast',
+                            backgroundColor: '#17ff7b',
+                            borderColor: '#00c957',
+                            borderWidth: 1,
+                            hoverBackgroundColor: '#00c957',
+                            hoverBorderColor: '#007d36',
+                        },
+                    ],
                 }
 
                 return (
