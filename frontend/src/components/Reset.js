@@ -30,7 +30,8 @@ const initialState = {
 // TODO: refactor to use hooks
 class Reset extends Component {
     static propTypes = {
-        resetToken: PropTypes.string.isRequired,
+        // resetToken: PropTypes.string.isRequired,
+        location: PropTypes.object.isRequired,
     }
 
     state = initialState
@@ -49,53 +50,56 @@ class Reset extends Component {
     }
 
     render() {
-        let params = queryString.parse(this.props.location.search)
-        const resetToken = params.resetToken
-        const { password, confirmPassword } = this.state
+        const params = queryString.parse(this.props.location.search)
+        const { resetToken } = params
+        const { password, confirmPassword, formError } = this.state
         console.log('resetToken: ', resetToken)
 
         return (
             <Mutation
                 mutation={RESET_MUTATION}
                 variables={{ resetToken, password, confirmPassword }}
-                refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+                refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
                 {(reset, { error, loading, called }) => (
                     <Main>
                         <Form
-                            method="POST"
+                            method='POST'
                             onSubmit={e => {
                                 this.handleSubmit(e, reset)
-                            }}>
+                            }}
+                        >
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <h2>Reset your password</h2>
 
                                 <Error error={error} />
+                                {formError && <p>{formError}</p>}
 
-                                <label htmlFor="password">
+                                <label htmlFor='password'>
                                     Password
                                     <input
                                         required
-                                        type="password"
-                                        name="password"
-                                        placeholder="*****"
+                                        type='password'
+                                        name='password'
+                                        placeholder='*****'
                                         value={password}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <label htmlFor="confirmPassword">
+                                <label htmlFor='confirmPassword'>
                                     Confirm Password
                                     <input
                                         required
-                                        type="password"
-                                        name="confirmPassword"
-                                        placeholder="*****"
+                                        type='password'
+                                        name='confirmPassword'
+                                        placeholder='*****'
                                         value={confirmPassword}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <button type="submit">Reset password</button>
+                                <button type='submit'>Reset password</button>
                             </fieldset>
                         </Form>
                     </Main>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Table = styled.table`
   border-spacing: 0;
   width: 100%;
-  /* border: 1px solid var(--color-black); */
+  /* border: 1px solid var(--color-primary); */
   box-shadow: 0 0 20px var(--color-primary-darker);
   border-radius: 20px;
 
@@ -36,6 +36,7 @@ const Table = styled.table`
   tr {
     &:hover {
       background: var(--color-primary);
+      box-shadow: 0 0 20px var(--color-primary-darker);
       border-radius: 20px;
     }
   }

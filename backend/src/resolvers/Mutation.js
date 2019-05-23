@@ -73,7 +73,16 @@ const Mutations = {
         return updatedFast
     },
     async signup(parent, args, ctx, info) {
-        args.email = args.email.toLowerCase()
+        if (args.name.length < 3) {
+            throw new Error('Username must be at least 3 characters long')
+        }
+        if (args.password.length < 10) {
+            throw new Error('Password must be at least 10 characters long')
+        }
+        if (args.email.indexOf('@') === -1) {
+            throw new Error('Invalid email')
+        }
+        args.email = args.email.toLowerCase().trim()
         const password = await bcrypt.hash(args.password, 12)
         const user = await ctx.db.mutation.createUser(
             {
@@ -92,7 +101,9 @@ const Mutations = {
         })
         return user
     },
-    async signin(parent, { email, password }, ctx, info) {
+    async signin(parent, args, ctx, info) {
+        const email = args.email.trim()
+        const { password } = args
         const user = await ctx.db.query.user({ where: { email } })
         if (!user) {
             throw new Error(`User with email ${email} doesn't exist`)
@@ -138,7 +149,7 @@ const Mutations = {
     },
     async resetPassword(parent, args, ctx, info) {
         if (args.password !== args.confirmPassword) {
-            throw new Error("Passwords doesn't match")
+            throw new Error("Passwords don't match")
         }
         const [user] = await ctx.db.query.users({
             where: {

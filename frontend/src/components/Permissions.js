@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Error from './ErrorMessage'
-import Table from './styled/Table'
+import PermissionsTable from './styled/PermissionsTable'
 import PermissionsButton from './styled/PermissionsButton'
 import checkmarkIcon from '../static/icons/checkmark.svg'
 
@@ -39,7 +39,7 @@ const Permissions = props => (
             return (
                 <>
                     <h2>Manage Permissions</h2>
-                    <Table>
+                    <PermissionsTable>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -57,7 +57,7 @@ const Permissions = props => (
                                 <UserPermissions user={user} key={user.id} />
                             ))}
                         </tbody>
-                    </Table>
+                    </PermissionsTable>
                 </>
             )
         }}

@@ -42,10 +42,11 @@ class RequestReset extends Component {
                 {(reset, { error, loading, called }) => (
                     <Main>
                         <Form
-                            method="POST"
+                            method='POST'
                             onSubmit={e => {
                                 this.handleSubmit(e, reset)
-                            }}>
+                            }}
+                        >
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <h2>Reset your password</h2>
 
@@ -55,19 +56,21 @@ class RequestReset extends Component {
                                     <p>Success! Check your email for the reset link!</p>
                                 )}
 
-                                <label htmlFor="email">
+                                <label htmlFor='email'>
                                     Email
                                     <input
                                         required
-                                        type="email"
-                                        name="email"
-                                        placeholder="email"
+                                        type='email'
+                                        name='email'
+                                        placeholder='email'
                                         value={email}
                                         onChange={this.handleChange}
                                     />
                                 </label>
 
-                                <button type="submit" className='reset'>Reset password</button>
+                                <button type='submit' className='reset'>
+                                    Reset password
+                                </button>
 
                                 <div className='divider' />
                             </fieldset>
