@@ -5,10 +5,11 @@ import 'normalize.css'
 
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Fast from './components/Fast'
+import FastPage from './components/FastPage'
 import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
+import ProfilePage from './components/ProfilePage'
 import RequestReset from './components/RequestReset'
 import Reset from './components/Reset'
 import PermissionsPage from './components/PermissionsPage'
@@ -30,13 +31,13 @@ class App extends Component {
                 <Header />
                 <Switch>
                     <Route path='/' exact component={Home} />
-                    <Route path='/fast' component={Fast} />
+                    <Route path='/fast' component={FastPage} />
                     <Route path='/login' component={Login} />
                     <Route path='/register' component={Register} />
+                    <Route path='/profile' component={ProfilePage} />
                     <Route path='/requestreset' component={RequestReset} />
                     <Route path='/reset' component={Reset} />
                     <Route path='/permissions' component={PermissionsPage} />
-                    {/* <Route path="/reset?resetToken=" component={Reset}/> */}
                 </Switch>
                 <Footer />
             </AppStyles>

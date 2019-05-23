@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Query } from 'react-apollo'
 import styled from 'styled-components'
 import { Bar } from 'react-chartjs-2'
-import Error from './ErrorMessage'
+
 import timeConversion from '../lib/timeConversion'
+
+import Error from './ErrorMessage'
+
 import { CURRENT_USER_QUERY, ALL_FASTS_QUERY } from '../gql/Query'
 
 const ChartStyles = styled.div`
@@ -16,6 +19,19 @@ const ChartStyles = styled.div`
         /* height: 400px; */
     }
 `
+
+function getFastData(data, labels, ids) {
+    return data.fasts.map(fast => {
+        const startDate = new Date(fast.startDate)
+        const endDate = new Date(fast.endDate)
+        const duration = timeConversion(startDate, endDate)
+        const dayName = startDate.toString().split(' ')[0]
+        const dayNumber = startDate.toString().split(' ')[2]
+        labels.push(`${dayName}/${dayNumber}`)
+        ids.push(fast.id)
+        return Number.parseInt(duration.hours)
+    })
+}
 
 const FastCharts = () => {
     const [activeFast, setActiveFast] = useState({})
@@ -43,16 +59,7 @@ const FastCharts = () => {
 
                 const labels = []
                 const ids = []
-                const fasts = data.fasts.map(fast => {
-                    const startDate = new Date(fast.startDate)
-                    const endDate = new Date(fast.endDate)
-                    const duration = timeConversion(startDate, endDate)
-                    const dayName = startDate.toString().split(' ')[0]
-                    const dayNumber = startDate.toString().split(' ')[2]
-                    labels.push(`${dayName}/${dayNumber}`)
-                    ids.push(fast.id)
-                    return Number.parseInt(duration.hours)
-                })
+                const fasts = getFastData(data, labels, ids)
 
                 const chartData = {
                     labels,

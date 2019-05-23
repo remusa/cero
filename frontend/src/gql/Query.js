@@ -1,5 +1,22 @@
 import gql from 'graphql-tag'
 
+// const CURRENT_USER_QUERY = gql`
+//     query CURRENT_USER_QUERY {
+//         me {
+//             id
+//             email
+//             name
+//             permissions
+//             fasts(last: 7, orderBy: { field: createdAt, direction: DESC }) {
+//                 id
+//                 startDate
+//                 endDate
+//                 isActive
+//                 duration
+//             }
+//         }
+//     }
+// `
 const CURRENT_USER_QUERY = gql`
     query CURRENT_USER_QUERY {
         me {
@@ -7,11 +24,13 @@ const CURRENT_USER_QUERY = gql`
             email
             name
             permissions
-            # fasts(orderBy: { field: createdAt, direction: DESC }) {
-            #     startDate
-            #     endDate
-            #     isActive
-            # }
+            fasts {
+                id
+                startDate
+                endDate
+                isActive
+                duration
+            }
         }
     }
 `
@@ -27,10 +46,10 @@ const ALL_USERS_QUERY = gql`
     }
 `
 
+// last: 7
 const ALL_FASTS_QUERY = gql`
     query ALL_FASTS_QUERY {
-        # last: 7
-        fasts(last: 7, orderBy: startDate_ASC) {
+        fasts(orderBy: startDate_ASC) {
             id
             startDate
             endDate

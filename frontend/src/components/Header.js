@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
 import User from './User'
 import Logout from './Logout'
 import logo from '../logo.svg'
@@ -39,6 +40,16 @@ const HeaderStyles = styled.header`
         }
 
         .nav__links {
+            &__admin {
+                font-weight: 700;
+                margin-right: 48px;
+                display: inline-block;
+
+                & a {
+                    color: red;
+                }
+            }
+
             span {
                 font-weight: 600;
                 color: var(--color-white);
@@ -82,7 +93,13 @@ const HeaderStyles = styled.header`
                 display: flex;
                 flex-flow: column wrap;
 
+                &__admin {
+                    margin: 0;
+                    padding-bottom: 8px;
+                }
+
                 & > span {
+                    margin: 0;
                     padding-bottom: 8px;
                 }
             }
@@ -142,16 +159,18 @@ const Navigation = () => {
                                     <>
                                         {me && (
                                             <>
-                                                <span>
-                                                    <Link to='/fast'>{me.name}</Link>
-                                                </span>
-
                                                 {(me.permissions.includes('ADMIN') ||
                                                     me.permissions.includes(
                                                         'PERMISSIONUPDATE'
                                                     )) && (
-                                                    <Link to='/permissions'>Permissions</Link>
+                                                    <div className='nav__links__admin'>
+                                                        <Link to='/permissions'>Permissions</Link>
+                                                    </div>
                                                 )}
+
+                                                <span>
+                                                    <Link to='/profile'>{me.name}</Link>
+                                                </span>
 
                                                 <Link to='/fast'>Fast</Link>
                                                 <Logout />

@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
+
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
+
 import { CURRENT_USER_QUERY } from '../gql/Query'
 import { SIGNIN_MUTATION } from '../gql/Mutation'
 

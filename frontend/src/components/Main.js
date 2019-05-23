@@ -1,4 +1,5 @@
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import styled from 'styled-components'
 
 const MainStyles = styled.main`
@@ -10,8 +11,10 @@ const MainStyles = styled.main`
     align-items: center;
 `
 
-const Main = props => {
-    return <MainStyles>{props.children}</MainStyles>
+const Main = ({ children }) => <MainStyles>{children}</MainStyles>
+
+Main.propTypes = {
+    children: PropTypes.object.isRequired,
 }
 
 export default Main

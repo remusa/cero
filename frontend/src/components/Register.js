@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
+
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
+
 import { CURRENT_USER_QUERY } from '../gql/Query'
 import { SIGNUP_MUTATION } from '../gql/Mutation'
 

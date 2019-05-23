@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import PleaseSignIn from './PleaseSignIn'
 import FastTimer from './FastTimer'
 import FastCharts from './FastCharts'
@@ -23,9 +24,8 @@ const FastStyles = styled.div`
     }
 `
 
-const Fast = () => (
+const FastPage = () => (
     <PleaseSignIn>
-        {/* <Main> */}
         <FastStyles>
             <h2>Fast!</h2>
             <div className='fast__info'>
@@ -33,8 +33,7 @@ const Fast = () => (
                 <FastCharts />
             </div>
         </FastStyles>
-        {/* </Main> */}
     </PleaseSignIn>
 )
 
-export default Fast
+export default FastPage
