@@ -142,7 +142,7 @@ class FastTimer extends Component {
         localStorage.setItem('startDate', startDate)
     }
 
-    stopFast = e => {
+    stopFast = () => {
         if (window.confirm('Stop fasting period?')) {
             const endDate = Date.now()
             this.setState({
@@ -180,7 +180,8 @@ class FastTimer extends Component {
                 <div className='container__buttons'>
                     <ButtonStyles
                         className='container__buttons__button'
-                        onClick={timerActive === false ? this.startFast : e => this.stopFast(e)}>
+                        onClick={timerActive === false ? this.startFast : e => this.stopFast(e)}
+                    >
                         <img
                             src={startStopIcon}
                             alt='startStopIcon'
