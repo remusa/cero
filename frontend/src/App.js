@@ -25,16 +25,16 @@ const AppStyles = styled.div`
 class App extends Component {
     render() {
         return (
-            <AppStyles className="App">
-                <Header />
+            <AppStyles className='App'>
+                <Route path='/login' component={Login} />
                 <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/fast" component={Fast} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/requestreset" component={RequestReset} />
-                    <Route path="/reset" component={Reset} />
-                    <Route path="/permissions" component={PermissionsPage} />
+                    <Header />
+                    <Route path='/' exact component={Home} />
+                    <Route path='/fast' component={Fast} />
+                    <Route path='/register' component={Register} />
+                    <Route path='/requestreset' component={RequestReset} />
+                    <Route path='/reset' component={Reset} />
+                    <Route path='/permissions' component={PermissionsPage} />
                     {/* <Route path="/reset?resetToken=" component={Reset}/> */}
                 </Switch>
                 <Footer />

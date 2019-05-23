@@ -43,10 +43,9 @@ const ChartStyles = styled.div`
     }
 `
 
-
 const FastCharts = () => {
     const handleClick = () => {
-        console.log("clicked")
+        console.log('clicked')
     }
 
     return (
@@ -55,11 +54,13 @@ const FastCharts = () => {
                 if (loading) return <p>Loading...</p>
                 if (error) return <Error error={error} />
 
-                const latestActiveFast = data.fasts.filter(fast => fast.endDate === null && fast.isActive === true)[0]
+                const latestActiveFast = data.fasts.filter(
+                    fast => fast.endDate === null && fast.isActive === true
+                )[0]
                 // TODO: set local startDate to latest fast
-                const startDate = new Date(latestActiveFast.startDate)
-                localStorage.setItem('startDate', startDate)
-    
+                const startDateLatest = new Date(latestActiveFast.startDate)
+                localStorage.setItem('startDateLatest', startDateLatest)
+
                 const fasts = data.fasts
                     ? data.fasts.map(fast => {
                           const startDate = new Date(fast.startDate)
@@ -70,7 +71,7 @@ const FastCharts = () => {
                           return [`${dayName}/${dayNumber}`, Number.parseInt(duration.hours)]
                       })
                     : testdata
-    
+
                 return (
                     <ChartStyles>
                         <ColumnChart
@@ -86,7 +87,6 @@ const FastCharts = () => {
         </Query>
     )
 }
-
 
 export default FastCharts
 export { ALL_FASTS_QUERY }

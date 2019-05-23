@@ -175,7 +175,9 @@ class FastTimer extends Component {
 
                 <div className='container__timer'>
                     <p className='container__timer__time-left'>
-                        {fast.days > 0 && fast.days}{fast.days > 0 && ':'}{fast.hours}:{fast.minutes}:{fast.seconds}
+                        {fast.days > 0 && fast.days}
+                        {fast.days > 0 && ':'}
+                        {fast.hours}:{fast.minutes}:{fast.seconds}
                     </p>
                 </div>
 
