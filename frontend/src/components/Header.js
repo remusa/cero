@@ -130,7 +130,6 @@ const Navigation = () => {
                                 <a href='#' className='nav__toggle' onClick={handleToggle}>
                                     ☰
                                 </a>
-
                                 {(toggled || width > 500) && (
                                     <Link to='/' className='logo'>
                                         <img src={logo} alt='logo' />
@@ -148,7 +147,6 @@ const Navigation = () => {
                                                 </span>
 
                                                 {(me.permissions.includes('ADMIN') || me.permissions.includes('PERMISSIONUPDATE')) &&
-            
                                                     <Link to='/permissions'>Permissions</Link>
                                                 }
 
@@ -156,7 +154,6 @@ const Navigation = () => {
                                                 <Logout />
                                             </>
                                         )}
-
                                         {!me && (
                                             <>
                                                 <Link to='/login'>Login</Link>

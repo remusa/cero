@@ -4,14 +4,7 @@ import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
-
-const REQUEST_RESET_MUTATION = gql`
-    mutation REQUEST_RESET_MUTATION($email: String!) {
-        requestReset(email: $email) {
-            message
-        }
-    }
-`
+import {REQUEST_RESET_MUTATION} from '../gql/Mutation'
 
 const initialState = {
     email: '',
@@ -83,4 +76,3 @@ class RequestReset extends Component {
 }
 
 export default RequestReset
-export { REQUEST_RESET_MUTATION }

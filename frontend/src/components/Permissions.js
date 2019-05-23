@@ -6,30 +6,10 @@ import Error from './ErrorMessage'
 import PermissionsTable from './styled/PermissionsTable'
 import PermissionsButton from './styled/PermissionsButton'
 import checkmarkIcon from '../static/icons/checkmark.svg'
+import { ALL_USERS_QUERY } from '../gql/Query'
+import { UPDATE_PERMISSIONS_MUTATION } from '../gql/Mutation'
 
 const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
-
-const UPDATE_PERMISSIONS_MUTATION = gql`
-    mutation updatePermissions($userId: ID!, $permissions: [Permission]) {
-        updatePermissions(userId: $userId, permissions: $permissions) {
-            id
-            permissions
-            name
-            email
-        }
-    }
-`
-
-const ALL_USERS_QUERY = gql`
-    query ALL_USERS_QUERY {
-        users {
-            id
-            name
-            email
-            permissions
-        }
-    }
-`
 
 const Permissions = props => (
     <Query query={ALL_USERS_QUERY}>

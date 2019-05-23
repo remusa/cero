@@ -1,23 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost'
 import styled from 'styled-components'
 import { Bar } from 'react-chartjs-2';
 import Error from './ErrorMessage'
-import { CURRENT_USER_QUERY } from './User'
 import timeConversion from '../lib/timeConversion'
-
-const ALL_FASTS_QUERY = gql`
-    query ALL_FASTS_QUERY {
-        fasts(last: 7, orderBy: startDate_ASC) {
-            id
-            startDate
-            endDate
-            isActive
-            duration
-        }
-    }
-`
+import { CURRENT_USER_QUERY } from '../gql/Query'
+import { ALL_FASTS_QUERY } from '../gql/Query'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -31,8 +20,15 @@ const ChartStyles = styled.div`
 `
 
 const FastCharts = () => {
+    const [activeFast, setActiveFast] = useState({})
+
+    useEffect(() => {
+        const startDate = new Date(activeFast.startDate)
+        localStorage.setItem('startDate', startDate)
+    }, [activeFast])
+
     const handleClick = (e) => {
-        const data = e
+        const data = e[0]
         console.log('CLICK: ', data)
     }
 
@@ -42,23 +38,10 @@ const FastCharts = () => {
                 if (loading) return <p>Loading...</p>
                 if (error) return <Error error={error} />
 
-                const latestActiveFast = data.fasts.filter(
+                const dataActiveFast = data.fasts.filter(
                     fast => fast.endDate === null && fast.isActive === true
                 )[0]
-                // TODO: set local startDate to latest fast
-                const startDateLatest = new Date(latestActiveFast.startDate)
-                localStorage.setItem('startDateLatest', startDateLatest)
-
-                {/* const fasts = data.fasts
-                    ? data.fasts.map(fast => {
-                          const startDate = new Date(fast.startDate)
-                          const endDate = new Date(fast.endDate)
-                          const duration = timeConversion(startDate, endDate)
-                          const dayName = startDate.toString().split(' ')[0]
-                          const dayNumber = startDate.toString().split(' ')[2]
-                          return [`${dayName}/${dayNumber}`, Number.parseInt(duration.hours)]
-                      })
-                    : testdata */}
+                setActiveFast(dataActiveFast)
 
                 const labels = []
                 const ids = []
@@ -86,17 +69,14 @@ const FastCharts = () => {
                     }]
                 }
 
-                const chartOptions = {}
-
                 return (
                     <ChartStyles>
                         <Bar
                             data={chartData}
-                            options={chartOptions}
+                            options={{}}
                             max={24}
-                            colors={['#00c957', '#666']}
                             stacked={false}
-                            getElementAtEvent={handleClick}
+                            getElementAtEvent={elems => handleClick(elems)}
                         />
                     </ChartStyles>
                 )
@@ -106,4 +86,3 @@ const FastCharts = () => {
 }
 
 export default FastCharts
-export { ALL_FASTS_QUERY }

@@ -6,17 +6,8 @@ import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
-import { CURRENT_USER_QUERY } from './User'
-
-const SIGNIN_MUTATION = gql`
-    mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-        signin(email: $email, password: $password) {
-            id
-            email
-            name
-        }
-    }
-`
+import { CURRENT_USER_QUERY } from '../gql/Query'
+import { SIGNIN_MUTATION } from '../gql/Mutation'
 
 const ResetStyles = styled.div`
     padding: 4px;
@@ -123,4 +114,3 @@ class Login extends Component {
 }
 
 export default Login
-export { SIGNIN_MUTATION }
