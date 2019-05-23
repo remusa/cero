@@ -4,6 +4,7 @@ import { gql } from 'apollo-boost'
 import styled from 'styled-components'
 import Chart from 'chart.js'
 import ReactChartkick, { ColumnChart } from 'react-chartkick'
+// import { ColumnChart } from 'react-chartjs-2';
 import Error from './ErrorMessage'
 import { CURRENT_USER_QUERY } from './User'
 import timeConversion from '../lib/timeConversion'

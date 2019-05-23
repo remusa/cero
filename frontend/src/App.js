@@ -26,11 +26,11 @@ class App extends Component {
     render() {
         return (
             <AppStyles className='App'>
-                <Route path='/login' component={Login} />
+                <Header />
                 <Switch>
-                    <Header />
                     <Route path='/' exact component={Home} />
                     <Route path='/fast' component={Fast} />
+                    <Route path='/login' component={Login} />
                     <Route path='/register' component={Register} />
                     <Route path='/requestreset' component={RequestReset} />
                     <Route path='/reset' component={Reset} />
