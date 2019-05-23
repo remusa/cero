@@ -4,7 +4,7 @@ import tomato from '../static/icons/tomato.svg'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import timeConversion from '../lib/timeConversion'
-import { ALL_FASTS_QUERY } from './FastCharts'
+// import { ALL_FASTS_QUERY } from '../gql/Query'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -175,7 +175,9 @@ class FastTimer extends Component {
 
                 <div className='container__timer'>
                     <p className='container__timer__time-left'>
-                        {fast.days > 0 && fast.days}{fast.days > 0 && ':'}{fast.hours}:{fast.minutes}:{fast.seconds}
+                        {fast.days > 0 && fast.days}
+                        {fast.days > 0 && ':'}
+                        {fast.hours}:{fast.minutes}:{fast.seconds}
                     </p>
                 </div>
 

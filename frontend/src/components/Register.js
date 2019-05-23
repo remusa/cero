@@ -4,17 +4,8 @@ import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
-import { CURRENT_USER_QUERY } from './User'
-
-const SIGNUP_MUTATION = gql`
-    mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
-        signup(email: $email, name: $name, password: $password) {
-            id
-            email
-            name
-        }
-    }
-`
+import { CURRENT_USER_QUERY } from '../gql/Query'
+import { SIGNUP_MUTATION } from '../gql/Mutation'
 
 const initialState = {
     email: '',
@@ -126,4 +117,3 @@ class Register extends Component {
 }
 
 export default Register
-export { SIGNUP_MUTATION }

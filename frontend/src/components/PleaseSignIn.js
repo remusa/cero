@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
-import { CURRENT_USER_QUERY } from './User'
 import Error from './ErrorMessage'
 import Login from './Login'
 import Main from './Main'
+import { CURRENT_USER_QUERY } from '../gql/Query'
 
 const PleaseSignIn = props => (
     <Query query={CURRENT_USER_QUERY}>

@@ -6,21 +6,8 @@ import gql from 'graphql-tag'
 import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
-import { CURRENT_USER_QUERY } from './User'
-
-const RESET_MUTATION = gql`
-    mutation RESET_MUTATION($resetToken: String!, $password: String!, $confirmPassword: String!) {
-        resetPassword(
-            resetToken: $resetToken
-            password: $password
-            confirmPassword: $confirmPassword
-        ) {
-            id
-            email
-            name
-        }
-    }
-`
+import { CURRENT_USER_QUERY } from '../gql/Query'
+import {RESET_MUTATION} from '../gql/Mutation'
 
 const initialState = {
     password: '',
@@ -110,4 +97,3 @@ class Reset extends Component {
 }
 
 export default Reset
-export { RESET_MUTATION }
