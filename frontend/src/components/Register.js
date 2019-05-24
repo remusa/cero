@@ -5,8 +5,8 @@ import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
 
-import { CURRENT_USER_QUERY } from '../gql/Query'
-import { SIGNUP_MUTATION } from '../gql/Mutation'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import { SIGNUP_MUTATION } from '../gql/UserMutation'
 
 const initialState = {
     email: '',

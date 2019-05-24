@@ -7,7 +7,8 @@ import timeConversion from '../lib/timeConversion'
 
 import Error from './ErrorMessage'
 
-import { CURRENT_USER_QUERY, ALL_FASTS_QUERY } from '../gql/Query'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 
 const ChartStyles = styled.div`
     margin: 0 auto;

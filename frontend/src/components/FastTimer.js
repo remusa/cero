@@ -7,7 +7,7 @@ import tomato from '../static/icons/tomato.svg'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 
-// import { ALL_FASTS_QUERY } from '../gql/Query'
+// import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 
 const ContainerStyles = styled.div`
     text-align: center;

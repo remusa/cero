@@ -106,6 +106,7 @@ const HeaderStyles = styled.header`
         }
     }
 `
+
 const Navigation = () => {
     const initialToggle = () => localStorage.getItem('toggled') || false // only called on the first render
     const [toggled, setToggled] = useState(initialToggle)
@@ -159,12 +160,16 @@ const Navigation = () => {
                                     <>
                                         {me && (
                                             <>
-                                                {(me.permissions.includes('ADMIN') ||
-                                                    me.permissions.includes(
-                                                        'PERMISSIONUPDATE'
-                                                    )) && (
+                                                {me.permissions.includes('ADMIN') && (
                                                     <div className='nav__links__admin'>
-                                                        <Link to='/permissions'>Permissions</Link>
+                                                        <Link to='/test'>Test</Link>
+                                                        {me.permissions.includes(
+                                                            'PERMISSIONUPDATE'
+                                                        ) && (
+                                                            <Link to='/permissions'>
+                                                                Permissions /
+                                                            </Link>
+                                                        )}
                                                     </div>
                                                 )}
 

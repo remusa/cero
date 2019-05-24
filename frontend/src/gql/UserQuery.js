@@ -46,17 +46,4 @@ const ALL_USERS_QUERY = gql`
     }
 `
 
-// last: 7
-const ALL_FASTS_QUERY = gql`
-    query ALL_FASTS_QUERY {
-        fasts(orderBy: startDate_ASC) {
-            id
-            startDate
-            endDate
-            isActive
-            duration
-        }
-    }
-`
-
-export { CURRENT_USER_QUERY, ALL_USERS_QUERY, ALL_FASTS_QUERY }
+export { CURRENT_USER_QUERY, ALL_USERS_QUERY }

@@ -7,8 +7,8 @@ import Form from './styled/Form'
 import Error from './ErrorMessage'
 import Main from './Main'
 
-import { CURRENT_USER_QUERY } from '../gql/Query'
-import { SIGNIN_MUTATION } from '../gql/Mutation'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import { SIGNIN_MUTATION } from '../gql/UserMutation'
 
 const ResetStyles = styled.div`
     padding: 4px;

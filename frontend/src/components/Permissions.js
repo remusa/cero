@@ -7,8 +7,8 @@ import PermissionsTable from './styled/PermissionsTable'
 import PermissionsButton from './styled/PermissionsButton'
 import checkmarkIcon from '../static/icons/checkmark.svg'
 
-import { ALL_USERS_QUERY } from '../gql/Query'
-import { UPDATE_PERMISSIONS_MUTATION } from '../gql/Mutation'
+import { ALL_USERS_QUERY } from '../gql/UserQuery'
+import { UPDATE_PERMISSIONS_MUTATION } from '../gql/UserMutation'
 
 const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 

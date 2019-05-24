@@ -6,7 +6,7 @@ import Error from './ErrorMessage'
 import Login from './Login'
 import Main from './Main'
 
-import { CURRENT_USER_QUERY } from '../gql/Query'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 
 const PleaseSignIn = props => (
     <Query query={CURRENT_USER_QUERY}>
