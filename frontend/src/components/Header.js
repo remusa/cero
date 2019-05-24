@@ -162,7 +162,6 @@ const Navigation = () => {
                                             <>
                                                 {me.permissions.includes('ADMIN') && (
                                                     <div className='nav__links__admin'>
-                                                        <Link to='/test'>Test</Link>
                                                         {me.permissions.includes(
                                                             'PERMISSIONUPDATE'
                                                         ) && (

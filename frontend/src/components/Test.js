@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -29,12 +30,13 @@ const q = gql`
     }
 `
 
-const testQuery = ALL_USERS_QUERY
+const testQuery = CURRENT_USER_QUERY
 const RunQuery = () => (
     <Query query={testQuery}>
         {({ data, loading, error }) => {
-            if (error) return <div>Error: {error}</div>
-            if (loading) return <div>Loading...</div>
+            if (error) return <h2>Error: {error.message}</h2>
+            if (loading) return <h2>Loading...</h2>
+
             console.log(data)
             return <h2>Data received</h2>
         }}
@@ -49,8 +51,8 @@ const doAction = async action => {
 const RunMutation = () => (
     <Mutation mutation={testMutation} variables={variables}>
         {(action, { called, loading, data, error, client }) => {
-            if (error) return <div>Error: {error}</div>
-            if (loading) return <div>Loading...</div>
+            if (error) return <h2>Error: {error.message}</h2>
+            if (loading) return <h2>Loading...</h2>
 
             doAction(action)
             console.log(data)
@@ -63,6 +65,7 @@ const Test = () => (
     <div style={{ gridArea: 'main' }}>
         <RunQuery />
         {/* <RunMutation /> */}
+        <Link to='/test'>Refetch</Link>
     </div>
 )
 

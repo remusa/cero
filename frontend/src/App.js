@@ -28,7 +28,6 @@ const AppStyles = styled.div`
 const Router = () => (
     <Switch>
         <Route path='/' exact component={Home} />
-        <Route path='/test' component={Test} />
         <Route path='/fast' component={FastPage} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
@@ -36,6 +35,7 @@ const Router = () => (
         <Route path='/requestreset' component={RequestReset} />
         <Route path='/reset' component={Reset} />
         <Route path='/permissions' component={PermissionsPage} />
+        <Route path='/test' component={Test} />
     </Switch>
 )
 
