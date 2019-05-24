@@ -1,19 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-
-import { CURRENT_USER_QUERY, ALL_USERS_QUERY } from '../gql/UserQuery'
-import {
-    SIGNIN_MUTATION,
-    SIGNUP_MUTATION,
-    SIGNOUT_MUTATION,
-    RESET_MUTATION,
-    REQUEST_RESET_MUTATION,
-    UPDATE_PERMISSIONS_MUTATION,
-} from '../gql/UserMutation'
-import { ALL_FASTS_QUERY } from '../gql/FastQuery'
-import { CREATE_FAST_MUTATION, UPDATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
+import React from 'react'
+import { Mutation, Query } from 'react-apollo'
+import { Link } from 'react-router-dom'
+import { SIGNOUT_MUTATION } from '../gql/UserMutation'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 
 const q = gql`
     query Q {

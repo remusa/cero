@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
 import timeConversion from '../lib/timeConversion'
-
-import tomato from '../static/icons/tomato.svg'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
+import tomato from '../static/icons/tomato.svg'
 
 // import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 

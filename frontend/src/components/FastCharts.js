@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Query } from 'react-apollo'
-import styled from 'styled-components'
 import { Bar } from 'react-chartjs-2'
-
-import timeConversion from '../lib/timeConversion'
-
-import Error from './ErrorMessage'
-
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import styled from 'styled-components'
 import { ALL_FASTS_QUERY } from '../gql/FastQuery'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import timeConversion from '../lib/timeConversion'
+import Error from './ErrorMessage'
 
 const ChartStyles = styled.div`
     margin: 0 auto;

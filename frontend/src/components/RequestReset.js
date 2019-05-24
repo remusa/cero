@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { Mutation } from 'react-apollo'
-
-import Form from './styled/Form'
+import { REQUEST_RESET_MUTATION } from '../gql/UserMutation'
 import Error from './ErrorMessage'
 import Main from './Main'
-
-import { REQUEST_RESET_MUTATION } from '../gql/UserMutation'
+import Form from './styled/Form'
 
 const RequestReset = () => {
     const [email, setEmail] = useState('')

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
-import User from './User'
-import Logout from './Logout'
 import logo from '../logo.svg'
+import Logout from './Logout'
+import User from './User'
 
 const HeaderStyles = styled.header`
     grid-area: header;

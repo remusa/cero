@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import FastCharts from './FastCharts'
 import PleaseSignIn from './PleaseSignIn'
 

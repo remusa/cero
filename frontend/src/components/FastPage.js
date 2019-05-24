@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-
-import PleaseSignIn from './PleaseSignIn'
-import FastTimer from './FastTimer'
 import FastCharts from './FastCharts'
+import FastTimer from './FastTimer'
+import PleaseSignIn from './PleaseSignIn'
 
 const FastStyles = styled.div`
     grid-area: main;
