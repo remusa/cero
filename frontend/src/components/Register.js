@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-import Form from './styled/Form'
+import { SIGNUP_MUTATION } from '../gql/UserMutation'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 import Error from './ErrorMessage'
 import Main from './Main'
-import { CURRENT_USER_QUERY } from '../gql/Query'
-import { SIGNUP_MUTATION } from '../gql/Mutation'
+import Form from './styled/Form'
 
 const initialState = {
     email: '',

@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import PleaseSignIn from './PleaseSignIn'
-import FastTimer from './FastTimer'
 import FastCharts from './FastCharts'
+import FastTimer from './FastTimer'
+import PleaseSignIn from './PleaseSignIn'
 
 const FastStyles = styled.div`
     grid-area: main;
@@ -23,18 +23,16 @@ const FastStyles = styled.div`
     }
 `
 
-const Fast = () => (
+const FastPage = () => (
     <PleaseSignIn>
-        {/* <Main> */}
         <FastStyles>
             <h2>Fast!</h2>
-            <div className="fast__info">
+            <div className='fast__info'>
                 <FastTimer />
                 <FastCharts />
             </div>
         </FastStyles>
-        {/* </Main> */}
     </PleaseSignIn>
 )
 
-export default Fast
+export default FastPage

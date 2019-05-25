@@ -1,15 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
-const FastButton = props => {
-    return (
-        <div>
+const FastButton = props => <div />
 
-        </div>
-    )
-}
-
-FastButton.propTypes = {
-
-}
+FastButton.propTypes = {}
 
 export default FastButton

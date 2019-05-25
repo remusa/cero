@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Query, Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-import Error from './ErrorMessage'
-import PermissionsTable from './styled/PermissionsTable'
-import PermissionsButton from './styled/PermissionsButton'
+import React, { useState } from 'react'
+import { Mutation, Query } from 'react-apollo'
+import { UPDATE_PERMISSIONS_MUTATION } from '../gql/UserMutation'
+import { ALL_USERS_QUERY } from '../gql/UserQuery'
 import checkmarkIcon from '../static/icons/checkmark.svg'
-import { ALL_USERS_QUERY } from '../gql/Query'
-import { UPDATE_PERMISSIONS_MUTATION } from '../gql/Mutation'
+import Error from './ErrorMessage'
+import PermissionsButton from './styled/PermissionsButton'
+import PermissionsTable from './styled/PermissionsTable'
 
 const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 
@@ -64,7 +63,8 @@ const UserPermissions = props => {
     return (
         <Mutation
             mutation={UPDATE_PERMISSIONS_MUTATION}
-            variables={{ userId: user.id, permissions }}>
+            variables={{ userId: user.id, permissions }}
+        >
             {(updatePermissions, { loading, error }) => (
                 <>
                     {error && (
@@ -94,7 +94,8 @@ const UserPermissions = props => {
                             <PermissionsButton
                                 type='button'
                                 disabled={loading}
-                                onClick={updatePermissions}>
+                                onClick={updatePermissions}
+                            >
                                 Updat{loading ? 'ing' : 'e'}
                             </PermissionsButton>
                         </td>

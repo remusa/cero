@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Query } from 'react-apollo'
-import { gql } from 'apollo-boost'
+import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
-import { Bar } from 'react-chartjs-2';
-import Error from './ErrorMessage'
+import { ALL_FASTS_QUERY } from '../gql/FastQuery'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 import timeConversion from '../lib/timeConversion'
-import { CURRENT_USER_QUERY } from '../gql/Query'
-import { ALL_FASTS_QUERY } from '../gql/Query'
+import Error from './ErrorMessage'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -19,6 +18,19 @@ const ChartStyles = styled.div`
     }
 `
 
+function getFastData(data, labels, ids) {
+    return data.fasts.map(fast => {
+        const startDate = new Date(fast.startDate)
+        const endDate = new Date(fast.endDate)
+        const duration = timeConversion(startDate, endDate)
+        const dayName = startDate.toString().split(' ')[0]
+        const dayNumber = startDate.toString().split(' ')[2]
+        labels.push(`${dayName}/${dayNumber}`)
+        ids.push(fast.id)
+        return Number.parseInt(duration.hours)
+    })
+}
+
 const FastCharts = () => {
     const [activeFast, setActiveFast] = useState({})
 
@@ -27,7 +39,7 @@ const FastCharts = () => {
         localStorage.setItem('startDate', startDate)
     }, [activeFast])
 
-    const handleClick = (e) => {
+    const handleClick = e => {
         const data = e[0]
         console.log('CLICK: ', data)
     }
@@ -45,28 +57,21 @@ const FastCharts = () => {
 
                 const labels = []
                 const ids = []
-                const fasts = data.fasts.map(fast => {
-                    const startDate = new Date(fast.startDate)
-                    const endDate = new Date(fast.endDate)
-                    const duration = timeConversion(startDate, endDate)
-                    const dayName = startDate.toString().split(' ')[0]
-                    const dayNumber = startDate.toString().split(' ')[2]
-                    labels.push(`${dayName}/${dayNumber}`)
-                    ids.push(fast.id)
-                    return Number.parseInt(duration.hours)
-                })
+                const fasts = getFastData(data, labels, ids)
 
                 const chartData = {
                     labels,
-                    datasets: [{
-                        data: fasts,
-                        label: 'Fast',
-                        backgroundColor: '#17ff7b',
-                        borderColor: '#00c957',
-                        borderWidth: 1,
-                        hoverBackgroundColor: '#00c957',
-                        hoverBorderColor: '#007d36',
-                    }]
+                    datasets: [
+                        {
+                            data: fasts,
+                            label: 'Fast',
+                            backgroundColor: '#17ff7b',
+                            borderColor: '#00c957',
+                            borderWidth: 1,
+                            hoverBackgroundColor: '#00c957',
+                            hoverBorderColor: '#007d36',
+                        },
+                    ],
                 }
 
                 return (

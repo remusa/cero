@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import gql from 'graphql-tag'
-import Form from './styled/Form'
+import { SIGNIN_MUTATION } from '../gql/UserMutation'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 import Error from './ErrorMessage'
 import Main from './Main'
-import { CURRENT_USER_QUERY } from '../gql/Query'
-import { SIGNIN_MUTATION } from '../gql/Mutation'
+import Form from './styled/Form'
 
 const ResetStyles = styled.div`
     padding: 4px;

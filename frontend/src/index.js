@@ -20,18 +20,18 @@ const URI = process.env.NODE_ENV === 'dev' ? END_POINT : END_POINT
 const cache = new InMemoryCache()
 const httpLink = new HttpLink({ uri: URI, credentials: 'include' })
 const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem('token') || null
-  operation.setContext({
-    headers: {
-      authorization: token,
-    },
-    fetchOptions: {
-      credentials: 'include',
-    },
-  });
-  return forward(operation);
+    const token = localStorage.getItem('token') || null
+    operation.setContext({
+        headers: {
+            authorization: token,
+        },
+        fetchOptions: {
+            credentials: 'include',
+        },
+    })
+    return forward(operation)
 })
-const client = new ApolloClient({ link: from([authMiddleware, httpLink]), cache });
+const client = new ApolloClient({ link: from([authMiddleware, httpLink]), cache })
 
 // Wes Bos
 // const client = new ApolloClient({

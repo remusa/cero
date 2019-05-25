@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
+import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
-import Form from './styled/Form'
+import { RESET_MUTATION } from '../gql/UserMutation'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 import Error from './ErrorMessage'
 import Main from './Main'
-import { CURRENT_USER_QUERY } from '../gql/Query'
-import {RESET_MUTATION} from '../gql/Mutation'
+import Form from './styled/Form'
 
 const initialState = {
     password: '',
@@ -34,11 +33,14 @@ class Reset extends Component {
         e.preventDefault()
         await reset()
         this.setState = initialState
+
+        const { history } = this.props
+        history.push('/fast')
     }
 
     render() {
-        const params = queryString.parse(this.props.location.search)
-        const { resetToken } = params
+        const search = queryString.parse(this.props.location.search)
+        const { resetToken } = search
         const { password, confirmPassword, formError } = this.state
         console.log('resetToken: ', resetToken)
 
@@ -58,10 +60,8 @@ class Reset extends Component {
                         >
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <h2>Reset your password</h2>
-
                                 <Error error={error} />
                                 {formError && <p>{formError}</p>}
-
                                 <label htmlFor='password'>
                                     Password
                                     <input
@@ -73,7 +73,6 @@ class Reset extends Component {
                                         onChange={this.handleChange}
                                     />
                                 </label>
-
                                 <label htmlFor='confirmPassword'>
                                     Confirm Password
                                     <input
@@ -85,7 +84,6 @@ class Reset extends Component {
                                         onChange={this.handleChange}
                                     />
                                 </label>
-
                                 <button type='submit'>Reset password</button>
                             </fieldset>
                         </Form>

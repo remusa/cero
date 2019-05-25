@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import tomato from '../static/icons/tomato.svg'
+import timeConversion from '../lib/timeConversion'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
-import timeConversion from '../lib/timeConversion'
-// import { ALL_FASTS_QUERY } from '../gql/Query'
+import tomato from '../static/icons/tomato.svg'
+
+// import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 
 const ContainerStyles = styled.div`
     text-align: center;

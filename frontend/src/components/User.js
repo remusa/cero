@@ -1,8 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
-import { CURRENT_USER_QUERY } from '../gql/Query'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 
 const User = props => (
     <Query {...props} query={CURRENT_USER_QUERY}>

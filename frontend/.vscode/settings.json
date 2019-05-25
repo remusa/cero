@@ -6,6 +6,7 @@
     "titleBar.inactiveBackground": "#FFC600CC"
   },
   "favorites.resources": [
-    "src\\components\\FastTimer.js"
+    "src\\components\\FastTimer.js",
+    ""
   ]
 }
