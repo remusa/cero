@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { useMutation } from '@apollo/react-hooks'
 import timeConversion from '../lib/timeConversion'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
 
 // import { ALL_FASTS_QUERY } from '../gql/FastQuery'
+import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -96,12 +98,7 @@ const ButtonStyles = styled.button`
 // TODO: refactor to use hooks
 class FastTimer extends Component {
     state = {
-        // startDate: new Date('2019-04-07T08:00:55.986Z'), // .getTime() for ms
-        startDate: new Date(localStorage.getItem('startDate')),
-        endDate: null,
-        timerActive: '',
         fast: {
-            milliseconds: '00',
             days: '00',
             hours: '00',
             minutes: '00',
@@ -110,11 +107,12 @@ class FastTimer extends Component {
     }
 
     componentDidMount = () => {
-        const { startDate } = this.state
-        const endDate = Date.now()
-        this.setState({ endDate })
+        let { startDate } = this.props.activeFast
+        const { id, endDate, isActive } = this.props.activeFast
+        startDate = new Date(startDate)
+        this.setState({ id, startDate, endDate: Date.now(), isActive })
         this.interval = setInterval(() => this.timerControl(), 1000)
-        localStorage.setItem('startDate', startDate)
+        // localStorage.setItem('startDate', startDate)
     }
 
     componentWillUnmount() {
@@ -123,13 +121,11 @@ class FastTimer extends Component {
 
     timerControl = () => {
         const { startDate, endDate } = this.state
-        const duration = timeConversion(startDate, new Date(endDate)) // .getTime()
-        // console.log(new Date(endDate).toISOString())
+        const duration = timeConversion(startDate, new Date(endDate))
 
         this.setState({
-            endDate: new Date(), // number -> Date.now()
+            endDate: new Date(),
             fast: {
-                milliseconds: duration.milliseconds,
                 days: duration.days,
                 hours: duration.hours,
                 minutes: duration.minutes,
@@ -138,20 +134,29 @@ class FastTimer extends Component {
         })
     }
 
+    // refetchQueries: ['getRocketInventory']
+
     startFast = () => {
         const startDate = Date.now()
         this.setState({ timerActive: true, startDate })
         this.interval = setInterval(() => this.timerControl(), 1000)
-        localStorage.setItem('startDate', startDate)
+        // localStorage.setItem('startDate', startDate)
+
+        // FIX: hook call
+        // const [createFast, { error, data }] = useMutation(CREATE_FAST_MUTATION, {
+        //     variables: { startDate: new Date(), isActive: true },
+        // })
     }
 
     stopFast = () => {
         if (window.confirm('Stop fasting period?')) {
+            const { id } = this.state
             const endDate = Date.now()
+
             this.setState({
                 timerActive: false,
                 startDate: '',
-                endDate,
+                endDate: '',
                 fast: {
                     milliseconds: '00',
                     days: '00',
@@ -161,6 +166,12 @@ class FastTimer extends Component {
                 },
             })
             clearInterval(this.interval)
+            // localStorage.removeItem('startDate')
+
+            // FIX: hook call
+            // const [stopFast, { error, data }] = useMutation(STOP_FAST_MUTATION, {
+            //     variables: { id },
+            // })
         }
     }
 

@@ -28,13 +28,17 @@ const FastStyles = styled.div`
 `
 
 const FastContainer = () => {
-    const [fasts, setFasts] = useState([])
     const [activeFast, setActiveFast] = useState('')
+    const [fasts, setFasts] = useState([])
 
-    useEffect(() => {
-        const startDate = new Date(activeFast.startDate)
-        localStorage.setItem('startDate', startDate)
-    }, [activeFast])
+    // useEffect(() => {
+    //     const startDate = new Date(activeFast.startDate)
+    //     localStorage.setItem('startDate', startDate)
+    // }, [activeFast])
+
+    // useEffect(() => {
+    //     localStorage.setItem('fasts', fasts)
+    // }, [fasts])
 
     return (
         <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
@@ -50,8 +54,8 @@ const FastContainer = () => {
 
                 return (
                     <>
-                        <FastTimer activeFast={activeFast} />
-                        <FastCharts fasts={fasts} />
+                        <FastTimer activeFast={latestFast} />
+                        <FastCharts fasts={data.fasts} />
                     </>
                 )
             }}
