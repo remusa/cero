@@ -9,6 +9,7 @@ const ALL_FASTS_QUERY = gql`
             endDate
             isActive
             duration
+            createdAt
         }
     }
 `
