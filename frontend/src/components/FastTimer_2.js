@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Mutation } from 'react-apollo'
 import { useMutation } from '@apollo/react-hooks'
-import { adopt } from 'react-adopt'
 import timeConversion from '../lib/timeConversion'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
 
+// import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
 
 const ContainerStyles = styled.div`
@@ -96,24 +95,6 @@ const ButtonStyles = styled.button`
     }
 `
 
-/* eslint-disable */
-// const Composed = adopt({
-//     createFast: ({ render }) => <Mutation mutation={CREATE_FAST_MUTATION} variables={}>{render}</Mutation>,
-//     stopFast: ({ render }) => <Mutation mutation={STOP_FAST_MUTATION}>{render}</Mutation>,
-// })
-/* eslint-enable */
-
-/*
-    <Composed>
-        {({ user, toggleCart, localState }) => {
-        const me = user.data.me;
-        if (!me) return null;
-            return (
-            );
-        }}
-  </Composed>
-*/
-
 // TODO: refactor to use hooks
 class FastTimer extends Component {
     state = {
@@ -161,7 +142,7 @@ class FastTimer extends Component {
         this.interval = setInterval(() => this.timerControl(), 1000)
         // localStorage.setItem('startDate', startDate)
 
-        // TODO: hook call
+        // FIX: hook call
         // const [createFast, { error, data }] = useMutation(CREATE_FAST_MUTATION, {
         //     variables: { startDate: new Date(), isActive: true },
         // })
@@ -187,7 +168,7 @@ class FastTimer extends Component {
             clearInterval(this.interval)
             // localStorage.removeItem('startDate')
 
-            // TODO: hook call
+            // FIX: hook call
             // const [stopFast, { error, data }] = useMutation(STOP_FAST_MUTATION, {
             //     variables: { id },
             // })
@@ -215,7 +196,7 @@ class FastTimer extends Component {
                 <div className='container__buttons'>
                     <ButtonStyles
                         className='container__buttons__button'
-                        onClick={timerActive === false ? this.startFast : e => this.stopFast(e)}
+                        onClick={!timerActive ? this.startFast : e => this.stopFast(e)}
                     >
                         <img
                             src={startStopIcon}
