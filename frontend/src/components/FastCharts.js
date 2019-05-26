@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Query } from 'react-apollo'
+import { PropTypes } from 'prop-types'
+import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
-import { ALL_FASTS_QUERY } from '../gql/FastQuery'
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 import timeConversion from '../lib/timeConversion'
-import Error from './ErrorMessage'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -18,76 +15,66 @@ const ChartStyles = styled.div`
     }
 `
 
-function getFastData(data, labels, ids) {
-    return data.fasts.map(fast => {
+function getFastData(fasts) {
+    const labels = []
+    const ids = []
+
+    const chartFasts = fasts.map(fast => {
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
         const duration = timeConversion(startDate, endDate)
         const dayName = startDate.toString().split(' ')[0]
         const dayNumber = startDate.toString().split(' ')[2]
+
         labels.push(`${dayName}/${dayNumber}`)
         ids.push(fast.id)
         return Number.parseInt(duration.hours)
     })
+
+    return [chartFasts, labels, ids]
 }
 
-const FastCharts = () => {
-    const [activeFast, setActiveFast] = useState({})
-
-    useEffect(() => {
-        const startDate = new Date(activeFast.startDate)
-        localStorage.setItem('startDate', startDate)
-    }, [activeFast])
+const FastCharts = props => {
+    const { fasts } = props
+    console.log(fasts)
+    const [chartFasts, labels, ids] = getFastData(fasts)
 
     const handleClick = e => {
-        const data = e[0]
-        console.log('CLICK: ', data)
+        if (!e[0]) return
+        const index = e[0]._index
+        console.log('id: ', fasts[index].id)
+    }
+
+    const chartData = {
+        labels,
+        datasets: [
+            {
+                data: chartFasts,
+                label: 'Fast',
+                backgroundColor: '#17ff7b',
+                borderColor: '#00c957',
+                borderWidth: 1,
+                hoverBackgroundColor: '#00c957',
+                hoverBorderColor: '#007d36',
+            },
+        ],
     }
 
     return (
-        <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
-            {({ data, loading, error }) => {
-                if (loading) return <p>Loading...</p>
-                if (error) return <Error error={error} />
-
-                const dataActiveFast = data.fasts.filter(
-                    fast => fast.endDate === null && fast.isActive === true
-                )[0]
-                setActiveFast(dataActiveFast)
-
-                const labels = []
-                const ids = []
-                const fasts = getFastData(data, labels, ids)
-
-                const chartData = {
-                    labels,
-                    datasets: [
-                        {
-                            data: fasts,
-                            label: 'Fast',
-                            backgroundColor: '#17ff7b',
-                            borderColor: '#00c957',
-                            borderWidth: 1,
-                            hoverBackgroundColor: '#00c957',
-                            hoverBorderColor: '#007d36',
-                        },
-                    ],
-                }
-
-                return (
-                    <ChartStyles>
-                        <Bar
-                            data={chartData}
-                            options={{}}
-                            max={24}
-                            stacked={false}
-                            getElementAtEvent={elems => handleClick(elems)}
-                        />
-                    </ChartStyles>
-                )
-            }}
-        </Query>
+        <ChartStyles>
+            <Bar
+                data={chartData}
+                options={{}}
+                max={24}
+                stacked={false}
+                getElementAtEvent={elems => handleClick(elems)}
+            />
+        </ChartStyles>
     )
+}
+
+FastCharts.propTypes = {
+    fasts: PropTypes.array.isRequired,
 }
 
 export default FastCharts

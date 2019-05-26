@@ -14,7 +14,8 @@ const MainStyles = styled.main`
 const Main = ({ children }) => <MainStyles>{children}</MainStyles>
 
 Main.propTypes = {
-    children: PropTypes.element.isRequired,
+    // children: PropTypes.element.isRequired, //element
+    children: PropTypes.any.isRequired,
 }
 
 export default Main

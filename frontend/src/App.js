@@ -1,10 +1,9 @@
-import React, { useState, useContext, createContext } from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import 'normalize.css'
 import { Router } from './Router'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import { FastsContext } from './data/DataContext'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -16,18 +15,16 @@ const AppStyles = styled.div`
     grid-template-areas: 'header header header' '. main .' 'footer footer footer';
 `
 
-function App() {
-    const [fasts, setFasts] = useState([])
-
-    return (
-        <FastsContext.Provider value={fasts}>
+class App extends Component {
+    render() {
+        return (
             <AppStyles className='App'>
                 <Header />
                 <Router />
                 <Footer />
             </AppStyles>
-        </FastsContext.Provider>
-    )
+        )
+    }
 }
 
 export default App

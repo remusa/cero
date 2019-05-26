@@ -1,5 +1,5 @@
 import { createContext } from 'react'
 
-const FastsContext = createContext(null)
+const FastsContext = createContext()
 
 export { FastsContext }

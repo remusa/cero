@@ -5,9 +5,10 @@ import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 import Error from './ErrorMessage'
 import Login from './Login'
 import Main from './Main'
+import User from './User'
 
 const PleaseSignIn = props => (
-    <Query query={CURRENT_USER_QUERY}>
+    <User>
         {({ data, loading, error }) => {
             if (loading)
                 return (
@@ -31,7 +32,7 @@ const PleaseSignIn = props => (
             }
             return props.children
         }}
-    </Query>
+    </User>
 )
 
 PleaseSignIn.propTypes = {
