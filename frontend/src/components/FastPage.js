@@ -39,14 +39,13 @@ const FastContainer = () => {
     return (
         <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
             {({ data, loading, error }) => {
-                if (loading) return <p>Loading fasts data...</p>
+                if (loading) return <p>Loading fasts...</p>
                 if (error) return <Error error={error} />
 
-                const dataActiveFast = data.fasts.filter(
+                const latestFast = data.fasts.filter(
                     fast => fast.endDate === null && fast.isActive === true
                 )[0]
-                console.log('INSIDE')
-                setActiveFast(dataActiveFast)
+                setActiveFast(latestFast)
                 setFasts(data.fasts)
 
                 return (

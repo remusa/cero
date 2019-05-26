@@ -1,5 +1,5 @@
-import { PropTypes } from 'prop-types'
 import React from 'react'
+import { PropTypes } from 'prop-types'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
 import timeConversion from '../lib/timeConversion'
@@ -36,7 +36,6 @@ function getFastData(fasts) {
 
 const FastCharts = props => {
     const { fasts } = props
-    console.log(fasts)
     const [chartFasts, labels, ids] = getFastData(fasts)
 
     const handleClick = e => {
