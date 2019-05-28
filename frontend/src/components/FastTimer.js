@@ -180,6 +180,23 @@ StopButton.propTypes = {
     setEndDate: PropTypes.func.isRequired,
 }
 
+const TimerDuration = props => {
+    // const duration = props.duration
+    const duration = localStorage.getItem('duration')
+    const timer = timeConversion(duration)
+    console.log(`TimerDuration: ${Object.entries(timer)}`)
+
+    return (
+        <div className='container__timer'>
+            <p className='container__timer__time-left'>
+                {timer.days > 0 && timer.days}
+                {timer.days > 0 && ':'}
+                {timer.hours}:{timer.minutes}:{timer.seconds}
+            </p>
+        </div>
+    )
+}
+
 const FastTimer = props => {
     // const { activeFast } = useContext(FastsContext)
     const { activeFast } = props
@@ -200,6 +217,7 @@ const FastTimer = props => {
             setStartDate(new Date(activeFast.startDate))
             setIsActive(activeFast.isActive)
             setDuration(activeFast.duration)
+            localStorage.setItem('duration', activeFast.duration)
             // console.log("useEffect: there's an active fast")
         } else {
             // console.log("useEffect: there isn't an active fast")
@@ -218,13 +236,7 @@ const FastTimer = props => {
         <ContainerStyles className='container'>
             <TimerIcon />
 
-            <div className='container__timer'>
-                <p className='container__timer__time-left'>
-                    {duration.days > 0 && duration.days}
-                    {duration.days > 0 && ':'}
-                    {duration.hours}:{duration.minutes}:{duration.seconds}
-                </p>
-            </div>
+            <TimerDuration duration={duration} />
 
             {!isActive ? (
                 <StartButton

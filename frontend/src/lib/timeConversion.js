@@ -1,5 +1,6 @@
-export function timeConversion(startDate, endDate) {
-    const diffMs = Math.abs(endDate - startDate)
+export function timeConversion(time) {
+    // const diffMs = timeDifference(startDate, endDate)
+    const diffMs = time
 
     const diffDays = Math.floor(diffMs / 86400000)
     const diffHrs = Math.floor((diffMs % 86400000) / 3600000)
@@ -17,4 +18,9 @@ export function timeConversion(startDate, endDate) {
     }
 
     return duration
+}
+
+export function timeDifference(startDate, endDate) {
+    const diffMs = Math.abs(endDate - startDate)
+    return timeConversion(diffMs)
 }

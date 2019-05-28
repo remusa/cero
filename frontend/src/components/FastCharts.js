@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
 import { FastsContext } from '../data/FastsContext'
-import { timeConversion } from '../lib/timeConversion'
+import { timeDifference } from '../lib/timeConversion'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -19,15 +19,19 @@ function getFastData(fasts) {
     const labels = []
 
     const chartFasts = fasts.map(fast => {
+        if (fast.isActive || fast.endDate === null) {
+            return
+        }
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
-        const duration = timeConversion(startDate, endDate)
+        const duration = timeDifference(startDate, endDate)
 
         const dayName = startDate.toString().split(' ')[0]
         const dayNumber = startDate.toString().split(' ')[2]
 
         labels.push(`${dayName}/${dayNumber}`)
-        return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days) // added days * 24 hours for total
+
+        return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
     })
 
     return [chartFasts, labels]
