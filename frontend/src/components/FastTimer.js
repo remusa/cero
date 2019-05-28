@@ -49,6 +49,7 @@ const ContainerStyles = styled.div`
     @media all and (max-width: 500px) {
         justify-content: center;
         align-items: center;
+        margin-bottom: 16px;
 
         .container__buttons__button {
             width: 100px;
@@ -138,6 +139,7 @@ StartButton.propTypes = {
     setId: PropTypes.func.isRequired,
     setStartDate: PropTypes.func.isRequired,
     setIsActive: PropTypes.func.isRequired,
+    setDuration: PropTypes.func.isRequired,
 }
 
 const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsActive }) => (
@@ -176,8 +178,11 @@ const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsAct
 
 StopButton.propTypes = {
     id: PropTypes.string.isRequired,
-    setIsActive: PropTypes.func.isRequired,
+    setId: PropTypes.func.isRequired,
+    setStartDate: PropTypes.func.isRequired,
     setEndDate: PropTypes.func.isRequired,
+    setIsActive: PropTypes.func.isRequired,
+    setDuration: PropTypes.func.isRequired,
 }
 
 const TimerDuration = props => {
@@ -200,7 +205,6 @@ const TimerDuration = props => {
 const FastTimer = props => {
     // const { activeFast } = useContext(FastsContext)
     const { activeFast } = props
-    console.log('FastTimer: activeFast', activeFast)
 
     const [id, setId] = useState(activeFast ? activeFast.id : '')
     const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
@@ -236,7 +240,7 @@ const FastTimer = props => {
         <ContainerStyles className='container'>
             <TimerIcon />
 
-            <TimerDuration duration={duration} />
+            {!isActive ? <h2>Start fast</h2> : <TimerDuration duration={duration} />}
 
             {!isActive ? (
                 <StartButton

@@ -25,12 +25,9 @@ function getFastData(fasts) {
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
         const duration = timeDifference(startDate, endDate)
-
         const dayName = startDate.toString().split(' ')[0]
         const dayNumber = startDate.toString().split(' ')[2]
-
         labels.push(`${dayName}/${dayNumber}`)
-
         return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
     })
 
@@ -53,13 +50,34 @@ const FastCharts = () => {
         labels,
         datasets: [
             {
+                label: 'Duration',
                 data: chartFasts,
-                label: 'Fast',
                 backgroundColor: '#17ff7b',
                 borderColor: '#00c957',
                 borderWidth: 1,
                 hoverBackgroundColor: '#00c957',
                 hoverBorderColor: '#007d36',
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 50,
+                        fontSize: 10,
+                        fontColor: '#bbb',
+                        padding: 5,
+                    },
+                },
+                scales: {
+                    yAxes: [
+                        {
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100,
+                                suggestedMax: 24,
+                            },
+                        },
+                    ],
+                },
             },
         ],
     }
