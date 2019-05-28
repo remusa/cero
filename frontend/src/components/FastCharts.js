@@ -37,6 +37,7 @@ const FastCharts = () => {
     const { fasts } = useContext(FastsContext)
     const [chartFasts, labels] = getFastData(fasts)
 
+    // TODO: update fast when clicked on chart
     const handleClick = e => {
         if (!e[0]) return
         const index = e[0]._index

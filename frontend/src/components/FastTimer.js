@@ -102,7 +102,7 @@ const TimerIcon = () => (
     </div>
 )
 
-const StartButton = ({ setId, setStartDate, setIsActive }) => (
+const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
     <Mutation mutation={CREATE_FAST_MUTATION} variables={{ startDate: new Date(), isActive: true }}>
         {(createFast, { error, loading }) => {
             if (loading) console.log(`CREATING FAST`)
@@ -119,6 +119,7 @@ const StartButton = ({ setId, setStartDate, setIsActive }) => (
                                 setStartDate(new Date())
                             })
                             setIsActive(true)
+                            setDuration(0)
                         }}
                     >
                         <img
@@ -139,7 +140,7 @@ StartButton.propTypes = {
     setIsActive: PropTypes.func.isRequired,
 }
 
-const StopButton = ({ id, setIsActive, setEndDate }) => (
+const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsActive }) => (
     <Mutation mutation={STOP_FAST_MUTATION} variables={{ id }}>
         {(stopFast, { error, loading }) => {
             if (error) return <Error error={error} />
@@ -149,10 +150,15 @@ const StopButton = ({ id, setIsActive, setEndDate }) => (
                     <ButtonStyles
                         className='container__buttons__button'
                         onClick={async () => {
-                            await stopFast().then(res => {
-                                // console.log(`1. StopButton : ${Object.keys(res.data.stopFast)}`)
-                                setEndDate(res.data.stopFast.endDate)
-                            })
+                            await stopFast()
+                            // .then(res => {
+                            // console.log(`1. StopButton : ${Object.keys(res.data.stopFast)}`)
+                            // setEndDate(res.data.stopFast.endDate)
+                            // })
+                            setId('')
+                            setStartDate('')
+                            setEndDate('')
+                            setDuration(0)
                             setIsActive(false)
                         }}
                     >
@@ -225,13 +231,17 @@ const FastTimer = props => {
                     setId={setId}
                     setStartDate={setStartDate}
                     setIsActive={setIsActive}
+                    setDuration={setDuration}
                     // startFast={startFast}
                 />
             ) : (
                 <StopButton
                     id={id}
+                    setId={setId}
+                    setStartDate={setStartDate}
                     setEndDate={setEndDate}
                     setIsActive={setIsActive}
+                    setDuration={setDuration}
                     // stopFast={this.endFast}
                 />
             )}
