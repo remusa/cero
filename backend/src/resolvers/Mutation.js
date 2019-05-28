@@ -41,7 +41,6 @@ const Mutations = {
         // throw new Error('You must be logged in to do that!')
         // }
         console.log(`BACKEND 1. STOPPING | ID: ${args.id}`)
-
         const fastInfo = await ctx.db.query.fast({
             where: { id: args.id },
         })
@@ -51,7 +50,7 @@ const Mutations = {
         const duration = timeConversion(startDate, endDate)
         const updates = { ...args, endDate, isActive: false, duration: duration.milliseconds }
         delete updates.id
-        const updatedFast = await ctx.db.mutation.updateFast(
+        const stoppedFast = await ctx.db.mutation.updateFast(
             {
                 data: updates,
                 where: { id: args.id },
@@ -59,7 +58,7 @@ const Mutations = {
             info
         )
         console.log(`2. STOPPED | ID: ${args.id}`)
-        return updatedFast
+        return stoppedFast
     },
     async updateFast(parent, args, ctx, info) {
         // TODO: check if user is logged in
@@ -68,7 +67,6 @@ const Mutations = {
         // }
         const updates = { ...args }
         delete updates.id
-        console.log('UPDATING FAST: ', updates)
         const updatedFast = await ctx.db.mutation.updateFast(
             {
                 data: updates,

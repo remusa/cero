@@ -5,7 +5,6 @@ function timeConversion(startDate, endDate) {
     const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000)
     const diffSecs = Math.round(((((diffMs % 86400000) % 3600000) % 60000) % 60000) / 1000)
     const totalHrs = Math.floor(diffMs % 86400000)
-
     const duration = {
         milliseconds: diffMs,
         days: diffDays,
@@ -14,8 +13,6 @@ function timeConversion(startDate, endDate) {
         seconds: diffSecs < 10 ? `0${diffSecs}` : diffSecs,
         totalHours: totalHrs < 10 ? `0${totalHrs}` : totalHrs,
     }
-
-    console.log('CONV: ', timeConversion)
     return duration
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react'
 import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
+import { PropTypes } from 'prop-types'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
@@ -103,7 +104,7 @@ const TimerIcon = () => (
 
 const StartButton = ({ setId, setStartDate, setIsActive }) => (
     <Mutation mutation={CREATE_FAST_MUTATION} variables={{ startDate: new Date(), isActive: true }}>
-        {(createFast, { data, error, loading }) => {
+        {(createFast, { error, loading }) => {
             if (loading) console.log(`CREATING FAST`)
             if (error) return <Error error={error} />
 
@@ -112,11 +113,12 @@ const StartButton = ({ setId, setStartDate, setIsActive }) => (
                     <ButtonStyles
                         className='container__buttons__button'
                         onClick={async () => {
-                            await createFast()
-                            await console.log(`2. StartButton: ${data.id}`)
-
-                            await setStartDate(new Date())
-                            await setIsActive(true)
+                            await createFast().then(res => {
+                                // console.log(`1. StartButton: ${Object.keys(res.data.createFast)}`)
+                                setId(res.data.createFast.id)
+                                setStartDate(new Date())
+                            })
+                            setIsActive(true)
                         }}
                     >
                         <img
@@ -131,10 +133,15 @@ const StartButton = ({ setId, setStartDate, setIsActive }) => (
     </Mutation>
 )
 
+StartButton.propTypes = {
+    setId: PropTypes.func.isRequired,
+    setStartDate: PropTypes.func.isRequired,
+    setIsActive: PropTypes.func.isRequired,
+}
+
 const StopButton = ({ id, setIsActive, setEndDate }) => (
     <Mutation mutation={STOP_FAST_MUTATION} variables={{ id }}>
-        {(stopFast, { data, error, loading }) => {
-            if (loading) console.log(`1. STOPPING : ${id}`)
+        {(stopFast, { error, loading }) => {
             if (error) return <Error error={error} />
 
             return (
@@ -142,11 +149,11 @@ const StopButton = ({ id, setIsActive, setEndDate }) => (
                     <ButtonStyles
                         className='container__buttons__button'
                         onClick={async () => {
-                            console.log(`2. STOPPING : ${id}`)
-                            await stopFast()
-                            console.log(`2. STOPPED: ${data}`)
-                            await setIsActive(false)
-                            await setEndDate(new Date())
+                            await stopFast().then(res => {
+                                // console.log(`1. StopButton : ${Object.keys(res.data.stopFast)}`)
+                                setEndDate(res.data.stopFast.endDate)
+                            })
+                            setIsActive(false)
                         }}
                     >
                         <img
@@ -160,6 +167,12 @@ const StopButton = ({ id, setIsActive, setEndDate }) => (
         }}
     </Mutation>
 )
+
+StopButton.propTypes = {
+    id: PropTypes.string.isRequired,
+    setIsActive: PropTypes.func.isRequired,
+    setEndDate: PropTypes.func.isRequired,
+}
 
 const TimerDuration = ({ duration }) => {
     const converted = timeConversion(duration)
