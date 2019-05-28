@@ -174,30 +174,6 @@ StopButton.propTypes = {
     setEndDate: PropTypes.func.isRequired,
 }
 
-const TimerDuration = ({ duration }) => {
-    const converted = timeConversion(duration)
-    // console.log('TimerDuration: ', converted)
-
-    // const converted = {
-    //     milliseconds: '00',
-    //     days: '00',
-    //     hours: '00',
-    //     minutes: '00',
-    //     seconds: '00',
-    //     totalHours: '00',
-    // }
-
-    return (
-        <div className='container__timer'>
-            <p className='container__timer__time-left'>
-                {duration.days > 0 && duration.days}
-                {duration.days > 0 && ':'}
-                {duration.hours}:{duration.minutes}:{duration.seconds}
-            </p>
-        </div>
-    )
-}
-
 const FastTimer = props => {
     // const { activeFast } = useContext(FastsContext)
     const { activeFast } = props
@@ -236,7 +212,13 @@ const FastTimer = props => {
         <ContainerStyles className='container'>
             <TimerIcon />
 
-            <TimerDuration duration={duration} />
+            <div className='container__timer'>
+                <p className='container__timer__time-left'>
+                    {duration.days > 0 && duration.days}
+                    {duration.days > 0 && ':'}
+                    {duration.hours}:{duration.minutes}:{duration.seconds}
+                </p>
+            </div>
 
             {!isActive ? (
                 <StartButton
