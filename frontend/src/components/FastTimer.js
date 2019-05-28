@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect, useContext, useMemo } from 'react'
 import { Mutation } from 'react-apollo'
-import { useMutation } from '@apollo/react-hooks'
-import { adopt } from 'react-adopt'
-import timeConversion from '../lib/timeConversion'
+import styled from 'styled-components'
+import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
-
-import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
+import { FastsContext } from '../data/FastsContext'
+import Error from './ErrorMessage'
+import { timeConversion } from '../lib/timeConversion'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -96,137 +95,153 @@ const ButtonStyles = styled.button`
     }
 `
 
-/* eslint-disable */
-// const Composed = adopt({
-//     createFast: ({ render }) => <Mutation mutation={CREATE_FAST_MUTATION} variables={}>{render}</Mutation>,
-//     stopFast: ({ render }) => <Mutation mutation={STOP_FAST_MUTATION}>{render}</Mutation>,
-// })
-/* eslint-enable */
+const TimerIcon = () => (
+    <div className='container__header'>
+        <img src={tomato} alt='Pomodoro Clock' className='container__header__icon' />
+    </div>
+)
 
-/*
-    <Composed>
-        {({ user, toggleCart, localState }) => {
-        const me = user.data.me;
-        if (!me) return null;
+const StartButton = ({ setId, setStartDate, setIsActive }) => (
+    <Mutation mutation={CREATE_FAST_MUTATION} variables={{ startDate: new Date(), isActive: true }}>
+        {(createFast, { data, error, loading }) => {
+            if (loading) console.log(`CREATING FAST`)
+            if (error) return <Error error={error} />
+
             return (
-            );
-        }}
-  </Composed>
-*/
-
-// TODO: refactor to use hooks
-class FastTimer extends Component {
-    state = {
-        fast: {
-            days: '00',
-            hours: '00',
-            minutes: '00',
-            seconds: '00',
-        },
-    }
-
-    componentDidMount = () => {
-        let { startDate } = this.props.activeFast
-        const { id, endDate, isActive } = this.props.activeFast
-        startDate = new Date(startDate)
-        this.setState({ id, startDate, endDate: Date.now(), isActive })
-        this.interval = setInterval(() => this.timerControl(), 1000)
-        // localStorage.setItem('startDate', startDate)
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval)
-    }
-
-    timerControl = () => {
-        const { startDate, endDate } = this.state
-        const duration = timeConversion(startDate, new Date(endDate))
-
-        this.setState({
-            endDate: new Date(),
-            fast: {
-                days: duration.days,
-                hours: duration.hours,
-                minutes: duration.minutes,
-                seconds: duration.seconds,
-            },
-        })
-    }
-
-    // refetchQueries: ['getRocketInventory']
-
-    startFast = () => {
-        const startDate = Date.now()
-        this.setState({ timerActive: true, startDate })
-        this.interval = setInterval(() => this.timerControl(), 1000)
-        // localStorage.setItem('startDate', startDate)
-
-        // TODO: hook call
-        // const [createFast, { error, data }] = useMutation(CREATE_FAST_MUTATION, {
-        //     variables: { startDate: new Date(), isActive: true },
-        // })
-    }
-
-    stopFast = () => {
-        if (window.confirm('Stop fasting period?')) {
-            const { id } = this.state
-            const endDate = Date.now()
-
-            this.setState({
-                startDate: '',
-                endDate: '',
-                timerActive: false,
-                fast: {
-                    milliseconds: '00',
-                    days: '00',
-                    hours: '00',
-                    minutes: '00',
-                    seconds: '00',
-                },
-            })
-            clearInterval(this.interval)
-            // localStorage.removeItem('startDate')
-
-            // TODO: hook call
-            // const [stopFast, { error, data }] = useMutation(STOP_FAST_MUTATION, {
-            //     variables: { id },
-            // })
-        }
-    }
-
-    render() {
-        const { fast, timerActive } = this.state
-        const startStopIcon = timerActive === false ? playIcon : stopIcon
-
-        return (
-            <ContainerStyles className='container'>
-                <div className='container__header'>
-                    <img src={tomato} alt='Pomodoro Clock' className='container__header__icon' />
-                </div>
-
-                <div className='container__timer'>
-                    <p className='container__timer__time-left'>
-                        {fast.days > 0 && fast.days}
-                        {fast.days > 0 && ':'}
-                        {fast.hours}:{fast.minutes}:{fast.seconds}
-                    </p>
-                </div>
-
                 <div className='container__buttons'>
                     <ButtonStyles
                         className='container__buttons__button'
-                        onClick={timerActive === false ? this.startFast : e => this.stopFast(e)}
+                        onClick={async () => {
+                            await createFast()
+                            await console.log(`2. StartButton: ${data.id}`)
+
+                            await setStartDate(new Date())
+                            await setIsActive(true)
+                        }}
                     >
                         <img
-                            src={startStopIcon}
+                            src={playIcon}
                             alt='startStopIcon'
                             className='container__buttons__button__icon'
                         />
                     </ButtonStyles>
                 </div>
-            </ContainerStyles>
-        )
-    }
+            )
+        }}
+    </Mutation>
+)
+
+const StopButton = ({ id, setIsActive, setEndDate }) => (
+    <Mutation mutation={STOP_FAST_MUTATION} variables={{ id }}>
+        {(stopFast, { data, error, loading }) => {
+            if (loading) console.log(`1. STOPPING : ${id}`)
+            if (error) return <Error error={error} />
+
+            return (
+                <div className='container__buttons'>
+                    <ButtonStyles
+                        className='container__buttons__button'
+                        onClick={async () => {
+                            console.log(`2. STOPPING : ${id}`)
+                            await stopFast()
+                            console.log(`2. STOPPED: ${data}`)
+                            await setIsActive(false)
+                            await setEndDate(new Date())
+                        }}
+                    >
+                        <img
+                            src={stopIcon}
+                            alt='startStopIcon'
+                            className='container__buttons__button__icon'
+                        />
+                    </ButtonStyles>
+                </div>
+            )
+        }}
+    </Mutation>
+)
+
+const TimerDuration = ({ duration }) => {
+    const converted = timeConversion(duration)
+    // console.log('TimerDuration: ', converted)
+
+    // const converted = {
+    //     milliseconds: '00',
+    //     days: '00',
+    //     hours: '00',
+    //     minutes: '00',
+    //     seconds: '00',
+    //     totalHours: '00',
+    // }
+
+    return (
+        <div className='container__timer'>
+            <p className='container__timer__time-left'>
+                {duration.days > 0 && duration.days}
+                {duration.days > 0 && ':'}
+                {duration.hours}:{duration.minutes}:{duration.seconds}
+            </p>
+        </div>
+    )
+}
+
+const FastTimer = props => {
+    // const { activeFast } = useContext(FastsContext)
+    const { activeFast } = props
+    console.log('FastTimer: activeFast', activeFast)
+
+    const [id, setId] = useState(activeFast ? activeFast.id : '')
+    const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
+    const [endDate, setEndDate] = useState(activeFast ? activeFast.endDate : '')
+    const [isActive, setIsActive] = useState(activeFast ? activeFast.isActive : false)
+    const [duration, setDuration] = useState(activeFast ? activeFast.duration : 0)
+
+    // Initial setup
+    useEffect(() => {
+        // console.log('1. useEffect called: ')
+
+        if (activeFast) {
+            setId(activeFast.id)
+            setStartDate(new Date(activeFast.startDate))
+            setIsActive(activeFast.isActive)
+            setDuration(activeFast.duration)
+            // console.log("useEffect: there's an active fast")
+        } else {
+            // console.log("useEffect: there isn't an active fast")
+        }
+
+        return () => {
+            // clearInterval(this.interval)
+        }
+    }, [activeFast])
+
+    // useEffect(() => {
+    //     setEndDate(Date.now())
+    // }, [])
+
+    return (
+        <ContainerStyles className='container'>
+            <TimerIcon />
+
+            <TimerDuration duration={duration} />
+
+            {!isActive ? (
+                <StartButton
+                    setId={setId}
+                    setStartDate={setStartDate}
+                    setIsActive={setIsActive}
+                    // startFast={startFast}
+                />
+            ) : (
+                <StopButton
+                    id={id}
+                    setEndDate={setEndDate}
+                    setIsActive={setIsActive}
+                    // stopFast={this.endFast}
+                />
+            )}
+        </ContainerStyles>
+    )
 }
 
 export default FastTimer

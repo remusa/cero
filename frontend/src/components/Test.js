@@ -4,7 +4,7 @@ import { Mutation, Query } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { SIGNOUT_MUTATION } from '../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../gql/UserQuery'
-import { FastsContext } from '../data/DataContext'
+import {FastsContext} from '../data/FastsContext'
 
 const TEST_QUERY = gql`
     query me {

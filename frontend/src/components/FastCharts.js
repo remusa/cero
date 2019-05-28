@@ -1,8 +1,8 @@
-import React from 'react'
-import { PropTypes } from 'prop-types'
+import React, { useContext } from 'react'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
-import timeConversion from '../lib/timeConversion'
+import { FastsContext } from '../data/FastsContext'
+import { timeConversion } from '../lib/timeConversion'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -17,30 +17,30 @@ const ChartStyles = styled.div`
 
 function getFastData(fasts) {
     const labels = []
-    const ids = []
 
     const chartFasts = fasts.map(fast => {
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
         const duration = timeConversion(startDate, endDate)
+
         const dayName = startDate.toString().split(' ')[0]
         const dayNumber = startDate.toString().split(' ')[2]
 
         labels.push(`${dayName}/${dayNumber}`)
-        ids.push(fast.id)
-        return Number.parseInt(duration.hours)
+        return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days) // added days * 24 hours for total
     })
 
-    return [chartFasts, labels, ids]
+    return [chartFasts, labels]
 }
 
-const FastCharts = props => {
-    const { fasts } = props
-    const [chartFasts, labels, ids] = getFastData(fasts)
+const FastCharts = () => {
+    const { fasts } = useContext(FastsContext)
+    const [chartFasts, labels] = getFastData(fasts)
 
     const handleClick = e => {
         if (!e[0]) return
         const index = e[0]._index
+
         console.log('id: ', fasts[index].id)
     }
 
@@ -64,16 +64,11 @@ const FastCharts = props => {
             <Bar
                 data={chartData}
                 options={{}}
-                max={24}
                 stacked={false}
                 getElementAtEvent={elems => handleClick(elems)}
             />
         </ChartStyles>
     )
-}
-
-FastCharts.propTypes = {
-    fasts: PropTypes.array.isRequired,
 }
 
 export default FastCharts

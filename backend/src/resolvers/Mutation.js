@@ -16,6 +16,8 @@ const Mutations = {
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
+        console.log(`CREATING FAST WITH STARTDATE: ${args.startDate}`)
+
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
@@ -38,13 +40,16 @@ const Mutations = {
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
+        console.log(`BACKEND 1. STOPPING | ID: ${args.id}`)
+
         const fastInfo = await ctx.db.query.fast({
             where: { id: args.id },
         })
+        if (!fastInfo) throw new Error(`Fast doesn't exist: ${args.id}`)
         const startDate = new Date(fastInfo.startDate)
         const endDate = new Date()
-        const { hours } = timeConversion(startDate, endDate)
-        const updates = { ...args, endDate, isActive: false, duration: hours }
+        const duration = timeConversion(startDate, endDate)
+        const updates = { ...args, endDate, isActive: false, duration: duration.milliseconds }
         delete updates.id
         const updatedFast = await ctx.db.mutation.updateFast(
             {
@@ -53,6 +58,7 @@ const Mutations = {
             },
             info
         )
+        console.log(`2. STOPPED | ID: ${args.id}`)
         return updatedFast
     },
     async updateFast(parent, args, ctx, info) {
