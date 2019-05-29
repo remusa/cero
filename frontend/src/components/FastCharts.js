@@ -119,6 +119,10 @@ const FastCharts = () => {
                 startDate={startDate}
                 endDate={endDate}
                 isActive={isActive}
+                setId={setId}
+                setStartDate={setStartDate}
+                setEndDate={setEndDate}
+                setIsActive={setIsActive}
             />
             <Bar
                 data={chartData}

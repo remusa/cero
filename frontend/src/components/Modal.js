@@ -38,27 +38,34 @@ const ModalStyles = styled.div`
 `
 
 const Modal = props => {
-    const [startDate, setStartDate] = useState(props.startDate)
-    const [endDate, setEndDate] = useState(props.endDate)
-    const [isActive, setIsActive] = useState(props.isActive)
+    // const [startDate, setStartDate] = useState(props.startDate)
+    // const [endDate, setEndDate] = useState(props.endDate)
+    // const [isActive, setIsActive] = useState(props.isActive)
     const [formError, setFormError] = useState(null)
 
-    useEffect(() => {
-        setStartDate(props.startDate)
-        setEndDate(props.endDate)
-        setIsActive(props.isActive)
-    }, [props.endDate, props.isActive, props.startDate])
+    // useEffect(() => {
+    //     setStartDate(props.startDate)
+    //     setEndDate(props.endDate)
+    //     setIsActive(props.isActive)
+    // }, [props.endDate, props.isActive, props.startDate])
 
     const handleSubmit = async (e, update) => {
         e.preventDefault()
         await update().then(res => props.onClose())
-        setStartDate('')
-        setEndDate('')
+        props.setId(null)
+        props.setStartDate('')
+        props.setEndDate('')
+        props.setIsActive(false)
     }
 
     if (!props.show) return null
 
-    const variables = { id: props.id, startDate, endDate, isActive }
+    const variables = {
+        id: props.id,
+        startDate: props.startDate,
+        endDate: props.endDate,
+        isActive: props.isActive,
+    }
     console.log(`VARIABLES: ${Object.entries(variables)}`)
 
     return (
@@ -91,14 +98,14 @@ const Modal = props => {
                                         type='text'
                                         name='startDate'
                                         placeholder='startDate'
-                                        value={startDate}
+                                        value={props.startDate}
                                     />
                                     <DatePicker
                                         selected={new Date(props.startDate)}
                                         showTimeInput
                                         timeInputLabel='Time:'
                                         onChange={date => {
-                                            setStartDate(date)
+                                            props.setStartDate(date)
                                         }}
                                         dateFormat='MM/dd/yyyy h:mm aa'
                                     />
@@ -111,14 +118,14 @@ const Modal = props => {
                                         type='text'
                                         name='endDate'
                                         placeholder='endDate'
-                                        value={endDate}
+                                        value={props.endDate}
                                     />
                                     <DatePicker
                                         selected={new Date(props.endDate)}
                                         showTimeInput
                                         timeInputLabel='Time:'
                                         onChange={date => {
-                                            setEndDate(date)
+                                            props.setEndDate(date)
                                         }}
                                         dateFormat='MM/dd/yyyy h:mm aa'
                                     />
@@ -129,9 +136,9 @@ const Modal = props => {
                                     <input
                                         type='checkbox'
                                         name='isActive'
-                                        checked={isActive}
+                                        checked={props.isActive}
                                         onChange={e => {
-                                            setIsActive(e.target.checked)
+                                            props.setIsActive(e.target.checked)
                                         }}
                                     />
                                 </label>
