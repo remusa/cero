@@ -8,6 +8,7 @@ import Error from './ErrorMessage'
 import FastCharts from './FastCharts'
 import FastTimer from './FastTimer'
 import PleaseSignIn from './PleaseSignIn'
+import Loading from './Loading'
 
 const FastStyles = styled.div`
     grid-area: main;
@@ -47,7 +48,7 @@ const FastContainer = () => {
     return (
         <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
             {({ data, loading, error }) => {
-                if (loading) return <p>Loading fasts data...</p>
+                if (loading) return <Loading />
                 if (error) return <Error error={error} />
 
                 const latestFast = data.fasts.filter(

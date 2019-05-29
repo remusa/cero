@@ -6,6 +6,7 @@ import Error from './ErrorMessage'
 import Login from './Login'
 import Main from './Main'
 import User from './User'
+import Loading from './Loading'
 
 const PleaseSignIn = props => (
     <User>
@@ -13,7 +14,7 @@ const PleaseSignIn = props => (
             if (loading)
                 return (
                     <Main>
-                        <p>Loading...</p>
+                        <Loading />
                     </Main>
                 )
             if (error)

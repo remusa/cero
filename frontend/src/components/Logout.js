@@ -8,7 +8,7 @@ const Logout = () => (
     <Mutation mutation={SIGNOUT_MUTATION} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
         {signout => (
             <Link to='/' onClick={signout}>
-                Logout />
+                Logout
             </Link>
         )}
     </Mutation>
