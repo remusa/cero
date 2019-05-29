@@ -8,11 +8,12 @@ import Error from './ErrorMessage'
 import Main from './Main'
 import Form from './styled/Form'
 
-const ResetStyles = styled.div`
+export const ResetStyles = styled.div`
     padding: 4px;
     margin-top: 8px;
     font-size: 1.3rem;
     color: var(--color-grey);
+    cursor: pointer;
 
     &:hover {
         text-decoration: underline;

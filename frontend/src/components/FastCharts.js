@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
 import { FastsContext } from '../data/FastsContext'
 import { timeDifference } from '../lib/timeConversion'
+import Modal from './Modal'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -27,6 +28,7 @@ function getFastData(fasts) {
         const duration = timeDifference(startDate, endDate)
         const dayName = startDate.toString().split(' ')[0]
         const dayNumber = startDate.toString().split(' ')[2]
+
         labels.push(`${dayName}/${dayNumber}`)
         return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
     })
@@ -37,13 +39,20 @@ function getFastData(fasts) {
 const FastCharts = () => {
     const { fasts } = useContext(FastsContext)
     const [chartFasts, labels] = getFastData(fasts)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [id, setId] = useState(null)
 
     // TODO: update fast when clicked on chart
+    const toggleModal = e => {
+        console.log(`isModalOpen: ${isModalOpen}`)
+        setIsModalOpen(!isModalOpen)
+    }
+
     const handleClick = e => {
         if (!e[0]) return
         const index = e[0]._index
-
-        console.log('id: ', fasts[index].id)
+        setId(fasts[index].id)
+        toggleModal()
     }
 
     const chartData = {
@@ -84,11 +93,12 @@ const FastCharts = () => {
 
     return (
         <ChartStyles>
+            <Modal show={isModalOpen} onClose={toggleModal} id={id} />
             <Bar
                 data={chartData}
                 options={{}}
                 stacked={false}
-                getElementAtEvent={elems => handleClick(elems)}
+                getElementAtEvent={element => handleClick(element)}
             />
         </ChartStyles>
     )
