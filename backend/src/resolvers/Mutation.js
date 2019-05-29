@@ -16,6 +16,8 @@ const Mutations = {
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
+        console.log(`CREATING FAST WITH STARTDATE: ${args.startDate}`)
+
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
@@ -38,22 +40,25 @@ const Mutations = {
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
+        console.log(`BACKEND 1. STOPPING | ID: ${args.id}`)
         const fastInfo = await ctx.db.query.fast({
             where: { id: args.id },
         })
+        if (!fastInfo) throw new Error(`Fast doesn't exist: ${args.id}`)
         const startDate = new Date(fastInfo.startDate)
         const endDate = new Date()
-        const { hours } = timeConversion(startDate, endDate)
-        const updates = { ...args, endDate, isActive: false, duration: hours }
+        const duration = timeConversion(startDate, endDate)
+        const updates = { ...args, endDate, isActive: false, duration: duration.milliseconds }
         delete updates.id
-        const updatedFast = await ctx.db.mutation.updateFast(
+        const stoppedFast = await ctx.db.mutation.updateFast(
             {
                 data: updates,
                 where: { id: args.id },
             },
             info
         )
-        return updatedFast
+        console.log(`2. STOPPED | ID: ${args.id}`)
+        return stoppedFast
     },
     async updateFast(parent, args, ctx, info) {
         // TODO: check if user is logged in
@@ -62,7 +67,6 @@ const Mutations = {
         // }
         const updates = { ...args }
         delete updates.id
-        console.log('UPDATING FAST: ', updates)
         const updatedFast = await ctx.db.mutation.updateFast(
             {
                 data: updates,

@@ -10,6 +10,14 @@ import Reset from './components/Reset'
 import PermissionsPage from './components/PermissionsPage'
 import Test from './components/Test'
 
+const NotFound404 = ({ location }) => (
+    <div>
+        <h3>
+            404, no match for <code>{location.pathname}</code>
+        </h3>
+    </div>
+)
+
 export const Router = () => (
     <Switch>
         <Route path='/' exact component={Home} />
@@ -21,5 +29,6 @@ export const Router = () => (
         <Route path='/reset' component={Reset} />
         <Route path='/permissions' component={PermissionsPage} />
         <Route path='/test' component={Test} />
+        <Route component={NotFound404} />
     </Switch>
 )

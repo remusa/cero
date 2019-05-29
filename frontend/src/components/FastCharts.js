@@ -1,8 +1,8 @@
-import React from 'react'
-import { PropTypes } from 'prop-types'
+import React, { useContext } from 'react'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
-import timeConversion from '../lib/timeConversion'
+import { FastsContext } from '../data/FastsContext'
+import { timeDifference } from '../lib/timeConversion'
 
 const ChartStyles = styled.div`
     margin: 0 auto;
@@ -17,30 +17,32 @@ const ChartStyles = styled.div`
 
 function getFastData(fasts) {
     const labels = []
-    const ids = []
 
     const chartFasts = fasts.map(fast => {
+        if (fast.isActive || fast.endDate === null) {
+            return
+        }
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
-        const duration = timeConversion(startDate, endDate)
+        const duration = timeDifference(startDate, endDate)
         const dayName = startDate.toString().split(' ')[0]
         const dayNumber = startDate.toString().split(' ')[2]
-
         labels.push(`${dayName}/${dayNumber}`)
-        ids.push(fast.id)
-        return Number.parseInt(duration.hours)
+        return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
     })
 
-    return [chartFasts, labels, ids]
+    return [chartFasts, labels]
 }
 
-const FastCharts = props => {
-    const { fasts } = props
-    const [chartFasts, labels, ids] = getFastData(fasts)
+const FastCharts = () => {
+    const { fasts } = useContext(FastsContext)
+    const [chartFasts, labels] = getFastData(fasts)
 
+    // TODO: update fast when clicked on chart
     const handleClick = e => {
         if (!e[0]) return
         const index = e[0]._index
+
         console.log('id: ', fasts[index].id)
     }
 
@@ -48,13 +50,34 @@ const FastCharts = props => {
         labels,
         datasets: [
             {
+                label: 'Duration',
                 data: chartFasts,
-                label: 'Fast',
                 backgroundColor: '#17ff7b',
                 borderColor: '#00c957',
                 borderWidth: 1,
                 hoverBackgroundColor: '#00c957',
                 hoverBorderColor: '#007d36',
+                legend: {
+                    display: true,
+                    labels: {
+                        boxWidth: 50,
+                        fontSize: 10,
+                        fontColor: '#bbb',
+                        padding: 5,
+                    },
+                },
+                scales: {
+                    yAxes: [
+                        {
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100,
+                                suggestedMax: 24,
+                            },
+                        },
+                    ],
+                },
             },
         ],
     }
@@ -64,16 +87,11 @@ const FastCharts = props => {
             <Bar
                 data={chartData}
                 options={{}}
-                max={24}
                 stacked={false}
                 getElementAtEvent={elems => handleClick(elems)}
             />
         </ChartStyles>
     )
-}
-
-FastCharts.propTypes = {
-    fasts: PropTypes.array.isRequired,
 }
 
 export default FastCharts

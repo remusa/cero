@@ -22,7 +22,7 @@ type Fast {
     startDate: DateTime!
     endDate: DateTime
     duration: Int @default(value: 0)
-    isActive: Boolean @default(value: false)
+    isActive: Boolean @default(value: true)
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
     user: User!

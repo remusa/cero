@@ -7,6 +7,7 @@ import checkmarkIcon from '../static/icons/checkmark.svg'
 import Error from './ErrorMessage'
 import PermissionsButton from './styled/PermissionsButton'
 import PermissionsTable from './styled/PermissionsTable'
+import Loading from './Loading'
 
 const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 
@@ -14,7 +15,7 @@ const Permissions = props => (
     <Query query={ALL_USERS_QUERY}>
         {({ data, loading, error }) => {
             if (error) return <Error error={error} />
-            if (loading) return <p>Loading...</p>
+            if (loading) return <Loading />
             return (
                 <>
                     <h2>Manage Permissions</h2>

@@ -56,7 +56,7 @@ const FastContainer = () => {
                 )[0]
 
                 setFasts(data.fasts)
-                setActiveFast(latestFast)
+                // setActiveFast(latestFast)
 
                 return (
                     <>
