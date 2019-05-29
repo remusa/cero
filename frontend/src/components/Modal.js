@@ -40,6 +40,7 @@ const ModalStyles = styled.div`
 const Modal = props => {
     const [startDate, setStartDate] = useState(props.startDate)
     const [endDate, setEndDate] = useState(props.endDate)
+    const [isActive, setIsActive] = useState(false)
     const [formError, setFormError] = useState(null)
 
     useEffect(() => {
@@ -56,7 +57,7 @@ const Modal = props => {
 
     if (!props.show) return null
 
-    const variables = { id: props.id, startDate, endDate }
+    const variables = { id: props.id, startDate, endDate, isActive }
     console.log(`VARIABLES: ${Object.entries(variables)}`)
 
     return (
@@ -124,7 +125,14 @@ const Modal = props => {
 
                                 <label htmlFor='isActive'>
                                     Active?
-                                    <input type='checkbox' name='isActive' />
+                                    <input
+                                        type='checkbox'
+                                        name='isActive'
+                                        checked={isActive}
+                                        onChange={e => {
+                                            setIsActive(e.target.checked)
+                                        }}
+                                    />
                                 </label>
 
                                 <button type='submit'>Update</button>
