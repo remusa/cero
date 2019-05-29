@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
 import { FastsContext } from '../data/FastsContext'
@@ -38,13 +38,26 @@ function getFastData(fasts) {
 
 const FastCharts = () => {
     const { fasts } = useContext(FastsContext)
-    const [chartFasts, labels] = getFastData(fasts)
+
+    const [chartFasts, chartLabels] = getFastData(fasts)
+    const [d, setF] = useState(chartFasts)
+    const [l, setL] = useState(chartLabels)
+
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+    // Fast info
     const [id, setId] = useState(null)
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+
+    useEffect(() => {
+        const [t1, t2] = getFastData(fasts)
+        setF(t1)
+        setL(t2)
+    }, [fasts])
 
     // TODO: update fast when clicked on chart
     const toggleModal = e => {
-        console.log(`isModalOpen: ${isModalOpen}`)
         setIsModalOpen(!isModalOpen)
     }
 
@@ -52,15 +65,19 @@ const FastCharts = () => {
         if (!e[0]) return
         const index = e[0]._index
         setId(fasts[index].id)
+        setStartDate(fasts[index].startDate)
+        setEndDate(fasts[index].endDate)
         toggleModal()
     }
 
     const chartData = {
-        labels,
+        // labels,
+        labels: l,
         datasets: [
             {
                 label: 'Duration',
-                data: chartFasts,
+                // data: chartFasts,
+                data: d,
                 backgroundColor: '#17ff7b',
                 borderColor: '#00c957',
                 borderWidth: 1,
@@ -93,7 +110,13 @@ const FastCharts = () => {
 
     return (
         <ChartStyles>
-            <Modal show={isModalOpen} onClose={toggleModal} id={id} />
+            <Modal
+                show={isModalOpen}
+                onClose={toggleModal}
+                id={id}
+                startDate={startDate}
+                endDate={endDate}
+            />
             <Bar
                 data={chartData}
                 options={{}}

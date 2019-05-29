@@ -9,6 +9,8 @@ import tomato from '../static/icons/tomato.svg'
 import { FastsContext } from '../data/FastsContext'
 import Error from './ErrorMessage'
 import { timeConversion } from '../lib/timeConversion'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -106,7 +108,7 @@ const TimerIcon = () => (
 const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
     <Mutation mutation={CREATE_FAST_MUTATION} variables={{ startDate: new Date(), isActive: true }}>
         {(createFast, { error, loading }) => {
-            if (loading) console.log(`CREATING FAST`)
+            // if (loading) console.log(`CREATING FAST`)
             if (error) return <Error error={error} />
 
             return (
@@ -143,7 +145,11 @@ StartButton.propTypes = {
 }
 
 const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsActive }) => (
-    <Mutation mutation={STOP_FAST_MUTATION} variables={{ id }}>
+    <Mutation
+        mutation={STOP_FAST_MUTATION}
+        variables={{ id }}
+        refetchQueries={[{ query: ALL_FASTS_QUERY }]}
+    >
         {(stopFast, { error, loading }) => {
             if (error) return <Error error={error} />
 

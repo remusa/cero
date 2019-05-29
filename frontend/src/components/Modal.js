@@ -1,12 +1,14 @@
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
 import { Mutation } from 'react-apollo'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import styled from 'styled-components'
 import { UPDATE_FAST_MUTATION } from '../gql/FastMutation'
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 import Error from './ErrorMessage'
-import Form from './styled/Form'
 import { ResetStyles } from './Login'
+import Form from './styled/Form'
 
 const BackdropStyles = styled.div`
     position: fixed;
@@ -14,7 +16,7 @@ const BackdropStyles = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 99;
+    z-index: 89;
     background-color: rgba(0, 0, 0, 0.5);
     transform: scale(1);
     transition: 0.3s ease-in-out;
@@ -29,36 +31,39 @@ const ModalStyles = styled.div`
     background-color: var(--color-white);
     box-shadow: 0 0 20px var(--color-primary-darker);
     border-radius: 20px;
+    z-index: 99;
     /*
     max-width: 500;
     min-height: 300; */
 `
 
 const Modal = props => {
-    const [formState, setFormState] = useState({})
+    const [startDate, setStartDate] = useState(props.startDate)
+    const [endDate, setEndDate] = useState(props.endDate)
     const [formError, setFormError] = useState(null)
 
-    // <ModalStyles>
-    // {props.children}
-    // </ModalStyles>
-
-    const handleChange = e => {
-        console.log(e.target.value)
-    }
+    useEffect(() => {
+        setStartDate(props.startDate)
+        setEndDate(props.endDate)
+    }, [props.endDate, props.startDate])
 
     const handleSubmit = async (e, update) => {
         e.preventDefault()
-        await update()
-        setFormState({})
+        await update().then(res => props.onClose())
+        setStartDate('')
+        setEndDate('')
     }
 
     if (!props.show) return null
 
+    const variables = { id: props.id, startDate, endDate }
+    console.log(`VARIABLES: ${Object.entries(variables)}`)
+
     return (
         <Mutation
             mutation={UPDATE_FAST_MUTATION}
-            variables={{ id: props.id }}
-            refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+            variables={variables}
+            refetchQueries={[{ query: ALL_FASTS_QUERY }]}
         >
             {(update, { error, loading, called }) => (
                 <BackdropStyles>
@@ -75,45 +80,51 @@ const Modal = props => {
                                 {formError && <p>{formError}</p>}
 
                                 <h2>Update fast</h2>
-                                <p>{props.id}</p>
+                                <p>ID: {props.id}</p>
 
                                 <label htmlFor='startDate'>
                                     Start Date
                                     <input
+                                        disabled
                                         type='text'
-                                        name='endDate'
-                                        placeholder='endDate'
-                                        value='startDate'
-                                        onChange={handleChange}
+                                        name='startDate'
+                                        placeholder='startDate'
+                                        value={startDate}
+                                    />
+                                    <DatePicker
+                                        selected={new Date(props.startDate)}
+                                        showTimeInput
+                                        timeInputLabel='Time:'
+                                        onChange={date => {
+                                            setStartDate(date)
+                                        }}
+                                        dateFormat='MM/dd/yyyy h:mm aa'
                                     />
                                 </label>
 
                                 <label htmlFor='endDate'>
                                     End Date
                                     <input
+                                        disabled
                                         type='text'
                                         name='endDate'
                                         placeholder='endDate'
-                                        value='endDate'
-                                        onChange={handleChange}
+                                        value={endDate}
+                                    />
+                                    <DatePicker
+                                        selected={new Date(props.endDate)}
+                                        showTimeInput
+                                        timeInputLabel='Time:'
+                                        onChange={date => {
+                                            setEndDate(date)
+                                        }}
+                                        dateFormat='MM/dd/yyyy h:mm aa'
                                     />
                                 </label>
 
                                 <label htmlFor='isActive'>
                                     Active?
                                     <input type='checkbox' name='isActive' />
-                                </label>
-
-                                <label htmlFor='duration'>
-                                    Duration
-                                    <input
-                                        disabled
-                                        type='text'
-                                        name='duration'
-                                        placeholder='duration'
-                                        value='duration'
-                                        onChange={handleChange}
-                                    />
                                 </label>
 
                                 <button type='submit'>Update</button>

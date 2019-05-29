@@ -66,6 +66,8 @@ const Mutations = {
         // throw new Error('You must be logged in to do that!')
         // }
         const updates = { ...args }
+        const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
+        updates.duration = duration.milliseconds
         delete updates.id
         const updatedFast = await ctx.db.mutation.updateFast(
             {
