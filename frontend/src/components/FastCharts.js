@@ -49,6 +49,7 @@ const FastCharts = () => {
     const [id, setId] = useState(null)
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+    const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {
         const [t1, t2] = getFastData(fasts)
@@ -67,6 +68,7 @@ const FastCharts = () => {
         setId(fasts[index].id)
         setStartDate(fasts[index].startDate)
         setEndDate(fasts[index].endDate)
+        setIsActive(fasts[index].isActive)
         toggleModal()
     }
 
@@ -116,6 +118,7 @@ const FastCharts = () => {
                 id={id}
                 startDate={startDate}
                 endDate={endDate}
+                isActive={isActive}
             />
             <Bar
                 data={chartData}

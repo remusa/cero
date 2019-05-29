@@ -40,13 +40,14 @@ const ModalStyles = styled.div`
 const Modal = props => {
     const [startDate, setStartDate] = useState(props.startDate)
     const [endDate, setEndDate] = useState(props.endDate)
-    const [isActive, setIsActive] = useState(false)
+    const [isActive, setIsActive] = useState(props.isActive)
     const [formError, setFormError] = useState(null)
 
     useEffect(() => {
         setStartDate(props.startDate)
         setEndDate(props.endDate)
-    }, [props.endDate, props.startDate])
+        setIsActive(props.isActive)
+    }, [props.endDate, props.isActive, props.startDate])
 
     const handleSubmit = async (e, update) => {
         e.preventDefault()
