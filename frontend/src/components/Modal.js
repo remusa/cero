@@ -38,12 +38,14 @@ const ModalStyles = styled.div`
 `
 
 const Modal = props => {
+    const [formError, setFormError] = useState(null)
+    // const [id, setId] = useState(props.id)
     // const [startDate, setStartDate] = useState(props.startDate)
     // const [endDate, setEndDate] = useState(props.endDate)
     // const [isActive, setIsActive] = useState(props.isActive)
-    const [formError, setFormError] = useState(null)
 
     // useEffect(() => {
+    //     setId(props.id)
     //     setStartDate(props.startDate)
     //     setEndDate(props.endDate)
     //     setIsActive(props.isActive)
