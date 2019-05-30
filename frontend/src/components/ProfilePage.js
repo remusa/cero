@@ -20,7 +20,6 @@ const ProfilePage = () => {
         <PleaseSignIn>
             <ProfileStyles>
                 <h2>Profile</h2>
-
                 <h3>Coming soon...</h3>
             </ProfileStyles>
         </PleaseSignIn>

@@ -180,9 +180,9 @@ const Navigation = () => {
                                                 )}
 
                                                 <span>
-                                                    <Link to='/profile'>{me.name}</Link>
+                                                    {/* <Link to='/profile'>{me.name}</Link> */}
+                                                    {me.name}
                                                 </span>
-
                                                 <Link to='/fast'>Fast</Link>
                                                 <Logout />
                                             </>
