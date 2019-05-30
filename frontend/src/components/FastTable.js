@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components'
-import { getDate, getMonth, getHours, getMinutes, differenceInHours } from 'date-fns'
+import { differenceInHours } from 'date-fns'
 import { FastsContext } from '../data/FastsContext'
-import { timeConversion, timeDifference } from '../lib/timeConversion'
 import Modal from './Modal'
 
 const RowsStyles = styled.div`
@@ -10,21 +9,31 @@ const RowsStyles = styled.div`
     /* width: auto; */
     /* height: auto; */
 
-    @media all and (max-width: 800px) {
+    @media all and (max-width: 500px) {
         /* width: 90%; */
         /* height: 400px; */
+        margin: 8px;
     }
 `
 
 const TableStyles = styled.table`
     border-spacing: 0;
-    width: 100%;
-    /* border: 1px solid var(--color-primary); */
-    box-shadow: 0 0 20px var(--color-primary-darker);
-    border-radius: 20px;
+    border: 1px solid var(--color-grey);
+    border-radius: 4px;
 
     thead {
         font-size: 1rem;
+        padding: 4px;
+
+        border-bottom: 4px solid var(--color-primary);
+    }
+
+    .divider {
+        /* margin-bottom: 1px; */
+        width: 100%;
+        height: 3px;
+        border-radius: 1px;
+        background-color: var(--color-primary);
     }
 
     td,
@@ -48,7 +57,7 @@ const TableStyles = styled.table`
     }
 `
 
-const FastDisplay = () => {
+const FastTable = () => {
     const { fasts, activeFast } = useContext(FastsContext)
     // const [f, setF] = useState(activeFast)
 
@@ -105,6 +114,12 @@ const FastDisplay = () => {
                         <th>Finished?</th>
                         <th>Duration</th>
                     </tr>
+
+                    <tr>
+                        <td colSpan='4'>
+                            <div colSpan='4' className='divider' />
+                        </td>
+                    </tr>
                 </thead>
 
                 <tbody>
@@ -129,4 +144,4 @@ const FastDisplay = () => {
     )
 }
 
-export default FastDisplay
+export default FastTable
