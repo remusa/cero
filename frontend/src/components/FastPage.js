@@ -9,6 +9,7 @@ import FastCharts from './FastCharts'
 import FastTimer from './FastTimer'
 import PleaseSignIn from './PleaseSignIn'
 import Loading from './Loading'
+import FastDisplay from './FastDisplays'
 
 const FastStyles = styled.div`
     grid-area: main;
@@ -62,6 +63,7 @@ const FastContainer = () => {
                     <>
                         <FastTimer activeFast={latestFast} />
                         <FastCharts />
+                        <FastDisplay />
                     </>
                 )
             }}

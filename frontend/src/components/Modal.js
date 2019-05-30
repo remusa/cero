@@ -134,7 +134,7 @@ const Modal = props => {
                                 </label>
 
                                 <label htmlFor='isActive'>
-                                    Active?
+                                    Currently active?
                                     <input
                                         type='checkbox'
                                         name='isActive'

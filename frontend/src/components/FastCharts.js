@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Bar } from 'react-chartjs-2'
 import styled from 'styled-components'
+import { differenceInHours } from 'date-fns'
 import { FastsContext } from '../data/FastsContext'
 import { timeDifference } from '../lib/timeConversion'
 import Modal from './Modal'
@@ -20,9 +21,9 @@ function getFastData(fasts) {
     const labels = []
 
     const chartFasts = fasts.map(fast => {
-        if (fast.isActive || fast.endDate === null) {
-            return
-        }
+        // if (fast.isActive || fast.endDate === null) {
+        //     return
+        // }
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
         const duration = timeDifference(startDate, endDate)
@@ -30,7 +31,8 @@ function getFastData(fasts) {
         const dayNumber = startDate.toString().split(' ')[2]
 
         labels.push(`${dayName}/${dayNumber}`)
-        return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
+        // return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
+        return differenceInHours(endDate, startDate)
     })
 
     return [chartFasts, labels]
@@ -43,13 +45,14 @@ const FastCharts = () => {
     const [d, setF] = useState(chartFasts)
     const [l, setL] = useState(chartLabels)
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
     // Fast info
     const [id, setId] = useState(null)
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [isActive, setIsActive] = useState(false)
+
+    // Modal
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         const [t1, t2] = getFastData(fasts)
@@ -57,7 +60,6 @@ const FastCharts = () => {
         setL(t2)
     }, [fasts])
 
-    // TODO: update fast when clicked on chart
     const toggleModal = e => {
         setIsModalOpen(!isModalOpen)
     }
@@ -124,6 +126,7 @@ const FastCharts = () => {
                 setEndDate={setEndDate}
                 setIsActive={setIsActive}
             />
+
             <Bar
                 data={chartData}
                 options={{}}
