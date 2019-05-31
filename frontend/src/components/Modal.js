@@ -37,6 +37,34 @@ const ModalStyles = styled.div`
     min-height: 300; */
 `
 
+const DeleteButton = props => {
+    const handleClick = async (e, deleteFast) => {
+        e.preventDefault()
+        await deleteFast().then(res => props.onClose())
+    }
+
+    return (
+        <button type='button' onClick={console.log(`DELETING: ${props.id}`)}>
+            Delete
+        </button>
+        // <Mutation
+        //     mutation={DELETE_FAST_MUTATION}
+        //     variables={{ id: props.id }}
+        //     refetchQueries={[{ query: ALL_FASTS_QUERY }]}
+        // >
+        //     {(deleteFast, { data, error, loading }) => {
+        //         console.log(`DELETING ${props.id}`)
+
+        //         return (
+        //             <button type='button' onClick={e => handleClick(e, deleteFast)}>
+        //                 Delete
+        //             </button>
+        //         )
+        //     }}
+        // </Mutation>
+    )
+}
+
 const Modal = props => {
     const [formError, setFormError] = useState(null)
     // const [id, setId] = useState(props.id)
@@ -146,6 +174,8 @@ const Modal = props => {
                                 </label>
 
                                 <button type='submit'>Update</button>
+
+                                <DeleteButton id={props.id} onClick={props.onClose} />
 
                                 <ResetStyles onClick={props.onClose}>Go back</ResetStyles>
                             </fieldset>

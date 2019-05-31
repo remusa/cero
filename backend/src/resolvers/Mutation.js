@@ -1,4 +1,4 @@
-// const { forwardTo } = require('prisma-binding')
+const { forwardTo } = require('prisma-binding')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
@@ -11,6 +11,7 @@ const { timeConversion } = require('../utils/timeConversion')
 const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
 
 const Mutations = {
+    deleteFast: forwardTo('db'),
     async createFast(parent, args, ctx, info) {
         // TODO: check if user is logged in
         // if (!ctx.request.userId) {
