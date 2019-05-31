@@ -33,7 +33,8 @@ const FastStyles = styled.div`
 const InfoStyles = styled.div`
     display: flex;
     flex-flow: column wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
 
     @media all and (max-width: 500px) {
         justify-content: center;

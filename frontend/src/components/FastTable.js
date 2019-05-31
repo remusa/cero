@@ -34,6 +34,7 @@ const TableStyles = styled.table`
         height: 3px;
         border-radius: 1px;
         background-color: var(--color-primary);
+        pointer-events: none;
     }
 
     td,
