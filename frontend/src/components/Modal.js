@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import styled from 'styled-components'
-import { UPDATE_FAST_MUTATION } from '../gql/FastMutation'
+import { UPDATE_FAST_MUTATION, DELETE_FAST_MUTATION } from '../gql/FastMutation'
 import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 import Error from './ErrorMessage'
 import { ResetStyles } from './Login'
@@ -37,32 +37,63 @@ const ModalStyles = styled.div`
     min-height: 300; */
 `
 
+const DeleteStyles = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+
+    button {
+        display: block;
+        width: auto;
+        border: 0;
+        border-radius: 5px;
+        font-size: 1.7rem;
+        padding: 0.5rem 1.2rem;
+        background: red;
+        color: white;
+        font-weight: 600;
+        font-size: 1.7rem;
+        transform: skew(-2deg);
+        transition: all 0.5s;
+
+        &[disabled] {
+            opacity: 0.5;
+        }
+    }
+`
+
 const DeleteButton = props => {
     const handleClick = async (e, deleteFast) => {
         e.preventDefault()
-        await deleteFast().then(res => props.onClose())
+        await deleteFast().then(res => props.onClick())
     }
 
     return (
-        <button type='button' onClick={console.log(`DELETING: ${props.id}`)}>
-            Delete
-        </button>
-        // <Mutation
-        //     mutation={DELETE_FAST_MUTATION}
-        //     variables={{ id: props.id }}
-        //     refetchQueries={[{ query: ALL_FASTS_QUERY }]}
-        // >
-        //     {(deleteFast, { data, error, loading }) => {
-        //         console.log(`DELETING ${props.id}`)
-
-        //         return (
-        //             <button type='button' onClick={e => handleClick(e, deleteFast)}>
-        //                 Delete
-        //             </button>
-        //         )
-        //     }}
-        // </Mutation>
+        <Mutation
+            mutation={DELETE_FAST_MUTATION}
+            variables={{ id: props.id }}
+            refetchQueries={[{ query: ALL_FASTS_QUERY }]}
+        >
+            {(deleteFast, { data, error, loading }) => (
+                <DeleteStyles>
+                    <button
+                        type='button'
+                        disabled={loading}
+                        onClick={e => handleClick(e, deleteFast)}
+                    >
+                        Delete
+                    </button>
+                </DeleteStyles>
+            )}
+        </Mutation>
     )
+}
+
+DeleteButton.propTypes = {
+    id: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 }
 
 const Modal = props => {

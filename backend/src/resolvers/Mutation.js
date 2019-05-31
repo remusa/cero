@@ -11,14 +11,12 @@ const { timeConversion } = require('../utils/timeConversion')
 const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
 
 const Mutations = {
-    deleteFast: forwardTo('db'),
     async createFast(parent, args, ctx, info) {
         // TODO: check if user is logged in
         // if (!ctx.request.userId) {
         // throw new Error('You must be logged in to do that!')
         // }
         console.log(`CREATING FAST WITH STARTDATE: ${args.startDate}`)
-
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
@@ -78,6 +76,19 @@ const Mutations = {
             info
         )
         return updatedFast
+    },
+    async deleteFast(parent, args, ctx, info) {
+        // TODO: check if user is logged in
+        // if (!ctx.request.userId) {
+        // throw new Error('You must be logged in to do that!')
+        // }
+        const deletedFast = await ctx.db.mutation.deleteFast(
+            {
+                where: { id: args.id },
+            },
+            info
+        )
+        return deletedFast
     },
     async signup(parent, args, ctx, info) {
         if (args.name.length < 3) {
