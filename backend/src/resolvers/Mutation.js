@@ -65,6 +65,9 @@ const Mutations = {
         // throw new Error('You must be logged in to do that!')
         // }
         const updates = { ...args }
+        if (updates.endDate && updates.startDate > updates.endDate) {
+            throw new Error('Ending date must be after start date')
+        }
         const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
         updates.duration = duration.milliseconds
         delete updates.id

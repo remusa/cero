@@ -35,17 +35,26 @@ const ModalStyles = styled.div`
     /*
     max-width: 500;
     min-height: 300; */
+
+    .buttons_container {
+        display: flex;
+        flex-flow: column row;
+        justify-content: space-evenly;
+        align-items: center;
+
+        margin-top: 8px;
+    }
 `
 
 const DeleteStyles = styled.div`
-    display: flex;
+    /* display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 8px; */
 
     button {
-        display: block;
+        /* display: block; */
         width: auto;
         border: 0;
         border-radius: 5px;
@@ -156,14 +165,14 @@ const Modal = props => {
                                 <p>ID: {props.id}</p>
 
                                 <label htmlFor='startDate'>
-                                    Start Date
-                                    <input
+                                    Start Date: {'\t'}
+                                    {/* <input
                                         disabled
                                         type='text'
                                         name='startDate'
                                         placeholder='startDate'
                                         value={props.startDate}
-                                    />
+                                    /> */}
                                     <DatePicker
                                         selected={new Date(props.startDate)}
                                         showTimeInput
@@ -176,14 +185,14 @@ const Modal = props => {
                                 </label>
 
                                 <label htmlFor='endDate'>
-                                    End Date
-                                    <input
+                                    End Date: {'\t'}
+                                    {/* <input
                                         disabled
                                         type='text'
                                         name='endDate'
                                         placeholder='endDate'
                                         value={props.endDate}
-                                    />
+                                    /> */}
                                     <DatePicker
                                         selected={new Date(props.endDate)}
                                         showTimeInput
@@ -195,7 +204,7 @@ const Modal = props => {
                                     />
                                 </label>
 
-                                <label htmlFor='isActive'>
+                                {/* <label htmlFor='isActive'>
                                     Currently active?
                                     <input
                                         type='checkbox'
@@ -205,11 +214,12 @@ const Modal = props => {
                                             props.setIsActive(e.target.checked)
                                         }}
                                     />
-                                </label>
+                                </label> */}
 
-                                <button type='submit'>Update</button>
-
-                                <DeleteButton id={props.id} onClick={props.onClose} />
+                                <div className='buttons_container'>
+                                    <button type='submit'>Update</button>
+                                    <DeleteButton id={props.id} onClick={props.onClose} />
+                                </div>
 
                                 <ResetStyles onClick={props.onClose}>Go back</ResetStyles>
                             </fieldset>
