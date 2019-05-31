@@ -67,7 +67,10 @@ const DeleteStyles = styled.div`
 const DeleteButton = props => {
     const handleClick = async (e, deleteFast) => {
         e.preventDefault()
-        await deleteFast().then(res => props.onClick())
+
+        if (window.confirm('Delete fast?')) {
+            await deleteFast().then(res => props.onClick())
+        }
     }
 
     return (

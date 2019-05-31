@@ -237,14 +237,14 @@ const FastTimer = props => {
     useEffect(() => {
         const timerControl = () => {
             const d = timeDifference(startDate, new Date(endDate))
-            // console.log(`DURATION: ${Object.entries(d)}`)
+            console.log(`DURATION: ${Object.entries(d)}`)
 
             setEndDate(new Date())
             setDuration(d)
         }
 
-        // const interval = setInterval(() => timerControl(), 1000)
-        // return () => clearInterval(interval)
+        const interval = setInterval(() => timerControl(), 1000)
+        return () => clearInterval(interval)
     }, [])
     /* eslint-enable */
 
