@@ -9,6 +9,7 @@ import FastCharts from './FastCharts'
 import FastTimer from './FastTimer'
 import PleaseSignIn from './PleaseSignIn'
 import Loading from './Loading'
+import FastTable from './FastTable'
 
 const FastStyles = styled.div`
     grid-area: main;
@@ -16,7 +17,7 @@ const FastStyles = styled.div`
     .fast__info {
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
     }
 
@@ -26,6 +27,17 @@ const FastStyles = styled.div`
             justify-content: center;
             align-items: center;
         }
+    }
+`
+
+const InfoStyles = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+
+    @media all and (max-width: 500px) {
+        justify-content: center;
+        align-items: center;
     }
 `
 
@@ -61,7 +73,10 @@ const FastContainer = () => {
                 return (
                     <>
                         <FastTimer activeFast={latestFast} />
-                        <FastCharts />
+                        <InfoStyles>
+                            <FastCharts />
+                            <FastTable />
+                        </InfoStyles>
                     </>
                 )
             }}

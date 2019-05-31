@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { FastsContext, FastsProvider } from '../data/FastsContext'
-import FastCharts from './FastCharts'
+import { FastsContext } from '../data/FastsContext'
 import PleaseSignIn from './PleaseSignIn'
 
 const ProfileStyles = styled.div`
@@ -14,14 +13,13 @@ const ProfileStyles = styled.div`
 `
 
 const ProfilePage = () => {
-    // const { fasts } = useContext(FastsContext)
+    const { fasts } = useContext(FastsContext)
     console.log(`Profile page: `)
 
     return (
         <PleaseSignIn>
             <ProfileStyles>
                 <h2>Profile</h2>
-
                 <h3>Coming soon...</h3>
             </ProfileStyles>
         </PleaseSignIn>

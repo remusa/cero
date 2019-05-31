@@ -31,6 +31,10 @@ const HeaderStyles = styled.header`
             }
         }
 
+        .nav__hamburguer:hover {
+            text-decoration: none;
+        }
+
         .nav__toggle__container {
             .nav__toggle {
                 display: none;
@@ -144,7 +148,11 @@ const Navigation = () => {
                                 className='nav__toggle__container'
                                 style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}
                             >
-                                <a href='#' className='nav__toggle' onClick={handleToggle}>
+                                <a
+                                    href='#'
+                                    className='nav__toggle nav__hamburguer'
+                                    onClick={handleToggle}
+                                >
                                     ☰
                                 </a>
                                 {(toggled || width > 500) && (
@@ -172,9 +180,9 @@ const Navigation = () => {
                                                 )}
 
                                                 <span>
-                                                    <Link to='/profile'>{me.name}</Link>
+                                                    {/* <Link to='/profile'>{me.name}</Link> */}
+                                                    {me.name}
                                                 </span>
-
                                                 <Link to='/fast'>Fast</Link>
                                                 <Logout />
                                             </>

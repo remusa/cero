@@ -1,4 +1,4 @@
-// const { forwardTo } = require('prisma-binding')
+const { forwardTo } = require('prisma-binding')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
@@ -17,7 +17,6 @@ const Mutations = {
         // throw new Error('You must be logged in to do that!')
         // }
         console.log(`CREATING FAST WITH STARTDATE: ${args.startDate}`)
-
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
@@ -66,6 +65,8 @@ const Mutations = {
         // throw new Error('You must be logged in to do that!')
         // }
         const updates = { ...args }
+        const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
+        updates.duration = duration.milliseconds
         delete updates.id
         const updatedFast = await ctx.db.mutation.updateFast(
             {
@@ -75,6 +76,19 @@ const Mutations = {
             info
         )
         return updatedFast
+    },
+    async deleteFast(parent, args, ctx, info) {
+        // TODO: check if user is logged in
+        // if (!ctx.request.userId) {
+        // throw new Error('You must be logged in to do that!')
+        // }
+        const deletedFast = await ctx.db.mutation.deleteFast(
+            {
+                where: { id: args.id },
+            },
+            info
+        )
+        return deletedFast
     },
     async signup(parent, args, ctx, info) {
         if (args.name.length < 3) {

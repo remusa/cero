@@ -48,4 +48,16 @@ const UPDATE_FAST_MUTATION = gql`
     }
 `
 
-export { CREATE_FAST_MUTATION, UPDATE_FAST_MUTATION, STOP_FAST_MUTATION }
+const DELETE_FAST_MUTATION = gql`
+    mutation DELETE_FAST_MUTATION($id: ID!) {
+        deleteFast(id: $id) {
+            id
+            startDate
+            endDate
+            isActive
+            duration
+        }
+    }
+`
+
+export { CREATE_FAST_MUTATION, UPDATE_FAST_MUTATION, STOP_FAST_MUTATION, DELETE_FAST_MUTATION }

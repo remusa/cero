@@ -8,7 +8,9 @@ import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
 import { FastsContext } from '../data/FastsContext'
 import Error from './ErrorMessage'
-import { timeConversion } from '../lib/timeConversion'
+import { timeConversion, timeDifference } from '../lib/timeConversion'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -106,7 +108,7 @@ const TimerIcon = () => (
 const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
     <Mutation mutation={CREATE_FAST_MUTATION} variables={{ startDate: new Date(), isActive: true }}>
         {(createFast, { error, loading }) => {
-            if (loading) console.log(`CREATING FAST`)
+            // if (loading) console.log(`CREATING FAST`)
             if (error) return <Error error={error} />
 
             return (
@@ -143,7 +145,11 @@ StartButton.propTypes = {
 }
 
 const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsActive }) => (
-    <Mutation mutation={STOP_FAST_MUTATION} variables={{ id }}>
+    <Mutation
+        mutation={STOP_FAST_MUTATION}
+        variables={{ id }}
+        refetchQueries={[{ query: ALL_FASTS_QUERY }]}
+    >
         {(stopFast, { error, loading }) => {
             if (error) return <Error error={error} />
 
@@ -186,10 +192,11 @@ StopButton.propTypes = {
 }
 
 const TimerDuration = props => {
-    // const duration = props.duration
-    const duration = localStorage.getItem('duration')
-    const timer = timeConversion(duration)
-    console.log(`TimerDuration: ${Object.entries(timer)}`)
+    const { duration } = props
+    // const duration = localStorage.getItem('duration')
+    // const timer = timeConversion(duration)
+    const timer = duration
+    console.log(`TimerDuration: ${Object.entries(duration)}`)
 
     return (
         <div className='container__timer'>
@@ -213,28 +220,33 @@ const FastTimer = props => {
     const [duration, setDuration] = useState(activeFast ? activeFast.duration : 0)
 
     // Initial setup
+    /* eslint-disable */
     useEffect(() => {
-        // console.log('1. useEffect called: ')
-
         if (activeFast) {
+            console.log('1. useEffect called: ')
             setId(activeFast.id)
             setStartDate(new Date(activeFast.startDate))
             setIsActive(activeFast.isActive)
             setDuration(activeFast.duration)
             localStorage.setItem('duration', activeFast.duration)
-            // console.log("useEffect: there's an active fast")
-        } else {
-            // console.log("useEffect: there isn't an active fast")
+        }
+    }, [])
+    /* eslint-enable */
+
+    /* eslint-disable */
+    useEffect(() => {
+        const timerControl = () => {
+            const d = timeDifference(startDate, new Date(endDate))
+            // console.log(`DURATION: ${Object.entries(d)}`)
+
+            setEndDate(new Date())
+            setDuration(d)
         }
 
-        return () => {
-            // clearInterval(this.interval)
-        }
-    }, [activeFast])
-
-    // useEffect(() => {
-    //     setEndDate(Date.now())
-    // }, [])
+        // const interval = setInterval(() => timerControl(), 1000)
+        // return () => clearInterval(interval)
+    }, [])
+    /* eslint-enable */
 
     return (
         <ContainerStyles className='container'>
