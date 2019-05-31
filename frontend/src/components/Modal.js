@@ -130,7 +130,7 @@ const Modal = props => {
         endDate: props.endDate,
         isActive: props.isActive,
     }
-    console.log(`VARIABLES: ${Object.entries(variables)}`)
+    // console.log(`VARIABLES: ${Object.entries(variables)}`)
 
     return (
         <Mutation

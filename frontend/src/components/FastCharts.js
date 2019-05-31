@@ -21,9 +21,8 @@ function getFastData(fasts) {
     const labels = []
 
     const chartFasts = fasts.map(fast => {
-        // if (fast.isActive || fast.endDate === null) {
-        //     return
-        // }
+        if (fast.isActive || !fast.endDate) return
+
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
         const duration = timeDifference(startDate, endDate)

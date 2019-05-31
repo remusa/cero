@@ -83,7 +83,7 @@ const FastTable = () => {
 
     const handleClick = (e, fast) => {
         if (!e) return
-        console.log(`fast: ${Object.entries(fast)}`)
+        // console.log(`fast: ${Object.entries(fast)}`)
         setId(fast.id)
         setStartDate(fast.startDate)
         setEndDate(fast.endDate)
@@ -125,13 +125,20 @@ const FastTable = () => {
                 <tbody>
                     {fasts
                         .map(fast => {
+                            // if (fast.isActive || !fast.endDate) return
+                            if (!fast.endDate) return
+
                             const { startDate, endDate, isActive, duration } = fast
                             const totalHours = differenceInHours(endDate, startDate)
 
                             return (
                                 <tr key={fast.id} onClick={e => handleClick(e, fast)}>
                                     <td>{new Date(startDate).toISOString().slice(5, 10)}</td>
-                                    <td>{new Date(endDate).toISOString().slice(5, 10)}</td>
+                                    <td>
+                                        {endDate
+                                            ? new Date(endDate).toISOString().slice(5, 10)
+                                            : '-'}
+                                    </td>
                                     <td>{isActive ? '❌' : '✔️'}</td>
                                     <td>{totalHours} hrs.</td>
                                 </tr>
