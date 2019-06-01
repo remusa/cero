@@ -12,19 +12,16 @@ const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
 
 const Mutations = {
     async createFast(parent, args, ctx, info) {
-        // TODO: check if user is logged in
-        // if (!ctx.request.userId) {
-        // throw new Error('You must be logged in to do that!')
-        // }
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
         console.log(`CREATING FAST WITH STARTDATE: ${args.startDate}`)
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
                     user: {
                         connect: {
-                            // TODO: get id from context
-                            // id:  ctx.request.userId,
-                            id: 'cjvifoe55b2ct0b733fieqq3x',
+                            id: ctx.request.userId,
                         },
                     },
                     ...args,
@@ -35,10 +32,9 @@ const Mutations = {
         return fast
     },
     async stopFast(parent, args, ctx, info) {
-        // TODO: check if user is logged in
-        // if (!ctx.request.userId) {
-        // throw new Error('You must be logged in to do that!')
-        // }
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
         console.log(`BACKEND 1. STOPPING | ID: ${args.id}`)
         const fastInfo = await ctx.db.query.fast({
             where: { id: args.id },
@@ -60,10 +56,9 @@ const Mutations = {
         return stoppedFast
     },
     async updateFast(parent, args, ctx, info) {
-        // TODO: check if user is logged in
-        // if (!ctx.request.userId) {
-        // throw new Error('You must be logged in to do that!')
-        // }
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
         const updates = { ...args }
         if (updates.endDate && updates.startDate > updates.endDate) {
             throw new Error('Ending date must be after start date')
@@ -81,10 +76,9 @@ const Mutations = {
         return updatedFast
     },
     async deleteFast(parent, args, ctx, info) {
-        // TODO: check if user is logged in
-        // if (!ctx.request.userId) {
-        // throw new Error('You must be logged in to do that!')
-        // }
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
         const deletedFast = await ctx.db.mutation.deleteFast(
             {
                 where: { id: args.id },
