@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
 import { PropTypes } from 'prop-types'
+import React, { useContext, useEffect, useState } from 'react'
 import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
 import { FastsContext } from '../data/FastsContext'
