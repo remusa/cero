@@ -15,7 +15,7 @@ import App from './App'
 import './index.scss'
 
 // const URI = process.env.NODE_ENV === 'dev' ? 'http://localhost:4444/' : process.env.END_POINT
-console.log(`END_POINT: ${process.env.END_POINT}`)
+console.log(`END_POINT: ${process.env.REACT_APP_END_POINT}`)
 
 // Apollo Boost
 const client = new ApolloClient({
