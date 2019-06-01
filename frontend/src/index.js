@@ -14,20 +14,27 @@ import App from './App'
 
 import './index.scss'
 
-// const URI = process.env.NODE_ENV === 'dev' ? 'http://localhost:4444/' : process.env.END_POINT
-console.log(`END_POINT: ${process.env.REACT_APP_END_POINT}`)
+console.log(`${process.env.NODE_ENV}`)
+console.log(`${process.env.END_POINT_DEV}`)
+console.log(`${process.env.REACT_APP_END_POINT}`)
 
 // Apollo Boost
 const client = new ApolloClient({
-    uri:
-        process.env.NODE_ENV === 'dev' ? 'http://localhost:4444/' : process.env.REACT_APP_END_POINT,
+    uri: process.env.NODE_ENV.includes('dev')
+        ? process.env.END_POINT_DEV
+        : process.env.REACT_APP_END_POINT,
     request: async operation => {
         operation.setContext({
             fetchOptions: {
                 credentials: 'include',
             },
+            // headers,
+            // headers: {
+            //     // authorization: `Bearer your-personal-access-token`,
+            // },
             headers: {
-                authorization: `Bearer your-personal-access-token`,
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
             },
         })
     },

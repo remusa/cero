@@ -49,7 +49,6 @@ server.express.use(async (req, res, next) => {
         '{ id, email, name, permissions }'
     )
     req.user = user
-
     next()
 })
 
@@ -58,7 +57,9 @@ server.start(
     {
         cors: {
             credentials: true,
-            origin: process.env.FRONTEND_URL,
+            origin: process.env.NODE_ENV.contains('dev')
+                ? process.env.FRONTEND_URL_DEV
+                : process.env.FRONTEND_URL,
         },
     },
     deets => {
