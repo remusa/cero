@@ -19,8 +19,8 @@ const ProfilePage = () => {
     return (
         <PleaseSignIn>
             <ProfileStyles>
-                <h2>Profile</h2>
-                <h3>Coming soon...</h3>
+                <h1>Profile</h1>
+                <h2>Coming soon...</h2>
             </ProfileStyles>
         </PleaseSignIn>
     )

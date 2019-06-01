@@ -1,21 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
-import styled from 'styled-components'
 import { differenceInHours } from 'date-fns'
 import { FastsContext } from '../data/FastsContext'
 import { timeDifference } from '../lib/timeConversion'
 import Modal from './Modal'
-
-const ChartStyles = styled.div`
-    margin: 0 auto;
-    /* width: auto; */
-    /* height: auto; */
-
-    @media all and (max-width: 800px) {
-        /* width: 90%; */
-        /* height: 400px; */
-    }
-`
 
 function getFastData(fasts) {
     const labels = []
@@ -112,7 +100,7 @@ const FastCharts = () => {
     }
 
     return (
-        <ChartStyles>
+        <div>
             <Modal
                 show={isModalOpen}
                 onClose={toggleModal}
@@ -132,7 +120,7 @@ const FastCharts = () => {
                 stacked={false}
                 getElementAtEvent={element => handleClick(element)}
             />
-        </ChartStyles>
+        </div>
     )
 }
 

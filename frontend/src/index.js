@@ -7,6 +7,7 @@ import ApolloClient from 'apollo-boost'
 // import { HttpLink } from 'apollo-link-http'
 // import { ApolloLink, from } from 'apollo-link'
 import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks'
 import { BrowserRouter as Router } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
@@ -51,9 +52,11 @@ const client = new ApolloClient({
 
 ReactDOM.render(
     <ApolloProvider client={client}>
-        <Router>
-            <App />
-        </Router>
+        <ApolloProviderHooks client={client}>
+            <Router>
+                <App />
+            </Router>
+        </ApolloProviderHooks>
     </ApolloProvider>,
     document.getElementById('root')
 )

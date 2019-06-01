@@ -7,10 +7,12 @@ import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 const Logout = () => (
     <Mutation mutation={SIGNOUT_MUTATION} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
         {signout => {
-            {/* localStorage.removeItem('startDate')
+            {
+                /* localStorage.removeItem('startDate')
             localStorage.removeItem('duration')
             localStorage.removeItem('charts-fasts')
-            localStorage.removeItem('charts-labels') */}
+            localStorage.removeItem('charts-labels') */
+            }
 
             return (
                 <Link to='/' onClick={signout}>

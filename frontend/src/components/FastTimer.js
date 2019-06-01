@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { PropTypes } from 'prop-types'
 import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
-import { PropTypes } from 'prop-types'
+import { FastsContext } from '../data/FastsContext'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
+import { ALL_FASTS_QUERY } from '../gql/FastQuery'
+import { timeDifference } from '../lib/timeConversion'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
-import { FastsContext } from '../data/FastsContext'
 import Error from './ErrorMessage'
-import { timeConversion, timeDifference } from '../lib/timeConversion'
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
-import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -216,8 +215,8 @@ const TimerDuration = props => {
 }
 
 const FastTimer = props => {
-    // const { activeFast } = useContext(FastsContext)
-    const { activeFast } = props
+    const { activeFast } = useContext(FastsContext)
+    // const { activeFast } = props
 
     const [id, setId] = useState(activeFast ? activeFast.id : '')
     const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
