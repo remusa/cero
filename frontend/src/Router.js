@@ -1,16 +1,15 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import AdminPage from './components/AdminPage'
 import FastPage from './components/FastPage'
 import Home from './components/Home'
 import Login from './components/Login'
-import Register from './components/Register'
 import ProfilePage from './components/ProfilePage'
+import Register from './components/Register'
 import RequestReset from './components/RequestReset'
 import Reset from './components/Reset'
-import PermissionsPage from './components/PermissionsPage'
-import Test from './components/Test'
 
-const NotFound404 = ({ location }) => (
+export const NotFound404 = ({ location }) => (
     <div>
         <h3>
             404, no match for <code>{location.pathname}</code>
@@ -27,8 +26,8 @@ export const Router = () => (
         <Route path='/profile' component={ProfilePage} />
         <Route path='/requestreset' component={RequestReset} />
         <Route path='/reset' component={Reset} />
-        <Route path='/permissions' component={PermissionsPage} />
-        <Route path='/test' component={Test} />
+        <Route path='/admin' component={AdminPage} />
+        {/* <Route path='/test' component={Test} /> */}
         <Route component={NotFound404} />
     </Switch>
 )

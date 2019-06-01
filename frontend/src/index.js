@@ -7,19 +7,19 @@ import ApolloClient from 'apollo-boost'
 // import { HttpLink } from 'apollo-link-http'
 // import { ApolloLink, from } from 'apollo-link'
 import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks'
 import { BrowserRouter as Router } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
 
 import './index.scss'
 
-import { END_POINT } from './config'
-
-const URI = process.env.NODE_ENV === 'dev' ? END_POINT : END_POINT
+// const URI = process.env.NODE_ENV === 'dev' ? 'http://localhost:4444/' : process.env.END_POINT
+console.log(`END_POINT: ${process.env.END_POINT}`)
 
 // Apollo Boost
 const client = new ApolloClient({
-    uri: URI,
+    uri: process.env.END_POINT || 'http://localhost:4444/',
     request: async operation => {
         operation.setContext({
             fetchOptions: {
@@ -51,9 +51,11 @@ const client = new ApolloClient({
 
 ReactDOM.render(
     <ApolloProvider client={client}>
-        <Router>
-            <App />
-        </Router>
+        <ApolloProviderHooks client={client}>
+            <Router>
+                <App />
+            </Router>
+        </ApolloProviderHooks>
     </ApolloProvider>,
     document.getElementById('root')
 )

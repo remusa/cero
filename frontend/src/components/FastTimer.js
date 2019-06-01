@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react'
+import { PropTypes } from 'prop-types'
+import React, { useContext, useEffect, useState } from 'react'
 import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
-import { PropTypes } from 'prop-types'
+import { FastsContext } from '../data/FastsContext'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../gql/FastMutation'
+import { ALL_FASTS_QUERY } from '../gql/FastQuery'
+import { timeDifference } from '../lib/timeConversion'
 import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
-import { FastsContext } from '../data/FastsContext'
 import Error from './ErrorMessage'
-import { timeConversion, timeDifference } from '../lib/timeConversion'
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
-import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -196,39 +195,48 @@ const TimerDuration = props => {
     // const duration = localStorage.getItem('duration')
     // const timer = timeConversion(duration)
     const timer = duration
-    console.log(`TimerDuration: ${Object.entries(duration)}`)
+    // console.log(`TimerDuration: ${Object.entries(duration)}`)
+
+    let children
+    if (timer === 0) {
+        children = '00:00:00'
+    } else {
+        children = `${timer.hours}:${timer.minutes}:${timer.seconds}`
+    }
 
     return (
         <div className='container__timer'>
             <p className='container__timer__time-left'>
-                {timer.days > 0 && timer.days}
-                {timer.days > 0 && ':'}
-                {timer.hours}:{timer.minutes}:{timer.seconds}
+                {timer.days > 0 && `${timer.days}:`}
+                {children}
             </p>
         </div>
     )
 }
 
 const FastTimer = props => {
-    // const { activeFast } = useContext(FastsContext)
-    const { activeFast } = props
+    const { activeFast } = useContext(FastsContext)
+    // const { activeFast } = props
 
     const [id, setId] = useState(activeFast ? activeFast.id : '')
     const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
     const [endDate, setEndDate] = useState(activeFast ? activeFast.endDate : '')
     const [isActive, setIsActive] = useState(activeFast ? activeFast.isActive : false)
-    const [duration, setDuration] = useState(activeFast ? activeFast.duration : 0)
+    const [duration, setDuration] = useState(activeFast ? activeFast.duration : '')
 
     // Initial setup
     /* eslint-disable */
     useEffect(() => {
         if (activeFast) {
-            console.log('1. useEffect called: ')
+            // console.log('1. useEffect(): ACTIVEFAST')
             setId(activeFast.id)
-            setStartDate(new Date(activeFast.startDate))
+            setStartDate(activeFast.startDate)
+            setEndDate(activeFast.endDate)
             setIsActive(activeFast.isActive)
             setDuration(activeFast.duration)
-            localStorage.setItem('duration', activeFast.duration)
+            // localStorage.setItem('duration', activeFast.duration)
+        } else {
+            console.log('1. useEffect(): NOACTIVEFAST')
         }
     }, [])
     /* eslint-enable */
@@ -236,16 +244,23 @@ const FastTimer = props => {
     /* eslint-disable */
     useEffect(() => {
         const timerControl = () => {
-            const d = timeDifference(startDate, new Date(endDate))
-            // console.log(`DURATION: ${Object.entries(d)}`)
-
-            setEndDate(new Date())
+            const end = new Date()
+            setEndDate(end)
+            const d = timeDifference(new Date(startDate), end)
             setDuration(d)
+            // console.log(`DURATION: ${Object.entries(d)}`)
+            // console.log(`DURATION: ${Number.parseInt(d.milliseconds)}`)
+            // console.log(startDate, endDate, duration)
         }
 
-        // const interval = setInterval(() => timerControl(), 1000)
-        // return () => clearInterval(interval)
-    }, [])
+        const interval = setInterval(() => {
+            timerControl()
+        }, 1000)
+
+        return () => {
+            clearInterval(interval)
+        }
+    })
     /* eslint-enable */
 
     return (

@@ -1,59 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
-import styled from 'styled-components'
 import { differenceInHours } from 'date-fns'
+import React, { useContext, useState } from 'react'
+import styled from 'styled-components'
 import { FastsContext } from '../data/FastsContext'
 import Modal from './Modal'
+import { TableStyles } from './styled/Table'
 
 const RowsStyles = styled.div`
     margin: 0 auto;
-    /* width: auto; */
-    /* height: auto; */
 
     @media all and (max-width: 500px) {
-        /* width: 90%; */
-        /* height: 400px; */
         margin: 8px;
-    }
-`
-
-const TableStyles = styled.table`
-    border-spacing: 0;
-    border: 1px solid var(--color-grey);
-    border-radius: 4px;
-
-    thead {
-        font-size: 1rem;
-        padding: 4px;
-
-        border-bottom: 4px solid var(--color-primary);
-    }
-
-    .divider {
-        /* margin-bottom: 1px; */
-        width: 100%;
-        height: 3px;
-        border-radius: 1px;
-        background-color: var(--color-primary);
-    }
-
-    td,
-    th {
-        font-size: 1.2rem;
-        padding: 4px;
-        position: relative;
-
-        label {
-            padding: 8px 4px;
-            display: block;
-        }
-    }
-
-    tr {
-        &:hover {
-            background: var(--color-primary);
-            box-shadow: 0 0 20px var(--color-primary-darker);
-            border-radius: 20px;
-        }
     }
 `
 
@@ -83,7 +39,7 @@ const FastTable = () => {
 
     const handleClick = (e, fast) => {
         if (!e) return
-        console.log(`fast: ${Object.entries(fast)}`)
+        // console.log(`fast: ${Object.entries(fast)}`)
         setId(fast.id)
         setStartDate(fast.startDate)
         setEndDate(fast.endDate)
@@ -125,13 +81,19 @@ const FastTable = () => {
                 <tbody>
                     {fasts
                         .map(fast => {
+                            if (!fast.endDate) return
+
                             const { startDate, endDate, isActive, duration } = fast
                             const totalHours = differenceInHours(endDate, startDate)
 
                             return (
                                 <tr key={fast.id} onClick={e => handleClick(e, fast)}>
                                     <td>{new Date(startDate).toISOString().slice(5, 10)}</td>
-                                    <td>{new Date(endDate).toISOString().slice(5, 10)}</td>
+                                    <td>
+                                        {endDate
+                                            ? new Date(endDate).toISOString().slice(5, 10)
+                                            : '-'}
+                                    </td>
                                     <td>{isActive ? '❌' : '✔️'}</td>
                                     <td>{totalHours} hrs.</td>
                                 </tr>

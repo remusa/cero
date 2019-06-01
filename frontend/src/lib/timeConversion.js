@@ -1,5 +1,4 @@
-export function timeConversion(time) {
-    // const diffMs = timeDifference(startDate, endDate)
+function timeConversion(time) {
     const diffMs = time
 
     const diffDays = Math.floor(diffMs / 86400000)
@@ -16,11 +15,23 @@ export function timeConversion(time) {
         seconds: diffSecs < 10 ? `0${diffSecs}` : diffSecs,
         totalHours: totalHrs < 10 ? `0${totalHrs}` : totalHrs,
     }
+    // const duration = {
+    //     milliseconds: diffMs,
+    //     days: diffDays,
+    //     hours: diffHrs,
+    //     minutes: diffMins,
+    //     seconds: diffSecs,
+    //     totalHours: totalHrs,
+    // }
 
     return duration
 }
 
-export function timeDifference(startDate, endDate) {
+function timeDifference(startDate, endDate) {
+    // const end = endDate === null ? new Date() : endDate
     const diffMs = Math.abs(endDate - startDate)
+    // console.log(`timeDifference: ${diffMs}`)
     return timeConversion(diffMs)
 }
+
+export { timeConversion, timeDifference }

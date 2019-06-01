@@ -1,6 +1,6 @@
 # [Cero - A fasting tracker](https://cero.netlify.com/)
 
-Cero is a fasting tracker built in React, Node.js (Express.js).
+Cero is a fasting tracker built in React, Node.js (Express.js) and GraphQL.
 
 ## Front-end
 
