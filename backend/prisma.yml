@@ -1,3 +1,4 @@
+# disableAuth: true
 endpoint: ${env:PRISMA_ENDPOINT}
 # endpoint: https://cero-production-e63af37be2.herokuapp.com/cero-prod/prod
 datamodel: datamodel.prisma

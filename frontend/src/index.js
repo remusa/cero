@@ -14,9 +14,9 @@ import App from './App'
 
 import './index.scss'
 
-console.log(`${process.env.NODE_ENV}`)
-console.log(`${process.env.END_POINT_DEV}`)
-console.log(`${process.env.REACT_APP_END_POINT}`)
+// console.log(`${process.env.NODE_ENV}`)
+// console.log(`${process.env.END_POINT_DEV}`)
+// console.log(`${process.env.REACT_APP_END_POINT}`)
 
 // Apollo Boost
 const client = new ApolloClient({

@@ -57,9 +57,7 @@ server.start(
     {
         cors: {
             credentials: true,
-            origin: process.env.NODE_ENV.contains('dev')
-                ? process.env.FRONTEND_URL_DEV
-                : process.env.FRONTEND_URL,
+            origin: process.env.FRONTEND_URL,
         },
     },
     deets => {
