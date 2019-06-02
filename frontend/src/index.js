@@ -18,13 +18,18 @@ import './index.scss'
 // console.log(`${process.env.END_POINT_DEV}`)
 // console.log(`${process.env.REACT_APP_END_POINT}`)
 
+const endpoint = process.env.END_POINT_DEV
+const endpointProd = process.env.REACT_APP_END_POINT
+
 // Apollo Boost
 const client = new ApolloClient({
-    uri: process.env.NODE_ENV.includes('dev')
-        ? process.env.END_POINT_DEV
-        : process.env.REACT_APP_END_POINT,
+    uri: process.env.NODE_ENV === 'dev' ? endpoint : endpointProd,
     request: async operation => {
         operation.setContext({
+            headers: {
+                // 'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
+            },
             fetchOptions: {
                 credentials: 'include',
             },
@@ -32,10 +37,6 @@ const client = new ApolloClient({
             // headers: {
             //     // authorization: `Bearer your-personal-access-token`,
             // },
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
-            },
         })
     },
 })
