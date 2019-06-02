@@ -14,8 +14,11 @@ import App from './App'
 
 import './index.scss'
 
+require('dotenv').config({ path: '.env' })
+
 const client = new ApolloClient({
-    uri: process.env.REACT_APP_END_POINT || 'http://localhost:4444/',
+    // uri: process.env.REACT_APP_END_POINT,
+    uri: process.env.REACT_APP_LOCALHOST,
     request: async operation => {
         operation.setContext({
             headers: {
