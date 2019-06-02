@@ -19,16 +19,13 @@ server.express.use(cookieParser())
 server.express.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }))
 server.express.use(
     helmet({
-        hidePoweredBy: { setTo: 'PHP 4.2.0' },
-        xssFilter: { setOnOldIE: true },
-        // frameguard: { action: 'deny' },
-        // contentSecurityPolicy: {
-        //     directives: {
-        //         defaultSrc: ["'self'"],
-        //         scriptSrc: ["'self'"],
-        //         styleSrc: ["'self'"],
-        //     },
-        // },
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                styleSrc: ["'self'"],
+                scriptSrc: ["'self'"],
+            },
+        },
     })
 )
 
@@ -55,7 +52,7 @@ server.express.use(async (req, res, next) => {
 
 server.start(
     {
-        cors: false,
+        cors: false, // disable apollo server cors
     },
     deets => {
         console.log(`Server is now running on port http://localhost:${deets.port}`)

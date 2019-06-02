@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import { differenceInHours } from 'date-fns'
 import { FastsContext } from '../data/FastsContext'
-import { timeDifference } from '../lib/timeConversion'
+// import { timeDifference } from '../lib/timeConversion'
 import Modal from './Modal'
 
 function getFastData(fasts) {
@@ -13,11 +13,11 @@ function getFastData(fasts) {
 
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
-        const duration = timeDifference(startDate, endDate)
         const dayName = startDate.toString().split(' ')[0]
         const dayNumber = startDate.toString().split(' ')[2]
 
         labels.push(`${dayName}/${dayNumber}`)
+        // const duration = timeDifference(startDate, endDate)
         // return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
         return differenceInHours(endDate, startDate)
     })

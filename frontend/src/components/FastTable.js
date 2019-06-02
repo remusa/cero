@@ -1,5 +1,5 @@
-import { differenceInHours } from 'date-fns'
 import React, { useContext, useState } from 'react'
+import { differenceInHours } from 'date-fns'
 import styled from 'styled-components'
 import { FastsContext } from '../data/FastsContext'
 import Modal from './Modal'
@@ -14,8 +14,7 @@ const RowsStyles = styled.div`
 `
 
 const FastTable = () => {
-    const { fasts, activeFast } = useContext(FastsContext)
-    // const [f, setF] = useState(activeFast)
+    const { fasts } = useContext(FastsContext)
 
     // Fast info
     const [id, setId] = useState(null)
@@ -26,13 +25,6 @@ const FastTable = () => {
     // Modal
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    /* eslint-disable */
-    // useEffect(() => {
-    //     setF(activeFast)
-    // }, [])
-    /* eslint-enable */
-
-    // TODO: update fast when clicked on chart
     const toggleModal = e => {
         setIsModalOpen(!isModalOpen)
     }

@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import { Query } from 'react-apollo'
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import PropTypes from 'prop-types'
 import Error from './ErrorMessage'
+import Loading from './Loading'
 import Login from './Login'
 import Main from './Main'
 import User from './User'
-import Loading from './Loading'
 
 const PleaseSignIn = props => (
     <User>
@@ -26,7 +24,7 @@ const PleaseSignIn = props => (
             if (!data.me) {
                 return (
                     <Main>
-                        <p>Please login before continuing</p>
+                        {/* <p>Please login before continuing</p> */}
                         <Login />
                     </Main>
                 )

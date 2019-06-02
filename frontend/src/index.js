@@ -14,13 +14,8 @@ import App from './App'
 
 import './index.scss'
 
-const endpointDev = process.env.END_POINT_DEV
-const endpointProd = process.env.REACT_APP_END_POINT
-
-// Apollo Boost
 const client = new ApolloClient({
-    // uri: process.env.REACT_APP_END_POINT,
-    uri: 'http://localhost:4444/',
+    uri: process.env.REACT_APP_END_POINT || 'http://localhost:4444/',
     request: async operation => {
         operation.setContext({
             headers: {
@@ -32,23 +27,6 @@ const client = new ApolloClient({
         })
     },
 })
-
-// Without Apollo Boost
-// const cache = new InMemoryCache()
-// const httpLink = new HttpLink({ uri: URI, credentials: 'include' })
-// const authMiddleware = new ApolloLink((operation, forward) => {
-//     const token = localStorage.getItem('token') || null
-//     operation.setContext({
-//         headers: {
-//             authorization: token,
-//         },
-//         fetchOptions: {
-//             credentials: 'include',
-//         },
-//     })
-//     return forward(operation)
-// })
-// const client = new ApolloClient({ link: from([authMiddleware, httpLink]), cache })
 
 ReactDOM.render(
     <ApolloProvider client={client}>

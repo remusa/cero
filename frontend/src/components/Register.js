@@ -28,10 +28,6 @@ class Register extends Component {
         e.preventDefault()
         await signup()
         this.setState = initialState
-
-        // redirect
-        const { history } = this.props
-        history.push('/fast')
     }
 
     render() {
@@ -42,6 +38,7 @@ class Register extends Component {
                 mutation={SIGNUP_MUTATION}
                 variables={this.state}
                 refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+                onCompleted={() => this.props.history.push('/fast')}
             >
                 {(signup, { error, loading }) => (
                     <Main>

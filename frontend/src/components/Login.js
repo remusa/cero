@@ -45,10 +45,6 @@ class Login extends Component {
         e.preventDefault()
         await signin()
         this.setState = initialState
-
-        // redirect
-        const { history } = this.props
-        history.push('/fast')
     }
 
     render() {
@@ -59,6 +55,7 @@ class Login extends Component {
                 mutation={SIGNIN_MUTATION}
                 variables={this.state}
                 refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+                onCompleted={() => this.props.history.push('/fast')}
             >
                 {(signin, { error, loading }) => (
                     <Main>
