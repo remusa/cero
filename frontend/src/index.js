@@ -18,16 +18,18 @@ import './index.scss'
 // console.log(`${process.env.END_POINT_DEV}`)
 // console.log(`${process.env.REACT_APP_END_POINT}`)
 
-// const endpoint = process.env.END_POINT_DEV
-// const endpointProd = process.env.REACT_APP_END_POINT
-const endpoint = 'http://localhost:4444/'
-const endpointProd = 'https://cero-production-e63af37be2.herokuapp.com/cero-prod/prod'
+const endpoint = process.env.END_POINT_DEV
+const endpointProd = process.env.REACT_APP_END_POINT
 
 // Apollo Boost
 const client = new ApolloClient({
     uri: process.env.NODE_ENV === 'dev' ? endpoint : endpointProd,
     request: async operation => {
         operation.setContext({
+            headers: {
+                // 'Content-Type': 'application/json',
+                Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
+            },
             fetchOptions: {
                 credentials: 'include',
             },
@@ -35,10 +37,6 @@ const client = new ApolloClient({
             // headers: {
             //     // authorization: `Bearer your-personal-access-token`,
             // },
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
-            },
         })
     },
 })

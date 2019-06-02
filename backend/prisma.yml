@@ -2,7 +2,8 @@
 #endpoint: ${env:PRISMA_ENDPOINT}
 
 # PROD
-endpoint: https://cero-production-e63af37be2.herokuapp.com/cero-prod/prod
+# endpoint: https://cero-production-e63af37be2.herokuapp.com/cero-prod/prod
+endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.prisma
 secret: ${env:PRISMA_SECRET}
 
