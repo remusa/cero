@@ -107,7 +107,6 @@ const TimerIcon = () => (
 const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
     <Mutation mutation={CREATE_FAST_MUTATION} variables={{ startDate: new Date(), isActive: true }}>
         {(createFast, { error, loading }) => {
-            // if (loading) console.log(`CREATING FAST`)
             if (error) return <Error error={error} />
 
             return (
@@ -116,7 +115,6 @@ const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
                         className='container__buttons__button'
                         onClick={async () => {
                             await createFast().then(res => {
-                                // console.log(`1. StartButton: ${Object.keys(res.data.createFast)}`)
                                 setId(res.data.createFast.id)
                                 setStartDate(new Date())
                             })
@@ -158,10 +156,6 @@ const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsAct
                         className='container__buttons__button'
                         onClick={async () => {
                             await stopFast()
-                            // .then(res => {
-                            // console.log(`1. StopButton : ${Object.keys(res.data.stopFast)}`)
-                            // setEndDate(res.data.stopFast.endDate)
-                            // })
                             setId('')
                             setStartDate('')
                             setEndDate('')
@@ -236,7 +230,7 @@ const FastTimer = props => {
             setDuration(activeFast.duration)
             // localStorage.setItem('duration', activeFast.duration)
         } else {
-            console.log('1. useEffect(): NOACTIVEFAST')
+            // console.log('1. useEffect(): NOACTIVEFAST')
         }
     }, [])
     /* eslint-enable */
