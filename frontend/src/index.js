@@ -19,12 +19,12 @@ const endpointProd = process.env.REACT_APP_END_POINT
 
 // Apollo Boost
 const client = new ApolloClient({
-    uri: process.env.NODE_ENV === 'dev' ? endpointDev : endpointProd,
+    // uri: process.env.NODE_ENV === 'dev' ? endpointDev : endpointDev,
+    uri: process.env.REACT_APP_END_POINT,
     request: async operation => {
         operation.setContext({
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Credentials': true,
+                // 'Access-Control-Allow-Credentials': true,
                 Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
             },
             fetchOptions: {
