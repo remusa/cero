@@ -49,7 +49,6 @@ server.express.use(async (req, res, next) => {
         '{ id, email, name, permissions }'
     )
     req.user = user
-
     next()
 })
 
