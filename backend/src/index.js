@@ -16,6 +16,7 @@ server.express.use(bodyParser.urlencoded({ extended: true }))
 server.express.use(cookieParser())
 
 // Security features
+server.express.use(cors({ origin: process.env.FRONTEND_URL }))
 server.express.use(
     helmet({
         hidePoweredBy: { setTo: 'PHP 4.2.0' },
@@ -52,7 +53,6 @@ server.express.use(async (req, res, next) => {
     next()
 })
 
-server.express.use(cors({ origin: process.env.FRONTEND_URL }))
 server.start(
     // {
     //     cors: {
