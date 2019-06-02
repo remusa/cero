@@ -6,6 +6,7 @@ export const TableStyles = styled.table`
     border-radius: 4px;
     margin: 0 auto;
     width: auto;
+    /* max-height: 500px; */
 
     thead {
         font-size: 1rem;

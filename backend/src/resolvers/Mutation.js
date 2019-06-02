@@ -15,7 +15,6 @@ const Mutations = {
         if (!ctx.request.userId) {
             throw new Error('You must be logged in to do that!')
         }
-        console.log(`CREATING FAST WITH STARTDATE: ${args.startDate}`)
         const fast = await ctx.db.mutation.createFast(
             {
                 data: {
@@ -29,13 +28,47 @@ const Mutations = {
             },
             info
         )
+        console.log(`NEW FAST: ${fast.id}`)
+
+        // const stoppedFasts = await ctx.db.query.fasts(
+        //     {
+        //         where: { id_not: fast.id, isActive: true },
+        //     },
+        //     info
+        // )
+        // if (stoppedFasts) {
+        //     console.log(`${Object.entries(stoppedFasts)} FASTS`)
+        // }
+
+        // TODO: Update duration of forcibly stopped fasts
+        const stoppedFasts = await ctx.db.mutation.updateManyFasts(
+            {
+                data: { endDate: new Date(), isActive: false, duration: 0 },
+                where: { id_not: fast.id, isActive: true },
+            },
+            info
+        )
+        // const stoppedFasts = await ctx.db.mutation.deleteManyFasts(
+        //     {
+        //         where: {
+        //             id_not: fast.id,
+        //             isActive: true,
+        //             // duration_lt: 60000,
+        //         },
+        //     },
+        //     info
+        // )
+        if (stoppedFasts) {
+            // await console.log(`${stoppedFast.BatchPayload}`)
+            await console.log(`${Object.entries(stoppedFasts)}`)
+        }
+
         return fast
     },
     async stopFast(parent, args, ctx, info) {
         if (!ctx.request.userId) {
             throw new Error('You must be logged in to do that!')
         }
-        console.log(`BACKEND 1. STOPPING | ID: ${args.id}`)
         const fastInfo = await ctx.db.query.fast({
             where: { id: args.id },
         })
@@ -52,7 +85,6 @@ const Mutations = {
             },
             info
         )
-        console.log(`2. STOPPED | ID: ${args.id}`)
         return stoppedFast
     },
     async updateFast(parent, args, ctx, info) {
@@ -94,10 +126,10 @@ const Mutations = {
         if (args.password.length < 10) {
             throw new Error('Password must be at least 10 characters long')
         }
+        args.email = args.email.toLowerCase().trim()
         if (args.email.indexOf('@') === -1) {
             throw new Error('Invalid email')
         }
-        args.email = args.email.toLowerCase().trim()
         const password = await bcrypt.hash(args.password, 12)
         const user = await ctx.db.mutation.createUser(
             {

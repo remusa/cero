@@ -1,14 +1,12 @@
 # disableAuth: true
 endpoint: ${env:PRISMA_ENDPOINT}
-# endpoint: https://cero-production-e63af37be2.herokuapp.com/cero-prod/prod
 datamodel: datamodel.prisma
 secret: ${env:PRISMA_SECRET}
 
 generate:
     - generator: graphql-schema
       output: src/generated/prisma.graphql
-#  The `prisma generate` command was executed twice. Since Prisma 1.31, the Prisma client is generated automatically after running `prisma deploy`. It is not necessary to generate it via a `post-deploy` hook any more, you can therefore remove the ho you can therefore remove the hook if you do not need it otherwise.
-# hooks:
-#     post-deploy:
-#         - prisma generate
-#         - graphql get-schema -p prisma
+hooks:
+    post-deploy:
+        # - prisma generate
+        - graphql get-schema -p prisma

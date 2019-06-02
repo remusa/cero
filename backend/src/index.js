@@ -55,12 +55,6 @@ server.express.use(async (req, res, next) => {
 
 server.start(
     {
-        // cors: {
-        // credentials: true,
-        // origin: process.env.FRONTEND_URL,
-        // origin: 'http://localhost:3000',
-        // cors: false,
-        // },
         cors: false,
     },
     deets => {

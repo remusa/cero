@@ -39,7 +39,6 @@ const FastTable = () => {
 
     const handleClick = (e, fast) => {
         if (!e) return
-        // console.log(`fast: ${Object.entries(fast)}`)
         setId(fast.id)
         setStartDate(fast.startDate)
         setEndDate(fast.endDate)
