@@ -27,7 +27,8 @@ const client = new ApolloClient({
     request: async operation => {
         operation.setContext({
             headers: {
-                // 'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Credentials': true,
                 Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
             },
             fetchOptions: {
