@@ -5,7 +5,6 @@ dependencies:
   chart.js: 2.8.0
   date-fns: 1.30.1
   dotenv: 8.0.0
-  eslint-plugin-react-hooks: 1.6.0
   graphql: 14.3.1
   graphql-tag: 2.10.1
   normalize.css: 8.0.1
@@ -37,6 +36,7 @@ devDependencies:
   eslint-plugin-jsx-a11y: 6.2.1
   eslint-plugin-prettier: 3.1.0
   eslint-plugin-react: 7.13.0
+  eslint-plugin-react-hooks: 1.6.0
   graphql-tools: 4.0.4
   jest-transform-graphql: 2.1.0
   node-sass: 4.12.0
@@ -4726,7 +4726,7 @@ packages:
     resolution:
       integrity: sha512-XWX2yVuwVNLOUhQijAkXz+rMPPoCr7WFiAl8ig6I7Xn+pPVhDhzg4DxHpmbeb0iqjO9UronEA3Tb09ChnFVHHA==
   /eslint-plugin-react-hooks/1.6.0:
-    dev: false
+    dev: true
     engines:
       node: '>=7'
     peerDependencies:
