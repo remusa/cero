@@ -1,5 +1,6 @@
 const { forwardTo } = require('prisma-binding')
-const bcrypt = require('bcryptjs')
+// const bcrypt = require('bcryptjs')
+const argon2 = require('argon2');
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
 const { promisify } = require('util')
@@ -130,7 +131,8 @@ const Mutations = {
         if (args.email.indexOf('@') === -1) {
             throw new Error('Invalid email')
         }
-        const password = await bcrypt.hash(args.password, 12)
+        // const password = await bcrypt.hash(args.password, 12)
+        const password = await argon2.hash(args.password)
         const user = await ctx.db.mutation.createUser(
             {
                 data: {
@@ -155,7 +157,8 @@ const Mutations = {
         if (!user) {
             throw new Error(`User with email ${email} doesn't exist`)
         }
-        const valid = await bcrypt.compare(password, user.password)
+        // const valid = await bcrypt.compare(password, user.password)
+        const valid = await argon2.verify(user.password, password)
         if (!valid) {
             throw new Error('Invalid password')
         }
@@ -207,7 +210,8 @@ const Mutations = {
         if (!user) {
             throw new Error('Token is invalid or has expired')
         }
-        const password = await bcrypt.hash(args.password, 12)
+        // const password = await bcrypt.hash(args.password, 12)
+        const password = await argon2.hash(args.password)
         const updatedUser = await ctx.db.mutation.updateUser({
             where: { email: user.email },
             data: {

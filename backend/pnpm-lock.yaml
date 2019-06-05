@@ -1,4 +1,5 @@
 dependencies:
+  argon2: 0.23.0
   babel-preset-env: 1.7.0
   bcryptjs: 2.4.3
   body-parser: 1.19.0
@@ -56,6 +57,14 @@ packages:
       graphql: ^0.12.0 || ^0.13.0
     resolution:
       integrity: sha512-CNVsCrMge/jq6DCT5buNZ8PACY9RTvPJbCNoIcndfkJOCsNxOx9dnc5qw4pHZdHi8GS6l3qlgkuFKp33iD8J2Q==
+  /@phc/format/0.5.0:
+    dependencies:
+      safe-buffer: 5.1.2
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-JWtZ5P1bfXU0bAtTzCpOLYHDXuxSVdtL/oqz4+xa97h8w9E5IlVN333wugXVFv8vZ1hbXObKQf1ptXmFFcMByg==
   /@types/body-parser/1.17.0:
     dependencies:
       '@types/connect': 3.4.32
@@ -447,6 +456,17 @@ packages:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0
     resolution:
       integrity: sha512-wQjV+FdWcTWmWUFlChG5rS0vHKy5OsXC6XlV9STRstQq6VbXANwHy6DHnTEQAfLXWAbNcPgBu+nBUpR3dFhwrA==
+  /argon2/0.23.0:
+    dependencies:
+      '@phc/format': 0.5.0
+      node-addon-api: 1.6.3
+      node-gyp-build: 4.1.0
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    requiresBuild: true
+    resolution:
+      integrity: sha512-+CC/bLeHF3c1JmTgmeuVSCsNc/hk2yFPYdxvfX37G6VHgZAZ0gMezPI/qsYUy4YXGya8dGBUEu85itYtf8eIQQ==
   /argparse/1.0.10:
     dependencies:
       sprintf-js: 1.0.3
@@ -3857,6 +3877,10 @@ packages:
       node: '>=4.0.0'
     resolution:
       integrity: sha512-0L9FvHG3nfnnmaEQPjT9xhfN4ISk0A8/2j4M37Np4mcDesJjHgEUfgPhdCyZuFI954tjokaIj/A3NdpFNdEh4Q==
+  /node-addon-api/1.6.3:
+    dev: false
+    resolution:
+      integrity: sha512-FXWH6mqjWgU8ewuahp4spec8LkroFZK2NicOv6bNwZC3kcwZUI8LeZdG80UzTSLLhK4T7MsgNwlYDVRlDdfTDg==
   /node-fetch/1.7.3:
     dependencies:
       encoding: 0.1.12
@@ -3874,6 +3898,11 @@ packages:
       node: 4.x || >=6.0.0
     resolution:
       integrity: sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+  /node-gyp-build/4.1.0:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-rGLv++nK20BG8gc0MzzcYe1Nl3p3mtwJ74Q2QD0HTEDKZ6NvOFSelY6s2QBPWIHRR8h7hpad0LiwajfClBJfNg==
   /node-request-by-swagger/1.1.4:
     dev: true
     resolution:
@@ -5873,6 +5902,7 @@ packages:
     resolution:
       integrity: sha512-kQz39uonEjEESwh+qCi83kcC3rZJGh4mrZW7xjkSQYXkq//JZHTtKo+6yuVloTgMtzsIWOJrjIrKvk/dqm0L5g==
 specifiers:
+  argon2: ^0.23.0
   babel-preset-env: ^1.7.0
   bcryptjs: ^2.4.3
   body-parser: ^1.19.0
