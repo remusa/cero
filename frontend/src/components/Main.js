@@ -9,6 +9,7 @@ const MainStyles = styled.main`
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
+    padding: 16px;
 `
 
 const Main = ({ children }) => <MainStyles>{children}</MainStyles>

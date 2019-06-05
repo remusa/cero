@@ -1,11 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ApolloClient from 'apollo-boost'
-// without apollo-boost
-// import { ApolloClient } from 'apollo-client'
-// import { InMemoryCache } from 'apollo-cache-inmemory'
-// import { HttpLink } from 'apollo-link-http'
-// import { ApolloLink, from } from 'apollo-link'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloProvider as ApolloProviderHooks } from 'react-apollo-hooks'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -14,8 +9,13 @@ import App from './App'
 
 import './index.scss'
 
+require('dotenv').config({ path: '.env' })
+
+const LOCAL_HOST = "http://localhost:4444/"
+const URI = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_END_POINT : LOCAL_HOST
+
 const client = new ApolloClient({
-    uri: process.env.REACT_APP_END_POINT || 'http://localhost:4444/',
+    uri: URI,
     request: async operation => {
         operation.setContext({
             headers: {

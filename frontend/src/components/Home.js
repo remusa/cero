@@ -3,7 +3,8 @@ import Main from './Main'
 
 const Home = () => (
     <Main>
-        <h3>Cero is a simple intermittent fasting tracker that just works</h3>
+        <h1>Cero</h1>
+        <h2>Cero is a simple intermittent fasting tracker app</h2>
     </Main>
 )
 

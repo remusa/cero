@@ -45,7 +45,7 @@ const InfoStyles = styled.div`
 const FastPage = () => (
     <PleaseSignIn>
         <FastStyles>
-            <h2>Fast!</h2>
+            <h1>Fast!</h1>
             <div className='fast__info'>
                 <FastsProvider>
                     <FastContainer />
@@ -56,7 +56,7 @@ const FastPage = () => (
 )
 
 const FastContainer = () => {
-    const { setFasts, setActiveFast } = useContext(FastsContext)
+    const { activeFast, setActiveFast, fasts, setFasts  } = useContext(FastsContext)
 
     return (
         <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
@@ -73,7 +73,7 @@ const FastContainer = () => {
 
                 return (
                     <>
-                        <FastTimer activeFast={latestFast} />
+                        <FastTimer />
                         <InfoStyles>
                             <FastCharts />
                             <FastTable />
