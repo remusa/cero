@@ -116,10 +116,11 @@ const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
                         onClick={async () => {
                             await createFast().then(res => {
                                 setId(res.data.createFast.id)
-                                setStartDate(new Date())
                             })
                             setIsActive(true)
                             setDuration(0)
+                            setStartDate(new Date())
+                            localStorage.setItem('active', true)
                         }}
                     >
                         <img
@@ -186,10 +187,7 @@ StopButton.propTypes = {
 
 const TimerDuration = props => {
     const { duration } = props
-    // const duration = localStorage.getItem('duration')
-    // const timer = timeConversion(duration)
     const timer = duration
-    // console.log(`TimerDuration: ${Object.entries(duration)}`)
 
     let children
     if (timer === 0) {
@@ -210,7 +208,6 @@ const TimerDuration = props => {
 
 const FastTimer = props => {
     const { activeFast } = useContext(FastsContext)
-    // const { activeFast } = props
 
     const [id, setId] = useState(activeFast ? activeFast.id : '')
     const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
@@ -218,21 +215,16 @@ const FastTimer = props => {
     const [isActive, setIsActive] = useState(activeFast ? activeFast.isActive : false)
     const [duration, setDuration] = useState(activeFast ? activeFast.duration : '')
 
-    // Initial setup
     /* eslint-disable */
     useEffect(() => {
         if (activeFast) {
-            // console.log('1. useEffect(): ACTIVEFAST')
             setId(activeFast.id)
             setStartDate(activeFast.startDate)
             setEndDate(activeFast.endDate)
             setIsActive(activeFast.isActive)
             setDuration(activeFast.duration)
-            // localStorage.setItem('duration', activeFast.duration)
-        } else {
-            // console.log('1. useEffect(): NOACTIVEFAST')
         }
-    }, [])
+    }, [activeFast])
     /* eslint-enable */
 
     /* eslint-disable */
@@ -242,18 +234,13 @@ const FastTimer = props => {
             setEndDate(end)
             const d = timeDifference(new Date(startDate), end)
             setDuration(d)
-            // console.log(`DURATION: ${Object.entries(d)}`)
-            // console.log(`DURATION: ${Number.parseInt(d.milliseconds)}`)
-            // console.log(startDate, endDate, duration)
         }
 
         const interval = setInterval(() => {
             timerControl()
         }, 1000)
 
-        return () => {
-            clearInterval(interval)
-        }
+        return () => clearInterval(interval)
     })
     /* eslint-enable */
 
@@ -269,7 +256,6 @@ const FastTimer = props => {
                     setStartDate={setStartDate}
                     setIsActive={setIsActive}
                     setDuration={setDuration}
-                    // startFast={startFast}
                 />
             ) : (
                 <StopButton
@@ -279,7 +265,6 @@ const FastTimer = props => {
                     setEndDate={setEndDate}
                     setIsActive={setIsActive}
                     setDuration={setDuration}
-                    // stopFast={this.endFast}
                 />
             )}
         </ContainerStyles>

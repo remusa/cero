@@ -42,27 +42,16 @@ const Mutations = {
         // }
 
         // TODO: Update duration of forcibly stopped fasts
-        const stoppedFasts = await ctx.db.mutation.updateManyFasts(
-            {
-                data: { endDate: new Date(), isActive: false, duration: 0 },
-                where: { id_not: fast.id, isActive: true },
-            },
-            info
-        )
-        // const stoppedFasts = await ctx.db.mutation.deleteManyFasts(
+        // const stoppedFasts = await ctx.db.mutation.updateManyFasts(
         //     {
-        //         where: {
-        //             id_not: fast.id,
-        //             isActive: true,
-        //             // duration_lt: 60000,
-        //         },
+        //         data: { endDate: new Date(), isActive: false, duration: 0 },
+        //         where: { id_not: fast.id, isActive: true },
         //     },
         //     info
         // )
-        if (stoppedFasts) {
-            // await console.log(`${stoppedFast.BatchPayload}`)
-            await console.log(`${Object.entries(stoppedFasts)}`)
-        }
+        // if (stoppedFasts) {
+        //     await console.log(`${Object.entries(stoppedFasts)}`)
+        // }
 
         return fast
     },

@@ -73,7 +73,7 @@ const FastContainer = () => {
 
                 return (
                     <>
-                        <FastTimer activeFast={latestFast} />
+                        <FastTimer />
                         <InfoStyles>
                             <FastCharts />
                             <FastTable />
