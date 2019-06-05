@@ -56,7 +56,7 @@ const FastPage = () => (
 )
 
 const FastContainer = () => {
-    const { setFasts, activeFast, setActiveFast } = useContext(FastsContext)
+    const { activeFast, setActiveFast, fasts, setFasts  } = useContext(FastsContext)
 
     return (
         <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>

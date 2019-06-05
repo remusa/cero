@@ -49,6 +49,7 @@ class Reset extends Component {
                 mutation={RESET_MUTATION}
                 variables={{ resetToken, password, confirmPassword }}
                 refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+                onCompleted={() => this.props.history.push('/fast')}
             >
                 {(reset, { error, loading, called }) => (
                     <Main>
