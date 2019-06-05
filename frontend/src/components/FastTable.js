@@ -16,13 +16,11 @@ const RowsStyles = styled.div`
 const FastTable = () => {
     const { fasts } = useContext(FastsContext)
 
-    // Fast info
     const [id, setId] = useState(null)
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [isActive, setIsActive] = useState(false)
 
-    // Modal
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const toggleModal = e => {

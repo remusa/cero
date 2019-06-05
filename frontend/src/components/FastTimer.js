@@ -228,7 +228,6 @@ const FastTimer = props => {
     }, [activeFast])
     /* eslint-enable */
 
-    /* eslint-disable */
     useEffect(() => {
         const timerControl = () => {
             const end = new Date()
@@ -241,7 +240,6 @@ const FastTimer = props => {
 
         return () => clearInterval(interval)
     })
-    /* eslint-enable */
 
     return (
         <ContainerStyles className='container'>

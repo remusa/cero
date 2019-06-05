@@ -110,9 +110,10 @@ const HeaderStyles = styled.header`
                     padding-bottom: 8px;
                 }
 
-                & > span {
+                &__user {
                     margin: 0;
-                    padding-bottom: 8px;
+                    padding-top: 4px;
+                    padding-bottom: 4px;
                 }
             }
         }
@@ -120,7 +121,7 @@ const HeaderStyles = styled.header`
 `
 
 const Navigation = () => {
-    const initialToggle = () => localStorage.getItem('toggled') || false // only called on the first render
+    const initialToggle = () => localStorage.getItem('toggled') || false
     const [toggled, setToggled] = useState(initialToggle)
     const [width, setWidth] = useState(window.innerWidth)
 
@@ -136,15 +137,13 @@ const Navigation = () => {
             }
         }
 
-        // componentDidMount()
         window.addEventListener('resize', updateWindowDimensions)
         updateWindowDimensions()
 
-        // componentWillUnmount
         return () => {
             window.removeEventListener('resize', updateWindowDimensions)
         }
-    }, [width]) // re-render only when width changes
+    }, [width])
 
     return (
         <User>
@@ -158,11 +157,7 @@ const Navigation = () => {
                                 className='nav__toggle__container'
                                 style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}
                             >
-                                <a
-                                    href='#'
-                                    className='nav__toggle nav__hamburguer'
-                                    onClick={handleToggle}
-                                >
+                                <a className='nav__toggle nav__hamburguer' onClick={handleToggle}>
                                     ☰
                                 </a>
                                 {(toggled || width > 500) && (
