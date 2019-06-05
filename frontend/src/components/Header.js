@@ -122,7 +122,7 @@ const HeaderStyles = styled.header`
 `
 
 const Navigation = () => {
-    const initialToggle = () => localStorage.getItem('toggled') || false // only called on the first render
+    const initialToggle = () => localStorage.getItem('toggled') || false
     const [toggled, setToggled] = useState(initialToggle)
     const [width, setWidth] = useState(window.innerWidth)
 

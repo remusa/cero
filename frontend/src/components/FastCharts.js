@@ -32,13 +32,11 @@ const FastCharts = () => {
     const [d, setF] = useState(chartFasts)
     const [l, setL] = useState(chartLabels)
 
-    // Fast info
     const [id, setId] = useState(null)
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [isActive, setIsActive] = useState(false)
 
-    // Modal
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
@@ -62,13 +60,11 @@ const FastCharts = () => {
     }
 
     const chartData = {
-        // labels,
-        labels: l,
+        labels: l, // labels
         datasets: [
             {
                 label: 'Duration',
-                // data: chartFasts,
-                data: d,
+                data: d, // chartFasts
                 backgroundColor: '#17ff7b',
                 borderColor: '#00c957',
                 borderWidth: 1,
