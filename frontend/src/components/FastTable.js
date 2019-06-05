@@ -74,6 +74,8 @@ const FastTable = () => {
                 <tbody>
                     {fasts
                         .map(fast => {
+                            if (!fast.endDate) return
+
                             const { startDate, endDate, isActive, duration } = fast
                             const totalHours = differenceInHours(endDate, startDate)
 
@@ -86,11 +88,7 @@ const FastTable = () => {
                                             : '-'}
                                     </td>
                                     <td>{isActive ? '❌' : '✔️'}</td>
-                                    <td>
-                                    {fast.endDate
-                                            ? `${totalHours} hrs.`
-                                            : '-'}
-                                    </td>
+                                    <td>{fast.endDate ? `${totalHours} hrs.` : '-'}</td>
                                 </tr>
                             )
                         })
