@@ -108,7 +108,18 @@ DeleteButton.propTypes = {
     onClick: PropTypes.func.isRequired,
 }
 
-const Modal = props => {
+const Modal = ({
+    show,
+    onClose,
+    id,
+    setId,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    isActive,
+    setIsActive,
+}) => {
     const [formError, setFormError] = useState(null)
     // const [id, setId] = useState(props.id)
     // const [startDate, setStartDate] = useState(props.startDate)
@@ -124,20 +135,22 @@ const Modal = props => {
 
     const handleSubmit = async (e, update) => {
         e.preventDefault()
-        await update().then(res => props.onClose())
-        props.setId(null)
-        props.setStartDate('')
-        props.setEndDate('')
-        props.setIsActive(false)
+
+        await update().then(res => onClose())
+
+        setId(null)
+        setStartDate('')
+        setEndDate('')
+        setIsActive(false)
     }
 
-    if (!props.show) return null
+    if (!show) return null
 
     const variables = {
-        id: props.id,
-        startDate: props.startDate,
-        endDate: props.endDate,
-        isActive: props.isActive,
+        id,
+        startDate,
+        endDate,
+        isActive,
     }
     // console.log(`VARIABLES: ${Object.entries(variables)}`)
 
@@ -162,7 +175,7 @@ const Modal = props => {
                                 {formError && <p>{formError}</p>}
 
                                 <h2>Update fast</h2>
-                                <p>ID: {props.id}</p>
+                                <p>ID: {id}</p>
 
                                 <label htmlFor='startDate'>
                                     Start Date: {'\t'}
@@ -171,14 +184,14 @@ const Modal = props => {
                                         type='text'
                                         name='startDate'
                                         placeholder='startDate'
-                                        value={props.startDate}
+                                        value={startDate}
                                     /> */}
                                     <DatePicker
-                                        selected={new Date(props.startDate)}
+                                        selected={new Date(startDate)}
                                         showTimeInput
                                         timeInputLabel='Time:'
                                         onChange={date => {
-                                            props.setStartDate(date)
+                                            setStartDate(date)
                                         }}
                                         dateFormat='MM/dd/yyyy h:mm aa'
                                     />
@@ -191,14 +204,14 @@ const Modal = props => {
                                         type='text'
                                         name='endDate'
                                         placeholder='endDate'
-                                        value={props.endDate}
+                                        value={endDate}
                                     /> */}
                                     <DatePicker
-                                        selected={new Date(props.endDate)}
+                                        selected={endDate ? new Date(endDate) : ''}
                                         showTimeInput
                                         timeInputLabel='Time:'
                                         onChange={date => {
-                                            props.setEndDate(date)
+                                            setEndDate(date)
                                         }}
                                         dateFormat='MM/dd/yyyy h:mm aa'
                                     />
@@ -209,19 +222,19 @@ const Modal = props => {
                                     <input
                                         type='checkbox'
                                         name='isActive'
-                                        checked={props.isActive}
+                                        checked={isActive}
                                         onChange={e => {
-                                            props.setIsActive(e.target.checked)
+                                            setIsActive(e.target.checked)
                                         }}
                                     />
                                 </label> */}
 
                                 <div className='buttons_container'>
                                     <button type='submit'>Update</button>
-                                    <DeleteButton id={props.id} onClick={props.onClose} />
+                                    <DeleteButton id={id} onClick={onClose} />
                                 </div>
 
-                                <ResetStyles onClick={props.onClose}>Go back</ResetStyles>
+                                <ResetStyles onClick={onClose}>Go back</ResetStyles>
                             </fieldset>
                         </Form>
                     </ModalStyles>

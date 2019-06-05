@@ -162,6 +162,7 @@ const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsAct
                             setEndDate('')
                             setDuration(0)
                             setIsActive(false)
+                            localStorage.setItem('active', false)
                         }}
                     >
                         <img
@@ -236,9 +237,7 @@ const FastTimer = props => {
             setDuration(d)
         }
 
-        const interval = setInterval(() => {
-            timerControl()
-        }, 1000)
+        const interval = setInterval(() => timerControl(), 1000)
 
         return () => clearInterval(interval)
     })
