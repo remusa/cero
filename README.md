@@ -4,7 +4,7 @@ Cero is a fasting tracker built in React, Node.js (Express.js) and GraphQL.
 
 ## Front-end
 
-* React
+* React (using the latest features like hooks for state and context)
 * Apollo Client
 * Styled Components
 
