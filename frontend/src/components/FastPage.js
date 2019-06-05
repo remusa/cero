@@ -45,7 +45,7 @@ const InfoStyles = styled.div`
 const FastPage = () => (
     <PleaseSignIn>
         <FastStyles>
-            <h2>Fast!</h2>
+            <h1>Fast!</h1>
             <div className='fast__info'>
                 <FastsProvider>
                     <FastContainer />

@@ -11,6 +11,7 @@ export const TableStyles = styled.table`
     thead {
         font-size: 1rem;
         padding: 4px;
+        color: var(--color-grey-darker);
 
         border-bottom: 4px solid var(--color-primary);
     }

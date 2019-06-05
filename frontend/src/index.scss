@@ -1,6 +1,10 @@
 :root {
-    --color-white: hsl(0, 0%, 96%);
+    --color-white-dark: hsl(0, 0%, 96%);
+    --color-white: hsl(0, 0%, 99%);
+    --color-grey-light: hsl(0, 0%, 33%);
     --color-grey: hsl(0, 0%, 29%);
+    --color-grey-dark: hsl(0, 0%, 20%);
+    --color-grey-darker: hsl(0, 0%, 15%);
     --color-black: hsl(0, 0%, 17%);
     --color-green: hsl(146, 100%, 39%);
     --color-green-dark: hsl(146, 100%, 25%);
@@ -43,6 +47,14 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+    color: var(--color-grey-darker);
+}
+
+h2 {
+    color: var(--color-grey-dark);
 }
 
 button {

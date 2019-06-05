@@ -10,9 +10,12 @@ const HeaderStyles = styled.header`
     transition: 0.3s ease-in-out;
 
     nav {
-        height: 40px;
+        height: 60px;
         background: var(--color-primary);
         text-align: center;
+        padding-left: 16px;
+        padding-right: 16px;
+
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
@@ -23,7 +26,8 @@ const HeaderStyles = styled.header`
             padding: 4px;
             margin: 4px;
             flex: 0 1 20px;
-            color: #fff;
+            /* color: var(--color-grey-dark); */
+            color: var(--color-white-dark);
 
             &:hover {
                 /* font-weight: 600; */
@@ -53,10 +57,15 @@ const HeaderStyles = styled.header`
                 }
             }
 
-            span {
+            &__user {
                 font-weight: 600;
                 color: var(--color-white);
                 margin-right: 8px;
+
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
             }
         }
     }
@@ -141,6 +150,7 @@ const Navigation = () => {
         <User>
             {({ data }) => {
                 const me = data ? data.me : null
+
                 return (
                     <HeaderStyles>
                         <nav>
@@ -173,7 +183,7 @@ const Navigation = () => {
                                                     </div>
                                                 )}
 
-                                                <span>
+                                                <span className='nav__links__user'>
                                                     {/* <Link to='/profile'>{me.name}</Link> */}
                                                     {me.name}
                                                 </span>
