@@ -19,13 +19,13 @@ server.express.use(cookieParser())
 server.express.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }))
 server.express.use(
     helmet({
-        contentSecurityPolicy: {
-            directives: {
-                defaultSrc: ["'self'"],
-                styleSrc: ["'self'"],
-                scriptSrc: ["'self'"],
-            },
-        },
+        // contentSecurityPolicy: {
+        //     directives: {
+        //         defaultSrc: ["'self'"],
+        //         styleSrc: ["'self'"],
+        //         scriptSrc: ["'self'"],
+        //     },
+        // },
     })
 )
 

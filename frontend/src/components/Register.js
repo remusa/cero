@@ -30,6 +30,8 @@ class Register extends Component {
         this.setState = initialState
     }
 
+    validate = () => {}
+
     render() {
         const { email, name, password } = this.state
 

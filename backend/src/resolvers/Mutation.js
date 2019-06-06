@@ -140,11 +140,17 @@ const Mutations = {
         return user
     },
     async signin(parent, args, ctx, info) {
-        const email = args.email.trim()
+        if (args.password.length < 10) {
+            throw new Error('Password must be at least 10 characters long')
+        }
+        const email = args.email.toLowerCase().trim()
+        if (email.indexOf('@') === -1) {
+            throw new Error('Invalid email')
+        }
         const { password } = args
         const user = await ctx.db.query.user({ where: { email } })
         if (!user) {
-            throw new Error(`User with email ${email} doesn't exist`)
+            throw new Error(`An account with email: ${email} doesn't exist`)
         }
         // const valid = await bcrypt.compare(password, user.password)
         const valid = await argon2.verify(user.password, password)
