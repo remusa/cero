@@ -3,8 +3,23 @@ const { hasPermission } = require('../utils/utils')
 
 const Query = {
     fast: forwardTo('db'),
-    fasts: forwardTo('db'),
     fastsConnection: forwardTo('db'),
+    // fasts: forwardTo('db'),
+    fasts(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            return [] // must return a fast array
+        }
+        return ctx.db.query.fasts(
+            {
+                where: {
+                    user: {
+                        id: ctx.request.userId
+                    }
+                 },
+            },
+            info
+        )
+    },
     me(parent, args, ctx, info) {
         if (!ctx.request.userId) {
             return null
