@@ -59,6 +59,25 @@ const FastCharts = () => {
         toggleModal()
     }
 
+    const chartOptions = {
+        // maintainAspectRatio: false,
+        scales: {
+            yAxes: [
+                {
+                    display: true,
+                    ticks: {
+                        // stepSize: 1,
+                        beginAtZero: true,
+                        // suggestedMin: 0,
+                        // min: 0,
+                        suggestedMax: 24,
+                        // max: 24,
+                    },
+                },
+            ],
+        },
+    }
+
     const chartData = {
         labels: l, // labels
         datasets: [
@@ -69,7 +88,7 @@ const FastCharts = () => {
                 borderColor: '#00c957',
                 borderWidth: 1,
                 hoverBackgroundColor: '#00c957',
-                hoverBorderColor: '#007d36',
+                // hoverBorderColor: '#007d36',
                 legend: {
                     display: true,
                     labels: {
@@ -78,18 +97,6 @@ const FastCharts = () => {
                         fontColor: '#bbb',
                         padding: 5,
                     },
-                },
-                scales: {
-                    yAxes: [
-                        {
-                            display: true,
-                            ticks: {
-                                beginAtZero: true,
-                                max: 100,
-                                suggestedMax: 24,
-                            },
-                        },
-                    ],
                 },
             },
         ],
@@ -112,7 +119,7 @@ const FastCharts = () => {
 
             <Bar
                 data={chartData}
-                options={{}}
+                options={chartOptions}
                 stacked={false}
                 getElementAtEvent={element => handleClick(element)}
             />
