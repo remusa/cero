@@ -7,7 +7,7 @@ const Query = {
     // fasts: forwardTo('db'),
     fasts(parent, args, ctx, info) {
         if (!ctx.request.userId) {
-            return null
+            return [] // must return a fast array
         }
         return ctx.db.query.fasts(
             {
