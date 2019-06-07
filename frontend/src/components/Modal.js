@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import DatePicker from 'react-datepicker'
@@ -152,7 +152,6 @@ const Modal = ({
         endDate,
         isActive,
     }
-    // console.log(`VARIABLES: ${Object.entries(variables)}`)
 
     return (
         <Mutation
