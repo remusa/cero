@@ -17,7 +17,7 @@
         "test": "cross-env NODE_ENV=test jest --watch",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "deploy-backend": "prisma deploy & cd .. & git subtree push --prefix backend heroku-backend master",
+        "deploy-backend": "prisma deploy && cd .. && git subtree push --prefix backend heroku-backend master",
         "frontend": "cd .. & cd frontend/ & pnpm run dev"
     },
     "dependencies": {
