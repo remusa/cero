@@ -48,7 +48,6 @@ class App extends Component {
                     <FancyRoute path='/reset' component={Reset} />
                     <FancyRoute path='/admin' component={AdminPage} />
                     <FancyRoute component={NotFound404} />
-                    {/* <FancyRoute  path='/test' component={Test} /> */}
                 </Switch>
 
                 <Footer />

@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Mutation, Query } from 'react-apollo'
 import nprogress from 'nprogress'
+import styled from 'styled-components'
 import { UPDATE_PERMISSIONS_MUTATION } from '../gql/UserMutation'
 import { ALL_USERS_QUERY } from '../gql/UserQuery'
 import checkmarkIcon from '../static/icons/checkmark.svg'
@@ -14,15 +15,22 @@ import '../static/nprogress.css'
 
 const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 
+const LoadingStyles = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+`
+
 const Permissions = props => (
     <Query query={ALL_USERS_QUERY}>
         {({ data, loading, error }) => {
             if (loading) {
                 nprogress.start()
                 return (
-                    <PermissionsTable>
+                    <LoadingStyles>
                         <Loading />
-                    </PermissionsTable>
+                    </LoadingStyles>
                 )
             }
             if (error) {
