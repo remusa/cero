@@ -31,8 +31,8 @@ export const Router = () => (
         <FancyRoute path='/requestreset' component={RequestReset} />
         <FancyRoute path='/reset' component={Reset} />
         <FancyRoute path='/admin' component={AdminPage} />
+        {/* <FancyRoute component={NotFound404} /> */}
         {/* <FancyRoute  path='/test' component={Test} /> */}
-        <FancyRoute component={NotFound404} />
     </Switch>
 )
 

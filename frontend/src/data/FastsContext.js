@@ -1,9 +1,9 @@
 import React, { createContext, useState } from 'react'
 import { PropTypes } from 'prop-types'
 
-export const FastsContext = createContext()
+const FastsContext = createContext()
 
-export const FastsProvider = ({ children }) => {
+const FastsProvider = ({ children }) => {
     const [fasts, setFasts] = useState([])
     const [activeFast, setActiveFast] = useState('')
 
@@ -17,3 +17,5 @@ export const FastsProvider = ({ children }) => {
 FastsProvider.propTypes = {
     children: PropTypes.element.isRequired,
 }
+
+export { FastsContext, FastsProvider }
