@@ -18,7 +18,7 @@ server.express.use(cookieParser())
 // Security features
 server.express.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }))
 
-server.express.use(helmet({
+const helmetOptions = {
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
@@ -26,7 +26,8 @@ server.express.use(helmet({
             scriptSrc: ["'self'"],
         },
     },
-}))
+}
+server.express.use(helmet())
 
 // Decode JWT and pass it to each request
 server.express.use((req, res, next) => {
