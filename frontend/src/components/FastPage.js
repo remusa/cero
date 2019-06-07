@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Query } from 'react-apollo'
 import styled from 'styled-components'
+import nprogress from 'nprogress'
 import { FastsContext, FastsProvider } from '../data/FastsContext'
 import { ALL_FASTS_QUERY } from '../gql/FastQuery'
 import { CURRENT_USER_QUERY } from '../gql/UserQuery'
@@ -10,6 +11,8 @@ import FastTimer from './FastTimer'
 import PleaseSignIn from './PleaseSignIn'
 import Loading from './Loading'
 import FastTable from './FastTable'
+
+import '../static/nprogress.css'
 
 const FastStyles = styled.div`
     grid-area: main;
@@ -61,8 +64,14 @@ const FastContainer = () => {
     return (
         <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
             {({ data, loading, error }) => {
-                if (loading) return <Loading />
-                if (error) return <Error error={error} />
+                if (loading) {
+                    nprogress.start()
+                    return <Loading />
+                }
+                if (error) {
+                    nprogress.done()
+                    return <Error error={error} />
+                }
 
                 const latestFast = data.fasts.filter(
                     fast => fast.endDate === null && fast.isActive === true
@@ -70,6 +79,8 @@ const FastContainer = () => {
 
                 setFasts(data.fasts)
                 setActiveFast(latestFast)
+
+                nprogress.done()
 
                 return (
                     <>

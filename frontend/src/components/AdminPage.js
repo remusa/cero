@@ -131,18 +131,9 @@ const AdminPage = () => {
             {({ data }) => {
                 const me = data ? data.me : null
 
-                if (!me)
-                    return (
-                        <NotAdmin>
-                            <h1>Not Admin</h1>
-                        </NotAdmin>
-                    )
-                if (!me.permissions.includes('ADMIN'))
-                    return (
-                        <NotAdmin>
-                            <h2>Not Admin</h2>
-                        </NotAdmin>
-                    )
+                if (!me || !me.permissions.includes('ADMIN')) {
+                    return <NotAdmin>{/* <h1>Not Admin</h1> */}</NotAdmin>
+                }
 
                 return (
                     <AdminStyles>

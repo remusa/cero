@@ -12,7 +12,6 @@ const RequestReset = () => {
         setEmail(e.target.value)
     }
 
-    // TODO: find a generic event handler
     const handleSubmit = async (e, reset) => {
         e.preventDefault()
         await reset()

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import logo from '../logo.svg'
+// import logo from '../logo.svg'
+import logo from '../static/logo.svg'
 import Logout from './Logout'
 import User from './User'
 
@@ -43,6 +44,10 @@ const HeaderStyles = styled.header`
             .nav__toggle {
                 display: none;
                 cursor: pointer;
+            }
+
+            .logo img {
+                max-width: 50px;
             }
         }
 
@@ -160,6 +165,7 @@ const Navigation = () => {
                                 <a className='nav__toggle nav__hamburguer' onClick={handleToggle}>
                                     ☰
                                 </a>
+
                                 {(toggled || width > 500) && (
                                     <Link to='/' className='logo'>
                                         <img src={logo} alt='logo' />
