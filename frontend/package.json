@@ -12,6 +12,7 @@
         "graphql": "^14.3.0",
         "graphql-tag": "^2.10.1",
         "normalize.css": "^8.0.1",
+        "nprogress": "^0.2.0",
         "prop-types": "^15.7.2",
         "query-string": "^6.5.0",
         "react": "^16.8.6",
@@ -25,6 +26,7 @@
         "react-particles-js": "^2.6.0",
         "react-router-dom": "^5.0.0",
         "react-scripts": "3.0.1",
+        "react-spinners": "^0.5.4",
         "styled-components": "^4.2.1"
     },
     "devDependencies": {
@@ -43,7 +45,8 @@
         "graphql-tools": "^4.0.0",
         "jest-transform-graphql": "^2.1.0",
         "node-sass": "^4.12.0",
-        "prettier": "^1.16.4"
+        "prettier": "^1.16.4",
+        "why-did-you-update": "^1.0.6"
     },
     "jest": {
         "setupFilesAfterEnv": [
@@ -67,7 +70,7 @@
         "dev": "cross-env-shell NODE_ENV=development && react-scripts start",
         "test": "cross-env NODE_ENV=test jest --watch",
         "deploy": "netlify deploy",
-        "backend": "cd .. & cd backend/ & npm run dev"
+        "backend": "cd .. && cd backend/ && npm run dev"
     },
     "eslintConfig": {
         "extends": [
@@ -82,5 +85,8 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
+    ],
+    "plugins": [
+        "emotion"
     ]
 }

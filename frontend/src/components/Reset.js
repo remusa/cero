@@ -1,6 +1,6 @@
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
-import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { RESET_MUTATION } from '../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../gql/UserQuery'

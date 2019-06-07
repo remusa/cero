@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import nprogress from 'nprogress'
 import AdminPage from './components/AdminPage'
 import FastPage from './components/FastPage'
 import Home from './components/Home'
@@ -8,6 +9,9 @@ import ProfilePage from './components/ProfilePage'
 import Register from './components/Register'
 import RequestReset from './components/RequestReset'
 import Reset from './components/Reset'
+
+// import 'nprogress/nprogress.css'
+import './static/nprogress.css'
 
 export const NotFound404 = ({ location }) => (
     <div>
@@ -19,15 +23,29 @@ export const NotFound404 = ({ location }) => (
 
 export const Router = () => (
     <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/fast' component={FastPage} />
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
-        <Route path='/profile' component={ProfilePage} />
-        <Route path='/requestreset' component={RequestReset} />
-        <Route path='/reset' component={Reset} />
-        <Route path='/admin' component={AdminPage} />
-        {/* <Route path='/test' component={Test} /> */}
-        <Route component={NotFound404} />
+        <FancyRoute path='/' exact component={Home} />
+        <FancyRoute path='/fast' component={FastPage} />
+        <FancyRoute path='/login' component={Login} />
+        <FancyRoute path='/register' component={Register} />
+        <FancyRoute path='/profile' component={ProfilePage} />
+        <FancyRoute path='/requestreset' component={RequestReset} />
+        <FancyRoute path='/reset' component={Reset} />
+        <FancyRoute path='/admin' component={AdminPage} />
+        {/* <FancyRoute  path='/test' component={Test} /> */}
+        <FancyRoute component={NotFound404} />
     </Switch>
 )
+
+export class FancyRoute extends React.Component {
+    componentWillMount() {
+        nprogress.start()
+    }
+
+    componentDidMount() {
+        nprogress.done()
+    }
+
+    render() {
+        return <Route {...this.props} />
+    }
+}
