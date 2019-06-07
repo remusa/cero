@@ -7,7 +7,7 @@ import { DotLoader } from 'react-spinners'
 const override = css`
     display: block;
     margin: 0 auto;
-    border-color: var(--color-primary-darker);
+    border-color: var(--color-primary);
 `
 
 const ContainerStyles = styled.div`
@@ -22,20 +22,10 @@ const StyledP = styled.p`
     text-align: center;
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-primary-darker);
+    color: var(--color-primary);
 `
 
 class Loading extends Component {
-    static defaultProps = {
-        text: 'Loading',
-        speed: 300,
-    }
-
-    static propTypes = {
-        text: PropTypes.string.isRequired,
-        speed: PropTypes.number.isRequired,
-    }
-
     state = {
         text: this.props.text,
         speed: this.props.speed,
@@ -44,18 +34,19 @@ class Loading extends Component {
 
     componentDidMount() {
         const stopper = `${this.props.text}...`
+        const { text, speed } = this.state
 
         this.interval = window.setInterval(() => {
-            if (this.state.text === stopper) {
+            if (text === stopper) {
                 this.setState({
                     text: this.props.text,
                 })
             } else {
                 this.setState({
-                    text: this.state.text.concat('.'),
+                    text: text.concat('.'),
                 })
             }
-        }, this.state.speed)
+        }, speed)
     }
 
     componentWillUnmount() {
@@ -65,6 +56,8 @@ class Loading extends Component {
     }
 
     render() {
+        const { text, loading } = this.state
+
         return (
             <ContainerStyles>
                 <div className='sweet-loading'>
@@ -74,14 +67,24 @@ class Loading extends Component {
                         size={100}
                         // height={8}
                         color='var(--color-primary-darker)'
-                        loading={this.state.loading}
+                        loading={loading}
                     />
                 </div>
 
-                <StyledP>{this.state.text}</StyledP>
+                <StyledP>{text}</StyledP>
             </ContainerStyles>
         )
     }
+}
+
+Loading.defaultProps = {
+    text: 'Loading',
+    speed: 300,
+}
+
+Loading.propTypes = {
+    text: PropTypes.string.isRequired,
+    speed: PropTypes.number.isRequired,
 }
 
 export default Loading
