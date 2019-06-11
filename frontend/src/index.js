@@ -29,13 +29,13 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
-        <ApolloProviderHooks client={client}>
-            <Router>
+    <Router>
+        <ApolloProvider client={client}>
+            <ApolloProviderHooks client={client}>
                 <App />
-            </Router>
-        </ApolloProviderHooks>
-    </ApolloProvider>,
+            </ApolloProviderHooks>
+        </ApolloProvider>
+    </Router>,
     document.getElementById('root')
 )
 
