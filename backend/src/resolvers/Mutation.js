@@ -62,13 +62,13 @@ const Mutations = {
             throw new Error('Ending date must be after start date')
         }
         if (args.endDate) {
-            // const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
-            // updates.duration = duration.milliseconds
+            const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
+            updates.duration = duration.milliseconds
         } else {
+            console.log(`NO ENDDATE: ${updates.endDate}`)
             // delete updates.endDate
-            // delete updates.duration
-            updates.duration = 0
         }
+        console.log(`${Object.entries(updates)}`)
         const updatedFast = await ctx.db.mutation.updateFast(
             {
                 data: updates,

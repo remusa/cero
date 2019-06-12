@@ -153,6 +153,10 @@ const Modal = ({
         isActive,
     }
 
+    if (!endDate) {
+        delete variables.endDate
+    }
+
     return (
         <Mutation
             mutation={UPDATE_FAST_MUTATION}
