@@ -135,9 +135,7 @@ const Modal = ({
 
     const handleSubmit = async (e, update) => {
         e.preventDefault()
-
         await update().then(res => onClose())
-
         setId(null)
         setStartDate('')
         setEndDate('')
@@ -149,8 +147,9 @@ const Modal = ({
     const variables = {
         id,
         startDate,
-        endDate,
-        isActive,
+    }
+    if (endDate) {
+        variables.endDate = endDate
     }
 
     return (
@@ -221,7 +220,6 @@ const Modal = ({
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired,
-    // children: PropTypes.node,
 }
 
 export default Modal
