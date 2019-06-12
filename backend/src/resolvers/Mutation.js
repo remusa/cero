@@ -1,5 +1,4 @@
 const { forwardTo } = require('prisma-binding')
-// const bcrypt = require('bcryptjs')
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
@@ -29,30 +28,6 @@ const Mutations = {
             },
             info
         )
-        console.log(`NEW FAST: ${fast.id}`)
-
-        // const stoppedFasts = await ctx.db.query.fasts(
-        //     {
-        //         where: { id_not: fast.id, isActive: true },
-        //     },
-        //     info
-        // )
-        // if (stoppedFasts) {
-        //     console.log(`${Object.entries(stoppedFasts)} FASTS`)
-        // }
-
-        // TODO: Update duration of forcibly stopped fasts
-        // const stoppedFasts = await ctx.db.mutation.updateManyFasts(
-        //     {
-        //         data: { endDate: new Date(), isActive: false, duration: 0 },
-        //         where: { id_not: fast.id, isActive: true },
-        //     },
-        //     info
-        // )
-        // if (stoppedFasts) {
-        //     await console.log(`${Object.entries(stoppedFasts)}`)
-        // }
-
         return fast
     },
     async stopFast(parent, args, ctx, info) {
@@ -87,8 +62,8 @@ const Mutations = {
             throw new Error('Ending date must be after start date')
         }
         if (args.endDate) {
-            const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
-            updates.duration = duration.milliseconds
+            // const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
+            // updates.duration = duration.milliseconds
         } else {
             delete updates.endDate
             delete updates.duration
@@ -125,7 +100,6 @@ const Mutations = {
         if (args.email.indexOf('@') === -1) {
             throw new Error('Invalid email')
         }
-        // const password = await bcrypt.hash(args.password, 12)
         const password = await argon2.hash(args.password)
         const user = await ctx.db.mutation.createUser(
             {
@@ -157,7 +131,6 @@ const Mutations = {
         if (!user) {
             throw new Error(`An account with email: ${email} doesn't exist`)
         }
-        // const valid = await bcrypt.compare(password, user.password)
         const valid = await argon2.verify(user.password, password)
         if (!valid) {
             throw new Error('Invalid password')
@@ -211,7 +184,6 @@ const Mutations = {
         if (!user) {
             throw new Error('Token is invalid or has expired')
         }
-        // const password = await bcrypt.hash(args.password, 12)
         const password = await argon2.hash(args.password)
         const updatedUser = await ctx.db.mutation.updateUser({
             where: { email: user.email },
