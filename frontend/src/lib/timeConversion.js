@@ -31,9 +31,7 @@ function timeConversion(time) {
 }
 
 function timeDifference(startDate, endDate) {
-    // const end = endDate === null ? new Date() : endDate
     const diffMs = Math.abs(endDate - startDate)
-    // console.log(`timeDifference: ${diffMs}`)
     return timeConversion(diffMs)
 }
 
