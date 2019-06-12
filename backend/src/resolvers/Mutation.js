@@ -82,12 +82,17 @@ const Mutations = {
             throw new Error('You must be logged in to do that!')
         }
         const updates = { ...args }
+        delete updates.id
         if (updates.endDate && updates.startDate > updates.endDate) {
             throw new Error('Ending date must be after start date')
         }
-        const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
-        updates.duration = duration.milliseconds
-        delete updates.id
+        if (args.endDate) {
+            const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
+            updates.duration = duration.milliseconds
+        } else {
+            delete updates.endDate
+            delete updates.duration
+        }
         const updatedFast = await ctx.db.mutation.updateFast(
             {
                 data: updates,

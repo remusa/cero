@@ -178,13 +178,6 @@ const Modal = ({
 
                                 <label htmlFor='startDate'>
                                     Start Date: {'\t'}
-                                    {/* <input
-                                        disabled
-                                        type='text'
-                                        name='startDate'
-                                        placeholder='startDate'
-                                        value={startDate}
-                                    /> */}
                                     <DatePicker
                                         selected={new Date(startDate)}
                                         showTimeInput
@@ -198,14 +191,8 @@ const Modal = ({
 
                                 <label htmlFor='endDate'>
                                     End Date: {'\t'}
-                                    {/* <input
-                                        disabled
-                                        type='text'
-                                        name='endDate'
-                                        placeholder='endDate'
-                                        value={endDate}
-                                    /> */}
                                     <DatePicker
+                                        disabled={isActive}
                                         selected={endDate ? new Date(endDate) : ''}
                                         showTimeInput
                                         timeInputLabel='Time:'
@@ -216,21 +203,9 @@ const Modal = ({
                                     />
                                 </label>
 
-                                {/* <label htmlFor='isActive'>
-                                    Currently active?
-                                    <input
-                                        type='checkbox'
-                                        name='isActive'
-                                        checked={isActive}
-                                        onChange={e => {
-                                            setIsActive(e.target.checked)
-                                        }}
-                                    />
-                                </label> */}
-
                                 <div className='buttons_container'>
                                     <button type='submit'>Update</button>
-                                    <DeleteButton id={id} onClick={onClose} />
+                                    {!isActive && <DeleteButton id={id} onClick={onClose} />}
                                 </div>
 
                                 <ResetStyles onClick={onClose}>Go back</ResetStyles>

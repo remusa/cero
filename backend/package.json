@@ -17,9 +17,10 @@
         "test": "cross-env NODE_ENV=test jest --watch",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
+        "format": "prettier \"src/**/*.{js,html}\" --write",
         "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
         "deploy-backend": "prisma deploy && cd .. && git subtree push --prefix backend heroku-backend master",
-        "frontend": "cd .. & cd frontend/ & pnpm run dev"
+        "frontend": "cd .. & cd frontend/ & npm run dev"
     },
     "dependencies": {
         "argon2": "^0.23.0",
@@ -43,10 +44,5 @@
         "graphql-cli": "^3.0.11",
         "mailgun-js": "^0.22.0",
         "netlify-cli": "^2.8.3"
-    },
-    "babel": {
-        "presets": [
-            "env"
-        ]
     }
 }

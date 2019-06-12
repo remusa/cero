@@ -105,7 +105,11 @@ const TimerIcon = () => (
 )
 
 const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
-    <Mutation mutation={CREATE_FAST_MUTATION} variables={{ startDate: new Date(), isActive: true }}>
+    <Mutation
+        mutation={CREATE_FAST_MUTATION}
+        variables={{ startDate: new Date(), isActive: true }}
+        refetchQueries={[{ query: ALL_FASTS_QUERY }]}
+    >
         {(createFast, { error, loading }) => {
             if (error) return <Error error={error} />
 
