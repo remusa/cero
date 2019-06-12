@@ -65,8 +65,7 @@ const Mutations = {
             const duration = timeConversion(new Date(updates.startDate), new Date(updates.endDate))
             updates.duration = duration.milliseconds
         } else {
-            console.log(`NO ENDDATE: ${updates.endDate}`)
-            // delete updates.endDate
+            delete updates.endDate
         }
         console.log(`${Object.entries(updates)}`)
         const updatedFast = await ctx.db.mutation.updateFast(
