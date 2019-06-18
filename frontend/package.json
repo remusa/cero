@@ -82,6 +82,15 @@
             "wesbos"
         ]
     },
+    "babel": {
+        "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+        ],
+        "plugins": [
+            "@babel/plugin-proposal-class-properties"
+        ]
+    },
     "browserslist": [
         ">0.2%",
         "not dead",
