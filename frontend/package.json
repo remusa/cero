@@ -24,6 +24,7 @@
         "react-chartkick": "^0.3.0",
         "react-datepicker": "^2.5.0",
         "react-dom": "^16.8.6",
+        "react-onclickoutside": "^6.8.0",
         "react-particles-js": "^2.6.0",
         "react-router-dom": "^5.0.0",
         "react-scripts": "3.0.1",
@@ -69,7 +70,7 @@
         "eject": "react-scripts eject",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "dev": "cross-env-shell NODE_ENV=development && react-scripts start",
+        "dev": "cross-env-shell NODE_ENV=development react-scripts start",
         "test": "cross-env NODE_ENV=test jest --watch",
         "deploy": "netlify deploy",
         "backend": "cd .. && cd backend/ && npm run dev"

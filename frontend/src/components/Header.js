@@ -11,7 +11,8 @@ const HeaderStyles = styled.header`
     transition: 0.3s ease-in-out;
 
     nav {
-        height: 60px;
+        /* height: 60px; */
+        max-height: 340px;
         background: var(--color-primary);
         text-align: center;
         padding-left: 16px;
@@ -29,6 +30,11 @@ const HeaderStyles = styled.header`
             flex: 0 1 20px;
             /* color: var(--color-grey-dark); */
             color: var(--color-white-dark);
+
+            border-color: #fff;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: 12px 18px;
 
             &:hover {
                 /* font-weight: 600; */
