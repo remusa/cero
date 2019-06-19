@@ -233,6 +233,14 @@ const Modal = ({
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired,
+    id: PropTypes.string,
+    setId: PropTypes.func.isRequired,
+    startDate: PropTypes.string.isRequired,
+    setStartDate: PropTypes.func.isRequired,
+    endDate: PropTypes.string.isRequired,
+    setEndDate: PropTypes.func.isRequired,
+    isActive: PropTypes.bool.isRequired,
+    setIsActive: PropTypes.func.isRequired,
 }
 
 // const clickOutsideConfig = {
