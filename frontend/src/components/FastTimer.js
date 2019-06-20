@@ -10,6 +10,7 @@ import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
 import Error from './ErrorMessage'
+import FastTimerCircles from './FastTimerCircles'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -205,10 +206,12 @@ const TimerDuration = props => {
         <div className='container__timer'>
             <h2>Timer</h2>
 
-            <p className='container__timer__time-left'>
+            {/* <p className='container__timer__time-left'>
                 {days > 0 && `${days}:`}
                 {children}
-            </p>
+            </p> */}
+
+            <FastTimerCircles days={days} hours={hours} minutes={minutes} seconds={seconds} />
         </div>
     )
 }
