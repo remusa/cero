@@ -7,7 +7,7 @@ import { DotLoader } from 'react-spinners'
 const override = css`
     display: block;
     margin: 0 auto;
-    border-color: var(--color-primary-darker);
+    border-color: var(--color-primary);
 `
 
 const ContainerStyles = styled.div`
@@ -22,7 +22,7 @@ const StyledP = styled.p`
     text-align: center;
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-primary-darker);
+    color: var(--color-primary);
 `
 
 class Loading extends Component {
@@ -66,7 +66,7 @@ class Loading extends Component {
                         sizeUnit='px'
                         size={100}
                         // height={8}
-                        color='var(--color-primary-darker)'
+                        color='var(--color-primary)'
                         loading={loading}
                     />
                 </div>
