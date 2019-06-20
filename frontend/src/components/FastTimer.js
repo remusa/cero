@@ -10,6 +10,7 @@ import playIcon from '../static/icons/play.svg'
 import stopIcon from '../static/icons/stop.svg'
 import tomato from '../static/icons/tomato.svg'
 import Error from './ErrorMessage'
+import FastTimerCircles from './FastTimerCircles'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -191,24 +192,32 @@ StopButton.propTypes = {
 }
 
 const TimerDuration = props => {
-    const { duration } = props
-    const timer = duration
+    const { duration: timer } = props
+    const { days, hours, minutes, seconds } = timer
 
     let children
     if (timer === 0) {
         children = '00:00:00'
     } else {
-        children = `${timer.hours}:${timer.minutes}:${timer.seconds}`
+        children = `${hours}:${minutes}:${seconds}`
     }
 
     return (
         <div className='container__timer'>
-            <p className='container__timer__time-left'>
-                {timer.days > 0 && `${timer.days}:`}
+            <h2>Timer</h2>
+
+            {/* <p className='container__timer__time-left'>
+                {days > 0 && `${days}:`}
                 {children}
-            </p>
+            </p> */}
+
+            <FastTimerCircles days={days} hours={hours} minutes={minutes} seconds={seconds} />
         </div>
     )
+}
+
+TimerDuration.propTypes = {
+    duration: PropTypes.any.isRequired,
 }
 
 const FastTimer = props => {

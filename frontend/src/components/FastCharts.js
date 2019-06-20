@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import { differenceInHours } from 'date-fns'
 import { FastsContext } from '../data/FastsContext'
-// import { timeDifference } from '../lib/timeConversion'
 import Modal from './Modal'
 
 function getFastData(fasts) {
@@ -17,8 +16,6 @@ function getFastData(fasts) {
         const dayNumber = startDate.toString().split(' ')[2]
 
         labels.push(`${dayName}/${dayNumber}`)
-        // const duration = timeDifference(startDate, endDate)
-        // return Number.parseInt(duration.hours) + 24 * Number.parseInt(duration.days)
         return differenceInHours(endDate, startDate)
     })
 
@@ -45,9 +42,9 @@ const FastCharts = () => {
         setL(t2)
     }, [fasts])
 
-    const toggleModal = e => {
-        setIsModalOpen(!isModalOpen)
-    }
+    const toggleModal = e => setIsModalOpen(!isModalOpen)
+
+    FastCharts.handleClickOutside = () => setIsModalOpen(false)
 
     const handleClick = e => {
         if (!e[0]) return
@@ -70,7 +67,7 @@ const FastCharts = () => {
                         beginAtZero: true,
                         // suggestedMin: 0,
                         // min: 0,
-                        suggestedMax: 72,
+                        suggestedMax: 24,
                         // max: 24,
                     },
                 },
@@ -127,4 +124,9 @@ const FastCharts = () => {
     )
 }
 
+// const clickOutsideConfig = {
+//     handleClickOutside: () => FastCharts.handleClickOutside,
+// }
+
 export default FastCharts
+// export default onClickOutside(FastCharts, clickOutsideConfig)
