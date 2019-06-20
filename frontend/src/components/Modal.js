@@ -237,7 +237,7 @@ Modal.propTypes = {
     setId: PropTypes.func.isRequired,
     startDate: PropTypes.string.isRequired,
     setStartDate: PropTypes.func.isRequired,
-    endDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string,
     setEndDate: PropTypes.func.isRequired,
     isActive: PropTypes.bool.isRequired,
     setIsActive: PropTypes.func.isRequired,

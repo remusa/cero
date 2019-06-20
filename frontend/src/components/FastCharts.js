@@ -67,7 +67,7 @@ const FastCharts = () => {
                         beginAtZero: true,
                         // suggestedMin: 0,
                         // min: 0,
-                        suggestedMax: 72,
+                        suggestedMax: 24,
                         // max: 24,
                     },
                 },
