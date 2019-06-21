@@ -8,5 +8,5 @@ generate:
       output: src/generated/prisma.graphql
 hooks:
     post-deploy:
-        # - prisma generate
+        - prisma generate
         - graphql get-schema -p prisma

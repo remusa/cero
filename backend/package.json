@@ -20,6 +20,11 @@
         "format": "prettier \"src/**/*.{js,html}\" --write",
         "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
         "deploy-backend": "prisma deploy && cd .. && git subtree push --prefix backend heroku-backend master",
+        "prisma:token": "prisma token",
+        "prisma:login": "prisma login",
+        "prisma:init": "prisma init",
+        "prisma:generate": "prisma generate",
+        "prisma:deploy": "prisma deploy",
         "frontend": "cd .. & cd frontend/ & npm run dev"
     },
     "dependencies": {
