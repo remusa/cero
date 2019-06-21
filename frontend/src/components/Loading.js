@@ -25,16 +25,55 @@ const StyledP = styled.p`
     color: var(--color-primary);
 `
 
+const ProgresBarStyles = styled.div`
+    .progress-bar {
+        background-color: #fefefe;
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        margin: 15px;
+        height: 30px;
+        width: 500px;
+        max-width: 100%;
+    }
+
+    .progress {
+        background: var(--color-green);
+        background: -webkit-linear-gradient(
+            to bottom,
+            var(--color-green-lighter),
+            var(--color-green)
+        );
+        background: linear-gradient(to bottom, var(--color-green-light), var(--color-green));
+        border-radius: 3px;
+        height: 30px;
+        width: 0;
+        transition: width 0.5s ease-in;
+    }
+`
+
+const ProgressBar = ({ width }) => (
+    <ProgresBarStyles>
+        <div className='progress-bar'>
+            <div data-size={width} className='progress' />
+        </div>
+    </ProgresBarStyles>
+)
+
+ProgressBar.propTypes = {
+    width: PropTypes.number.isRequired,
+}
+
 class Loading extends Component {
     state = {
         text: this.props.text,
         speed: this.props.speed,
         loading: true,
+        width: 0,
     }
 
     componentDidMount() {
         const stopper = `${this.props.text}...`
-        const { text, speed } = this.state
+        const { text, speed, width } = this.state
 
         this.interval = window.setInterval(() => {
             if (text === stopper) {
@@ -44,6 +83,7 @@ class Loading extends Component {
             } else {
                 this.setState({
                     text: text.concat('.'),
+                    width: width + 60,
                 })
             }
         }, speed)
@@ -56,7 +96,14 @@ class Loading extends Component {
     }
 
     render() {
-        const { text, loading } = this.state
+        const { text, loading, width } = this.state
+
+        const progressBars = document.querySelectorAll('.progress')
+
+        progressBars.forEach(bar => {
+            const { size } = bar.dataset
+            bar.style.width = `${size}%`
+        })
 
         return (
             <ContainerStyles>
@@ -72,6 +119,8 @@ class Loading extends Component {
                 </div>
 
                 <StyledP>{text}</StyledP>
+
+                <ProgressBar width={100} />
             </ContainerStyles>
         )
     }
