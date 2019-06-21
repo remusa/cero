@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { css } from '@emotion/core'
@@ -63,72 +63,58 @@ ProgressBar.propTypes = {
     width: PropTypes.number.isRequired,
 }
 
-class Loading extends Component {
-    state = {
-        text: this.props.text,
-        speed: this.props.speed,
-        loading: true,
-        width: 0,
-    }
+const Loading = props => {
+    const [text, setText] = useState(props.text || 'Loading')
+    const [speed, setSpeed] = useState(props.speed || 300)
+    const [loading, setLoading] = useState(true)
+    const [width, setWidth] = useState(0)
 
-    componentDidMount() {
-        const stopper = `${this.props.text}...`
-        const { text, speed, width } = this.state
+    /* eslint-disable */
+    useEffect(() => {
+        const stopper = `${props.text}...`
 
-        this.interval = window.setInterval(() => {
+        const interval = window.setInterval(() => {
             if (text === stopper) {
-                this.setState({
-                    text: this.props.text,
-                })
+                setText(props.text)
             } else {
-                this.setState({
-                    text: text.concat('.'),
-                    width: width + 60,
-                })
+                setText(text.concat('.'))
+                setWidth(width + 60)
             }
         }, speed)
-    }
 
-    componentWillUnmount() {
-        if (this.interval) {
-            window.clearInterval(this.interval)
+        return () => {
+            if (interval) {
+                window.clearInterval(interval)
+            }
         }
-    }
+    }, [])
+    /* eslint-enable */
 
-    render() {
-        const { text, loading, width } = this.state
+    const progressBars = document.querySelectorAll('.progress')
 
-        const progressBars = document.querySelectorAll('.progress')
+    progressBars.forEach(bar => {
+        const { size } = bar.dataset
+        bar.style.width = `${size}%`
+    })
 
-        progressBars.forEach(bar => {
-            const { size } = bar.dataset
-            bar.style.width = `${size}%`
-        })
+    return (
+        <ContainerStyles>
+            <div className='sweet-loading'>
+                <DotLoader
+                    css={override}
+                    sizeUnit='px'
+                    size={100}
+                    height={8}
+                    color='var(--color-primary)'
+                    loading={loading}
+                />
+            </div>
 
-        return (
-            <ContainerStyles>
-                <div className='sweet-loading'>
-                    <DotLoader
-                        css={override}
-                        sizeUnit='px'
-                        size={100}
-                        // height={8}
-                        color='var(--color-primary)'
-                        loading={loading}
-                    />
-                </div>
+            <StyledP>{text}</StyledP>
 
-                <StyledP>{text}</StyledP>
-
-                <ProgressBar width={100} />
-            </ContainerStyles>
-        )
-    }
-}
-
-Loading.defaultProps = {
-    text: 'Loading',
-    speed: 300,
+            <ProgressBar width={100} />
+        </ContainerStyles>
+    )
 }
 
 Loading.propTypes = {
