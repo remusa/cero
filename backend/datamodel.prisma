@@ -15,6 +15,7 @@ type User {
     updatedAt: DateTime! @updatedAt
     permissions: [Permission] @scalarList(strategy: RELATION)
     fasts: [Fast] @scalarList(strategy: RELATION)
+    goal: Int @default(value: 0)
 }
 
 type Fast {
