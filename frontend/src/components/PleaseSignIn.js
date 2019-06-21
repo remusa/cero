@@ -9,12 +9,7 @@ import User from './User'
 const PleaseSignIn = props => (
     <User>
         {({ data, loading, error }) => {
-            if (loading)
-                return (
-                    <Main>
-                        <Loading />
-                    </Main>
-                )
+            if (loading) return <Main>{/* <Loading /> */}</Main>
             if (error)
                 return (
                     <Main>

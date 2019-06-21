@@ -8,7 +8,8 @@ const FooterStyles = styled.div`
         /* background-image: radial-gradient(circle, var(--color-primary), var(--color-primary-darker)); */
         background-color: var(--color-primary);
         text-align: center;
-        line-height: 1;
+        /* line-height: 2; */
+        height: 40px;
 
         display: flex;
         flex-flow: row wrap;
@@ -36,10 +37,12 @@ const FooterStyles = styled.div`
 
     @media all and (max-width: 500px) {
         footer {
-            flex-direction: column;
+            height: auto;
+            flex-flow: column;
+            justify-content: space-evenly;
 
             &:last-child {
-                padding-bottom: 8px;
+                /* padding-bottom: 8px; */
             }
         }
     }
@@ -48,9 +51,8 @@ const FooterStyles = styled.div`
 const Footer = () => (
     <FooterStyles>
         <footer>
-            <p>RMS 2019</p>
-            <a href='https://github.com/remusa/cero' target='_blank' rel='noopener noreferrer'>
-                Github
+            <a href='https://renems.com' target='_blank' rel='noopener noreferrer'>
+                Built by RMS
             </a>
         </footer>
     </FooterStyles>

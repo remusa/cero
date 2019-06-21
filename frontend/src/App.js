@@ -20,7 +20,7 @@ const AppStyles = styled.div`
 
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto minmax(1fr, auto) auto;
+    grid-template-columns: auto minmax(1fr, auto) minmax(auto, 40px);
     grid-template-areas: 'header header header' '. main .' 'footer footer footer';
 `
 
