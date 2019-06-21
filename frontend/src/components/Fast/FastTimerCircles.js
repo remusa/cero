@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { polarToCartesian, describeArc, mapNumber } from '../lib/svgCircle'
+import { polarToCartesian, describeArc, mapNumber } from '../../lib/svgCircle'
 
 const CountDownStyles = styled.div`
     .countdown-wrapper {

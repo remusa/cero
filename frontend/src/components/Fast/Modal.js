@@ -4,12 +4,12 @@ import { Mutation } from 'react-apollo'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import styled from 'styled-components'
-import onClickOutside from 'react-onclickoutside'
-import { DELETE_FAST_MUTATION, UPDATE_FAST_MUTATION } from '../gql/FastMutation'
-import { ALL_FASTS_QUERY } from '../gql/FastQuery'
-import Error from './ErrorMessage'
-import { ResetStyles } from './Login'
-import Form from './styled/Form'
+// import onClickOutside from 'react-onclickoutside'
+import { DELETE_FAST_MUTATION, UPDATE_FAST_MUTATION } from '../../gql/FastMutation'
+import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
+import Error from '../ErrorMessage'
+import { ResetStyles } from '../User/Login'
+import Form from '../styled/Form'
 
 const BackdropStyles = styled.div`
     position: fixed;

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-apollo-hooks'
 import styled from 'styled-components'
-import { ALL_USERS_QUERY } from '../gql/UserQuery'
-import Error from './ErrorMessage'
+import { ALL_USERS_QUERY } from '../../gql/UserQuery'
+import Error from '../ErrorMessage'
 import Permissions from './Permissions'
-import { TableStyles } from './styled/Table'
-import User from './User'
+import { TableStyles } from '../styled/Table'
+import User from '../User/User'
 
 const AdminStyles = styled.div`
     grid-area: main;

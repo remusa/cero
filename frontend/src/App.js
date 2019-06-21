@@ -2,16 +2,16 @@ import 'normalize.css'
 import React, { Component } from 'react'
 import { Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import AdminPage from './components/AdminPage'
-import FastPage from './components/FastPage'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import Home from './components/Home'
-import Login from './components/Login'
-import ProfilePage from './components/ProfilePage'
-import Register from './components/Register'
-import RequestReset from './components/RequestReset'
-import Reset from './components/Reset'
+import AdminPage from './components/Admin/AdminPage'
+import FastPage from './components/Fast/FastPage'
+import Footer from './components/Layout/Footer'
+import Header from './components/Layout/Header'
+import Home from './components/Layout/Home'
+import Login from './components/User/Login'
+import ProfilePage from './components/User/ProfilePage'
+import Register from './components/User/Register'
+import RequestReset from './components/User/RequestReset'
+import Reset from './components/User/Reset'
 import { FancyRoute, NotFound404 } from './Router'
 
 const AppStyles = styled.div`
@@ -45,6 +45,7 @@ class App extends Component {
                     <FancyRoute path='/profile' component={ProfilePage} />
                     <FancyRoute path='/requestreset' component={RequestReset} />
                     <FancyRoute path='/reset' component={Reset} />
+                    <FancyRoute path='/profile' component={FastPage} />
                     <FancyRoute path='/admin' component={AdminPage} />
                     <FancyRoute component={NotFound404} />
                 </Switch>

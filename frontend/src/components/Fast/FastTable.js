@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { differenceInHours } from 'date-fns'
 import styled from 'styled-components'
-import { FastsContext } from '../data/FastsContext'
+import { FastsContext } from '../../data/FastsContext'
 import Modal from './Modal'
-import { TableStyles } from './styled/Table'
+import { TableStyles } from '../styled/Table'
 
 const RowsStyles = styled.div`
     margin: 0 auto;

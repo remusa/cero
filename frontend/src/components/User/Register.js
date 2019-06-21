@@ -1,25 +1,20 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import queryString from 'query-string'
 import { Mutation } from 'react-apollo'
-import { RESET_MUTATION } from '../gql/UserMutation'
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
-import Error from './ErrorMessage'
-import Main from './Main'
-import Form from './styled/Form'
+import { SIGNUP_MUTATION } from '../../gql/UserMutation'
+import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import Error from '../ErrorMessage'
+import Main from '../Layout/Main'
+import Form from '../styled/Form'
 
 const initialState = {
+    email: '',
+    name: '',
     password: '',
-    confirmPassword: '',
+    // confirmPassword: '',
 }
 
 // TODO: refactor to use hooks
-class Reset extends Component {
-    static propTypes = {
-        // resetToken: PropTypes.string.isRequired,
-        location: PropTypes.object.isRequired,
-    }
-
+class Register extends Component {
     state = initialState
 
     handleChange = e => {
@@ -29,40 +24,61 @@ class Reset extends Component {
         })
     }
 
-    handleSubmit = async (e, reset) => {
+    handleSubmit = async (e, signup) => {
         e.preventDefault()
-        await reset()
+        await signup()
         this.setState = initialState
-
-        const { history } = this.props
-        history.push('/fast')
     }
 
+    validate = () => {}
+
     render() {
-        const search = queryString.parse(this.props.location.search)
-        const { resetToken } = search
-        const { password, confirmPassword, formError } = this.state
-        console.log('resetToken: ', resetToken)
+        const { email, name, password } = this.state
 
         return (
             <Mutation
-                mutation={RESET_MUTATION}
-                variables={{ resetToken, password, confirmPassword }}
+                mutation={SIGNUP_MUTATION}
+                variables={this.state}
                 refetchQueries={[{ query: CURRENT_USER_QUERY }]}
                 onCompleted={() => this.props.history.push('/fast')}
             >
-                {(reset, { error, loading, called }) => (
+                {(signup, { error, loading }) => (
                     <Main>
                         <Form
                             method='POST'
                             onSubmit={e => {
-                                this.handleSubmit(e, reset)
+                                this.handleSubmit(e, signup)
                             }}
                         >
                             <fieldset disabled={loading} aria-busy={loading}>
-                                <h2>Reset your password</h2>
+                                <h2>Register a new account</h2>
+
                                 <Error error={error} />
-                                {formError && <p>{formError}</p>}
+
+                                <label htmlFor='name'>
+                                    Name
+                                    <input
+                                        required
+                                        type='text'
+                                        name='name'
+                                        placeholder='name'
+                                        value={name}
+                                        onChange={this.handleChange}
+                                    />
+                                </label>
+
+                                <label htmlFor='email'>
+                                    Email
+                                    <input
+                                        required
+                                        type='email'
+                                        name='email'
+                                        placeholder='email'
+                                        value={email}
+                                        onChange={this.handleChange}
+                                    />
+                                </label>
+
                                 <label htmlFor='password'>
                                     Password
                                     <input
@@ -74,18 +90,21 @@ class Reset extends Component {
                                         onChange={this.handleChange}
                                     />
                                 </label>
-                                <label htmlFor='confirmPassword'>
+
+                                {/* <label htmlFor='confirmPassword'>
                                     Confirm Password
                                     <input
-                                        required
                                         type='password'
                                         name='confirmPassword'
                                         placeholder='*****'
                                         value={confirmPassword}
                                         onChange={this.handleChange}
                                     />
-                                </label>
-                                <button type='submit'>Reset password</button>
+                                </label> */}
+
+                                <button type='submit'>Register</button>
+
+                                <div className='divider' />
                             </fieldset>
                         </Form>
                     </Main>
@@ -95,4 +114,4 @@ class Reset extends Component {
     }
 }
 
-export default Reset
+export default Register

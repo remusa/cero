@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import { differenceInHours } from 'date-fns'
-import { FastsContext } from '../data/FastsContext'
+import { FastsContext } from '../../data/FastsContext'
 import Modal from './Modal'
 
 function getFastData(fasts) {

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 // import logo from '../logo.svg'
-import logo from '../static/logo.svg'
-import Logout from './Logout'
-import User from './User'
+import logo from '../../static/logo.svg'
+import Logout from '../User/Logout'
+import User from '../User/User'
 
 const ButtonStyles = styled.button`
     border-radius: 20px;
@@ -219,8 +219,8 @@ const Navigation = () => {
                                                 )}
 
                                                 <span className='nav__links__user'>
-                                                    {/* <Link to='/profile'>{me.name}</Link> */}
-                                                    {me.name}
+                                                    <Link to='/profile'>{me.name}</Link>
+                                                    {/* {me.name} */}
                                                 </span>
                                                 <Link to='/fast'>Fast</Link>
                                                 <Logout />

@@ -1,20 +1,37 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import { SIGNUP_MUTATION } from '../gql/UserMutation'
-import { CURRENT_USER_QUERY } from '../gql/UserQuery'
-import Error from './ErrorMessage'
-import Main from './Main'
-import Form from './styled/Form'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { SIGNIN_MUTATION } from '../../gql/UserMutation'
+import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import Error from '../ErrorMessage'
+import Main from '../Layout/Main'
+import Form from '../styled/Form'
+
+export const ResetStyles = styled.div`
+    padding: 4px;
+    margin-top: 8px;
+    font-size: 1.3rem;
+    color: var(--color-grey);
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: var(--color-grey);
+    }
+`
 
 const initialState = {
-    email: '',
     name: '',
+    email: '',
     password: '',
-    // confirmPassword: '',
 }
 
 // TODO: refactor to use hooks
-class Register extends Component {
+class Login extends Component {
     state = initialState
 
     handleChange = e => {
@@ -24,48 +41,34 @@ class Register extends Component {
         })
     }
 
-    handleSubmit = async (e, signup) => {
+    handleSubmit = async (e, signin) => {
         e.preventDefault()
-        await signup()
+        await signin()
         this.setState = initialState
     }
 
-    validate = () => {}
-
     render() {
-        const { email, name, password } = this.state
+        const { email, password } = this.state
 
         return (
             <Mutation
-                mutation={SIGNUP_MUTATION}
+                mutation={SIGNIN_MUTATION}
                 variables={this.state}
                 refetchQueries={[{ query: CURRENT_USER_QUERY }]}
                 onCompleted={() => this.props.history.push('/fast')}
             >
-                {(signup, { error, loading }) => (
+                {(signin, { error, loading }) => (
                     <Main>
                         <Form
                             method='POST'
                             onSubmit={e => {
-                                this.handleSubmit(e, signup)
+                                this.handleSubmit(e, signin)
                             }}
                         >
                             <fieldset disabled={loading} aria-busy={loading}>
-                                <h2>Register a new account</h2>
+                                <h2>Login to your account</h2>
 
                                 <Error error={error} />
-
-                                <label htmlFor='name'>
-                                    Name
-                                    <input
-                                        required
-                                        type='text'
-                                        name='name'
-                                        placeholder='name'
-                                        value={name}
-                                        onChange={this.handleChange}
-                                    />
-                                </label>
 
                                 <label htmlFor='email'>
                                     Email
@@ -91,18 +94,11 @@ class Register extends Component {
                                     />
                                 </label>
 
-                                {/* <label htmlFor='confirmPassword'>
-                                    Confirm Password
-                                    <input
-                                        type='password'
-                                        name='confirmPassword'
-                                        placeholder='*****'
-                                        value={confirmPassword}
-                                        onChange={this.handleChange}
-                                    />
-                                </label> */}
+                                <button type='submit'>Login</button>
 
-                                <button type='submit'>Register</button>
+                                <Link to='/requestreset'>
+                                    <ResetStyles>Reset password</ResetStyles>
+                                </Link>
 
                                 <div className='divider' />
                             </fieldset>
@@ -114,4 +110,4 @@ class Register extends Component {
     }
 }
 
-export default Register
+export default Login

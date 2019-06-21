@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Error from './ErrorMessage'
-import Loading from './Loading'
+import Error from '../ErrorMessage'
+import Main from '../Layout/Main'
 import Login from './Login'
-import Main from './Main'
 import User from './User'
 
 const PleaseSignIn = props => (
