@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/rene-s/cero/dev
-# timestamp: Fri Jun 21 2019 14:00:04 GMT-0600 (GMT-06:00)
+# timestamp: Fri Jun 21 2019 14:45:30 GMT-0600 (GMT-06:00)
 
 type AggregateFast {
   count: Int!
