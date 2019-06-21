@@ -6,6 +6,33 @@ import logo from '../static/logo.svg'
 import Logout from './Logout'
 import User from './User'
 
+const ButtonStyles = styled.button`
+    border-radius: 20px;
+    border: 1px solid var(--color-primary-darker);
+    background-color: var(--color-primary-darker);
+    color: var(--color-white);
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 8px 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+
+    &:hover,
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    .ghost {
+        background-color: transparent;
+        border-color: #ffffff;
+    }
+`
+
 const HeaderStyles = styled.header`
     grid-area: header;
     transition: 0.3s ease-in-out;
