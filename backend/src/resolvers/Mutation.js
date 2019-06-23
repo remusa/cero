@@ -167,7 +167,7 @@ const Mutations = {
             \n\n
             <a href=${
                 process.env.FRONTEND_URL
-            }/reset?resetToken=${resetToken}>Click here to reset</a>`),
+                }/reset?resetToken=${resetToken}>Click here to reset</a>`),
         })
         return { message: 'Thanks!' }
     },

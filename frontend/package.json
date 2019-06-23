@@ -17,9 +17,7 @@
         "prop-types": "^15.7.2",
         "query-string": "^6.8.1",
         "react": "^16.8.6",
-        "react-adopt": "^0.6.0",
         "react-apollo": "^2.5.7",
-        "react-apollo-hooks": "^0.4.5",
         "react-chartjs-2": "^2.7.6",
         "react-chartkick": "^0.3.1",
         "react-datepicker": "^2.7.0",
@@ -62,23 +60,8 @@
             ".*": "babel-jest"
         }
     },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test2": "react-scripts test",
-        "eject": "react-scripts eject",
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix",
-        "dev": "cross-env-shell NODE_ENV=development react-scripts start",
-        "test": "cross-env NODE_ENV=test jest --watch",
-        "deploy": "netlify deploy",
-        "backend": "cd .. && cd backend/ && npm run dev"
-    },
     "eslintConfig": {
         "extends": [
-            "airbnb",
-            "prettier",
-            "prettier/react",
             "wesbos"
         ]
     },
@@ -90,6 +73,18 @@
         "plugins": [
             "@babel/plugin-proposal-class-properties"
         ]
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test2": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "dev": "cross-env-shell NODE_ENV=development react-scripts start",
+        "test": "cross-env NODE_ENV=test jest --watch",
+        "deploy": "netlify deploy",
+        "backend": "cd .. && cd backend/ && npm run dev"
     },
     "browserslist": [
         ">0.2%",

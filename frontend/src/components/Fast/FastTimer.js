@@ -1,6 +1,6 @@
-import { PropTypes } from 'prop-types'
 import React, { useContext, useEffect, useState } from 'react'
-import { Mutation } from 'react-apollo'
+import { PropTypes } from 'prop-types'
+import { useMutation } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import { FastsContext } from '../../data/FastsContext'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../../gql/FastMutation'
@@ -105,40 +105,37 @@ const TimerIcon = () => (
     </div>
 )
 
-const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => (
-    <Mutation
-        mutation={CREATE_FAST_MUTATION}
-        variables={{ startDate: new Date(), isActive: true }}
-        refetchQueries={[{ query: ALL_FASTS_QUERY }]}
-    >
-        {(createFast, { error, loading }) => {
-            if (error) return <Error error={error} />
+const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => {
+    const [createFast, { error, loading }] = useMutation(CREATE_FAST_MUTATION, {
+        variables: { startDate: new Date(), isActive: true },
+        refetchQueries: [{ query: ALL_FASTS_QUERY }],
+    })
 
-            return (
-                <div className='container__buttons'>
-                    <ButtonStyles
-                        className='container__buttons__button'
-                        onClick={async () => {
-                            await createFast().then(res => {
-                                setId(res.data.createFast.id)
-                            })
-                            setIsActive(true)
-                            setDuration(0)
-                            setStartDate(new Date())
-                            localStorage.setItem('active', true)
-                        }}
-                    >
-                        <img
-                            src={playIcon}
-                            alt='startStopIcon'
-                            className='container__buttons__button__icon'
-                        />
-                    </ButtonStyles>
-                </div>
-            )
-        }}
-    </Mutation>
-)
+    if (error) return <Error error={error} />
+
+    return (
+        <div className='container__buttons'>
+            <ButtonStyles
+                className='container__buttons__button'
+                onClick={async () => {
+                    await createFast().then(res => {
+                        setId(res.data.createFast.id)
+                    })
+                    setIsActive(true)
+                    setDuration(0)
+                    setStartDate(new Date())
+                    localStorage.setItem('active', true)
+                }}
+            >
+                <img
+                    src={playIcon}
+                    alt='startStopIcon'
+                    className='container__buttons__button__icon'
+                />
+            </ButtonStyles>
+        </div>
+    )
+}
 
 StartButton.propTypes = {
     setId: PropTypes.func.isRequired,
@@ -147,40 +144,37 @@ StartButton.propTypes = {
     setDuration: PropTypes.func.isRequired,
 }
 
-const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsActive }) => (
-    <Mutation
-        mutation={STOP_FAST_MUTATION}
-        variables={{ id }}
-        refetchQueries={[{ query: ALL_FASTS_QUERY }]}
-    >
-        {(stopFast, { error, loading }) => {
-            if (error) return <Error error={error} />
+const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsActive }) => {
+    const [stopFast, { error, loading }] = useMutation(STOP_FAST_MUTATION, {
+        variables: { id },
+        refetchQueries: [{ query: ALL_FASTS_QUERY }],
+    })
 
-            return (
-                <div className='container__buttons'>
-                    <ButtonStyles
-                        className='container__buttons__button'
-                        onClick={async () => {
-                            await stopFast()
-                            setId('')
-                            setStartDate('')
-                            setEndDate('')
-                            setDuration(0)
-                            setIsActive(false)
-                            localStorage.setItem('active', false)
-                        }}
-                    >
-                        <img
-                            src={stopIcon}
-                            alt='startStopIcon'
-                            className='container__buttons__button__icon'
-                        />
-                    </ButtonStyles>
-                </div>
-            )
-        }}
-    </Mutation>
-)
+    if (error) return <Error error={error} />
+
+    return (
+        <div className='container__buttons'>
+            <ButtonStyles
+                className='container__buttons__button'
+                onClick={async () => {
+                    await stopFast()
+                    setId('')
+                    setStartDate('')
+                    setEndDate('')
+                    setDuration(0)
+                    setIsActive(false)
+                    localStorage.setItem('active', false)
+                }}
+            >
+                <img
+                    src={stopIcon}
+                    alt='startStopIcon'
+                    className='container__buttons__button__icon'
+                />
+            </ButtonStyles>
+        </div>
+    )
+}
 
 StopButton.propTypes = {
     id: PropTypes.string.isRequired,

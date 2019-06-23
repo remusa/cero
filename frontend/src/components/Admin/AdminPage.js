@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-apollo-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import { ALL_USERS_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
@@ -93,8 +93,8 @@ const Users = () => {
                 </tr>
 
                 <tr>
-                    <td colSpan='3'>
-                        <div colSpan='3' className='divider' />
+                    <td colSpan={3}>
+                        <div colSpan={3} className='divider' />
                     </td>
                 </tr>
             </thead>
@@ -121,9 +121,9 @@ const Users = () => {
 const AdminPage = () => {
     const [page, setPage] = useState(localStorage.getItem('admin-page') || 'permissions')
 
-    const handlePage = p => {
-        setPage(p)
-        localStorage.setItem('admin-page', p)
+    const handlePage = pg => {
+        setPage(pg)
+        localStorage.setItem('admin-page', pg)
     }
 
     return (

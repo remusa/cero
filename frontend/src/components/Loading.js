@@ -118,8 +118,8 @@ const Loading = props => {
 }
 
 Loading.propTypes = {
-    text: PropTypes.string.isRequired,
-    speed: PropTypes.number.isRequired,
+    text: PropTypes.string,
+    speed: PropTypes.number,
 }
 
 export default Loading

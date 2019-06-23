@@ -27,6 +27,8 @@
     font-weight: normal;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
 html {
     box-sizing: border-box;
     font-size: 10px;
@@ -42,7 +44,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--color-background);
-    font-family: 'Lato-Regular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Lato-Regular', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 1.5rem;
     line-height: 2;
     text-rendering: optimizeLegibility;

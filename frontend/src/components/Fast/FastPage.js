@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import nprogress from 'nprogress'
 import { FastsContext, FastsProvider } from '../../data/FastsContext'
@@ -61,38 +62,34 @@ const FastPage = () => (
 const FastContainer = () => {
     const { setActiveFast, setFasts } = useContext(FastsContext)
 
+    const { data, loading, error } = useQuery(ALL_FASTS_QUERY, {
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    })
+
+    if (loading) {
+        nprogress.start()
+        return <Loading />
+    }
+    if (error) {
+        nprogress.done()
+        return <Error error={error} />
+    }
+
+    const latestFast = data.fasts.filter(fast => fast.endDate === null && fast.isActive === true)[0]
+
+    setFasts(data.fasts)
+    setActiveFast(latestFast)
+
+    nprogress.done()
+
     return (
-        <Query query={ALL_FASTS_QUERY} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
-            {({ data, loading, error }) => {
-                if (loading) {
-                    nprogress.start()
-                    return <Loading />
-                }
-                if (error) {
-                    nprogress.done()
-                    return <Error error={error} />
-                }
-
-                const latestFast = data.fasts.filter(
-                    fast => fast.endDate === null && fast.isActive === true
-                )[0]
-
-                setFasts(data.fasts)
-                setActiveFast(latestFast)
-
-                nprogress.done()
-
-                return (
-                    <>
-                        <FastTimer />
-                        <InfoStyles>
-                            <FastCharts />
-                            <FastTable />
-                        </InfoStyles>
-                    </>
-                )
-            }}
-        </Query>
+        <>
+            <FastTimer />
+            <InfoStyles>
+                <FastCharts />
+                <FastTable />
+            </InfoStyles>
+        </>
     )
 }
 

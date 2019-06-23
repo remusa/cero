@@ -1,117 +1,96 @@
-import React, { Component } from 'react'
-import { Mutation } from 'react-apollo'
+import React, { useState } from 'react'
+import { useMutation } from '@apollo/react-hooks'
 import { SIGNUP_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import Form from '../styled/Form'
 
-const initialState = {
-    email: '',
-    name: '',
-    password: '',
-    // confirmPassword: '',
-}
+const Register = props => {
+    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
-// TODO: refactor to use hooks
-class Register extends Component {
-    state = initialState
+    const resetState = () => {
+        setEmail('')
+        setUsername('')
+        setPassword('')
+    }
 
-    handleChange = e => {
+    const handleChange = e => {
         const { name, value } = e.target
-        this.setState({
-            [name]: value,
-        })
+        if (name === 'email') setEmail(value)
+        else if (name === 'username') setUsername(value)
+        else if (name === 'password') setPassword(value)
     }
 
-    handleSubmit = async (e, signup) => {
+    const handleSubmit = async (e, action) => {
         e.preventDefault()
-        await signup()
-        this.setState = initialState
+        await action().then(resetState())
     }
 
-    validate = () => {}
+    const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {
+        variables: { email, name: username, password },
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        onCompleted: () => props.history.push('/fast'),
+    })
 
-    render() {
-        const { email, name, password } = this.state
-
-        return (
-            <Mutation
-                mutation={SIGNUP_MUTATION}
-                variables={this.state}
-                refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-                onCompleted={() => this.props.history.push('/fast')}
+    return (
+        <Main>
+            <Form
+                method='POST'
+                onSubmit={e => {
+                    handleSubmit(e, signup)
+                }}
             >
-                {(signup, { error, loading }) => (
-                    <Main>
-                        <Form
-                            method='POST'
-                            onSubmit={e => {
-                                this.handleSubmit(e, signup)
-                            }}
-                        >
-                            <fieldset disabled={loading} aria-busy={loading}>
-                                <h2>Register a new account</h2>
+                <fieldset disabled={loading} aria-busy={loading}>
+                    <h2>Register a new account</h2>
 
-                                <Error error={error} />
+                    <Error error={error} />
 
-                                <label htmlFor='name'>
-                                    Name
-                                    <input
-                                        required
-                                        type='text'
-                                        name='name'
-                                        placeholder='name'
-                                        value={name}
-                                        onChange={this.handleChange}
-                                    />
-                                </label>
+                    <label htmlFor='username'>
+                        Username
+                        <input
+                            required
+                            type='text'
+                            name='username'
+                            placeholder='username'
+                            value={username}
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                                <label htmlFor='email'>
-                                    Email
-                                    <input
-                                        required
-                                        type='email'
-                                        name='email'
-                                        placeholder='email'
-                                        value={email}
-                                        onChange={this.handleChange}
-                                    />
-                                </label>
+                    <label htmlFor='email'>
+                        Email
+                        <input
+                            required
+                            type='email'
+                            name='email'
+                            placeholder='email'
+                            value={email}
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                                <label htmlFor='password'>
-                                    Password
-                                    <input
-                                        required
-                                        type='password'
-                                        name='password'
-                                        placeholder='*****'
-                                        value={password}
-                                        onChange={this.handleChange}
-                                    />
-                                </label>
+                    <label htmlFor='password'>
+                        Password
+                        <input
+                            required
+                            type='password'
+                            name='password'
+                            placeholder='*****'
+                            value={password}
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                                {/* <label htmlFor='confirmPassword'>
-                                    Confirm Password
-                                    <input
-                                        type='password'
-                                        name='confirmPassword'
-                                        placeholder='*****'
-                                        value={confirmPassword}
-                                        onChange={this.handleChange}
-                                    />
-                                </label> */}
+                    <button type='submit'>Register</button>
 
-                                <button type='submit'>Register</button>
-
-                                <div className='divider' />
-                            </fieldset>
-                        </Form>
-                    </Main>
-                )}
-            </Mutation>
-        )
-    }
+                    <div className='divider' />
+                </fieldset>
+            </Form>
+        </Main>
+    )
 }
 
 export default Register
