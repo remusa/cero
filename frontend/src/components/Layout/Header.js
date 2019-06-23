@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 // import logo from '../logo.svg'
 import logo from '../../static/logo.svg'
@@ -63,10 +63,11 @@ const HeaderStyles = styled.header`
             border: 1px solid transparent;
             padding: 12px 18px;
 
-            &:hover {
-                /* font-weight: 600; */
-                text-decoration: underline;
-            }
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 10px;
+            border-radius: 3px;
+            background: transparent;
         }
 
         .nav__hamburguer:hover {
@@ -85,6 +86,13 @@ const HeaderStyles = styled.header`
         }
 
         .nav__links {
+            & a {
+                &:hover,
+                &.active {
+                    background: rgba(40, 28, 77, 0.7);
+                }
+            }
+
             &__admin {
                 font-weight: 700;
                 margin-right: 48px;
@@ -92,18 +100,20 @@ const HeaderStyles = styled.header`
 
                 & a {
                     color: red;
+                    border-bottom: 2px solid red;
+                    /* background: var(--color-primary-darker); */
+
+                    &:hover,
+                    &.active {
+                        background: rgba(200, 0, 0, 0.7);
+                    }
                 }
             }
 
             &__user {
                 font-weight: 600;
                 color: var(--color-white);
-                margin-right: 8px;
-
-                &:hover {
-                    cursor: pointer;
-                    text-decoration: underline;
-                }
+                /* margin-right: 8px; */
             }
         }
     }
@@ -214,22 +224,33 @@ const Navigation = () => {
                                             <>
                                                 {me.permissions.includes('ADMIN') && (
                                                     <div className='nav__links__admin'>
-                                                        <Link to='/admin'>Admin</Link>
+                                                        <NavLink
+                                                            to='/admin'
+                                                            activeClassName='active'
+                                                        >
+                                                            Admin
+                                                        </NavLink>
                                                     </div>
                                                 )}
 
                                                 <span className='nav__links__user'>
-                                                    <Link to='/profile'>{me.name}</Link>
+                                                    <NavLink to='/profile' activeClassName='active'>
+                                                        {me.name}
+                                                    </NavLink>
                                                     {/* {me.name} */}
                                                 </span>
-                                                <Link to='/fast'>Fast</Link>
+                                                <NavLink to='/fast'>Fast</NavLink>
                                                 <Logout />
                                             </>
                                         )}
                                         {!me && (
                                             <>
-                                                <Link to='/login'>Login</Link>
-                                                <Link to='/register'>Register</Link>
+                                                <NavLink to='/login' activeClassName='active'>
+                                                    Login
+                                                </NavLink>
+                                                <NavLink to='/register' activeClassName='active'>
+                                                    Register
+                                                </NavLink>
                                             </>
                                         )}
                                     </>
