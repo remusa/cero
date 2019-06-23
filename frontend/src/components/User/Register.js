@@ -6,11 +6,16 @@ import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import Form from '../styled/Form'
 
-// TODO: refactor to use hooks
 const Register = props => {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
+    const resetState = () => {
+        setEmail('')
+        setUsername('')
+        setPassword('')
+    }
 
     const handleChange = e => {
         const { name, value } = e.target
@@ -21,10 +26,7 @@ const Register = props => {
 
     const handleSubmit = async (e, action) => {
         e.preventDefault()
-        await action()
-        setEmail('')
-        setUsername('')
-        setPassword('')
+        await action().then(resetState())
     }
 
     const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {

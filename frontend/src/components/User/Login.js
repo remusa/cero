@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Mutation } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useMutation } from '@apollo/react-hooks'
 import { SIGNIN_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
@@ -24,90 +25,80 @@ export const ResetStyles = styled.div`
     }
 `
 
-const initialState = {
-    name: '',
-    email: '',
-    password: '',
-}
+const Login = props => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-// TODO: refactor to use hooks
-class Login extends Component {
-    state = initialState
+    const resetState = () => {
+        setEmail('')
+        setPassword('')
+    }
 
-    handleChange = e => {
+    const handleChange = e => {
         const { name, value } = e.target
-        this.setState({
-            [name]: value,
-        })
+        if (name === 'email') setEmail(value)
+        else if (name === 'password') setPassword(value)
     }
 
-    handleSubmit = async (e, signin) => {
+    const handleSubmit = async (e, action) => {
         e.preventDefault()
-        await signin()
-        this.setState = initialState
+        await action().then(resetState())
     }
 
-    render() {
-        const { email, password } = this.state
+    const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION, {
+        variables: { email, password },
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        onCompleted: () => props.history.push('/fast'),
+    })
 
-        return (
-            <Mutation
-                mutation={SIGNIN_MUTATION}
-                variables={this.state}
-                refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-                onCompleted={() => this.props.history.push('/fast')}
+    return (
+        <Main>
+            <Form
+                method='POST'
+                onSubmit={e => {
+                    handleSubmit(e, signin)
+                }}
             >
-                {(signin, { error, loading }) => (
-                    <Main>
-                        <Form
-                            method='POST'
-                            onSubmit={e => {
-                                this.handleSubmit(e, signin)
-                            }}
-                        >
-                            <fieldset disabled={loading} aria-busy={loading}>
-                                <h2>Login to your account</h2>
+                <fieldset disabled={loading} aria-busy={loading}>
+                    <h2>Login to your account</h2>
 
-                                <Error error={error} />
+                    <Error error={error} />
 
-                                <label htmlFor='email'>
-                                    Email
-                                    <input
-                                        required
-                                        type='email'
-                                        name='email'
-                                        placeholder='email'
-                                        value={email}
-                                        onChange={this.handleChange}
-                                    />
-                                </label>
+                    <label htmlFor='email'>
+                        Email
+                        <input
+                            required
+                            type='email'
+                            name='email'
+                            placeholder='email'
+                            value={email}
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                                <label htmlFor='password'>
-                                    Password
-                                    <input
-                                        required
-                                        type='password'
-                                        name='password'
-                                        placeholder='*****'
-                                        value={password}
-                                        onChange={this.handleChange}
-                                    />
-                                </label>
+                    <label htmlFor='password'>
+                        Password
+                        <input
+                            required
+                            type='password'
+                            name='password'
+                            placeholder='*****'
+                            value={password}
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                                <button type='submit'>Login</button>
+                    <button type='submit'>Login</button>
 
-                                <Link to='/requestreset'>
-                                    <ResetStyles>Reset password</ResetStyles>
-                                </Link>
+                    <Link to='/requestreset'>
+                        <ResetStyles>Reset password</ResetStyles>
+                    </Link>
 
-                                <div className='divider' />
-                            </fieldset>
-                        </Form>
-                    </Main>
-                )}
-            </Mutation>
-        )
-    }
+                    <div className='divider' />
+                </fieldset>
+            </Form>
+        </Main>
+    )
 }
 
 export default Login
