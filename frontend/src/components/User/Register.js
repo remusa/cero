@@ -21,11 +21,10 @@ const Register = props => {
 
     const handleSubmit = async (e, action) => {
         e.preventDefault()
-        // await action({ email, name: username, password })
         await action()
-        await setEmail('')
-        await setUsername('')
-        await setPassword('')
+        setEmail('')
+        setUsername('')
+        setPassword('')
     }
 
     const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {
