@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-apollo-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import { ALL_USERS_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
@@ -78,7 +78,7 @@ const NotAdmin = styled.div`
 `
 
 const Users = () => {
-    const { data, error, loading } = useQuery(ALL_USERS_QUERY)
+    const [data, error, loading] = useQuery(ALL_USERS_QUERY)
 
     if (loading) return <div>Loading...</div>
     if (error) return <Error error={error} />

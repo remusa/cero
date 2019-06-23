@@ -1,18 +1,9 @@
-import 'normalize.css'
-import React, { Component } from 'react'
-import { Switch } from 'react-router-dom'
+import React from 'react'
 import styled from 'styled-components'
-import AdminPage from './components/Admin/AdminPage'
-import FastPage from './components/Fast/FastPage'
 import Footer from './components/Layout/Footer'
 import Header from './components/Layout/Header'
-import Home from './components/Layout/Home'
-import Login from './components/User/Login'
-import ProfilePage from './components/User/ProfilePage'
-import Register from './components/User/Register'
-import RequestReset from './components/User/RequestReset'
-import Reset from './components/User/Reset'
-import { FancyRoute, NotFound404 } from './Router'
+import Router from './Router'
+import 'normalize.css'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -29,31 +20,12 @@ const AppStyles = styled.div`
 //     whyDidYouUpdate(React)
 // }
 
-class App extends Component {
-    render() {
-        return (
-            <AppStyles className='App'>
-                <Header />
-
-                {/* <Router /> */}
-
-                <Switch>
-                    <FancyRoute path='/' exact component={Home} />
-                    <FancyRoute path='/fast' component={FastPage} />
-                    <FancyRoute path='/login' component={Login} />
-                    <FancyRoute path='/register' component={Register} />
-                    <FancyRoute path='/profile' component={ProfilePage} />
-                    <FancyRoute path='/requestreset' component={RequestReset} />
-                    <FancyRoute path='/reset' component={Reset} />
-                    <FancyRoute path='/profile' component={FastPage} />
-                    <FancyRoute path='/admin' component={AdminPage} />
-                    <FancyRoute component={NotFound404} />
-                </Switch>
-
-                <Footer />
-            </AppStyles>
-        )
-    }
-}
+const App = () => (
+    <AppStyles className='App'>
+        <Header />
+        <Router />
+        <Footer />
+    </AppStyles>
+)
 
 export default App

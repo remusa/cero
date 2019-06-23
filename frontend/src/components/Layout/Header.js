@@ -68,6 +68,10 @@ const HeaderStyles = styled.header`
             padding: 8px 10px;
             border-radius: 3px;
             background: transparent;
+
+            a:focus {
+                outline: none;
+            }
         }
 
         .nav__hamburguer:hover {
@@ -87,6 +91,10 @@ const HeaderStyles = styled.header`
 
         .nav__links {
             & a {
+                /* &.active {
+                    font-weight: bold;
+                } */
+
                 &:hover,
                 &.active {
                     background: rgba(40, 28, 77, 0.7);
@@ -110,11 +118,11 @@ const HeaderStyles = styled.header`
                 }
             }
 
-            &__user {
-                font-weight: 600;
-                color: var(--color-white);
-                /* margin-right: 8px; */
-            }
+            /* &__user { */
+            /* font-weight: 600;
+                color: var(--color-white); */
+            /* margin-right: 8px; */
+            /* } */
         }
     }
 
