@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import { Mutation, Query } from 'react-apollo'
 import nprogress from 'nprogress'
 import styled from 'styled-components'
-import { UPDATE_PERMISSIONS_MUTATION } from '../gql/UserMutation'
-import { ALL_USERS_QUERY } from '../gql/UserQuery'
-import checkmarkIcon from '../static/icons/checkmark.svg'
-import Error from './ErrorMessage'
-import PermissionsButton from './styled/PermissionsButton'
-import PermissionsTable from './styled/PermissionsTable'
-import Loading from './Loading'
+import { UPDATE_PERMISSIONS_MUTATION } from '../../gql/UserMutation'
+import { ALL_USERS_QUERY } from '../../gql/UserQuery'
+import checkmarkIcon from '../../static/icons/checkmark.svg'
+import Error from '../ErrorMessage'
+import PermissionsButton from '../styled/PermissionsButton'
+import PermissionsTable from '../styled/PermissionsTable'
+import Loading from '../Loading'
 
-import '../static/nprogress.css'
+import '../../static/nprogress.css'
 
 const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 

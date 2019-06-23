@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Permissions from './Permissions'
-import PleaseSignIn from './PleaseSignIn'
+import PleaseSignIn from '../User/PleaseSignIn'
 
 const PermissionsStyles = styled.div`
     grid-area: main;

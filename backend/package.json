@@ -19,11 +19,17 @@
         "lint:fix": "eslint . --fix",
         "format": "prettier \"src/**/*.{js,html}\" --write",
         "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
-        "deploy-backend": "prisma deploy && cd .. && git subtree push --prefix backend heroku-backend master",
+        "deploy:heroku": "cd .. && git subtree push --prefix backend heroku-backend master",
+        "deploy:backend": "prisma deploy && cd .. && npm run deploy:heroku",
+        "prisma:token": "prisma token",
+        "prisma:login": "prisma login",
+        "prisma:init": "prisma init",
+        "prisma:generate": "prisma generate",
+        "prisma:deploy": "prisma deploy",
         "frontend": "cd .. & cd frontend/ & npm run dev"
     },
     "dependencies": {
-        "argon2": "^0.23.0",
+        "argon2": "^0.24.0",
         "babel-preset-env": "^1.7.0",
         "body-parser": "^1.19.0",
         "cookie-parser": "^1.4.4",
@@ -31,18 +37,18 @@
         "dotenv": "^8.0.0",
         "graphql": "^14.3.1",
         "graphql-import": "^0.7.1",
-        "graphql-yoga": "^1.17.4",
+        "graphql-yoga": "^1.18.0",
         "helmet": "^3.18.0",
         "jsonwebtoken": "^8.5.1",
         "nodemailer": "^6.2.1",
         "nodemon": "^1.19.1",
         "npm-run-all": "^4.1.5",
-        "prisma-binding": "^2.3.11"
+        "prisma-binding": "^2.3.15"
     },
     "devDependencies": {
         "cross-env": "^5.2.0",
         "graphql-cli": "^3.0.11",
         "mailgun-js": "^0.22.0",
-        "netlify-cli": "^2.8.3"
+        "netlify-cli": "^2.11.23"
     }
 }

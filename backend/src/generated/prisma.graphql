@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/rene-s/cero/dev
-# timestamp: Sat Jun 01 2019 21:17:12 GMT-0500 (GMT-05:00)
+# timestamp: Fri Jun 21 2019 14:57:02 GMT-0600 (GMT-06:00)
 
 type AggregateFast {
   count: Int!
@@ -609,6 +609,7 @@ type User implements Node {
   updatedAt: DateTime!
   permissions: [Permission!]!
   fasts(where: FastWhereInput, orderBy: FastOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fast!]
+  goal: Int
 }
 
 """A connection to a list of items."""
@@ -628,6 +629,7 @@ input UserCreateInput {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
+  goal: Int
   permissions: UserCreatepermissionsInput
   fasts: FastCreateManyWithoutUserInput
 }
@@ -648,6 +650,7 @@ input UserCreateWithoutFastsInput {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
+  goal: Int
   permissions: UserCreatepermissionsInput
 }
 
@@ -677,6 +680,8 @@ enum UserOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  goal_ASC
+  goal_DESC
 }
 
 type UserPreviousValues {
@@ -689,6 +694,7 @@ type UserPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   permissions: [Permission!]!
+  goal: Int
 }
 
 type UserSubscriptionPayload {
@@ -734,6 +740,7 @@ input UserUpdateInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  goal: Int
   permissions: UserUpdatepermissionsInput
   fasts: FastUpdateManyWithoutUserInput
 }
@@ -744,6 +751,7 @@ input UserUpdateManyMutationInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  goal: Int
   permissions: UserUpdatepermissionsInput
 }
 
@@ -764,6 +772,7 @@ input UserUpdateWithoutFastsDataInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  goal: Int
   permissions: UserUpdatepermissionsInput
 }
 
@@ -1047,6 +1056,28 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  goal: Int
+
+  """All values that are not equal to given value."""
+  goal_not: Int
+
+  """All values that are contained in given list."""
+  goal_in: [Int!]
+
+  """All values that are not contained in given list."""
+  goal_not_in: [Int!]
+
+  """All values less than the given value."""
+  goal_lt: Int
+
+  """All values less than or equal the given value."""
+  goal_lte: Int
+
+  """All values greater than the given value."""
+  goal_gt: Int
+
+  """All values greater than or equal the given value."""
+  goal_gte: Int
   fasts_every: FastWhereInput
   fasts_some: FastWhereInput
   fasts_none: FastWhereInput
