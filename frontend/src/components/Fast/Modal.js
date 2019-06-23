@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { Mutation } from 'react-apollo'
+import { useMutation } from '@apollo/react-hooks'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import styled from 'styled-components'
@@ -76,33 +76,26 @@ const CloseButtonStyles = styled.div`
     right: 0;
 `
 
-const DeleteButton = props => {
+const DeleteButton = ({ id, onClick }) => {
     const handleClick = async (e, deleteFast) => {
         e.preventDefault()
 
         if (window.confirm('Delete fast?')) {
-            await deleteFast().then(res => props.onClick())
+            await deleteFast().then(res => onClick())
         }
     }
 
+    const [deleteFast, { loading }] = useMutation(DELETE_FAST_MUTATION, {
+        variables: { id },
+        refetchQueries: [{ query: ALL_FASTS_QUERY }],
+    })
+
     return (
-        <Mutation
-            mutation={DELETE_FAST_MUTATION}
-            variables={{ id: props.id }}
-            refetchQueries={[{ query: ALL_FASTS_QUERY }]}
-        >
-            {(deleteFast, { data, error, loading }) => (
-                <DeleteStyles>
-                    <button
-                        type='button'
-                        disabled={loading}
-                        onClick={e => handleClick(e, deleteFast)}
-                    >
-                        Delete
-                    </button>
-                </DeleteStyles>
-            )}
-        </Mutation>
+        <DeleteStyles>
+            <button type='button' disabled={loading} onClick={e => handleClick(e, deleteFast)}>
+                Delete
+            </button>
+        </DeleteStyles>
     )
 }
 
@@ -136,23 +129,13 @@ const Modal = ({
     // [])
     /* eslint-enable */
 
-    const handleSubmit = async (e, update) => {
+    const handleSubmit = async (e, action) => {
         e.preventDefault()
-        await update().then(res => onClose())
+        await action().then(onClose())
         setId(null)
         setStartDate('')
         setEndDate('')
         setIsActive(false)
-    }
-
-    if (!show) return null
-
-    const variables = {
-        id,
-        startDate,
-    }
-    if (endDate) {
-        variables.endDate = endDate
     }
 
     // const handleClickOutside = e => {
@@ -164,69 +147,76 @@ const Modal = ({
 
     // Modal.handleClickOutside = () => onClose
 
+    const variables = {
+        id,
+        startDate,
+    }
+    if (endDate) {
+        variables.endDate = endDate
+    }
+
+    const [update, { error, loading }] = useMutation(UPDATE_FAST_MUTATION, {
+        variables,
+        refetchQueries: [{ query: ALL_FASTS_QUERY }],
+    })
+
+    if (!show) return null
+
     return (
-        <Mutation
-            mutation={UPDATE_FAST_MUTATION}
-            variables={variables}
-            refetchQueries={[{ query: ALL_FASTS_QUERY }]}
-        >
-            {(update, { error, loading, called }) => (
-                <BackdropStyles>
-                    <ModalStyles>
-                        {/* <CloseButtonStyles onClick={onClose}>X</CloseButtonStyles> */}
-                        <Form
-                            method='POST'
-                            onSubmit={e => {
-                                handleSubmit(e, update)
-                            }}
-                        >
-                            <fieldset disabled={loading} aria-busy={loading}>
-                                <Error error={error} />
+        <BackdropStyles>
+            <ModalStyles>
+                {/* <CloseButtonStyles onClick={onClose}>X</CloseButtonStyles> */}
+                <Form
+                    method='POST'
+                    onSubmit={e => {
+                        handleSubmit(e, update)
+                    }}
+                >
+                    <fieldset disabled={loading} aria-busy={loading}>
+                        <Error error={error} />
 
-                                {formError && <p>{formError}</p>}
+                        {formError && <p>{formError}</p>}
 
-                                <h2>Update fast</h2>
-                                <p>ID: {id}</p>
+                        <h2>Update fast</h2>
+                        <p>ID: {id}</p>
 
-                                <label htmlFor='startDate'>
-                                    Start Date: {'\t'}
-                                    <DatePicker
-                                        selected={new Date(startDate)}
-                                        showTimeInput
-                                        timeInputLabel='Time:'
-                                        onChange={date => {
-                                            setStartDate(date)
-                                        }}
-                                        dateFormat='MM/dd/yyyy h:mm aa'
-                                    />
-                                </label>
+                        <label htmlFor='startDate'>
+                            Start Date: {'\t'}
+                            <DatePicker
+                                selected={new Date(startDate)}
+                                showTimeInput
+                                timeInputLabel='Time:'
+                                onChange={date => {
+                                    setStartDate(date)
+                                }}
+                                dateFormat='MM/dd/yyyy h:mm aa'
+                            />
+                        </label>
 
-                                <label htmlFor='endDate'>
-                                    End Date: {'\t'}
-                                    <DatePicker
-                                        disabled={isActive}
-                                        selected={endDate ? new Date(endDate) : ''}
-                                        showTimeInput
-                                        timeInputLabel='Time:'
-                                        onChange={date => {
-                                            setEndDate(date)
-                                        }}
-                                        dateFormat='MM/dd/yyyy h:mm aa'
-                                    />
-                                </label>
+                        <label htmlFor='endDate'>
+                            End Date: {'\t'}
+                            <DatePicker
+                                disabled={isActive}
+                                selected={endDate ? new Date(endDate) : ''}
+                                showTimeInput
+                                timeInputLabel='Time:'
+                                onChange={date => {
+                                    setEndDate(date)
+                                }}
+                                dateFormat='MM/dd/yyyy h:mm aa'
+                            />
+                        </label>
 
-                                <div className='buttons_container'>
-                                    <button type='submit'>Update</button>
-                                    {!isActive && <DeleteButton id={id} onClick={onClose} />}
-                                </div>
+                        <div className='buttons_container'>
+                            <button type='submit'>Update</button>
+                            {!isActive && <DeleteButton id={id} onClick={onClose} />}
+                        </div>
 
-                                <ResetStyles onClick={onClose}>Go back</ResetStyles>
-                            </fieldset>
-                        </Form>
-                    </ModalStyles>
-                </BackdropStyles>
-            )}
-        </Mutation>
+                        <ResetStyles onClick={onClose}>Go back</ResetStyles>
+                    </fieldset>
+                </Form>
+            </ModalStyles>
+        </BackdropStyles>
     )
 }
 
@@ -235,9 +225,12 @@ Modal.propTypes = {
     show: PropTypes.bool.isRequired,
     id: PropTypes.string,
     setId: PropTypes.func.isRequired,
-    startDate: PropTypes.string.isRequired,
+    startDate: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.instanceOf(Date).isRequired,
+    ]),
     setStartDate: PropTypes.func.isRequired,
-    endDate: PropTypes.string,
+    endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     setEndDate: PropTypes.func.isRequired,
     isActive: PropTypes.bool.isRequired,
     setIsActive: PropTypes.func.isRequired,

@@ -78,7 +78,7 @@ const NotAdmin = styled.div`
 `
 
 const Users = () => {
-    const [data, error, loading] = useQuery(ALL_USERS_QUERY)
+    const { data, error, loading } = useQuery(ALL_USERS_QUERY)
 
     if (loading) return <div>Loading...</div>
     if (error) return <Error error={error} />
@@ -93,8 +93,8 @@ const Users = () => {
                 </tr>
 
                 <tr>
-                    <td colSpan='3'>
-                        <div colSpan='3' className='divider' />
+                    <td colSpan={3}>
+                        <div colSpan={3} className='divider' />
                     </td>
                 </tr>
             </thead>
@@ -121,9 +121,9 @@ const Users = () => {
 const AdminPage = () => {
     const [page, setPage] = useState(localStorage.getItem('admin-page') || 'permissions')
 
-    const handlePage = p => {
-        setPage(p)
-        localStorage.setItem('admin-page', p)
+    const handlePage = pg => {
+        setPage(pg)
+        localStorage.setItem('admin-page', pg)
     }
 
     return (
