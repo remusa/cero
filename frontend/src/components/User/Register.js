@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { toast } from 'react-toastify'
 import { SIGNUP_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
@@ -26,7 +27,16 @@ const Register = props => {
 
     const handleSubmit = async (e, action) => {
         e.preventDefault()
-        await action().then(resetState())
+        await action()
+        await resetState()
+        await toast.success('Welcome!', {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+        })
     }
 
     const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {

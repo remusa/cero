@@ -6,9 +6,9 @@ import { polarToCartesian, describeArc, mapNumber } from '../../lib/svgCircle'
 const CountDownStyles = styled.div`
     .countdown-wrapper {
         display: flex;
+        flex-flow: row wrap;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
     }
 
     .countdown-item {
@@ -19,8 +19,8 @@ const CountDownStyles = styled.div`
         justify-content: center;
         flex-flow: column;
         line-height: 30px;
-        margin: 10px;
-        padding-top: 10px;
+        margin: 8px;
+        padding: 4px;
         position: relative;
         width: 100px;
         height: 100px;

@@ -27,6 +27,7 @@
         "react-router-dom": "^5.0.1",
         "react-scripts": "3.0.1",
         "react-spinners": "^0.5.4",
+        "react-toastify": "^5.3.1",
         "styled-components": "^4.3.2"
     },
     "devDependencies": {
@@ -83,7 +84,8 @@
         "lint:fix": "eslint . --fix",
         "dev": "cross-env-shell NODE_ENV=development react-scripts start",
         "test": "cross-env NODE_ENV=test jest --watch",
-        "deploy": "netlify deploy",
+        "deploy": "npm run netlify:deploy",
+        "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
         "backend": "cd .. && cd backend/ && npm run dev"
     },
     "browserslist": [

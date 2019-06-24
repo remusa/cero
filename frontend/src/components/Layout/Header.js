@@ -7,6 +7,7 @@ import Logout from '../User/Logout'
 import User from '../User/User'
 
 const ButtonStyles = styled.button`
+    outline: 0;
     border-radius: 20px;
     border: 1px solid var(--color-primary-darker);
     background-color: var(--color-primary-darker);
@@ -52,6 +53,7 @@ const HeaderStyles = styled.header`
         align-items: center;
 
         a {
+            outline: 0;
             padding: 4px;
             margin: 4px;
             flex: 0 1 20px;
@@ -68,10 +70,6 @@ const HeaderStyles = styled.header`
             padding: 8px 10px;
             border-radius: 3px;
             background: transparent;
-
-            a:focus {
-                outline: none;
-            }
         }
 
         .nav__hamburguer:hover {

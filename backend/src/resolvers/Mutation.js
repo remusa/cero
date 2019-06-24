@@ -1,5 +1,5 @@
 const { forwardTo } = require('prisma-binding')
-const argon2 = require('argon2');
+const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
 const { promisify } = require('util')
@@ -67,7 +67,6 @@ const Mutations = {
         } else {
             delete updates.endDate
         }
-        console.log(`${Object.entries(updates)}`)
         const updatedFast = await ctx.db.mutation.updateFast(
             {
                 data: updates,
@@ -153,7 +152,6 @@ const Mutations = {
         }
         const randomBytesPromisified = promisify(randomBytes)
         const resetToken = (await randomBytesPromisified(20)).toString('hex')
-        console.log(`resetToken: ${resetToken}`)
         const resetTokenExpiry = Date.now() + 3600000 // 1 hour from now
         const res = await ctx.db.mutation.updateUser({
             where: { email: args.email },
@@ -167,7 +165,7 @@ const Mutations = {
             \n\n
             <a href=${
                 process.env.FRONTEND_URL
-                }/reset?resetToken=${resetToken}>Click here to reset</a>`),
+            }/reset?resetToken=${resetToken}>Click here to reset</a>`),
         })
         return { message: 'Thanks!' }
     },
@@ -226,6 +224,23 @@ const Mutations = {
             },
             info
         )
+    },
+    async updateUser(parent, args, ctx, info) {
+        if (!ctx.request.userId) {
+            throw new Error('You must be logged in to do that!')
+        }
+        const updates = { ...args }
+        if (args.goal && args.goal <= 0) {
+            throw new Error('New goal must be greater than 0')
+        }
+        if (args.goal) {
+            updates.goal = Number.parseInt(args.goal)
+        }
+        const updatedUser = await ctx.db.mutation.updateUser({
+            data: updates,
+            where: { id: ctx.request.userId },
+        })
+        return updatedUser
     },
 }
 
