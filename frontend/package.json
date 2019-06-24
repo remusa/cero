@@ -27,6 +27,7 @@
         "react-router-dom": "^5.0.1",
         "react-scripts": "3.0.1",
         "react-spinners": "^0.5.4",
+        "react-spring": "^8.0.25",
         "react-toastify": "^5.3.1",
         "styled-components": "^4.3.2"
     },
@@ -44,17 +45,23 @@
         "eslint-plugin-react": "^7.13.0",
         "eslint-plugin-react-hooks": "^1.6.0",
         "graphql-tools": "^4.0.5",
+        "jest": "^24.8.0",
         "jest-transform-graphql": "^2.1.0",
         "netlify-cli": "^2.11.23",
         "node-sass": "^4.12.0",
         "prettier": "^1.18.2"
     },
-    "jest": {
+    "//": {
         "setupFilesAfterEnv": [
             "<rootDir>/src/jest.setup.js"
         ],
+        "verbose": true
+    },
+    "jest": {
         "testPathIgnorePatterns": [
-            "<rootDir>/node_modules/"
+            "<rootDir>/node_modules/",
+            "<rootDir>/build/",
+            "<rootDir>/dist/"
         ],
         "transform": {
             "\\.(gql|graphql)$": "jest-transform-graphql",

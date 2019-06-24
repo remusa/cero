@@ -35,7 +35,7 @@ function timeDifference(startDate, endDate) {
     // const diffHrs = format(diffMs, 'HH')
     const diffMins = format(diffMs, 'mm')
     const diffSecs = format(diffMs, 'ss')
-    const totalHrs = differenceInHours(diffMs)
+    const totalHrs = differenceInHours(endDate, startDate)
 
     const duration = {
         milliseconds: diffMs,
