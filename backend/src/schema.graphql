@@ -21,6 +21,7 @@ type Mutation {
     requestReset(email: String!): SuccessMessage
     resetPassword(resetToken: String!, password: String!, confirmPassword: String!): User!
     updatePermissions(userId: ID!, permissions: [Permission]): User
+    updateUser(goal: Int): User!
     createFast(startDate: DateTime!, endDate: DateTime, isActive: Boolean): Fast!
     stopFast(id: ID!): Fast!
     deleteFast(id: ID!): Fast!

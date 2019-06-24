@@ -61,6 +61,17 @@ const UPDATE_PERMISSIONS_MUTATION = gql`
     }
 `
 
+const UPDATE_USER_MUTATION = gql`
+    mutation updateUser($goal: Int) {
+        updateUser(goal: $goal) {
+            id
+            email
+            name
+            goal
+        }
+    }
+`
+
 export {
     SIGNIN_MUTATION,
     SIGNUP_MUTATION,
@@ -68,4 +79,5 @@ export {
     RESET_MUTATION,
     REQUEST_RESET_MUTATION,
     UPDATE_PERMISSIONS_MUTATION,
+    UPDATE_USER_MUTATION,
 }
