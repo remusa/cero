@@ -35,7 +35,9 @@ const ProfilePage = () => {
     }
 
     const updates = {}
-    if (Number.parseInt(goal) > 0) updates.goal = Number.parseInt(goal)
+    if (Number.parseInt(goal) > 0) {
+        updates.goal = Number.parseInt(goal)
+    }
 
     const [updateUser, { error, loading }] = useMutation(UPDATE_USER_MUTATION, {
         variables: updates,

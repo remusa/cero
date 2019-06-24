@@ -230,13 +230,13 @@ const Mutations = {
             throw new Error('You must be logged in to do that!')
         }
         const updates = { ...args }
-        delete updates.id
         if (args.goal && args.goal <= 0) {
             throw new Error('New goal must be greater than 0')
         }
         if (args.goal) {
             updates.goal = Number.parseInt(args.goal)
         }
+        console.log(`UPDATED USER: ${Object.entries(updates)}`)
         const updatedUser = await ctx.db.mutation.updateUser({
             data: updates,
             where: { id: ctx.request.userId },
