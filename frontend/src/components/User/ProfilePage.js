@@ -31,8 +31,7 @@ const ProfilePage = () => {
     const handleSubmit = async (e, action) => {
         e.preventDefault()
         if (Number.parseInt(goal) <= 0 || goal === '') return
-        const res = await action()
-        // console.log(`${Object.entries(res.data.updateUser)}`)
+        await action()
     }
 
     const updates = {}
