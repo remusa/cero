@@ -82,7 +82,7 @@ const ProfilePage = () => {
                         <Error error={error} />
 
                         <label htmlFor='goal'>
-                            Goal hours
+                            Target fast
                             <input
                                 type='number'
                                 min='1'
