@@ -9,13 +9,13 @@ type User {
     name: String!
     email: String! @unique
     password: String!
+    goal: Int @default(value: 0)
     resetToken: String
     resetTokenExpiry: Float
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
     permissions: [Permission] @scalarList(strategy: RELATION)
     fasts: [Fast] @scalarList(strategy: RELATION)
-    goal: Int @default(value: 0)
 }
 
 type Fast {

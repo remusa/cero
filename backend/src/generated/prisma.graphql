@@ -1,5 +1,5 @@
-# source: https://us1.prisma.sh/rene-s/cero/dev
-# timestamp: Fri Jun 21 2019 14:57:02 GMT-0600 (GMT-06:00)
+# source: https://cero-production-e63af37be2.herokuapp.com/cero-prod/prod
+# timestamp: Mon Jun 24 2019 17:22:13 GMT-0600 (GMT-06:00)
 
 type AggregateFast {
   count: Int!
@@ -603,13 +603,13 @@ type User implements Node {
   name: String!
   email: String!
   password: String!
+  goal: Int
   resetToken: String
   resetTokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
   permissions: [Permission!]!
   fasts(where: FastWhereInput, orderBy: FastOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fast!]
-  goal: Int
 }
 
 """A connection to a list of items."""
@@ -627,9 +627,9 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  goal: Int
   resetToken: String
   resetTokenExpiry: Float
-  goal: Int
   permissions: UserCreatepermissionsInput
   fasts: FastCreateManyWithoutUserInput
 }
@@ -648,9 +648,9 @@ input UserCreateWithoutFastsInput {
   name: String!
   email: String!
   password: String!
+  goal: Int
   resetToken: String
   resetTokenExpiry: Float
-  goal: Int
   permissions: UserCreatepermissionsInput
 }
 
@@ -672,6 +672,8 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  goal_ASC
+  goal_DESC
   resetToken_ASC
   resetToken_DESC
   resetTokenExpiry_ASC
@@ -680,8 +682,6 @@ enum UserOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  goal_ASC
-  goal_DESC
 }
 
 type UserPreviousValues {
@@ -689,12 +689,12 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  goal: Int
   resetToken: String
   resetTokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
   permissions: [Permission!]!
-  goal: Int
 }
 
 type UserSubscriptionPayload {
@@ -738,9 +738,9 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  goal: Int
   resetToken: String
   resetTokenExpiry: Float
-  goal: Int
   permissions: UserUpdatepermissionsInput
   fasts: FastUpdateManyWithoutUserInput
 }
@@ -749,9 +749,9 @@ input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+  goal: Int
   resetToken: String
   resetTokenExpiry: Float
-  goal: Int
   permissions: UserUpdatepermissionsInput
 }
 
@@ -770,9 +770,9 @@ input UserUpdateWithoutFastsDataInput {
   name: String
   email: String
   password: String
+  goal: Int
   resetToken: String
   resetTokenExpiry: Float
-  goal: Int
   permissions: UserUpdatepermissionsInput
 }
 
@@ -950,6 +950,28 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  goal: Int
+
+  """All values that are not equal to given value."""
+  goal_not: Int
+
+  """All values that are contained in given list."""
+  goal_in: [Int!]
+
+  """All values that are not contained in given list."""
+  goal_not_in: [Int!]
+
+  """All values less than the given value."""
+  goal_lt: Int
+
+  """All values less than or equal the given value."""
+  goal_lte: Int
+
+  """All values greater than the given value."""
+  goal_gt: Int
+
+  """All values greater than or equal the given value."""
+  goal_gte: Int
   resetToken: String
 
   """All values that are not equal to given value."""
@@ -1056,28 +1078,6 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  goal: Int
-
-  """All values that are not equal to given value."""
-  goal_not: Int
-
-  """All values that are contained in given list."""
-  goal_in: [Int!]
-
-  """All values that are not contained in given list."""
-  goal_not_in: [Int!]
-
-  """All values less than the given value."""
-  goal_lt: Int
-
-  """All values less than or equal the given value."""
-  goal_lte: Int
-
-  """All values greater than the given value."""
-  goal_gt: Int
-
-  """All values greater than or equal the given value."""
-  goal_gte: Int
   fasts_every: FastWhereInput
   fasts_some: FastWhereInput
   fasts_none: FastWhereInput

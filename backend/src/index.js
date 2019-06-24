@@ -15,8 +15,12 @@ server.express.use(bodyParser.json())
 server.express.use(bodyParser.urlencoded({ extended: true }))
 server.express.use(cookieParser())
 
-// Security features
-server.express.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }))
+const FRONTEND_URL =
+    process.env.NODE_ENV === 'development' ? process.env.LOCAL_HOST : process.env.FRONTEND_URL
+
+console.log(`FRONTEND_URL: ${FRONTEND_URL}`)
+
+server.express.use(cors({ credentials: true, origin: FRONTEND_URL }))
 
 const helmetOptions = {
     contentSecurityPolicy: {
