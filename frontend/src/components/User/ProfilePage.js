@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import styled from 'styled-components'
+import { toast } from 'react-toastify'
 import PleaseSignIn from './PleaseSignIn'
 import { UPDATE_USER_MUTATION } from '../../gql/UserMutation'
 import Form from '../styled/Form'
@@ -19,8 +20,32 @@ const ProfileStyles = styled.div`
 const ProfilePage = () => {
     const [goal, setGoal] = useState('')
 
+    const updates = {}
+    if (Number.parseInt(goal) > 0) {
+        updates.goal = Number.parseInt(goal)
+    }
+
     const resetState = () => {
         setGoal('')
+    }
+
+    const showToasts = updatedValues => {
+        const entries = Object.entries(updatedValues)
+
+        for (const [property, value] of entries) {
+            const message = `${property.charAt(0).toUpperCase()}${property.slice(
+                1
+            )} set to ${value}`
+
+            toast.info(message, {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+            })
+        }
     }
 
     const handleChange = e => {
@@ -32,11 +57,7 @@ const ProfilePage = () => {
         e.preventDefault()
         if (Number.parseInt(goal) <= 0 || goal === '') return
         await action()
-    }
-
-    const updates = {}
-    if (Number.parseInt(goal) > 0) {
-        updates.goal = Number.parseInt(goal)
+        await showToasts(updates)
     }
 
     const [updateUser, { error, loading }] = useMutation(UPDATE_USER_MUTATION, {
