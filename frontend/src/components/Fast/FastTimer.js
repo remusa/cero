@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PropTypes } from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
 import styled from 'styled-components'
+import { addHours, format } from 'date-fns'
 import { FastsContext } from '../../data/FastsContext'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../../gql/FastMutation'
 import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
@@ -189,17 +190,10 @@ const TimerDuration = props => {
     const { duration: timer } = props
     const { days, hours, minutes, seconds } = timer
 
-    let children
-    if (timer === 0) {
-        children = '00:00:00'
-    } else {
-        children = `${hours}:${minutes}:${seconds}`
-    }
+    const children = timer === 0 ? '00:00:00' : `${hours}:${minutes}:${seconds}`
 
     return (
         <div className='container__timer'>
-            <h2>Timer</h2>
-
             {/* <p className='container__timer__time-left'>
                 {days > 0 && `${days}:`}
                 {children}
@@ -248,11 +242,15 @@ const FastTimer = props => {
         return () => clearInterval(interval)
     })
 
+    const estimatedEndDate = format(new Date(addHours(startDate, 14)), 'dddd DD/MMM hh:mm aa')
+
     return (
         <ContainerStyles className='container'>
             <TimerIcon />
 
-            {!isActive ? <h2>Start fast</h2> : <TimerDuration duration={duration} />}
+            {!isActive ? <h2>Start fast</h2> : <h2>Goal: {estimatedEndDate}</h2>}
+
+            {isActive && <TimerDuration duration={duration} />}
 
             {!isActive ? (
                 <StartButton
