@@ -40,35 +40,6 @@ const PleaseSignIn = props => {
     return props.children
 }
 
-// const PleaseSignIn = props => (
-//     <User>
-//         {({ data, loading, error }) => {
-//             if (loading) {
-//                 return <Main>{/* <Loading /> */}</Main>
-//             }
-
-//             if (error) {
-//                 return (
-//                     <Main>
-//                         <Error error={error} />
-//                     </Main>
-//                 )
-//             }
-
-//             if (!data.me) {
-//                 return (
-//                     <Main>
-//                         {/* <p>Please login before continuing</p> */}
-//                         <Login />
-//                     </Main>
-//                 )
-//             }
-
-//             return props.children
-//         }}
-//     </User>
-// )
-
 PleaseSignIn.propTypes = {
     children: PropTypes.element.isRequired,
 }
