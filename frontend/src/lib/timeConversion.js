@@ -27,6 +27,8 @@ import { differenceInMilliseconds, differenceInHours, format } from 'date-fns'
 // }
 
 function timeDifference(startDate, endDate) {
+    if (startDate >= endDate) return null
+
     const diffMs = differenceInMilliseconds(endDate, startDate)
 
     const diffDays = Math.floor(diffMs / 86400000)
@@ -35,7 +37,7 @@ function timeDifference(startDate, endDate) {
     // const diffHrs = format(diffMs, 'HH')
     const diffMins = format(diffMs, 'mm')
     const diffSecs = format(diffMs, 'ss')
-    const totalHrs = differenceInHours(diffMs)
+    const totalHrs = differenceInHours(endDate, startDate)
 
     const duration = {
         milliseconds: diffMs,
