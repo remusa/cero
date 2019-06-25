@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import { addHours, format } from 'date-fns'
 import { FastsContext } from '../../data/FastsContext'
+import { UserContext } from '../../data/UserContext'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../../gql/FastMutation'
 import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
 import { timeDifference } from '../../lib/timeConversion'
@@ -188,6 +189,7 @@ StopButton.propTypes = {
 
 const FastTimer = props => {
     const { activeFast } = useContext(FastsContext)
+    const { user } = useContext(UserContext)
 
     const [id, setId] = useState(activeFast ? activeFast.id : '')
     const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
@@ -207,28 +209,24 @@ const FastTimer = props => {
     }, [activeFast])
     /* eslint-enable */
 
-    useEffect(() => {
-        const timerControl = () => {
-            const end = new Date()
-            setEndDate(end)
-            const d = timeDifference(new Date(startDate), end)
-            setDuration(d)
-        }
-
-        const interval = setInterval(() => timerControl(), 1000)
-
-        return () => clearInterval(interval)
-    })
-
-    const estimatedEndDate = format(new Date(addHours(startDate, 14)), 'dddd DD/MMM hh:mm aa')
+    const estimatedEndDate = format(
+        new Date(addHours(startDate, user.goal)),
+        'dddd DD/MMM hh:mm aa'
+    )
 
     return (
         <ContainerStyles className='container'>
             <TimerIcon />
 
-            {!isActive ? <h2>Start fast</h2> : <h2>Goal: {estimatedEndDate}</h2>}
+            {!isActive ? (
+                <h2>Start fast</h2>
+            ) : (
+                <h2>
+                    Goal ({user.goal} hours): {estimatedEndDate}
+                </h2>
+            )}
 
-            {isActive && <TimerDuration duration={duration} />}
+            {isActive && <TimerDuration activeFast={activeFast} />}
 
             {!isActive ? (
                 <StartButton

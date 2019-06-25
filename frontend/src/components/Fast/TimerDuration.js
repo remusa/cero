@@ -1,13 +1,31 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
-import FastTimerCircles from './FastTimerCircles'
+import { timeDifference } from '../../lib/timeConversion'
+import TimerCircles from './TimerCircles'
 
 const TimerDuration = props => {
-    const { duration: timer } = props
-    const { days, hours, minutes, seconds } = timer
+    const { activeFast } = props
+    const { startDate } = activeFast
 
-    const children = timer === 0 ? '00:00:00' : `${hours}:${minutes}:${seconds}`
+    const [endDate, setEndDate] = useState(activeFast ? activeFast.endDate : '')
+    const [duration, setDuration] = useState(activeFast ? activeFast.duration : '')
+    
 
+    useEffect(() => {
+        const timerControl = () => {
+            const end = new Date()
+            setEndDate(end)
+            const d = timeDifference(new Date(startDate), end)
+            setDuration(d)
+        }
+
+        const interval = setInterval(() => timerControl(), 1000)
+
+        return () => clearInterval(interval)
+    }, [])
+
+    let { days, hours, minutes, seconds } = duration
+    const children = duration === 0 ? '00:00:00' : `${hours}:${minutes}:${seconds}`
 
     return (
         <div className='container__timer'>
@@ -16,13 +34,13 @@ const TimerDuration = props => {
                 {children}
             </p> */}
 
-            <FastTimerCircles days={days} hours={hours} minutes={minutes} seconds={seconds} />
+            <TimerCircles days={days} hours={hours} minutes={minutes} seconds={seconds} />
         </div>
     )
 }
 
 TimerDuration.propTypes = {
-    duration: PropTypes.any.isRequired,
+    activeFast: PropTypes.object.isRequired,
 }
 
 export default TimerDuration
