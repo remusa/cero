@@ -15,12 +15,12 @@ import Error from '../ErrorMessage'
 import TimerDuration from './TimerDuration'
 
 const ContainerStyles = styled.div`
-    text-align: center;
-
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-flow: column wrap;
+    justify-content: flex-start;
     align-items: center;
+
+    text-align: center;
 
     .container__header {
         &__icon {
@@ -90,6 +90,10 @@ const ButtonStyles = styled.button`
     height: 160px;
     text-align: center;
 
+    &__stop {
+        background-image: linear-gradient(98.88deg, white 0, red 52.08%, black 100%);
+    }
+
     &:hover,
     &:active {
         box-shadow: 0 0 20px var(--color-primary-darker);
@@ -157,7 +161,7 @@ const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsAct
     return (
         <div className='container__buttons'>
             <ButtonStyles
-                className='container__buttons__button'
+                className='container__buttons__button__stop'
                 onClick={async () => {
                     await stopFast()
                     setId('')
@@ -216,7 +220,7 @@ const FastTimer = props => {
 
     return (
         <ContainerStyles className='container'>
-            <TimerIcon />
+            {!isActive && <TimerIcon />}
 
             {!isActive ? (
                 <h2>Start fast</h2>
@@ -226,7 +230,7 @@ const FastTimer = props => {
                 </h2>
             )}
 
-            {isActive && <TimerDuration activeFast={activeFast} />}
+            {activeFast && isActive && <TimerDuration activeFast={activeFast} />}
 
             {!isActive ? (
                 <StartButton

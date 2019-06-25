@@ -8,13 +8,13 @@ const CURRENT_USER_QUERY = gql`
             name
             goal
             permissions
-            fasts {
-                id
-                startDate
-                endDate
-                isActive
-                duration
-            }
+            # fasts {
+            #     id
+            #     startDate
+            #     endDate
+            #     isActive
+            #     duration
+            # }
         }
     }
 `
