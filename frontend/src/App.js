@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import Footer from './components/Layout/Footer'
 import Header from './components/Layout/Header'
-import Router from './Router'
+import Router, { AnimatedRouter } from './Router'
 import 'normalize.css'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -38,6 +38,7 @@ const App = () => (
     <AppStyles className='App'>
         <Header />
         <Router />
+        {/* <AnimatedRouter /> */}
         <Footer />
     </AppStyles>
 )

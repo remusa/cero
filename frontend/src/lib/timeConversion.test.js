@@ -12,4 +12,11 @@ describe('timeDifference function', () => {
         expect(time.seconds).toEqual('12')
         expect(time.totalHours).toEqual('91')
     })
+
+    it('returns null when endDate is equal/before startDate', () => {
+        const startDate = new Date('2019-06-02T03:00:06.276Z')
+        const endDate = new Date('2019-05-29T07:10:54.152Z')
+        const time = timeDifference(startDate, endDate)
+        expect(time).toEqual(null)
+    })
 })
