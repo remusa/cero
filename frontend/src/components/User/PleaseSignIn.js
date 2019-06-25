@@ -10,7 +10,7 @@ import Loading from '../Loading'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 
 const PleaseSignIn = props => {
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
 
     const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
 

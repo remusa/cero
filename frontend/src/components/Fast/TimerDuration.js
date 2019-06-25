@@ -5,7 +5,6 @@ import TimerCircles from './TimerCircles'
 
 const TimerDuration = props => {
     const { activeFast } = props
-
     const { startDate } = activeFast
 
     const [endDate, setEndDate] = useState(activeFast ? activeFast.endDate : '')
