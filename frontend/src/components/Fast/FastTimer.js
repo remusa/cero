@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PropTypes } from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
 import styled from 'styled-components'
+import { addHours, format } from 'date-fns'
 import { FastsContext } from '../../data/FastsContext'
+import { UserContext } from '../../data/UserContext'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../../gql/FastMutation'
 import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
 import { timeDifference } from '../../lib/timeConversion'
@@ -10,7 +12,7 @@ import playIcon from '../../static/icons/play.svg'
 import stopIcon from '../../static/icons/stop.svg'
 import tomato from '../../static/icons/tomato.svg'
 import Error from '../ErrorMessage'
-import FastTimerCircles from './FastTimerCircles'
+import TimerDuration from './TimerDuration'
 
 const ContainerStyles = styled.div`
     text-align: center;
@@ -185,37 +187,9 @@ StopButton.propTypes = {
     setDuration: PropTypes.func.isRequired,
 }
 
-const TimerDuration = props => {
-    const { duration: timer } = props
-    const { days, hours, minutes, seconds } = timer
-
-    let children
-    if (timer === 0) {
-        children = '00:00:00'
-    } else {
-        children = `${hours}:${minutes}:${seconds}`
-    }
-
-    return (
-        <div className='container__timer'>
-            <h2>Timer</h2>
-
-            {/* <p className='container__timer__time-left'>
-                {days > 0 && `${days}:`}
-                {children}
-            </p> */}
-
-            <FastTimerCircles days={days} hours={hours} minutes={minutes} seconds={seconds} />
-        </div>
-    )
-}
-
-TimerDuration.propTypes = {
-    duration: PropTypes.any.isRequired,
-}
-
 const FastTimer = props => {
     const { activeFast } = useContext(FastsContext)
+    const { user } = useContext(UserContext)
 
     const [id, setId] = useState(activeFast ? activeFast.id : '')
     const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
@@ -235,24 +209,24 @@ const FastTimer = props => {
     }, [activeFast])
     /* eslint-enable */
 
-    useEffect(() => {
-        const timerControl = () => {
-            const end = new Date()
-            setEndDate(end)
-            const d = timeDifference(new Date(startDate), end)
-            setDuration(d)
-        }
-
-        const interval = setInterval(() => timerControl(), 1000)
-
-        return () => clearInterval(interval)
-    })
+    const estimatedEndDate = format(
+        new Date(addHours(startDate, user.goal)),
+        'dddd DD/MMM hh:mm aa'
+    )
 
     return (
         <ContainerStyles className='container'>
             <TimerIcon />
 
-            {!isActive ? <h2>Start fast</h2> : <TimerDuration duration={duration} />}
+            {!isActive ? (
+                <h2>Start fast</h2>
+            ) : (
+                <h2>
+                    Goal ({user.goal} hours): {estimatedEndDate}
+                </h2>
+            )}
+
+            {isActive && <TimerDuration activeFast={activeFast} />}
 
             {!isActive ? (
                 <StartButton

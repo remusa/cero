@@ -43,7 +43,7 @@ const RouterStyles = styled.div`
     }
 `
 
-const AnimatedRouter = () => {
+const AnimatedRoutes = () => {
     const { location } = useContext(__RouterContext)
     const transitions = useTransition(location, location => location.key, {
         // from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
@@ -98,4 +98,4 @@ const Router = () => (
 )
 
 export default Router
-export { AnimatedRouter }
+export { AnimatedRoutes }

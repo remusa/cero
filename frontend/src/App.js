@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import Footer from './components/Layout/Footer'
 import Header from './components/Layout/Header'
-import Router, { AnimatedRouter } from './Router'
+import Routes, { AnimatedRoutes } from './Routes'
 import 'normalize.css'
 import 'react-toastify/dist/ReactToastify.css'
+import { UserProvider } from './data/UserContext'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -35,12 +36,14 @@ toast.configure({
 })
 
 const App = () => (
-    <AppStyles className='App'>
-        <Header />
-        <Router />
-        {/* <AnimatedRouter /> */}
-        <Footer />
-    </AppStyles>
+    <UserProvider>
+        <AppStyles className='App'>
+            <Header />
+            <Routes />
+            {/* <AnimatedRoutes /> */}
+            <Footer />
+        </AppStyles>
+    </UserProvider>
 )
 
 export default App

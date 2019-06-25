@@ -20,14 +20,14 @@
     --color-primary-lightest: var(--color-green-lightest);
 }
 
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
 @font-face {
     format: 'woff2';
     src: url('./static/fonts/Lato-Regular.woff2');
     font-family: 'Lato-Regular';
     font-weight: normal;
 }
-
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 html {
     box-sizing: border-box;
