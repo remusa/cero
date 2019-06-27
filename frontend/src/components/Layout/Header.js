@@ -234,18 +234,18 @@ const Navigation = () => {
                                                             to='/admin'
                                                             activeClassName='active'
                                                         >
-                                                            Admin
+                                                            ✪ Admin
                                                         </NavLink>
                                                     </div>
                                                 )}
 
                                                 <span className='nav__links__user'>
                                                     <NavLink to='/profile' activeClassName='active'>
-                                                        {me.name}
+                                                        ★ {me.name}
                                                     </NavLink>
                                                     {/* {me.name} */}
                                                 </span>
-                                                <NavLink to='/fast'>Fast</NavLink>
+                                                <NavLink to='/fast'>🔥 Fast</NavLink>
                                                 <Logout />
                                             </>
                                         )}

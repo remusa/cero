@@ -7,6 +7,7 @@ import Routes, { AnimatedRoutes } from './Routes'
 import 'normalize.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { UserProvider } from './data/UserContext'
+import { ThemeProvider } from './data/ThemeContext'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -36,14 +37,16 @@ toast.configure({
 })
 
 const App = () => (
-    <UserProvider>
-        <AppStyles className='App'>
-            <Header />
-            <Routes />
-            {/* <AnimatedRoutes /> */}
-            <Footer />
-        </AppStyles>
-    </UserProvider>
+    <ThemeProvider>
+        <UserProvider>
+            <AppStyles className='App'>
+                <Header />
+                <Routes />
+                {/* <AnimatedRoutes /> */}
+                <Footer />
+            </AppStyles>
+        </UserProvider>
+    </ThemeProvider>
 )
 
 export default App

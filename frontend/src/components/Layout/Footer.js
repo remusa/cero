@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { ThemeContext } from '../../data/ThemeContext'
 
 const FooterStyles = styled.div`
     grid-area: footer;
@@ -16,8 +17,13 @@ const FooterStyles = styled.div`
         justify-content: space-around;
         align-items: center;
 
+        .emoticon {
+            color: var(--color-red);
+        }
+
         a,
-        p {
+        p,
+        span {
             /* padding: 4px;
             margin: 4px; */
             color: #fff;
@@ -48,14 +54,24 @@ const FooterStyles = styled.div`
     }
 `
 
-const Footer = () => (
-    <FooterStyles>
-        <footer>
-            <a href='https://renems.com' target='_blank' rel='noopener noreferrer'>
-                Built by RMS
-            </a>
-        </footer>
-    </FooterStyles>
-)
+const Footer = () => {
+    const { theme, setDarkMode } = useContext(ThemeContext)
+
+    return (
+        <FooterStyles>
+            <footer>
+                <span>
+                    Built with <span className='emoticon'>❤</span>{' '}
+                    <a href='https://renems.com' target='_blank' rel='noopener noreferrer'>
+                        by RMS 2019
+                    </a>
+                </span>
+                {/* <button type='button' onClick={() => setDarkMode()}>
+                    {theme === 'light' ? 'Dark mode' : 'Light mode'}
+                </button> */}
+            </footer>
+        </FooterStyles>
+    )
+}
 
 export default Footer
