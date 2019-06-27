@@ -103,6 +103,11 @@ const ButtonStyles = styled.button`
             var(--color-primary-darker) 100%
         );
     }
+
+    @media all and (max-width: 500px) {
+        width: 120px;
+        height: 120px;
+    }
 `
 
 const TimerIcon = () => (

@@ -11,7 +11,8 @@ const override = css`
 `
 
 const ContainerStyles = styled.div`
-    height: 100%;
+    /* height: 100%; */
+    /* width: 100%; */
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -34,6 +35,9 @@ const ProgresBarStyles = styled.div`
         height: 30px;
         width: 500px;
         max-width: 100%;
+        @media all and (max-width: 500px) {
+            width: 300px;
+        }
     }
 
     .progress {
