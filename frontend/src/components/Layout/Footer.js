@@ -61,9 +61,10 @@ const Footer = () => {
         <FooterStyles>
             <footer>
                 <span>
-                    Built with <span className='emoticon'>❤</span>{' '}
+                    Built with <span className='emoticon'>❤</span>
+                    {' by '}
                     <a href='https://renems.com' target='_blank' rel='noopener noreferrer'>
-                        by RMS
+                        RMS
                     </a>
                 </span>
                 {/* <button type='button' onClick={() => setDarkMode()}>

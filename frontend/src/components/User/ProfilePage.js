@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
@@ -7,6 +7,7 @@ import { UPDATE_USER_MUTATION } from '../../gql/UserMutation'
 import Form from '../styled/Form'
 import Error from '../ErrorMessage'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import { UserContext } from '../../data/UserContext'
 
 const ProfileStyles = styled.div`
     grid-area: main;
@@ -19,6 +20,7 @@ const ProfileStyles = styled.div`
 
 const ProfilePage = () => {
     const [goal, setGoal] = useState('')
+    const { user } = useContext(UserContext)
 
     const updates = {}
     if (Number.parseInt(goal) > 0) {
@@ -56,7 +58,7 @@ const ProfilePage = () => {
     const handleSubmit = async (e, action) => {
         e.preventDefault()
         if (Number.parseInt(goal) <= 0 || goal === '') return
-        await action()
+        await action().then(resetState())
         await showToasts(updates)
     }
 
@@ -87,7 +89,7 @@ const ProfilePage = () => {
                                 type='number'
                                 min='1'
                                 name='goal'
-                                placeholder='14'
+                                placeholder={user.goal}
                                 value={goal}
                                 onChange={handleChange}
                             />

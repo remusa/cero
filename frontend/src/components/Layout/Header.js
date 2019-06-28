@@ -101,7 +101,7 @@ const HeaderStyles = styled.header`
 
             &__admin {
                 font-weight: 700;
-                margin-right: 48px;
+                /* margin-right: 48px; */
                 display: inline-block;
 
                 & a {
