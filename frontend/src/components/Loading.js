@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { css } from '@emotion/core'
+// import { css } from '@emotion/core'
 import { DotLoader } from 'react-spinners'
 
-const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: var(--color-primary);
-`
+// const override = css`
+//     display: block;
+//     margin: 0 auto;
+//     border-color: var(--color-primary);
+// `
+
+const override = {
+    display: 'block',
+    margin: '0 auto',
+    borderColor: 'var(--color-primary)',
+}
 
 const ContainerStyles = styled.div`
     /* height: 100%; */
