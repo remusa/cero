@@ -63,6 +63,7 @@ const FastContainer = () => {
     const { setActiveFast, setFasts } = useContext(FastsContext)
 
     const { data, loading, error } = useQuery(ALL_FASTS_QUERY, {
+        variables: { last: 7 },
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     })
 
