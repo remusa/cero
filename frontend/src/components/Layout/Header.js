@@ -101,7 +101,7 @@ const HeaderStyles = styled.header`
 
             &__admin {
                 font-weight: 700;
-                margin-right: 48px;
+                /* margin-right: 48px; */
                 display: inline-block;
 
                 & a {
@@ -234,18 +234,19 @@ const Navigation = () => {
                                                             to='/admin'
                                                             activeClassName='active'
                                                         >
-                                                            Admin
+                                                            ✪ Admin
                                                         </NavLink>
                                                     </div>
                                                 )}
 
+                                                <NavLink to='/fast'>🔥 Fast</NavLink>
+
                                                 <span className='nav__links__user'>
                                                     <NavLink to='/profile' activeClassName='active'>
-                                                        {me.name}
+                                                        ★ {me.name}
                                                     </NavLink>
-                                                    {/* {me.name} */}
                                                 </span>
-                                                <NavLink to='/fast'>Fast</NavLink>
+
                                                 <Logout />
                                             </>
                                         )}

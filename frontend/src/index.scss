@@ -1,17 +1,22 @@
 :root {
     --color-white-dark: hsl(0, 0%, 96%);
     --color-white: hsl(0, 0%, 99%);
-    --color-grey-light: hsl(0, 0%, 33%);
-    --color-grey: hsl(0, 0%, 29%);
+
+    --color-grey-light: hsl(0, 0%, 35%);
+    --color-grey: hsl(0, 0%, 30%);
     --color-grey-dark: hsl(0, 0%, 20%);
     --color-grey-darker: hsl(0, 0%, 15%);
-    --color-black: hsl(0, 0%, 17%);
+
+    --color-black: hsl(0, 0%, 10%);
+
     --color-green: hsl(146, 100%, 39%);
     --color-green-dark: hsl(146, 100%, 25%);
     --color-green-light: hsl(146, 100%, 55%);
     --color-green-lightest: hsl(146, 95%, 69%);
     --color-green-form: hsl(146, 78%, 45%);
-    --color-red: red;
+
+    --color-red: hsl(0, 100%, 60%);
+
     --color-background: var(--color-white);
     --color-font: var(--color-black);
     --color-primary: var(--color-green);
@@ -41,9 +46,9 @@ html {
 }
 
 body {
+    // background-color: var(--color-background);
     margin: 0;
     padding: 0;
-    background-color: var(--color-background);
     font-family: 'Lato-Regular', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 1.5rem;
     line-height: 2;
@@ -53,7 +58,7 @@ body {
 }
 
 h1 {
-    color: var(--color-grey-darker);
+    color: var(--color-grey-dark);
 }
 
 h2 {

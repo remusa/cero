@@ -11,8 +11,10 @@ import './index.scss'
 
 require('dotenv').config({ path: '.env' })
 
-const LOCAL_HOST = 'http://localhost:4444/'
-const URI = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_END_POINT : LOCAL_HOST
+const URI =
+    process.env.NODE_ENV === 'production'
+        ? process.env.REACT_APP_END_POINT
+        : process.env.REACT_APP_LOCAL_HOST
 
 const client = new ApolloClient({
     uri: URI,

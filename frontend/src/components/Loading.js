@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { css } from '@emotion/core'
+// import { css } from '@emotion/core'
 import { DotLoader } from 'react-spinners'
 
-const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: var(--color-primary);
-`
+// const override = css`
+//     display: block;
+//     margin: 0 auto;
+//     border-color: var(--color-primary);
+// `
+
+const override = {
+    display: 'block',
+    margin: '0 auto',
+    borderColor: 'var(--color-primary)',
+}
 
 const ContainerStyles = styled.div`
-    height: 100%;
+    /* height: 100%; */
+    /* width: 100%; */
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -34,6 +41,9 @@ const ProgresBarStyles = styled.div`
         height: 30px;
         width: 500px;
         max-width: 100%;
+        @media all and (max-width: 500px) {
+            width: 300px;
+        }
     }
 
     .progress {

@@ -15,7 +15,8 @@ const Query = {
                     user: {
                         id: ctx.request.userId
                     }
-                 },
+                },
+                last: args.last,
             },
             info
         )
