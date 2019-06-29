@@ -30,6 +30,7 @@
         "frontend": "cd .. & cd frontend/ & npm run dev"
     },
     "dependencies": {
+        "@sendgrid/mail": "^6.4.0",
         "argon2": "^0.24.0",
         "body-parser": "^1.19.0",
         "cookie-parser": "^1.4.4",
@@ -51,5 +52,10 @@
         "graphql-cli": "^3.0.11",
         "mailgun-js": "^0.22.0",
         "netlify-cli": "^2.11.23"
+    },
+    "eslintConfig": {
+        "extends": [
+            "wesbos"
+        ]
     }
 }
