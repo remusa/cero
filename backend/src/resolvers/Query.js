@@ -9,7 +9,6 @@ const Query = {
         if (!ctx.request.userId) {
             return [] // must return a fast array
         }
-        console.log(`${Object.entries(args)}`)
         return ctx.db.query.fasts(
             {
                 where: {
