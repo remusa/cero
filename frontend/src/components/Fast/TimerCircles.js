@@ -77,7 +77,7 @@ const FastTimerCircles = ({ days, hours, minutes, seconds }) => {
                         <span>day{days > 1 && 's'}</span>
                     </div>
                 )}
-                {hours && (
+                {hours > 0 && (
                     <div className='countdown-item'>
                         <SVGCircle radius={hoursRadius} />
                         {hours}
