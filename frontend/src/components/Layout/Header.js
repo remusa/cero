@@ -70,14 +70,14 @@ const HeaderStyles = styled.header`
             background: transparent;
         }
 
-        .nav__hamburguer:hover {
-            text-decoration: none;
-        }
-
-        .nav__toggle__container {
-            .nav__toggle {
+        .nav__toggle {
+            &__hamburguer {
                 display: none;
                 cursor: pointer;
+
+                &:hover {
+                    text-decoration: none;
+                }
             }
 
             .logo img {
@@ -126,13 +126,14 @@ const HeaderStyles = styled.header`
             height: auto;
             flex-flow: column wrap;
 
-            .nav__toggle__container {
+            .nav__toggle {
                 display: flex;
                 flex-flow: column wrap;
                 justify-content: center;
                 align-content: center;
+                order: 0;
 
-                .nav__toggle {
+                &__hamburguer {
                     display: block;
                     order: 1;
                 }
@@ -200,10 +201,10 @@ const Navigation = () => {
                     <HeaderStyles>
                         <nav>
                             <div
-                                className='nav__toggle__container'
+                                className='nav__toggle'
                                 style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}
                             >
-                                <a className='nav__toggle nav__hamburguer' onClick={handleToggle}>
+                                <a className='nav__toggle__hamburguer' onClick={handleToggle}>
                                     ☰
                                 </a>
 
@@ -234,7 +235,9 @@ const Navigation = () => {
                                                     </div>
                                                 )}
 
-                                                <NavLink to='/fast'>🔥 Fast</NavLink>
+                                                <NavLink to='/fast' onClick={handleToggle}>
+                                                    🔥 Fast
+                                                </NavLink>
 
                                                 <span className='nav__links__user'>
                                                     <NavLink
