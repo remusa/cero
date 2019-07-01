@@ -38,6 +38,13 @@ class FancyRoute extends React.Component {
 }
 
 const RouterStyles = styled.div`
+    grid-area: main;
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+
     .animated {
         grid-area: main;
     }
@@ -61,7 +68,7 @@ const AnimatedRoutes = () => {
     })
 
     return (
-        <Main>
+        <RouterStyles>
             {transitions.map(({ item, props: transition, key }) => (
                 <animated.div key={key} style={transition}>
                     <Switch location={item}>
@@ -78,7 +85,7 @@ const AnimatedRoutes = () => {
                     </Switch>
                 </animated.div>
             ))}
-        </Main>
+        </RouterStyles>
     )
 }
 
