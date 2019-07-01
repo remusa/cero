@@ -39,10 +39,8 @@ const HeaderStyles = styled.header`
     transition: 0.3s ease-in-out;
 
     nav {
-        /* height: 60px; */
         max-height: 340px;
         background: var(--color-primary);
-        /* background: transparent; */
         text-align: center;
         padding-left: 16px;
         padding-right: 16px;
@@ -80,7 +78,6 @@ const HeaderStyles = styled.header`
             .nav__toggle {
                 display: none;
                 cursor: pointer;
-                user-select: none;
             }
 
             .logo img {
@@ -217,8 +214,8 @@ const Navigation = () => {
                                 )}
                             </div>
 
-                            {(toggled || width > 500) && (
-                                <div className='nav__links'>
+                            <div className='nav__links'>
+                                {(toggled || width > 500) && (
                                     <>
                                         {me && (
                                             <>
@@ -234,9 +231,7 @@ const Navigation = () => {
                                                     </div>
                                                 )}
 
-                                                <NavLink to='/fast' onClick={handleToggle}>
-                                                    🔥 Fast
-                                                </NavLink>
+                                                <NavLink to='/fast'>🔥 Fast</NavLink>
 
                                                 <span className='nav__links__user'>
                                                     <NavLink
@@ -261,6 +256,7 @@ const Navigation = () => {
                                                 >
                                                     Login
                                                 </NavLink>
+
                                                 <NavLink
                                                     to='/register'
                                                     activeClassName='active'
@@ -271,8 +267,8 @@ const Navigation = () => {
                                             </>
                                         )}
                                     </>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </nav>
                     </HeaderStyles>
                 )
