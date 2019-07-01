@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-// import logo from '../logo.svg'
+import { animated, useSpring } from 'react-spring'
 import logo from '../../static/logo.svg'
 import Logout from '../User/Logout'
 import User from '../User/User'
@@ -58,7 +58,6 @@ const HeaderStyles = styled.header`
             padding: 4px;
             margin: 4px;
             flex: 0 1 20px;
-            /* color: var(--color-grey-dark); */
             color: var(--color-white-dark);
 
             border-color: #fff;
@@ -81,6 +80,7 @@ const HeaderStyles = styled.header`
             .nav__toggle {
                 display: none;
                 cursor: pointer;
+                user-select: none;
             }
 
             .logo img {
@@ -90,10 +90,6 @@ const HeaderStyles = styled.header`
 
         .nav__links {
             & a {
-                /* &.active {
-                    font-weight: bold;
-                } */
-
                 &:hover,
                 &.active {
                     background: rgba(40, 28, 77, 0.7);
@@ -102,13 +98,11 @@ const HeaderStyles = styled.header`
 
             &__admin {
                 font-weight: 700;
-                /* margin-right: 48px; */
                 display: inline-block;
 
                 & a {
                     color: red;
                     border-bottom: 2px solid red;
-                    /* background: var(--color-primary-darker); */
 
                     &:hover,
                     &.active {
@@ -116,12 +110,6 @@ const HeaderStyles = styled.header`
                     }
                 }
             }
-
-            /* &__user { */
-            /* font-weight: 600;
-                color: var(--color-white); */
-            /* margin-right: 8px; */
-            /* } */
         }
     }
 
@@ -181,6 +169,11 @@ const Navigation = () => {
     const [toggled, setToggled] = useState(initialToggle)
     const [width, setWidth] = useState(window.innerWidth)
 
+    const headerAnimations = useSpring({
+        opacity: toggled ? 1 : 0,
+        marginTop: toggled ? 0 : -1000,
+    })
+
     const handleToggle = () => {
         setToggled(!toggled)
     }
@@ -218,14 +211,14 @@ const Navigation = () => {
                                 </a>
 
                                 {(toggled || width > 500) && (
-                                    <Link to='/' className='logo'>
+                                    <Link to='/' className='logo' onClick={handleToggle}>
                                         <img src={logo} alt='logo' />
                                     </Link>
                                 )}
                             </div>
 
-                            <div className='nav__links'>
-                                {(toggled || width > 500) && (
+                            {(toggled || width > 500) && (
+                                <div className='nav__links'>
                                     <>
                                         {me && (
                                             <>
@@ -234,16 +227,23 @@ const Navigation = () => {
                                                         <NavLink
                                                             to='/admin'
                                                             activeClassName='active'
+                                                            onClick={handleToggle}
                                                         >
                                                             ✪ Admin
                                                         </NavLink>
                                                     </div>
                                                 )}
 
-                                                <NavLink to='/fast'>🔥 Fast</NavLink>
+                                                <NavLink to='/fast' onClick={handleToggle}>
+                                                    🔥 Fast
+                                                </NavLink>
 
                                                 <span className='nav__links__user'>
-                                                    <NavLink to='/profile' activeClassName='active'>
+                                                    <NavLink
+                                                        to='/profile'
+                                                        activeClassName='active'
+                                                        onClick={handleToggle}
+                                                    >
                                                         ★ {me.name}
                                                     </NavLink>
                                                 </span>
@@ -251,19 +251,28 @@ const Navigation = () => {
                                                 <Logout />
                                             </>
                                         )}
+
                                         {!me && (
                                             <>
-                                                <NavLink to='/login' activeClassName='active'>
+                                                <NavLink
+                                                    to='/login'
+                                                    activeClassName='active'
+                                                    onClick={handleToggle}
+                                                >
                                                     Login
                                                 </NavLink>
-                                                <NavLink to='/register' activeClassName='active'>
+                                                <NavLink
+                                                    to='/register'
+                                                    activeClassName='active'
+                                                    onClick={handleToggle}
+                                                >
                                                     Register
                                                 </NavLink>
                                             </>
                                         )}
                                     </>
-                                )}
-                            </div>
+                                </div>
+                            )}
                         </nav>
                     </HeaderStyles>
                 )
