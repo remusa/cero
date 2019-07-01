@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const TableStyles = styled.table`
     border-spacing: 0;
-    border: 1px solid var(--color-grey);
+    /* border: 1px solid var(--color-grey); */
     /* box-shadow: 0 5px 15px 0 hsla(0, 0, 0, 0.9); */
     /* box-shadow: 0 0 20px var(--color-primary); */
     border-radius: 4px;
