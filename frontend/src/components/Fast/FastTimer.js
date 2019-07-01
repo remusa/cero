@@ -31,6 +31,10 @@ const ContainerStyles = styled.div`
     .container__timer {
         line-height: 1;
         margin: 4px;
+        margin-bottom: 16px;
+
+        border-radius: 4px;
+        box-shadow: 0 0 8px var(--color-grey);
 
         &__time-left {
             font-size: 2.5rem;

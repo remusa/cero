@@ -34,19 +34,21 @@ const StyledP = styled.p`
 
 const ProgresBarStyles = styled.div`
     .progress-bar {
+        height: 25px;
         background-color: #fefefe;
         border-radius: 3px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         margin: 15px;
-        height: 30px;
         width: 500px;
         max-width: 100%;
+
         @media all and (max-width: 500px) {
             width: 300px;
         }
     }
 
     .progress {
+        height: 25px;
         background: var(--color-green);
         background: -webkit-linear-gradient(
             to bottom,
@@ -55,7 +57,6 @@ const ProgresBarStyles = styled.div`
         );
         background: linear-gradient(to bottom, var(--color-green-light), var(--color-green));
         border-radius: 3px;
-        height: 30px;
         width: 0;
         transition: width 0.5s ease-in;
     }

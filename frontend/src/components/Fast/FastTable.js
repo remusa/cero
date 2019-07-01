@@ -7,9 +7,16 @@ import { TableStyles } from '../styled/Table'
 
 const RowsStyles = styled.div`
     margin: 0 auto;
+    overflow-y: scroll;
+    max-height: 250px;
+    padding: 4px;
+    box-shadow: 0 0 8px var(--color-grey-darker);
+    border-radius: 4px;
 
     @media all and (max-width: 500px) {
-        margin: 8px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
     }
 `
 
@@ -29,14 +36,14 @@ const FastTable = () => {
 
     const handleClick = (e, fast) => {
         if (!e) return
-
         setId(fast.id)
         setStartDate(fast.startDate)
         setEndDate(fast.endDate)
         setIsActive(fast.isActive)
-
         toggleModal()
     }
+
+    const rows = 1
 
     return (
         <RowsStyles>
@@ -72,6 +79,11 @@ const FastTable = () => {
                 <tbody>
                     {fasts
                         .map(fast => {
+                            {
+                                /* if (rows > 7) return
+                            rows++ */
+                            }
+
                             const { startDate, endDate, isActive } = fast
                             const totalHours = differenceInHours(endDate, startDate)
 
@@ -89,6 +101,7 @@ const FastTable = () => {
                             )
                         })
                         .reverse()}
+                    {/* .reverse()} */}
                 </tbody>
             </TableStyles>
         </RowsStyles>

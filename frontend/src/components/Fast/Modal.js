@@ -88,7 +88,7 @@ const DeleteButton = ({ id, onClick }) => {
     const [deleteFast, { loading }] = useMutation(DELETE_FAST_MUTATION, {
         variables: { id },
         refetchQueries: [{ query: ALL_FASTS_QUERY }],
-    })
+    }) // variables: { last: 7 }
 
     return (
         <DeleteStyles>
@@ -158,7 +158,7 @@ const Modal = ({
     const [update, { error, loading }] = useMutation(UPDATE_FAST_MUTATION, {
         variables,
         refetchQueries: [{ query: ALL_FASTS_QUERY }],
-    })
+    }) // variables: { last: 7 }
 
     if (!show) return null
 

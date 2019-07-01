@@ -1,14 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import { differenceInHours } from 'date-fns'
+import styled from 'styled-components'
 import { FastsContext } from '../../data/FastsContext'
 import Modal from './Modal'
 
+const ChartWrapper = styled.div`
+    position: relative;
+    /* overflow-x: scroll; */
+    max-width: 300px;
+    margin-bottom: 8px;
+    padding: 4px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px var(--color-grey-darker);
+
+    @media all and (max-width: 500px) {
+        padding-bottom: 8px;
+    }
+`
+
 function getFastData(fasts) {
     const labels = []
+    // let count = 1
 
     const chartFasts = fasts.map(fast => {
         if (fast.isActive || !fast.endDate) return
+
+        // if (count > 7) return
+        // count++
 
         const startDate = new Date(fast.startDate)
         const endDate = new Date(fast.endDate)
@@ -44,7 +63,7 @@ const FastCharts = () => {
 
     const toggleModal = e => setIsModalOpen(!isModalOpen)
 
-    FastCharts.handleClickOutside = () => setIsModalOpen(false)
+    // FastCharts.handleClickOutside = () => setIsModalOpen(false)
 
     const handleClick = e => {
         if (!e[0]) return
@@ -100,7 +119,7 @@ const FastCharts = () => {
     }
 
     return (
-        <div>
+        <ChartWrapper>
             <Modal
                 show={isModalOpen}
                 onClose={toggleModal}
@@ -120,7 +139,7 @@ const FastCharts = () => {
                 stacked={false}
                 getElementAtEvent={element => handleClick(element)}
             />
-        </div>
+        </ChartWrapper>
     )
 }
 

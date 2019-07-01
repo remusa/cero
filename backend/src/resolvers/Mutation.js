@@ -1,14 +1,17 @@
-const { forwardTo } = require('prisma-binding')
+// const { forwardTo } = require('prisma-binding')
 const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
 const { promisify } = require('util')
-const { transport, createEmail } = require('../utils/mail')
 const { hasPermission } = require('../utils/utils')
 const { timeConversion } = require('../utils/timeConversion')
+const { transport, createEmail } = require('../utils/mail')
+const sgMail = require('@sendgrid/mail');
 // const stripe = require('../utils/stripe')
 
 const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const Mutations = {
     async createFast(parent, args, ctx, info) {
@@ -154,19 +157,21 @@ const Mutations = {
         const resetToken = (await randomBytesPromisified(20)).toString('hex')
         const resetTokenExpiry = Date.now() + 3600000 // 1 hour from now
         const res = await ctx.db.mutation.updateUser({
-            where: { email: args.email },
+            where: {email: args.email },
             data: { resetToken, resetTokenExpiry },
         })
-        const mailRes = await transport.sendMail({
-            from: `${process.env.MAIL_ADDRESS}}m`,
+        const mailOptions = {
+            from: `${process.env.MAIL_ADDRESS}`,
             to: user.email,
             subject: 'Password Reset Token',
             html: createEmail(`Your Password Reset Token is Here!
             \n\n
             <a href=${
-                process.env.FRONTEND_URL
-            }/reset?resetToken=${resetToken}>Click here to reset</a>`),
-        })
+                    process.env.FRONTEND_URL
+                }/reset?resetToken=${resetToken}>Click here to reset</a>`),
+        }
+        // const mailRes = await transport.sendMail(mailOptions)
+        sgMail.send(mailOptions)
         return { message: 'Thanks!' }
     },
     async resetPassword(parent, args, ctx, info) {
