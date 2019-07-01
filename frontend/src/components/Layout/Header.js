@@ -42,6 +42,7 @@ const HeaderStyles = styled.header`
         /* height: 60px; */
         max-height: 340px;
         background: var(--color-primary);
+        /* background: transparent; */
         text-align: center;
         padding-left: 16px;
         padding-right: 16px;
