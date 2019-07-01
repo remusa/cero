@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import styled from 'styled-components'
 import { animated, useSpring } from 'react-spring'
+import styled from 'styled-components'
 import logo from '../../static/logo.svg'
 import Logout from '../User/Logout'
 import User from '../User/User'
@@ -39,7 +39,7 @@ const HeaderStyles = styled.header`
     transition: 0.3s ease-in-out;
 
     nav {
-        max-height: 340px;
+        /* max-height: 340px; */
         background: var(--color-primary);
         text-align: center;
         padding-left: 16px;
@@ -53,28 +53,35 @@ const HeaderStyles = styled.header`
 
         a {
             outline: 0;
-            padding: 4px;
+            /* padding: 4px; */
             margin: 4px;
             flex: 0 1 20px;
             color: var(--color-white-dark);
 
+            /* padding: 12px 18px; */
             border-color: #fff;
             background-color: transparent;
             border: 1px solid transparent;
-            padding: 12px 18px;
 
-            text-decoration: none;
             color: #fff;
             padding: 8px 10px;
             border-radius: 3px;
             background: transparent;
+
+            text-decoration: none;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        span {
+            padding: 8px 10px;
+            margin: 4px;
+            flex: 0 1 20px;
         }
 
         .nav__toggle {
             &__hamburguer {
                 display: none;
-                cursor: pointer;
-                user-select: none;
 
                 &:hover {
                     text-decoration: none;
@@ -82,7 +89,7 @@ const HeaderStyles = styled.header`
             }
 
             .logo img {
-                max-width: 50px;
+                max-width: 40px;
             }
         }
 
@@ -148,14 +155,14 @@ const HeaderStyles = styled.header`
                 flex-flow: column wrap;
 
                 &__admin {
-                    margin: 0;
-                    padding-bottom: 8px;
+                    /* margin: 0; */
+                    /* padding-bottom: 8px; */
                 }
 
                 &__user {
-                    margin: 0;
-                    padding-top: 4px;
-                    padding-bottom: 4px;
+                    /* margin: 0; */
+                    /* padding-top: 4px; */
+                    /* padding-bottom: 4px; */
                 }
             }
         }
@@ -163,14 +170,24 @@ const HeaderStyles = styled.header`
 `
 
 const Navigation = () => {
-    const initialToggle = () => localStorage.getItem('toggled') || false
-    const [toggled, setToggled] = useState(initialToggle)
     const [width, setWidth] = useState(window.innerWidth)
+    const initialToggle = () => localStorage.getItem('toggled') || false
+    const [toggled, setToggled] = useState(false)
 
     const headerAnimations = useSpring({
         opacity: toggled ? 1 : 0,
         marginTop: toggled ? 0 : -1000,
+        transform: `perspective(600px) rotateX(${toggled ? 0 : 180}deg)`,
+        config: { mass: 5, tension: 500, friction: 80 },
     })
+
+    const handleClick = () => {
+        if (width >= 500) {
+            setToggled(true)
+        } else {
+            setToggled(false)
+        }
+    }
 
     const handleToggle = () => {
         setToggled(!toggled)
@@ -180,7 +197,7 @@ const Navigation = () => {
         function updateWindowDimensions() {
             setWidth(window.innerWidth)
             if (width >= 500) {
-                setToggled(false)
+                setToggled(true)
             }
         }
 
@@ -208,33 +225,39 @@ const Navigation = () => {
                                     ☰
                                 </a>
 
-                                {(toggled || width > 500) && (
-                                    <Link to='/' className='logo' onClick={handleToggle}>
+                                {width > 500 && (
+                                    <Link to='/' className='logo' onClick={handleClick}>
                                         <img src={logo} alt='logo' />
                                     </Link>
                                 )}
                             </div>
 
-                            {/* <animated.div className='nav__links' style={headerAnimations}>
-                                    </animated.div> */}
+                            {/* <animated.div className='nav__links' style={headerAnimations}> */}
+                            {/* </animated.div> */}
 
                             {(toggled || width > 500) && (
-                                <div className='nav__links'>
+                                <animated.div style={headerAnimations} className='nav__links'>
+                                    {width < 500 && (
+                                        <Link to='/' onClick={handleClick}>
+                                            Home
+                                        </Link>
+                                    )}
+
                                     {me && (
                                         <>
                                             {me.permissions.includes('ADMIN') && (
-                                                <div className='nav__links__admin'>
+                                                <span className='nav__links__admin'>
                                                     <NavLink
                                                         to='/admin'
                                                         activeClassName='active'
-                                                        onClick={handleToggle}
+                                                        onClick={handleClick}
                                                     >
                                                         ✪ Admin
                                                     </NavLink>
-                                                </div>
+                                                </span>
                                             )}
 
-                                            <NavLink to='/fast' onClick={handleToggle}>
+                                            <NavLink to='/fast' onClick={handleClick}>
                                                 🔥 Fast
                                             </NavLink>
 
@@ -242,7 +265,7 @@ const Navigation = () => {
                                                 <NavLink
                                                     to='/profile'
                                                     activeClassName='active'
-                                                    onClick={handleToggle}
+                                                    onClick={handleClick}
                                                 >
                                                     ★ {me.name}
                                                 </NavLink>
@@ -257,7 +280,7 @@ const Navigation = () => {
                                             <NavLink
                                                 to='/login'
                                                 activeClassName='active'
-                                                onClick={handleToggle}
+                                                onClick={handleClick}
                                             >
                                                 Login
                                             </NavLink>
@@ -265,13 +288,13 @@ const Navigation = () => {
                                             <NavLink
                                                 to='/register'
                                                 activeClassName='active'
-                                                onClick={handleToggle}
+                                                onClick={handleClick}
                                             >
                                                 Register
                                             </NavLink>
                                         </>
                                     )}
-                                </div>
+                                </animated.div>
                             )}
                         </nav>
                     </HeaderStyles>

@@ -64,7 +64,7 @@ const ImageStyles = styled.div`
         overflow: hidden;
         display: block;
         text-align: center;
-        margin-top: 80px;
+        margin-top: 20px;
         border-width: 0px 0px 0px 0px;
         border-color: rgba(188, 188, 188, 1);
         border-radius: 5;

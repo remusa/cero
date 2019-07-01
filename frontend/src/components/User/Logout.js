@@ -1,10 +1,10 @@
-import { useMutation } from '@apollo/react-hooks'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import { toast } from 'react-toastify'
 import { SIGNOUT_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import 'react-toastify/dist/ReactToastify.css'
-import { toast } from 'react-toastify'
 
 const Logout = () => {
     const [signout] = useMutation(SIGNOUT_MUTATION, {
@@ -12,7 +12,6 @@ const Logout = () => {
     })
 
     const handleSignOut = () => {
-        signout()
         localStorage.clear()
         toast.error('Goodbye!', {
             position: 'top-right',
@@ -22,6 +21,7 @@ const Logout = () => {
             pauseOnHover: false,
             draggable: false,
         })
+        signout()
     }
 
     return (
