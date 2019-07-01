@@ -1,10 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { polarToCartesian, describeArc, mapNumber } from '../../lib/svgCircle'
+import { describeArc, mapNumber } from '../../lib/svgCircle'
 
 const CountDownStyles = styled.div`
-    .countdown-wrapper {
+    border-radius: 4px;
+    box-shadow: 0 0 8px var(--color-grey);
+    line-height: 1;
+    padding: 8px;
+    margin-bottom: 16px;
+
+    @media all and (max-height: 800px) {
+        margin-top: 0px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    &__time-left {
+        font-size: 2.5rem;
+    }
+
+    .countdown-container {
         display: flex;
         flex-flow: row wrap;
         align-items: center;
@@ -12,25 +28,32 @@ const CountDownStyles = styled.div`
     }
 
     .countdown-item {
-        color: #111;
-        font-size: 3rem;
         display: flex;
+        flex-flow: column;
         align-items: center;
         justify-content: center;
-        flex-flow: column;
-        line-height: 30px;
-        margin: 8px;
-        padding: 4px;
+
         position: relative;
         width: 100px;
         height: 100px;
-    }
 
-    .countdown-item span {
-        color: #333;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
+        color: #111;
+        font-size: 3rem;
+        line-height: 30px;
+        margin: 4px;
+        padding: 4px;
+
+        & span {
+            color: #333;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        @media all and (max-width: 500px) {
+            /* margin-right: 30px;
+            margin-left: 30px; */
+        }
     }
 
     .countdown-svg {
@@ -57,7 +80,9 @@ SVGCircle.propTypes = {
     radius: PropTypes.number.isRequired,
 }
 
-const FastTimerCircles = ({ days, hours, minutes, seconds }) => {
+const FastTimerCircles = ({ duration }) => {
+    const { days, hours, minutes, seconds } = duration
+
     const daysRadius = mapNumber(days, 30, 0, 0, 360)
     const hoursRadius = mapNumber(hours, 24, 0, 0, 360)
     const minutesRadius = mapNumber(minutes, 60, 0, 0, 360)
@@ -69,7 +94,7 @@ const FastTimerCircles = ({ days, hours, minutes, seconds }) => {
 
     return (
         <CountDownStyles>
-            <div className='countdown-wrapper'>
+            <div className='countdown-container'>
                 {days > 0 && (
                     <div className='countdown-item'>
                         <SVGCircle radius={daysRadius} />
@@ -77,6 +102,7 @@ const FastTimerCircles = ({ days, hours, minutes, seconds }) => {
                         <span>day{days > 1 && 's'}</span>
                     </div>
                 )}
+
                 {hours > 0 && (
                     <div className='countdown-item'>
                         <SVGCircle radius={hoursRadius} />
@@ -84,6 +110,7 @@ const FastTimerCircles = ({ days, hours, minutes, seconds }) => {
                         <span>hour{hours > 1 && 's'}</span>
                     </div>
                 )}
+
                 {minutes && (
                     <div className='countdown-item'>
                         <SVGCircle radius={minutesRadius} />
@@ -91,6 +118,7 @@ const FastTimerCircles = ({ days, hours, minutes, seconds }) => {
                         <span>minute{minutes > 1 && 's'}</span>
                     </div>
                 )}
+
                 {seconds && (
                     <div className='countdown-item'>
                         <SVGCircle radius={secondsRadius} />
@@ -101,6 +129,10 @@ const FastTimerCircles = ({ days, hours, minutes, seconds }) => {
             </div>
         </CountDownStyles>
     )
+}
+
+FastTimerCircles.propTypes = {
+    duration: PropTypes.object.isRequired,
 }
 
 export default FastTimerCircles

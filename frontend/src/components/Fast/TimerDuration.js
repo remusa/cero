@@ -26,16 +26,7 @@ const TimerDuration = props => {
     const { days, hours, minutes, seconds } = duration
     const children = duration === 0 ? '00:00:00' : `${hours}:${minutes}:${seconds}`
 
-    return (
-        <div className='container__timer'>
-            {/* <p className='container__timer__time-left'>
-                {days > 0 && `${days}:`}
-                {children}
-            </p> */}
-
-            <TimerCircles days={days} hours={hours} minutes={minutes} seconds={seconds} />
-        </div>
-    )
+    return <TimerCircles duration={duration} />
 }
 
 TimerDuration.propTypes = {

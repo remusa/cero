@@ -26,6 +26,10 @@ const FastStyles = styled.div`
     }
 
     @media all and (max-width: 500px) {
+        h1 {
+            display: none;
+        }
+
         .fast__info {
             flex-flow: column wrap;
             justify-content: center;
