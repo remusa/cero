@@ -7,9 +7,14 @@ const MainStyles = styled.main`
 
     display: flex;
     flex-flow: column wrap;
+    /* justify-content: flex-start; */
     justify-content: center;
     align-items: center;
     padding: 16px;
+
+    @media all and (max-width: 500px) {
+        justify-content: flex-start;
+    }
 `
 
 const Main = ({ children }) => <MainStyles>{children}</MainStyles>
