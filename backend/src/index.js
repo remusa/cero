@@ -54,10 +54,16 @@ server.express.use(async (req, res, next) => {
     next()
 })
 
+const options = {
+//   port: 8000,
+//   endpoint: '/graphql',
+//   subscriptions: '/subscriptions',
+//   playground: '/playground',
+//   cors: false, // disable apollo server cors
+}
+
 server.start(
-    {
-        cors: false, // disable apollo server cors
-    },
+    { cors: false }, // disable apollo server cors
     deets => {
         console.log(`Server is now running on port http://localhost:${deets.port}`)
     }

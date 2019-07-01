@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { animated, useSpring } from 'react-spring'
 import styled from 'styled-components'
-// import logo from '../logo.svg'
 import logo from '../../static/logo.svg'
 import Logout from '../User/Logout'
 import User from '../User/User'
@@ -39,10 +39,8 @@ const HeaderStyles = styled.header`
     transition: 0.3s ease-in-out;
 
     nav {
-        /* height: 60px; */
-        max-height: 340px;
+        /* max-height: 340px; */
         background: var(--color-primary);
-        /* background: transparent; */
         text-align: center;
         padding-left: 16px;
         padding-right: 16px;
@@ -55,45 +53,48 @@ const HeaderStyles = styled.header`
 
         a {
             outline: 0;
-            padding: 4px;
+            /* padding: 4px; */
             margin: 4px;
             flex: 0 1 20px;
-            /* color: var(--color-grey-dark); */
             color: var(--color-white-dark);
 
+            /* padding: 12px 18px; */
             border-color: #fff;
             background-color: transparent;
             border: 1px solid transparent;
-            padding: 12px 18px;
 
-            text-decoration: none;
             color: #fff;
             padding: 8px 10px;
             border-radius: 3px;
             background: transparent;
-        }
 
-        .nav__hamburguer:hover {
             text-decoration: none;
+            cursor: pointer;
+            user-select: none;
         }
 
-        .nav__toggle__container {
-            .nav__toggle {
+        span {
+            padding: 8px 10px;
+            margin: 4px;
+            flex: 0 1 20px;
+        }
+
+        .nav__toggle {
+            &__hamburguer {
                 display: none;
-                cursor: pointer;
+
+                &:hover {
+                    text-decoration: none;
+                }
             }
 
             .logo img {
-                max-width: 50px;
+                max-width: 40px;
             }
         }
 
         .nav__links {
             & a {
-                /* &.active {
-                    font-weight: bold;
-                } */
-
                 &:hover,
                 &.active {
                     background: rgba(40, 28, 77, 0.7);
@@ -102,13 +103,11 @@ const HeaderStyles = styled.header`
 
             &__admin {
                 font-weight: 700;
-                /* margin-right: 48px; */
                 display: inline-block;
 
                 & a {
                     color: red;
                     border-bottom: 2px solid red;
-                    /* background: var(--color-primary-darker); */
 
                     &:hover,
                     &.active {
@@ -116,12 +115,6 @@ const HeaderStyles = styled.header`
                     }
                 }
             }
-
-            /* &__user { */
-            /* font-weight: 600;
-                color: var(--color-white); */
-            /* margin-right: 8px; */
-            /* } */
         }
     }
 
@@ -130,7 +123,7 @@ const HeaderStyles = styled.header`
             justify-content: space-between;
 
             .nav__toggle {
-                order: 1;
+                order: 0;
                 color: var(--color-white);
             }
         }
@@ -141,13 +134,13 @@ const HeaderStyles = styled.header`
             height: auto;
             flex-flow: column wrap;
 
-            .nav__toggle__container {
+            .nav__toggle {
                 display: flex;
                 flex-flow: column wrap;
                 justify-content: center;
                 align-content: center;
 
-                .nav__toggle {
+                &__hamburguer {
                     display: block;
                     order: 1;
                 }
@@ -162,14 +155,14 @@ const HeaderStyles = styled.header`
                 flex-flow: column wrap;
 
                 &__admin {
-                    margin: 0;
-                    padding-bottom: 8px;
+                    /* margin: 0; */
+                    /* padding-bottom: 8px; */
                 }
 
                 &__user {
-                    margin: 0;
-                    padding-top: 4px;
-                    padding-bottom: 4px;
+                    /* margin: 0; */
+                    /* padding-top: 4px; */
+                    /* padding-bottom: 4px; */
                 }
             }
         }
@@ -177,9 +170,24 @@ const HeaderStyles = styled.header`
 `
 
 const Navigation = () => {
-    const initialToggle = () => localStorage.getItem('toggled') || false
-    const [toggled, setToggled] = useState(initialToggle)
     const [width, setWidth] = useState(window.innerWidth)
+    const initialToggle = () => localStorage.getItem('toggled') || false
+    const [toggled, setToggled] = useState(false)
+
+    const headerAnimations = useSpring({
+        opacity: toggled ? 1 : 0,
+        marginTop: toggled ? 0 : -1000,
+        transform: `perspective(600px) rotateX(${toggled ? 0 : 180}deg)`,
+        config: { mass: 5, tension: 500, friction: 80 },
+    })
+
+    const handleClick = () => {
+        if (width >= 500) {
+            setToggled(true)
+        } else {
+            setToggled(false)
+        }
+    }
 
     const handleToggle = () => {
         setToggled(!toggled)
@@ -189,7 +197,7 @@ const Navigation = () => {
         function updateWindowDimensions() {
             setWidth(window.innerWidth)
             if (width >= 500) {
-                setToggled(false)
+                setToggled(true)
             }
         }
 
@@ -210,60 +218,84 @@ const Navigation = () => {
                     <HeaderStyles>
                         <nav>
                             <div
-                                className='nav__toggle__container'
+                                className='nav__toggle'
                                 style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}
                             >
-                                <a className='nav__toggle nav__hamburguer' onClick={handleToggle}>
+                                <a className='nav__toggle__hamburguer' onClick={handleToggle}>
                                     ☰
                                 </a>
 
-                                {(toggled || width > 500) && (
-                                    <Link to='/' className='logo'>
+                                {width > 500 && (
+                                    <Link to='/' className='logo' onClick={handleClick}>
                                         <img src={logo} alt='logo' />
                                     </Link>
                                 )}
                             </div>
 
-                            <div className='nav__links'>
-                                {(toggled || width > 500) && (
-                                    <>
-                                        {me && (
-                                            <>
-                                                {me.permissions.includes('ADMIN') && (
-                                                    <div className='nav__links__admin'>
-                                                        <NavLink
-                                                            to='/admin'
-                                                            activeClassName='active'
-                                                        >
-                                                            ✪ Admin
-                                                        </NavLink>
-                                                    </div>
-                                                )}
+                            {/* <animated.div className='nav__links' style={headerAnimations}> */}
+                            {/* </animated.div> */}
 
-                                                <NavLink to='/fast'>🔥 Fast</NavLink>
+                            {(toggled || width > 500) && (
+                                <animated.div style={headerAnimations} className='nav__links'>
+                                    {width < 500 && (
+                                        <Link to='/' onClick={handleClick}>
+                                            Home
+                                        </Link>
+                                    )}
 
-                                                <span className='nav__links__user'>
-                                                    <NavLink to='/profile' activeClassName='active'>
-                                                        ★ {me.name}
+                                    {me && (
+                                        <>
+                                            {me.permissions.includes('ADMIN') && (
+                                                <span className='nav__links__admin'>
+                                                    <NavLink
+                                                        to='/admin'
+                                                        activeClassName='active'
+                                                        onClick={handleClick}
+                                                    >
+                                                        ✪ Admin
                                                     </NavLink>
                                                 </span>
+                                            )}
 
-                                                <Logout />
-                                            </>
-                                        )}
-                                        {!me && (
-                                            <>
-                                                <NavLink to='/login' activeClassName='active'>
-                                                    Login
+                                            <NavLink to='/fast' onClick={handleClick}>
+                                                🔥 Fast
+                                            </NavLink>
+
+                                            <span className='nav__links__user'>
+                                                <NavLink
+                                                    to='/profile'
+                                                    activeClassName='active'
+                                                    onClick={handleClick}
+                                                >
+                                                    ★ {me.name}
                                                 </NavLink>
-                                                <NavLink to='/register' activeClassName='active'>
-                                                    Register
-                                                </NavLink>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </div>
+                                            </span>
+
+                                            <Logout />
+                                        </>
+                                    )}
+
+                                    {!me && (
+                                        <>
+                                            <NavLink
+                                                to='/login'
+                                                activeClassName='active'
+                                                onClick={handleClick}
+                                            >
+                                                Login
+                                            </NavLink>
+
+                                            <NavLink
+                                                to='/register'
+                                                activeClassName='active'
+                                                onClick={handleClick}
+                                            >
+                                                Register
+                                            </NavLink>
+                                        </>
+                                    )}
+                                </animated.div>
+                            )}
                         </nav>
                     </HeaderStyles>
                 )

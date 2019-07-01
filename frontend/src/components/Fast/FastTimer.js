@@ -28,19 +28,6 @@ const ContainerStyles = styled.div`
         }
     }
 
-    .container__timer {
-        line-height: 1;
-        margin: 4px;
-        margin-bottom: 16px;
-
-        border-radius: 4px;
-        box-shadow: 0 0 8px var(--color-grey);
-
-        &__time-left {
-            font-size: 2.5rem;
-        }
-    }
-
     .container__buttons {
         display: flex;
         justify-content: space-between;
@@ -54,18 +41,21 @@ const ContainerStyles = styled.div`
         }
     }
 
+    @media all and (max-width: 800px) {
+        margin-bottom: 16px;
+    }
+
     @media all and (max-width: 500px) {
         justify-content: center;
         align-items: center;
-        margin-bottom: 16px;
 
         .container__buttons__button {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
 
             &__icon {
-                max-width: 40px;
-                max-height: 40px;
+                max-width: 50px;
+                max-height: 50px;
             }
         }
     }
@@ -170,7 +160,7 @@ const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsAct
     return (
         <div className='container__buttons'>
             <ButtonStyles
-                className='container__buttons__button__stop'
+                className='container__buttons__button'
                 onClick={async () => {
                     await stopFast()
                     setId('')
