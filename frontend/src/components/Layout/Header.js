@@ -74,6 +74,7 @@ const HeaderStyles = styled.header`
             &__hamburguer {
                 display: none;
                 cursor: pointer;
+                user-select: none;
 
                 &:hover {
                     text-decoration: none;
@@ -115,7 +116,7 @@ const HeaderStyles = styled.header`
             justify-content: space-between;
 
             .nav__toggle {
-                order: 1;
+                order: 0;
                 color: var(--color-white);
             }
         }
@@ -131,7 +132,6 @@ const HeaderStyles = styled.header`
                 flex-flow: column wrap;
                 justify-content: center;
                 align-content: center;
-                order: 0;
 
                 &__hamburguer {
                     display: block;
@@ -218,63 +218,61 @@ const Navigation = () => {
                             {/* <animated.div className='nav__links' style={headerAnimations}>
                                     </animated.div> */}
 
-                            <div className='nav__links'>
-                                {(toggled || width > 500) && (
-                                    <>
-                                        {me && (
-                                            <>
-                                                {me.permissions.includes('ADMIN') && (
-                                                    <div className='nav__links__admin'>
-                                                        <NavLink
-                                                            to='/admin'
-                                                            activeClassName='active'
-                                                            onClick={handleToggle}
-                                                        >
-                                                            ✪ Admin
-                                                        </NavLink>
-                                                    </div>
-                                                )}
-
-                                                <NavLink to='/fast' onClick={handleToggle}>
-                                                    🔥 Fast
-                                                </NavLink>
-
-                                                <span className='nav__links__user'>
+                            {(toggled || width > 500) && (
+                                <div className='nav__links'>
+                                    {me && (
+                                        <>
+                                            {me.permissions.includes('ADMIN') && (
+                                                <div className='nav__links__admin'>
                                                     <NavLink
-                                                        to='/profile'
+                                                        to='/admin'
                                                         activeClassName='active'
                                                         onClick={handleToggle}
                                                     >
-                                                        ★ {me.name}
+                                                        ✪ Admin
                                                     </NavLink>
-                                                </span>
+                                                </div>
+                                            )}
 
-                                                <Logout />
-                                            </>
-                                        )}
+                                            <NavLink to='/fast' onClick={handleToggle}>
+                                                🔥 Fast
+                                            </NavLink>
 
-                                        {!me && (
-                                            <>
+                                            <span className='nav__links__user'>
                                                 <NavLink
-                                                    to='/login'
+                                                    to='/profile'
                                                     activeClassName='active'
                                                     onClick={handleToggle}
                                                 >
-                                                    Login
+                                                    ★ {me.name}
                                                 </NavLink>
+                                            </span>
 
-                                                <NavLink
-                                                    to='/register'
-                                                    activeClassName='active'
-                                                    onClick={handleToggle}
-                                                >
-                                                    Register
-                                                </NavLink>
-                                            </>
-                                        )}
-                                    </>
-                                )}
-                            </div>
+                                            <Logout />
+                                        </>
+                                    )}
+
+                                    {!me && (
+                                        <>
+                                            <NavLink
+                                                to='/login'
+                                                activeClassName='active'
+                                                onClick={handleToggle}
+                                            >
+                                                Login
+                                            </NavLink>
+
+                                            <NavLink
+                                                to='/register'
+                                                activeClassName='active'
+                                                onClick={handleToggle}
+                                            >
+                                                Register
+                                            </NavLink>
+                                        </>
+                                    )}
+                                </div>
+                            )}
                         </nav>
                     </HeaderStyles>
                 )
