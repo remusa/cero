@@ -5,7 +5,7 @@ import { SIGNUP_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
-import Form from '../styled/Form'
+import FormStyles from '../styled/Form'
 
 const Register = props => {
     const [email, setEmail] = useState('')
@@ -47,7 +47,7 @@ const Register = props => {
 
     return (
         <Main>
-            <Form
+            <FormStyles
                 method='POST'
                 onSubmit={e => {
                     handleSubmit(e, signup)
@@ -98,7 +98,7 @@ const Register = props => {
 
                     <div className='divider' />
                 </fieldset>
-            </Form>
+            </FormStyles>
         </Main>
     )
 }

@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { Field, Form, Formik, ErrorMessage } from 'formik'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { toast } from 'react-toastify'
-import { Formik } from 'formik'
+import styled from 'styled-components'
+import * as yup from 'yup'
 import { SIGNIN_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
-import Form from '../styled/Form'
+import FormStyles from '../styled/Form'
 
 export const ResetStyles = styled.div`
     padding: 4px;
@@ -26,25 +27,33 @@ export const ResetStyles = styled.div`
     }
 `
 
+const validationSchema = yup.object().shape({
+    email: yup
+        .string()
+        .email('Invalid email')
+        .required('Email is required'),
+    password: yup
+        .string()
+        .min(10, 'Password must be at least 10 characters long')
+        .max(25, 'Password must be max. 25 characters')
+        .required('Password is required'),
+})
+
 const Login = props => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [user, setUser] = useState({ email: '', password: '' })
 
-    const resetState = () => {
-        setEmail('')
-        setPassword('')
-    }
+    const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION, {
+        variables: user,
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        onCompleted: () => props.history.push('/fast'),
+    })
 
-    const handleChange = e => {
-        const { name, value } = e.target
-        if (name === 'email') setEmail(value)
-        else if (name === 'password') setPassword(value)
-    }
+    const handleSubmit = async ({ email, password }, actions) => {
+        actions.setSubmitting(true)
+        setUser({ email, password })
 
-    const handleSubmit = async (e, action) => {
-        e.preventDefault()
-        await action()
-        await resetState()
+        await signin()
+        await actions.setSubmitting(false)
         await toast.success('Welcome!', {
             position: 'top-right',
             autoClose: 2000,
@@ -55,58 +64,81 @@ const Login = props => {
         })
     }
 
-    const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION, {
-        variables: { email, password },
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-        onCompleted: () => props.history.push('/fast'),
-    })
-
     return (
         <Main>
-            <Form
-                method='POST'
-                onSubmit={e => {
-                    handleSubmit(e, signin)
-                }}
-            >
-                <fieldset disabled={loading} aria-busy={loading}>
-                    <h2>Login to your account</h2>
+            <FormStyles>
+                <Formik
+                    initialValues={user}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, actions) => {
+                        handleSubmit(values, actions)
+                    }}
+                >
+                    {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
+                        <Form>
+                            <fieldset disabled={loading} aria-busy={loading}>
+                                <h2>Login to your account</h2>
 
-                    <Error error={error} />
+                                <Error error={error} />
 
-                    <label htmlFor='email'>
-                        Email
-                        <input
-                            required
-                            type='email'
-                            name='email'
-                            placeholder='email'
-                            value={email}
-                            onChange={handleChange}
-                        />
-                    </label>
+                                <label htmlFor='email'>
+                                    Email
+                                    <Field
+                                        type='email'
+                                        name='email'
+                                        placeholder='your_email@example.com'
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                    <ErrorMessage
+                                        name='email'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
 
-                    <label htmlFor='password'>
-                        Password
-                        <input
-                            required
-                            type='password'
-                            name='password'
-                            placeholder='*****'
-                            value={password}
-                            onChange={handleChange}
-                        />
-                    </label>
+                                <label htmlFor='password'>
+                                    Password
+                                    <Field
+                                        required
+                                        type='password'
+                                        name='password'
+                                        placeholder='*****'
+                                        value={values.password}
+                                        onChange={handleChange}
+                                    />
+                                    <ErrorMessage
+                                        name='password'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
 
-                    <button type='submit'>Login</button>
+                                <button type='submit' disabled={loading || !dirty || isSubmitting}>
+                                    Login
+                                </button>
 
-                    <Link to='/requestreset'>
-                        <ResetStyles>Reset password</ResetStyles>
-                    </Link>
+                                <button
+                                    type='button'
+                                    disabled={!dirty}
+                                    component='div'
+                                    onClick={handleReset}
+                                    className='resetButton'
+                                >
+                                    Reset
+                                </button>
 
-                    <div className='divider' />
-                </fieldset>
-            </Form>
+                                <Link to='/requestreset'>
+                                    <ResetStyles>Reset password</ResetStyles>
+                                </Link>
+
+                                <div className='divider' />
+                            </fieldset>
+                        </Form>
+                    )}
+                </Formik>
+            </FormStyles>
         </Main>
     )
 }

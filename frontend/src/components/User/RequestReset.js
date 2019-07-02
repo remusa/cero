@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { REQUEST_RESET_MUTATION } from '../../gql/UserMutation'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
-import Form from '../styled/Form'
+import FormStyles from '../styled/Form'
 
 const RequestReset = () => {
     const [email, setEmail] = useState('')
@@ -23,7 +23,7 @@ const RequestReset = () => {
 
     return (
         <Main>
-            <Form
+            <FormStyles
                 method='POST'
                 onSubmit={e => {
                     handleSubmit(e, reset)
@@ -51,7 +51,7 @@ const RequestReset = () => {
                     </button>
                     <div className='divider' />
                 </fieldset>
-            </Form>
+            </FormStyles>
         </Main>
     )
 }

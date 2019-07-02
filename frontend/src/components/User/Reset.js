@@ -6,7 +6,7 @@ import { RESET_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
-import Form from '../styled/Form'
+import FormStyles from '../styled/Form'
 
 const Reset = props => {
     const [password, setPassword] = useState('')
@@ -39,7 +39,7 @@ const Reset = props => {
 
     return (
         <Main>
-            <Form
+            <FormStyles
                 method='POST'
                 onSubmit={e => {
                     handleSubmit(e, reset)
@@ -48,7 +48,7 @@ const Reset = props => {
                 <fieldset disabled={loading} aria-busy={loading}>
                     <h2>Reset your password</h2>
                     <Error error={error} />
-                    {/* {formError && <p>{formError}</p>} */}
+                    {/* {FormStylesError && <p>{FormStylesError}</p>} */}
                     <label htmlFor='password'>
                         Password
                         <input
@@ -73,7 +73,7 @@ const Reset = props => {
                     </label>
                     <button type='submit'>Reset password</button>
                 </fieldset>
-            </Form>
+            </FormStyles>
         </Main>
     )
 }

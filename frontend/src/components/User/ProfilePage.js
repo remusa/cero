@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import PleaseSignIn from './PleaseSignIn'
 import { UPDATE_USER_MUTATION } from '../../gql/UserMutation'
-import Form from '../styled/Form'
+import FormStyles from '../styled/Form'
 import Error from '../ErrorMessage'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import { UserContext } from '../../data/UserContext'
@@ -72,7 +72,7 @@ const ProfilePage = () => {
             <ProfileStyles>
                 <h1>Profile</h1>
 
-                <Form
+                <FormStyles
                     method='POST'
                     onSubmit={e => {
                         handleSubmit(e, updateUser)
@@ -97,7 +97,7 @@ const ProfilePage = () => {
 
                         <button type='submit'>Update</button>
                     </fieldset>
-                </Form>
+                </FormStyles>
             </ProfileStyles>
         </PleaseSignIn>
     )

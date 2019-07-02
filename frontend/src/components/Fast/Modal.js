@@ -9,7 +9,7 @@ import { DELETE_FAST_MUTATION, UPDATE_FAST_MUTATION } from '../../gql/FastMutati
 import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
 import Error from '../ErrorMessage'
 import { ResetStyles } from '../User/Login'
-import Form from '../styled/Form'
+import FormStyles from '../styled/Form'
 
 const BackdropStyles = styled.div`
     position: fixed;
@@ -166,7 +166,7 @@ const Modal = ({
         <BackdropStyles>
             <ModalStyles>
                 {/* <CloseButtonStyles onClick={onClose}>X</CloseButtonStyles> */}
-                <Form
+                <FormStyles
                     method='POST'
                     onSubmit={e => {
                         handleSubmit(e, update)
@@ -189,7 +189,7 @@ const Modal = ({
                                 onChange={date => {
                                     setStartDate(date)
                                 }}
-                                dateFormat='MM/dd/yyyy h:mm aa'
+                                dateFormStylesat='MM/dd/yyyy h:mm aa'
                             />
                         </label>
 
@@ -203,7 +203,7 @@ const Modal = ({
                                 onChange={date => {
                                     setEndDate(date)
                                 }}
-                                dateFormat='MM/dd/yyyy h:mm aa'
+                                dateFormStylesat='MM/dd/yyyy h:mm aa'
                             />
                         </label>
 
@@ -214,7 +214,7 @@ const Modal = ({
 
                         <ResetStyles onClick={onClose}>Go back</ResetStyles>
                     </fieldset>
-                </Form>
+                </FormStyles>
             </ModalStyles>
         </BackdropStyles>
     )
