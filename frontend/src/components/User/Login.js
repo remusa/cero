@@ -49,8 +49,8 @@ const Login = props => {
     })
 
     const handleSubmit = async ({ email, password }, actions) => {
-        actions.setSubmitting(true)
         setUser({ email, password })
+        actions.setSubmitting(true)
 
         await signin()
         await actions.setSubmitting(false)
@@ -84,12 +84,12 @@ const Login = props => {
                                 <label htmlFor='email'>
                                     Email
                                     <Field
+                                        required
                                         type='email'
                                         name='email'
                                         placeholder='your_email@example.com'
                                         value={values.email}
                                         onChange={handleChange}
-                                        required
                                     />
                                     <ErrorMessage
                                         name='email'
@@ -122,7 +122,6 @@ const Login = props => {
                                 <button
                                     type='button'
                                     disabled={!dirty}
-                                    component='div'
                                     onClick={handleReset}
                                     className='resetButton'
                                 >
@@ -130,7 +129,7 @@ const Login = props => {
                                 </button>
 
                                 <Link to='/requestreset'>
-                                    <ResetStyles>Reset password</ResetStyles>
+                                    <ResetStyles>Forgot password?</ResetStyles>
                                 </Link>
 
                                 <div className='divider' />

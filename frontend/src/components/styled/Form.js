@@ -60,6 +60,8 @@ const FormStyles = styled.div`
             font-size: 1.7rem;
             font-weight: 600;
             padding: 0.5rem 1.2rem;
+
+            margin-right: 8px;
         }
 
         button.resetButton {

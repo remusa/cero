@@ -72,31 +72,33 @@ const ProfilePage = () => {
             <ProfileStyles>
                 <h1>Profile</h1>
 
-                <FormStyles
-                    method='POST'
-                    onSubmit={e => {
-                        handleSubmit(e, updateUser)
-                    }}
-                >
-                    <fieldset disabled={loading} aria-busy={loading}>
-                        <h2>Update user</h2>
+                <FormStyles>
+                    <form
+                        method='POST'
+                        onSubmit={e => {
+                            handleSubmit(e, updateUser)
+                        }}
+                    >
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <h2>Update user</h2>
 
-                        <Error error={error} />
+                            <Error error={error} />
 
-                        <label htmlFor='goal'>
-                            Target fast
-                            <input
-                                type='number'
-                                min='1'
-                                name='goal'
-                                placeholder={user.goal}
-                                value={goal}
-                                onChange={handleChange}
-                            />
-                        </label>
+                            <label htmlFor='goal'>
+                                Target fast
+                                <input
+                                    type='number'
+                                    min='1'
+                                    name='goal'
+                                    placeholder={user.goal}
+                                    value={goal}
+                                    onChange={handleChange}
+                                />
+                            </label>
 
-                        <button type='submit'>Update</button>
-                    </fieldset>
+                            <button type='submit'>Update</button>
+                        </fieldset>
+                    </form>
                 </FormStyles>
             </ProfileStyles>
         </PleaseSignIn>
