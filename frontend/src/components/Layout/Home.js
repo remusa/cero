@@ -5,6 +5,32 @@ import Main from './Main'
 
 import screenshot from '../../static/images/cero.png'
 
+const HomeStyles = styled.div`
+    .particles {
+        --color1: ${props => props.theme.colorGreenLight};
+        --color2: ${props => props.theme.colorGreen};
+
+        background: var(--color2); /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+            to right,
+            var(--color1),
+            var(--color2)
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+            to right,
+            var(--color1),
+            var(--color2)
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+    }
+`
+
 const particlesOptions = {
     particles: {
         number: {
@@ -116,14 +142,14 @@ const Screenshot = () => (
 )
 
 const Home = () => (
-    <>
+    <HomeStyles>
         <Particles className='particles' params={particlesOptions} />
         <Main>
             <h1>Cero</h1>
             <h2>Cero is a simple intermittent fasting tracker app</h2>
             <Screenshot />
         </Main>
-    </>
+    </HomeStyles>
 )
 
 export default Home

@@ -4,7 +4,7 @@ export const TableStyles = styled.table`
     border-spacing: 0;
     /* border: 1px solid var(--color-grey); */
     /* box-shadow: 0 5px 15px 0 hsla(0, 0, 0, 0.9); */
-    /* box-shadow: 0 0 20px var(--color-primary); */
+    /* box-shadow: 0 0 20px ${props => props.theme.colorPrimary}; */
     border-radius: 4px;
     margin: 0 auto;
     width: auto;
@@ -16,14 +16,14 @@ export const TableStyles = styled.table`
         padding: 4px;
         color: var(--color-grey-darker);
 
-        border-bottom: 4px solid var(--color-primary);
+        border-bottom: 4px solid ${props => props.theme.colorPrimary};
     }
 
     .divider {
         width: 100%;
         height: 3px;
         border-radius: 1px;
-        background-color: var(--color-primary);
+        background-color: ${props => props.theme.colorPrimary};
         pointer-events: none;
     }
 
@@ -41,8 +41,8 @@ export const TableStyles = styled.table`
 
     tr {
         &:hover {
-            background: var(--color-primary);
-            box-shadow: 0 0 20px var(--color-primary-darker);
+            background: ${props => props.theme.colorPrimary};
+            box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarker};
             border-radius: 20px;
         }
     }

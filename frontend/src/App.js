@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { toast } from 'react-toastify'
 import Footer from './components/Layout/Footer'
 import Header from './components/Layout/Header'
@@ -7,7 +7,7 @@ import Routes, { AnimatedRoutes } from './Routes'
 import 'normalize.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { UserProvider } from './data/UserContext'
-import { ThemeProvider } from './data/ThemeContext'
+import { ThemeProvider, GlobalStyle } from './data/ThemeContext'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -40,6 +40,8 @@ const App = () => (
     <ThemeProvider>
         <UserProvider>
             <AppStyles className='App'>
+                <GlobalStyle />
+
                 <Header />
                 <Routes />
                 {/* <AnimatedRoutes /> */}

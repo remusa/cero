@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-// import { css } from '@emotion/core'
+import styled, { css } from 'styled-components'
 import { DotLoader } from 'react-spinners'
 
-// const override = css`
-//     display: block;
-//     margin: 0 auto;
-//     border-color: var(--color-primary);
-// `
-
-const override = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'var(--color-primary)',
-}
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: ${props => props.theme.colorPrimary};
+`
 
 const ContainerStyles = styled.div`
     /* height: 100%; */
@@ -29,7 +22,7 @@ const StyledP = styled.p`
     text-align: center;
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-primary);
+    color: ${props => props.theme.colorPrimary};
 `
 
 const ProgresBarStyles = styled.div`
@@ -49,13 +42,13 @@ const ProgresBarStyles = styled.div`
 
     .progress {
         height: 25px;
-        background: var(--color-green);
+        background: ${props => props.theme.colorGreen};
         background: -webkit-linear-gradient(
             to bottom,
             var(--color-green-lighter),
-            var(--color-green)
+            ${props => props.theme.colorGreen}
         );
-        background: linear-gradient(to bottom, var(--color-green-light), var(--color-green));
+        background: linear-gradient(to bottom, var(--color-green-light), ${props => props.theme.colorGreen});
         border-radius: 3px;
         width: 0;
         transition: width 0.5s ease-in;
@@ -116,7 +109,7 @@ const Loading = props => {
                     sizeUnit='px'
                     size={100}
                     height={8}
-                    color='var(--color-primary)'
+                    color='${props => props.theme.colorPrimary}'
                     loading={loading}
                 />
             </div>

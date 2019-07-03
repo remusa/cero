@@ -65,8 +65,8 @@ const ButtonStyles = styled.button`
     background-image: linear-gradient(
         98.88deg,
         var(--color-primary-lighter) 0,
-        var(--color-primary) 52.08%,
-        var(--color-primary-darker) 100%
+        ${props => props.theme.colorPrimary} 52.08%,
+        ${props => props.theme.colorPrimaryDarker} 100%
     );
     box-shadow: 0 0 20px var(--color-primary-lighter);
     border-radius: 50%;
@@ -90,11 +90,11 @@ const ButtonStyles = styled.button`
 
     &:hover,
     &:active {
-        box-shadow: 0 0 20px var(--color-primary-darker);
+        box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarker};
         background-image: linear-gradient(
             45deg,
             var(--color-primary-lighter) 0,
-            var(--color-primary-darker) 100%
+            ${props => props.theme.colorPrimaryDarker} 100%
         );
     }
 

@@ -14,8 +14,8 @@ const loading = keyframes`
 
 const FormStyles = styled.div`
     form {
-        /* background: linear-gradient(var(--color-primary-lighter) 52.08%, var(--color-primary) 100%); */
-        /* background: linear-gradient(var(--color-primary-lighter, var(--color-primary-darker)); */
+        /* background: linear-gradient(var(--color-primary-lighter) 52.08%, ${props => props.theme.colorPrimary} 100%); */
+        /* background: linear-gradient(var(--color-primary-lighter, ${props => props.theme.colorPrimaryDarker}); */
         box-shadow: 0 0 20px var(--color-primary-darkest);
         border-radius: 20px;
         padding: 20px;
@@ -25,7 +25,7 @@ const FormStyles = styled.div`
         max-width: 300px;
 
         h2 {
-            border-bottom: 3px solid var(--color-primary);
+            border-bottom: 3px solid ${props => props.theme.colorPrimary};
         }
 
         label {
@@ -44,8 +44,8 @@ const FormStyles = styled.div`
 
             &:focus {
                 outline: 0;
-                border-color: var(--color-primary);
-                box-shadow: 0 0 10px var(--color-primary);
+                border-color: ${props => props.theme.colorPrimary};
+                box-shadow: 0 0 10px ${props => props.theme.colorPrimary};
             }
         }
 
@@ -53,7 +53,7 @@ const FormStyles = styled.div`
         input[type='submit'] {
             outline: none;
             width: auto;
-            background: var(--color-primary);
+            background: ${props => props.theme.colorPrimary};
             color: var(--color-white);
             border: 0;
             border-radius: 3px;
@@ -90,8 +90,8 @@ const FormStyles = styled.div`
                 background-image: linear-gradient(
                     to right,
                     var(--color-primary-lighter) 0,
-                    var(--color-primary) 50%,
-                    var(--color-primary-darker) 100%
+                    ${props => props.theme.colorPrimary} 50%,
+                    ${props => props.theme.colorPrimaryDarker} 100%
                 );
             }
             &[aria-busy='true']::before {
@@ -110,7 +110,7 @@ const FormStyles = styled.div`
             width: 100%;
             height: 8px;
             border-radius: 30px;
-            background-color: var(--color-primary);
+            background-color: ${props => props.theme.colorPrimary};
         }
     }
 `

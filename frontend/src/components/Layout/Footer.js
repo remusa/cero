@@ -6,8 +6,8 @@ const FooterStyles = styled.div`
     grid-area: footer;
 
     footer {
-        /* background-image: radial-gradient(circle, var(--color-primary), var(--color-primary-darker)); */
-        background-color: var(--color-primary);
+        /* background-image: radial-gradient(circle, ${props => props.theme.colorPrimary}, ${props => props.theme.colorPrimaryDarker}); */
+        background-color: ${props => props.theme.colorPrimary};
         text-align: center;
         /* line-height: 2; */
         height: 40px;
@@ -18,7 +18,7 @@ const FooterStyles = styled.div`
         align-items: center;
 
         .emoticon {
-            color: var(--color-red);
+            color: ${props => props.theme.colorRed};
         }
 
         a,
@@ -67,9 +67,10 @@ const Footer = () => {
                         RMS
                     </a>
                 </span>
-                {/* <button type='button' onClick={() => setDarkMode()}>
+
+                <button type='button' onClick={() => setDarkMode()}>
                     {theme === 'light' ? 'Dark mode' : 'Light mode'}
-                </button> */}
+                </button>
             </footer>
         </FooterStyles>
     )
