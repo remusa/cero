@@ -8,7 +8,7 @@ const TimerDuration = props => {
     const { startDate } = activeFast
 
     const [endDate, setEndDate] = useState(activeFast ? activeFast.endDate : '')
-    const [duration, setDuration] = useState(activeFast ? activeFast.duration : '')
+    const [duration, setDuration] = useState(activeFast ? activeFast.duration : {})
 
     useEffect(() => {
         const timerControl = () => {

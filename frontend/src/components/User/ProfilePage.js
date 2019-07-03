@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { Field, Form, Formik, ErrorMessage } from 'formik'
+import * as yup from 'yup'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import PleaseSignIn from './PleaseSignIn'
 import { UPDATE_USER_MUTATION } from '../../gql/UserMutation'
-import Form from '../styled/Form'
+import FormStyles from '../styled/Form'
 import Error from '../ErrorMessage'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import { UserContext } from '../../data/UserContext'
@@ -17,6 +19,13 @@ const ProfileStyles = styled.div`
     justify-content: flex-start;
     align-items: center;
 `
+
+const validationSchema = yup.object().shape({
+    goal: yup
+        .string()
+        // .min(3, 'Username must be at least 3 characters long')
+        .max(4, 'Goal must be max. 4 characters'),
+})
 
 const ProfilePage = () => {
     const [goal, setGoal] = useState('')
@@ -72,32 +81,34 @@ const ProfilePage = () => {
             <ProfileStyles>
                 <h1>Profile</h1>
 
-                <Form
-                    method='POST'
-                    onSubmit={e => {
-                        handleSubmit(e, updateUser)
-                    }}
-                >
-                    <fieldset disabled={loading} aria-busy={loading}>
-                        <h2>Update user</h2>
+                <FormStyles>
+                    <form
+                        method='POST'
+                        onSubmit={e => {
+                            handleSubmit(e, updateUser)
+                        }}
+                    >
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <h2>Update user</h2>
 
-                        <Error error={error} />
+                            <Error error={error} />
 
-                        <label htmlFor='goal'>
-                            Target fast
-                            <input
-                                type='number'
-                                min='1'
-                                name='goal'
-                                placeholder={user.goal}
-                                value={goal}
-                                onChange={handleChange}
-                            />
-                        </label>
+                            <label htmlFor='goal'>
+                                Target fast
+                                <input
+                                    type='number'
+                                    min='1'
+                                    name='goal'
+                                    placeholder={user.goal}
+                                    value={goal}
+                                    onChange={handleChange}
+                                />
+                            </label>
 
-                        <button type='submit'>Update</button>
-                    </fieldset>
-                </Form>
+                            <button type='submit'>Update</button>
+                        </fieldset>
+                    </form>
+                </FormStyles>
             </ProfileStyles>
         </PleaseSignIn>
     )
