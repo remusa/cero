@@ -16,7 +16,7 @@ const FormStyles = styled.div`
     form {
         /* background: linear-gradient(var(--color-primary-lighter) 52.08%, var(--color-primary) 100%); */
         /* background: linear-gradient(var(--color-primary-lighter, var(--color-primary-darker)); */
-        box-shadow: 0 0 20px var(--color-primary-darker);
+        box-shadow: 0 0 20px var(--color-primary-darkest);
         border-radius: 20px;
         padding: 20px;
         font-size: 1.5rem;
@@ -56,8 +56,8 @@ const FormStyles = styled.div`
             background: var(--color-primary);
             color: var(--color-white);
             border: 0;
-            border-radius: 5px;
-            font-size: 1.7rem;
+            border-radius: 3px;
+            font-size: 1.5rem;
             font-weight: 600;
             padding: 0.5rem 1.2rem;
 
@@ -70,8 +70,8 @@ const FormStyles = styled.div`
             background: var(--color-grey);
             color: var(--color-white);
             border: 0;
-            border-radius: 5px;
-            font-size: 1.7rem;
+            border-radius: 3px;
+            font-size: 1.5rem;
             font-weight: 600;
             padding: 0.5rem 1.2rem;
         }

@@ -70,7 +70,7 @@ const Register = props => {
                     {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
                         <Form>
                             <fieldset disabled={loading} aria-busy={loading}>
-                                <h2>Register a new account</h2>
+                                <h2>Register</h2>
 
                                 <Error error={error} />
 
@@ -160,6 +160,9 @@ const Register = props => {
                                 </Link>
 
                                 <div className='divider' />
+
+                                {/* <pre>{JSON.stringify(values, null, 2)}</pre>
+                                <pre>{JSON.stringify(errors, null, 2)}</pre> */}
                             </fieldset>
                         </Form>
                     )}

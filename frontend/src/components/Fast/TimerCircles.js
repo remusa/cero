@@ -80,7 +80,7 @@ SVGCircle.propTypes = {
     radius: PropTypes.number.isRequired,
 }
 
-const FastTimerCircles = ({ duration }) => {
+const TimerCircles = ({ duration }) => {
     const { days, hours, minutes, seconds } = duration
 
     const daysRadius = mapNumber(days, 30, 0, 0, 360)
@@ -131,8 +131,12 @@ const FastTimerCircles = ({ duration }) => {
     )
 }
 
-FastTimerCircles.propTypes = {
-    duration: PropTypes.object.isRequired,
+TimerCircles.propTypes = {
+    duration: PropTypes.oneOfType([PropTypes.object.isRequired, PropTypes.number.isRequired]),
 }
 
-export default FastTimerCircles
+TimerCircles.defaultProps = {
+    duration: {},
+}
+
+export default TimerCircles

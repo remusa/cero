@@ -53,7 +53,7 @@ const RequestReset = () => {
                     {({ values, errors, dirty, handleChange, isSubmitting }) => (
                         <Form>
                             <fieldset disabled={loading} aria-busy={loading}>
-                                <h2>Reset your password</h2>
+                                <h2>Reset password</h2>
 
                                 <Error error={error} />
 
@@ -87,9 +87,6 @@ const RequestReset = () => {
                                 </button>
 
                                 <div className='divider' />
-
-                                {/* <pre>{JSON.stringify(values, null, 2)}</pre>
-                                <pre>{JSON.stringify(errors, null, 2)}</pre> */}
                             </fieldset>
                         </Form>
                     )}

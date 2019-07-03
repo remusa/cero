@@ -166,54 +166,56 @@ const Modal = ({
         <BackdropStyles>
             <ModalStyles>
                 {/* <CloseButtonStyles onClick={onClose}>X</CloseButtonStyles> */}
-                <FormStyles
-                    method='POST'
-                    onSubmit={e => {
-                        handleSubmit(e, update)
-                    }}
-                >
-                    <fieldset disabled={loading} aria-busy={loading}>
-                        <Error error={error} />
+                <FormStyles>
+                    <form
+                        method='POST'
+                        onSubmit={e => {
+                            handleSubmit(e, update)
+                        }}
+                    >
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <Error error={error} />
 
-                        {formError && <p>{formError}</p>}
+                            {formError && <p>{formError}</p>}
 
-                        <h2>Update fast</h2>
-                        <p>ID: {id}</p>
+                            <h2>Update fast</h2>
+                            <p>ID: {id}</p>
 
-                        <label htmlFor='startDate'>
-                            Start Date: {'\t'}
-                            <DatePicker
-                                selected={new Date(startDate)}
-                                showTimeInput
-                                timeInputLabel='Time:'
-                                onChange={date => {
-                                    setStartDate(date)
-                                }}
-                                dateFormStylesat='MM/dd/yyyy h:mm aa'
-                            />
-                        </label>
+                            <label htmlFor='startDate'>
+                                Start Date: {'\t'}
+                                <DatePicker
+                                    selected={new Date(startDate)}
+                                    showTimeInput
+                                    timeInputLabel='Time:'
+                                    onChange={date => {
+                                        setStartDate(date)
+                                    }}
+                                    dateFormStylesat='MM/dd/yyyy h:mm aa'
+                                />
+                            </label>
 
-                        <label htmlFor='endDate'>
-                            End Date: {'\t'}
-                            <DatePicker
-                                disabled={isActive}
-                                selected={endDate ? new Date(endDate) : ''}
-                                showTimeInput
-                                timeInputLabel='Time:'
-                                onChange={date => {
-                                    setEndDate(date)
-                                }}
-                                dateFormStylesat='MM/dd/yyyy h:mm aa'
-                            />
-                        </label>
+                            <label htmlFor='endDate'>
+                                End Date: {'\t'}
+                                <DatePicker
+                                    disabled={isActive}
+                                    selected={endDate ? new Date(endDate) : ''}
+                                    showTimeInput
+                                    timeInputLabel='Time:'
+                                    onChange={date => {
+                                        setEndDate(date)
+                                    }}
+                                    dateFormStylesat='MM/dd/yyyy h:mm aa'
+                                />
+                            </label>
 
-                        <div className='buttons_container'>
-                            <button type='submit'>Update</button>
-                            {!isActive && <DeleteButton id={id} onClick={onClose} />}
-                        </div>
+                            <div className='buttons_container'>
+                                <button type='submit'>Update</button>
+                                {!isActive && <DeleteButton id={id} onClick={onClose} />}
+                            </div>
 
-                        <ResetStyles onClick={onClose}>Go back</ResetStyles>
-                    </fieldset>
+                            <ResetStyles onClick={onClose}>Go back</ResetStyles>
+                        </fieldset>
+                    </form>
                 </FormStyles>
             </ModalStyles>
         </BackdropStyles>

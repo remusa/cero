@@ -104,9 +104,6 @@ const Reset = props => {
                                 >
                                     Reset password
                                 </button>
-
-                                <pre>{JSON.stringify(values, null, 2)}</pre>
-                                <pre>{JSON.stringify(errors, null, 2)}</pre>
                             </fieldset>
                         </Form>
                     )}

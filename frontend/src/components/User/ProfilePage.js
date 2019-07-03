@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { Field, Form, Formik, ErrorMessage } from 'formik'
+import * as yup from 'yup'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import PleaseSignIn from './PleaseSignIn'
@@ -17,6 +19,13 @@ const ProfileStyles = styled.div`
     justify-content: flex-start;
     align-items: center;
 `
+
+const validationSchema = yup.object().shape({
+    goal: yup
+        .string()
+        // .min(3, 'Username must be at least 3 characters long')
+        .max(4, 'Goal must be max. 4 characters'),
+})
 
 const ProfilePage = () => {
     const [goal, setGoal] = useState('')

@@ -77,7 +77,7 @@ const Login = props => {
                     {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
                         <Form>
                             <fieldset disabled={loading} aria-busy={loading}>
-                                <h2>Login to your account</h2>
+                                <h2>Login</h2>
 
                                 <Error error={error} />
 
