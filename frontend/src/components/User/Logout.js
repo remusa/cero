@@ -12,7 +12,7 @@ const Logout = () => {
     })
 
     const handleSignOut = () => {
-        localStorage.clear()
+        signout()
         toast.error('Goodbye!', {
             position: 'top-right',
             autoClose: 2000,
@@ -21,7 +21,7 @@ const Logout = () => {
             pauseOnHover: false,
             draggable: false,
         })
-        signout()
+        localStorage.clear()
     }
 
     return (
