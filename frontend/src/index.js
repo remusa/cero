@@ -20,9 +20,10 @@ const client = new ApolloClient({
     uri: URI,
     request: async operation => {
         operation.setContext({
-            headers: {
-                Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
-            },
+            // headers: {
+            // Authorization: `Bearer ${process.env.REACT_APP_PRISMA_TOKEN}`,
+            // Authorization: `Bearer ${localStorage.getItem('AUTH_TOKEN')}` : '',
+            // },
             fetchOptions: {
                 credentials: 'include',
             },

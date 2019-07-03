@@ -1,0 +1,21 @@
+{
+    "name": "cero",
+    "version": "1.0.0",
+    "description": "Cero is a fasting tracker built in React, Node.js (Express.js) and GraphQL.",
+    "main": "index.js",
+    "scripts": {
+        "frontend": "cd frontend/ && npm run dev",
+        "backend": "cd backend/ && npm run dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/remusa/cero.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/remusa/cero/issues"
+    },
+    "homepage": "https://github.com/remusa/cero#readme"
+}
