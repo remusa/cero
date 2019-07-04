@@ -7,7 +7,7 @@
         "frontend": "cd frontend/ && npm run dev",
         "backend": "cd backend/ && npm run dev",
         "deploy:frontend": "cd frontend/ && npm run netlify:deploy",
-        "deploy:backend": "cd backend/ && npm run deploy:heroku",
+        "deploy:backend": "cd backend/ && npm run deploy:heroku"
     },
     "repository": {
         "type": "git",
