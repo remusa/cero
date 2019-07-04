@@ -6,33 +6,33 @@ import logo from '../../static/logo.svg'
 import Logout from '../User/Logout'
 import User from '../User/User'
 
-// const ButtonStyles = styled.button`
-//     outline: 0;
-//     border-radius: 20px;
-//     border: 1px solid ${props => props.theme.colorPrimaryDarker};
-//     background-color: ${props => props.theme.colorPrimaryDarker};
-//     color: ${props => props.theme.colorWhite};
-//     font-size: 1.2rem;
-//     font-weight: bold;
-//     padding: 8px 15px;
-//     letter-spacing: 1px;
-//     text-transform: uppercase;
-//     transition: transform 80ms ease-in;
+const ButtonStyles = styled.button`
+    outline: 0;
+    border-radius: 20px;
+    border: 1px solid ${props => props.theme.colorPrimaryDarker};
+    background-color: ${props => props.theme.colorPrimaryDarker};
+    color: ${props => props.theme.colorWhite};
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 8px 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
 
-//     &:hover,
-//     &:active {
-//         transform: scale(0.95);
-//     }
+    &:hover,
+    &:active {
+        transform: scale(0.95);
+    }
 
-//     &:focus {
-//         outline: none;
-//     }
+    &:focus {
+        outline: none;
+    }
 
-//     .ghost {
-//         background-color: transparent;
-//         border-color: #ffffff;
-//     }
-// `
+    .ghost {
+        background-color: transparent;
+        border-color: #ffffff;
+    }
+`
 
 const HeaderStyles = styled.header`
     grid-area: header;
