@@ -247,6 +247,34 @@ const Mutations = {
         })
         return updatedUser
     },
+    // async subscribeUser(parent, args, ctx, info) {
+    //     const {userId}= ctx.request
+    //     if (!userId) {
+    //         throw new Error('You must be logged in to do that!')
+    //     }
+    //     console.log(`SUBSCRIBING USER`)
+    //     const user = await ctx.db.query.user(
+    //         { where: { id: userId}},
+    //         `{
+    //             subscription
+    //         }
+    //         `
+    //     )
+    //     const amount = 1
+    //     const charge = await stripe.charges.create({
+    //         amount,
+    //         currency: 'USD',
+    //         source: args.token
+    //     })
+    //     const updates = {
+    //         subscription: true,
+    //     }
+    //     const updatedUser = await ctx.db.mutation.updateUser({
+    //         data: updates,
+    //         where: { id: userId },
+    //     })
+    //     return updatedUser
+    // }
 }
 
 module.exports = Mutations
