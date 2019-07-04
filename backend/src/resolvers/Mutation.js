@@ -8,6 +8,7 @@ const { timeConversion } = require('../utils/timeConversion')
 const { transport, createEmail } = require('../utils/mail')
 const sgMail = require('@sendgrid/mail');
 // const stripe = require('../utils/stripe')
+const yup = require('yup')
 
 const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
 

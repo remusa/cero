@@ -7,12 +7,10 @@ import { REQUEST_RESET_MUTATION } from '../../gql/UserMutation'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import FormStyles from '../styled/Form'
+import { emailValidation } from '../../lib/validationSchemas'
 
 const validationSchema = yup.object().shape({
-    email: yup
-        .string()
-        .email('Invalid email')
-        .required('Email is required'),
+    email: emailValidation,
 })
 
 const RequestReset = () => {
