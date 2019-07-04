@@ -232,6 +232,9 @@ const Navigation = () => {
                                 )}
                             </div>
 
+                            {/* <animated.div className='nav__links' style={headerAnimations}> */}
+                            {/* </animated.div> */}
+
                             {(toggled || width > 500) && (
                                 <animated.div style={headerAnimations} className='nav__links'>
                                     {width < 500 && (
