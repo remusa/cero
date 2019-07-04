@@ -65,6 +65,6 @@ const options = {
 server.start(
     { cors: false }, // disable apollo server cors
     deets => {
-        console.log(`Server is now running on port http://localhost:${deets.port}`)
+        console.log(`🚀 Server is now running on port http://localhost:${deets.port}`)
     }
 )
