@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
-import { toast } from 'react-toastify'
-import { Field, Form, Formik, ErrorMessage } from 'formik'
-import * as yup from 'yup'
+import { Form, Formik } from 'formik'
 import queryString from 'query-string'
+import { toast } from 'react-toastify'
+import * as yup from 'yup'
 import { RESET_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import { passwordValidation, confirmPasswordValidation } from '../../lib/validationSchemas'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import FormStyles from '../styled/Form'
-import { passwordValidation, confirmPasswordValidation } from '../../lib/validationSchemas'
 
 const validationSchema = yup.object().shape({
     password: passwordValidation,
