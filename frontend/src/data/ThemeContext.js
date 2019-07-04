@@ -84,6 +84,7 @@ const lightTheme = {
     colorBackground: theme.colorWhite,
     colorHeader: theme.colorGreyDark,
     colorFont: theme.colorGreyDarker,
+    boxShadow: theme.colorGrey,
 
     colorPrimaryLighter: theme.colorGreenLight,
     colorPrimaryLightest: theme.colorGreenLightest,
@@ -98,6 +99,7 @@ const darkTheme = {
     colorBackground: theme.colorGreyDark,
     colorFont: theme.colorWhite,
     colorHeader: theme.colorWhiteDark,
+    boxShadow: theme.colorWhite,
 
     colorPrimaryLighter: theme.colorGreenLight,
     colorPrimaryLightest: theme.colorGreenLightest,

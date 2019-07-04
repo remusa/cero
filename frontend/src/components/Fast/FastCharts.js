@@ -12,7 +12,8 @@ const ChartWrapper = styled.div`
     margin-bottom: 8px;
     padding: 4px;
     border-radius: 4px;
-    box-shadow: 0 0 8px ${props => props.theme.colorGrey};
+    /* box-shadow: 0 0 8px ${props => props.theme.colorGrey}; */
+    box-shadow: 0 0 8px ${props => props.theme.boxShadow};
 
     @media all and (max-width: 500px) {
         padding-bottom: 8px;

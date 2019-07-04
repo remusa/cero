@@ -7,7 +7,8 @@ const CountDownStyles = styled.div`
     --colorStroke: ${props => props.theme.colorPrimary};
 
     border-radius: 4px;
-    box-shadow: 0 0 8px ${props => props.theme.colorGrey};
+    /* box-shadow: 0 0 8px ${props => props.theme.colorGrey}; */
+    box-shadow: 0 0 8px ${props => props.theme.boxShadow};
     line-height: 1;
     padding: 8px;
     margin-bottom: 16px;

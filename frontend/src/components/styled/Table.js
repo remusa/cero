@@ -1,6 +1,17 @@
 import styled from 'styled-components'
 
 export const TableStyles = styled.table`
+    overflow-y: scroll;
+    max-height: 250px;
+    padding: 4px;
+    box-shadow: 0 0 8px ${props => props.theme.boxShadow};
+
+    @media all and (max-width: 500px) {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+    }
+
     border-spacing: 0;
     /* border: 1px solid ${props => props.theme.colorGrey}; */
     /* box-shadow: 0 5px 15px 0 hsla(0, 0, 0, 0.9); */
