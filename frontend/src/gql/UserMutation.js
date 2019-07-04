@@ -72,6 +72,17 @@ const UPDATE_USER_MUTATION = gql`
     }
 `
 
+const SUBSCRIPTION_MUTATION = gql`
+    mutation subscribeUser {
+        subscribeUser {
+            id
+            email
+            name
+            subscription
+        }
+    }
+`
+
 export {
     SIGNIN_MUTATION,
     SIGNUP_MUTATION,
@@ -80,4 +91,5 @@ export {
     REQUEST_RESET_MUTATION,
     UPDATE_PERMISSIONS_MUTATION,
     UPDATE_USER_MUTATION,
+    SUBSCRIPTION_MUTATION,
 }

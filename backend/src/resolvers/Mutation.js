@@ -7,7 +7,7 @@ const { hasPermission } = require('../utils/utils')
 const { timeConversion } = require('../utils/timeConversion')
 const { transport, createEmail } = require('../utils/mail')
 const sgMail = require('@sendgrid/mail');
-// const stripe = require('../utils/stripe')
+const stripe = require('../utils/stripe')
 
 const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
 
@@ -247,6 +247,37 @@ const Mutations = {
         })
         return updatedUser
     },
+    async subscribeUser(parent, args, ctx, info) {
+        const {userId}= ctx.request
+        if (!userId) {
+            throw new Error('You must be logged in to do that!')
+        }
+
+        const user = await ctx.db.query.user(
+            { where: { id: userId}},
+            `{
+                subscription
+            }
+            `
+        )
+
+        const amount = 1
+
+        const charge = await stripe.charges.create({
+            amount,
+            currency: 'USD',
+            source: args.token
+        })
+
+        const updates = {subscription: true}
+
+        const updatedUser = await ctx.db.mutation.updateUser({
+            data: updates,
+            where: { id: ctx.request.userId },
+        })
+
+        return updatedUser
+    }
 }
 
 module.exports = Mutations

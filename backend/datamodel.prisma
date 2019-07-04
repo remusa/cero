@@ -10,6 +10,7 @@ type User {
     email: String! @unique
     password: String!
     goal: Int @default(value: 0)
+    subscription: Boolean @default(value: false)
     resetToken: String
     resetTokenExpiry: Float
     createdAt: DateTime! @createdAt
