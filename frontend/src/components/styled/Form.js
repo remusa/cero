@@ -14,9 +14,15 @@ const loading = keyframes`
 
 const FormStyles = styled.div`
     form {
-        /* background: linear-gradient(var(--color-primary-lighter) 52.08%, var(--color-primary) 100%); */
-        /* background: linear-gradient(var(--color-primary-lighter, var(--color-primary-darker)); */
-        box-shadow: 0 0 20px var(--color-primary-darkest);
+        /* background: linear-gradient(${props =>
+            props.theme.colorPrimaryLighter} 52.08%, ${props => props.theme.colorPrimary} 100%); */
+        /* background: linear-gradient(${props => props.theme.colorPrimaryLighter}, ${props =>
+    props.theme.colorPrimaryDarker}); */
+
+        /* background: linear-gradient(120deg, ${props =>
+            props.theme.colorGreyLight} 52.08%, ${props => props.theme.colorGreyDark} 100%); */
+        box-shadow: 0 0 8px ${props => props.theme.boxShadow};
+
         border-radius: 20px;
         padding: 20px;
         font-size: 1.5rem;
@@ -25,7 +31,7 @@ const FormStyles = styled.div`
         max-width: 300px;
 
         h2 {
-            border-bottom: 3px solid var(--color-primary);
+            border-bottom: 3px solid ${props => props.theme.colorPrimary};
         }
 
         label {
@@ -44,8 +50,8 @@ const FormStyles = styled.div`
 
             &:focus {
                 outline: 0;
-                border-color: var(--color-primary);
-                box-shadow: 0 0 10px var(--color-primary);
+                border-color: ${props => props.theme.colorPrimary};
+                box-shadow: 0 0 10px ${props => props.theme.colorPrimary};
             }
         }
 
@@ -53,8 +59,8 @@ const FormStyles = styled.div`
         input[type='submit'] {
             outline: none;
             width: auto;
-            background: var(--color-primary);
-            color: var(--color-white);
+            background: ${props => props.theme.colorPrimary};
+            color: ${props => props.theme.colorWhite};
             border: 0;
             border-radius: 3px;
             font-size: 1.5rem;
@@ -67,8 +73,8 @@ const FormStyles = styled.div`
         button.resetButton {
             outline: none;
             width: auto;
-            background: var(--color-grey);
-            color: var(--color-white);
+            background: ${props => props.theme.colorGrey};
+            color: ${props => props.theme.colorWhite};
             border: 0;
             border-radius: 3px;
             font-size: 1.5rem;
@@ -89,9 +95,9 @@ const FormStyles = styled.div`
                 display: block;
                 background-image: linear-gradient(
                     to right,
-                    var(--color-primary-lighter) 0,
-                    var(--color-primary) 50%,
-                    var(--color-primary-darker) 100%
+                    ${props => props.theme.colorPrimaryLighter} 0,
+                    ${props => props.theme.colorPrimary} 50%,
+                    ${props => props.theme.colorPrimaryDarker} 100%
                 );
             }
             &[aria-busy='true']::before {
@@ -110,7 +116,7 @@ const FormStyles = styled.div`
             width: 100%;
             height: 8px;
             border-radius: 30px;
-            background-color: var(--color-primary);
+            background-color: ${props => props.theme.colorPrimary};
         }
     }
 `

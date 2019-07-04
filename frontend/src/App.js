@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { toast } from 'react-toastify'
 import Footer from './components/Layout/Footer'
 import Header from './components/Layout/Header'

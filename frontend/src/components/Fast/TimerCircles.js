@@ -4,8 +4,11 @@ import styled from 'styled-components'
 import { describeArc, mapNumber } from '../../lib/svgCircle'
 
 const CountDownStyles = styled.div`
+    --colorStroke: ${props => props.theme.colorPrimary};
+
     border-radius: 4px;
-    box-shadow: 0 0 8px var(--color-grey);
+    /* box-shadow: 0 0 8px ${props => props.theme.colorGrey}; */
+    box-shadow: 0 0 8px ${props => props.theme.boxShadow};
     line-height: 1;
     padding: 8px;
     margin-bottom: 16px;
@@ -37,14 +40,16 @@ const CountDownStyles = styled.div`
         width: 100px;
         height: 100px;
 
-        color: #111;
+        /* color: #222; */
+        color: ${props => props.theme.colorFont};
         font-size: 3rem;
         line-height: 30px;
         margin: 4px;
         padding: 4px;
 
         & span {
-            color: #333;
+            /* color: #333; */
+            color: ${props => props.theme.colorHeader};
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
@@ -69,7 +74,7 @@ const SVGCircle = ({ radius }) => (
     <svg className='countdown-svg'>
         <path
             fill='none'
-            stroke='var(--color-primary)'
+            stroke='var(--colorStroke)'
             strokeWidth='4'
             d={describeArc(50, 50, 48, 0, radius)}
         />

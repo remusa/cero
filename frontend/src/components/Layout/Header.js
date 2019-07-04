@@ -9,9 +9,9 @@ import User from '../User/User'
 const ButtonStyles = styled.button`
     outline: 0;
     border-radius: 20px;
-    border: 1px solid var(--color-primary-darker);
-    background-color: var(--color-primary-darker);
-    color: var(--color-white);
+    border: 1px solid ${props => props.theme.colorPrimaryDarker};
+    background-color: ${props => props.theme.colorPrimaryDarker};
+    color: ${props => props.theme.colorWhite};
     font-size: 1.2rem;
     font-weight: bold;
     padding: 8px 15px;
@@ -40,7 +40,7 @@ const HeaderStyles = styled.header`
 
     nav {
         /* max-height: 340px; */
-        background: var(--color-primary);
+        background: ${props => props.theme.colorPrimary};
         text-align: center;
         padding-left: 16px;
         padding-right: 16px;
@@ -56,14 +56,14 @@ const HeaderStyles = styled.header`
             /* padding: 4px; */
             margin: 4px;
             flex: 0 1 20px;
-            color: var(--color-white-dark);
+            color: ${props => props.theme.colorWhiteDark};
 
             /* padding: 12px 18px; */
-            border-color: #fff;
+            border-color: ${props => props.theme.colorWhite};
             background-color: transparent;
             border: 1px solid transparent;
 
-            color: #fff;
+            color: ${props => props.theme.colorWhite};
             padding: 8px 10px;
             border-radius: 3px;
             background: transparent;
@@ -124,7 +124,7 @@ const HeaderStyles = styled.header`
 
             .nav__toggle {
                 order: 0;
-                color: var(--color-white);
+                color: ${props => props.theme.colorWhite};
             }
         }
     }

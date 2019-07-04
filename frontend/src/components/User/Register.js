@@ -10,6 +10,7 @@ import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import FormStyles from '../styled/Form'
 import { ResetStyles } from './Login'
+import ParticlesStyles from '../Layout/Particles'
 
 const validationSchema = yup.object().shape({
     name: yup
@@ -59,6 +60,7 @@ const Register = props => {
 
     return (
         <Main>
+            {/* <ParticlesStyles /> */}
             <FormStyles>
                 <Formik
                     initialValues={user}

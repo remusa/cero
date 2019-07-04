@@ -3,9 +3,12 @@ import styled from 'styled-components'
 const Table = styled.table`
     border-spacing: 0;
     width: 100%;
-    /* border: 1px solid var(--color-primary); */
-    box-shadow: 0 0 20px var(--color-primary-darker);
-    border-radius: 20px;
+    /* border: 1px solid ${props => props.theme.colorPrimary}; */
+
+    /* box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarker}; */
+    box-shadow: 0 0 8px ${props => props.theme.boxShadow};
+
+    border-radius: 4px;
 
     thead {
         font-size: 10px;
@@ -35,8 +38,8 @@ const Table = styled.table`
 
     tr {
         &:hover {
-            background: var(--color-primary);
-            box-shadow: 0 0 20px var(--color-primary-darker);
+            background: ${props => props.theme.colorPrimary};
+            box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarker};
             border-radius: 20px;
         }
     }
