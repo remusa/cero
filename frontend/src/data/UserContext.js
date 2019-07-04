@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types'
 const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
 
     return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
 }

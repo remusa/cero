@@ -6,8 +6,8 @@ import Header from './components/Layout/Header'
 import Routes, { AnimatedRoutes } from './Routes'
 import 'normalize.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { UserProvider } from './data/UserContext'
 import { ThemeProvider } from './data/ThemeContext'
+import { UserProvider } from './data/UserContext'
 
 const AppStyles = styled.div`
     text-align: center;
