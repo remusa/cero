@@ -26,7 +26,7 @@ Cero is a fasting tracker built in React, Node.js (Express.js) and GraphQL.
 * Security features: helmet + CORS
 * Password hashing: argon2 (previously used bcrypt)
 
-# Instructions
+# Development
 
 ## Front-end
 
