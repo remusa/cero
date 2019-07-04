@@ -11,7 +11,7 @@ const ButtonStyles = styled.button`
     border-radius: 20px;
     border: 1px solid ${props => props.theme.colorPrimaryDarker};
     background-color: ${props => props.theme.colorPrimaryDarker};
-    color: var(--color-white);
+    color: ${props => props.theme.colorWhite};
     font-size: 1.2rem;
     font-weight: bold;
     padding: 8px 15px;
@@ -124,7 +124,7 @@ const HeaderStyles = styled.header`
 
             .nav__toggle {
                 order: 0;
-                color: var(--color-white);
+                color: ${props => props.theme.colorWhite};
             }
         }
     }

@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect, useContext } from 'react'
+import React, { createContext, useState } from 'react'
 import { PropTypes } from 'prop-types'
-import styled, { ThemeProvider as StyledProvider, createGlobalStyle } from 'styled-components'
+import { ThemeProvider as StyledProvider, createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         background-color: ${props => props.theme.colorBackground};
+        color: ${props => props.theme.colorFont};
         margin: 0;
         padding: 0;
         font-family: 'Lato-Regular', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -36,18 +37,18 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
-        color: ${props => props.theme.colorGreyDark};
+        color: ${props => props.theme.colorHeader};
         cursor: default;
     }
 
     h2 {
-        color: ${props => props.theme.colorGreyDark};
+        color: ${props => props.theme.colorHeader};
         cursor: default;
     }
 
     button {
-        cursor: pointer;
         outline: none;
+        cursor: pointer;
     }
 
     a {
@@ -75,21 +76,14 @@ const theme = {
     colorGreenDark: 'hsl(146, 100%, 25%)',
     colorGreenDarkest: 'hsl(146, 100%, 20%)',
     colorGreenForm: 'hsl(146, 78%, 45%)',
-
-    // colorBackground: 'colorWhite',
-    // colorFont: 'colorBlack',
-    // colorPrimaryLighter: 'colorGreenLight',
-    // colorPrimaryLightest: 'colorGreenLightest',
-    // colorPrimary: 'colorGreen',
-    // colorPrimaryDarker: 'colorGreenDark',
-    // colorPrimaryDarkest: 'colorGreenDarkest',
 }
 
 const lightTheme = {
     ...theme,
 
     colorBackground: theme.colorWhite,
-    colorFont: theme.colorBlack,
+    colorHeader: theme.colorGreyDark,
+    colorFont: theme.colorGreyDarker,
 
     colorPrimaryLighter: theme.colorGreenLight,
     colorPrimaryLightest: theme.colorGreenLightest,
@@ -101,8 +95,9 @@ const lightTheme = {
 const darkTheme = {
     ...theme,
 
-    colorBackground: theme.colorBlack,
+    colorBackground: theme.colorGreyDark,
     colorFont: theme.colorWhite,
+    colorHeader: theme.colorWhiteDark,
 
     colorPrimaryLighter: theme.colorGreenLight,
     colorPrimaryLightest: theme.colorGreenLightest,
@@ -130,7 +125,12 @@ const ThemeProvider = ({ children }) => {
 
     return (
         <ThemeContext.Provider value={{ theme: currentTheme, setDarkMode }}>
-            <StyledProvider theme={computedTheme}>{children}</StyledProvider>
+            <StyledProvider theme={computedTheme}>
+                <>
+                    <GlobalStyle />
+                    {children}
+                </>
+            </StyledProvider>
         </ThemeContext.Provider>
     )
 }

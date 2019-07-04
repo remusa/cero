@@ -6,7 +6,10 @@ const FooterStyles = styled.div`
     grid-area: footer;
 
     footer {
-        /* background-image: radial-gradient(circle, ${props => props.theme.colorPrimary}, ${props => props.theme.colorPrimaryDarker}); */
+        /* background-image: radial-gradient(
+            circle, ${props => props.theme.colorPrimary},
+            ${props => props.theme.colorPrimaryDarker}
+        ); */
         background-color: ${props => props.theme.colorPrimary};
         text-align: center;
         /* line-height: 2; */

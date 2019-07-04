@@ -14,9 +14,9 @@ const loading = keyframes`
 
 const FormStyles = styled.div`
     form {
-        /* background: linear-gradient(var(--color-primary-lighter) 52.08%, ${props => props.theme.colorPrimary} 100%); */
+        /* background: linear-gradient(${props => props.theme.colorPrimaryLighter} 52.08%, ${props => props.theme.colorPrimary} 100%); */
         /* background: linear-gradient(var(--color-primary-lighter, ${props => props.theme.colorPrimaryDarker}); */
-        box-shadow: 0 0 20px var(--color-primary-darkest);
+        box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarkest};
         border-radius: 20px;
         padding: 20px;
         font-size: 1.5rem;
@@ -54,7 +54,7 @@ const FormStyles = styled.div`
             outline: none;
             width: auto;
             background: ${props => props.theme.colorPrimary};
-            color: var(--color-white);
+            color: ${props => props.theme.colorWhite};
             border: 0;
             border-radius: 3px;
             font-size: 1.5rem;
@@ -67,8 +67,8 @@ const FormStyles = styled.div`
         button.resetButton {
             outline: none;
             width: auto;
-            background: var(--color-grey);
-            color: var(--color-white);
+            background: ${props => props.theme.colorGrey};
+            color: ${props => props.theme.colorWhite};
             border: 0;
             border-radius: 3px;
             font-size: 1.5rem;
@@ -89,7 +89,7 @@ const FormStyles = styled.div`
                 display: block;
                 background-image: linear-gradient(
                     to right,
-                    var(--color-primary-lighter) 0,
+                    ${props => props.theme.colorPrimaryLighter} 0,
                     ${props => props.theme.colorPrimary} 50%,
                     ${props => props.theme.colorPrimaryDarker} 100%
                 );

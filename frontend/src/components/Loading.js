@@ -45,10 +45,10 @@ const ProgresBarStyles = styled.div`
         background: ${props => props.theme.colorGreen};
         background: -webkit-linear-gradient(
             to bottom,
-            var(--color-green-lighter),
+            ${props => props.theme.colorGreenLighter},
             ${props => props.theme.colorGreen}
         );
-        background: linear-gradient(to bottom, var(--color-green-light), ${props => props.theme.colorGreen});
+        background: linear-gradient(to bottom, ${props => props.theme.colorGreenLight}, ${props => props.theme.colorGreen});
         border-radius: 3px;
         width: 0;
         transition: width 0.5s ease-in;

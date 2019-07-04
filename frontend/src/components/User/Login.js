@@ -15,7 +15,7 @@ export const ResetStyles = styled.div`
     padding: 4px;
     margin-top: 8px;
     font-size: 1.3rem;
-    color: var(--color-grey);
+    color: ${props => props.theme.colorGrey};
     cursor: pointer;
 
     &:hover {
@@ -23,7 +23,7 @@ export const ResetStyles = styled.div`
     }
 
     &:active {
-        color: var(--color-grey);
+        color: ${props => props.theme.colorGrey};
     }
 `
 

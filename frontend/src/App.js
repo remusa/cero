@@ -7,7 +7,7 @@ import Routes, { AnimatedRoutes } from './Routes'
 import 'normalize.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { UserProvider } from './data/UserContext'
-import { ThemeProvider, GlobalStyle } from './data/ThemeContext'
+import { ThemeProvider } from './data/ThemeContext'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -40,8 +40,6 @@ const App = () => (
     <ThemeProvider>
         <UserProvider>
             <AppStyles className='App'>
-                <GlobalStyle />
-
                 <Header />
                 <Routes />
                 {/* <AnimatedRoutes /> */}

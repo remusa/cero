@@ -1,0 +1,23 @@
+.particles {
+    --color1: hsl(146, 100%, 55%);
+    --color2: hsl(146, 100%, 39%);
+
+    background: var(--color2); /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        var(--color1),
+        var(--color2)
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        var(--color1),
+        var(--color2)
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}

@@ -29,7 +29,7 @@ const BackdropStyles = styled.div`
 `
 
 const ModalStyles = styled.div`
-    background-color: var(--color-white);
+    background-color: ${props => props.theme.colorWhite};
     box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarker};
     border-radius: 20px;
     z-index: 99;

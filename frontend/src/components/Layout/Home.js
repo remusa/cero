@@ -1,87 +1,9 @@
 import React from 'react'
-import Particles from 'react-particles-js'
 import styled from 'styled-components'
 import Main from './Main'
+import ParticlesStyles from './Particles'
 
 import screenshot from '../../static/images/cero.png'
-
-const HomeStyles = styled.div`
-    .particles {
-        --color1: ${props => props.theme.colorGreenLight};
-        --color2: ${props => props.theme.colorGreen};
-
-        background: var(--color2); /* fallback for old browsers */
-        background: -webkit-linear-gradient(
-            to right,
-            var(--color1),
-            var(--color2)
-        ); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(
-            to right,
-            var(--color1),
-            var(--color2)
-        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
-    }
-`
-
-const particlesOptions = {
-    particles: {
-        number: {
-            value: 200,
-            density: {
-                enable: false,
-            },
-        },
-        size: {
-            value: 5,
-            random: true,
-            anim: {
-                speed: 4,
-                size_min: 0.3,
-            },
-        },
-        line_linked: {
-            enable: false,
-        },
-        move: {
-            random: true,
-            speed: 1,
-            direction: 'top',
-            out_mode: 'out',
-        },
-    },
-    interactivity: {
-        events: {
-            onhover: {
-                enable: true,
-                mode: 'bubble',
-            },
-            onclick: {
-                enable: true,
-                mode: 'repulse',
-            },
-        },
-        modes: {
-            bubble: {
-                distance: 250,
-                duration: 2,
-                size: 0,
-                opacity: 0,
-            },
-            repulse: {
-                distance: 400,
-                duration: 4,
-            },
-        },
-    },
-}
 
 const ImageStyles = styled.div`
     .project-list__card {
@@ -142,14 +64,12 @@ const Screenshot = () => (
 )
 
 const Home = () => (
-    <HomeStyles>
-        <Particles className='particles' params={particlesOptions} />
-        <Main>
-            <h1>Cero</h1>
-            <h2>Cero is a simple intermittent fasting tracker app</h2>
-            <Screenshot />
-        </Main>
-    </HomeStyles>
+    <Main>
+        <ParticlesStyles />
+        <h1>Cero</h1>
+        <h2>Cero is a simple intermittent fasting tracker app</h2>
+        <Screenshot />
+    </Main>
 )
 
 export default Home

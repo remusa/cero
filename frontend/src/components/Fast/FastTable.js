@@ -10,7 +10,7 @@ const RowsStyles = styled.div`
     overflow-y: scroll;
     max-height: 250px;
     padding: 4px;
-    box-shadow: 0 0 8px var(--color-grey-darker);
+    box-shadow: 0 0 8px ${props => props.theme.colorGrey};
     border-radius: 4px;
 
     @media all and (max-width: 500px) {
@@ -30,7 +30,7 @@ const FastTable = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const toggleModal = e => {
+    const toggleModal = () => {
         setIsModalOpen(!isModalOpen)
     }
 

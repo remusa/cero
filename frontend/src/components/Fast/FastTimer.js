@@ -64,17 +64,17 @@ const ContainerStyles = styled.div`
 const ButtonStyles = styled.button`
     background-image: linear-gradient(
         98.88deg,
-        var(--color-primary-lighter) 0,
+        ${props => props.theme.colorPrimaryLighter} 0,
         ${props => props.theme.colorPrimary} 52.08%,
         ${props => props.theme.colorPrimaryDarker} 100%
     );
-    box-shadow: 0 0 20px var(--color-primary-lighter);
+    box-shadow: 0 0 20px ${props => props.theme.colorPrimaryLighter};
     border-radius: 50%;
     margin: auto;
     padding: 16px; /* 17px 0 */
     font-size: 1rem; /* 1.6rem */
     line-height: 1rem; /* 20px */
-    color: var(--color-white);
+    color: ${props => props.theme.colorWhite};
     border: none;
     outline: 0;
     display: block;
@@ -93,7 +93,7 @@ const ButtonStyles = styled.button`
         box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarker};
         background-image: linear-gradient(
             45deg,
-            var(--color-primary-lighter) 0,
+            ${props => props.theme.colorPrimaryLighter} 0,
             ${props => props.theme.colorPrimaryDarker} 100%
         );
     }
