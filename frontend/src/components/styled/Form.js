@@ -16,10 +16,11 @@ const FormStyles = styled.div`
     form {
         /* background: linear-gradient(${props =>
             props.theme.colorPrimaryLighter} 52.08%, ${props => props.theme.colorPrimary} 100%); */
-        /* background: linear-gradient(var(--color-primary-lighter, ${props =>
-            props.theme.colorPrimaryDarker}); */
+        /* background: linear-gradient(${props => props.theme.colorPrimaryLighter}, ${props =>
+    props.theme.colorPrimaryDarker}); */
 
-        /* box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarkest}; */
+        /* background: linear-gradient(120deg, ${props =>
+            props.theme.colorGreyLight} 52.08%, ${props => props.theme.colorGreyDark} 100%); */
         box-shadow: 0 0 8px ${props => props.theme.boxShadow};
 
         border-radius: 20px;

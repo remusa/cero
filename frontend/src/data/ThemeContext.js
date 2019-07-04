@@ -85,6 +85,7 @@ const lightTheme = {
     colorHeader: theme.colorGreyDark,
     colorFont: theme.colorGreyDarker,
     boxShadow: theme.colorGrey,
+    colorReset: theme.colorGreyLight,
 
     colorPrimaryLighter: theme.colorGreenLight,
     colorPrimaryLightest: theme.colorGreenLightest,
@@ -100,6 +101,7 @@ const darkTheme = {
     colorFont: theme.colorWhite,
     colorHeader: theme.colorWhiteDark,
     boxShadow: theme.colorWhite,
+    colorReset: theme.colorWhite,
 
     colorPrimaryLighter: theme.colorGreenLight,
     colorPrimaryLightest: theme.colorGreenLightest,
@@ -113,13 +115,13 @@ const ThemeContext = createContext()
 const ThemeProvider = ({ children }) => {
     const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme') || 'light')
 
-    const setDarkMode = () => {
-        if (currentTheme === 'light') {
-            setCurrentTheme('dark')
-            localStorage.setItem('theme', 'dark')
-        } else {
+    const setDarkMode = darkModeEnabled => {
+        if (darkModeEnabled) {
             setCurrentTheme('light')
             localStorage.setItem('theme', 'light')
+        } else {
+            setCurrentTheme('dark')
+            localStorage.setItem('theme', 'dark')
         }
     }
 

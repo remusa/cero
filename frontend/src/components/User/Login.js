@@ -10,12 +10,13 @@ import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import FormStyles from '../styled/Form'
+import ParticlesStyles from '../Layout/Particles'
 
 export const ResetStyles = styled.div`
     padding: 4px;
     margin-top: 8px;
     font-size: 1.3rem;
-    color: ${props => props.theme.colorGrey};
+    color: ${props => props.theme.colorReset};
     cursor: pointer;
 
     &:hover {
@@ -66,6 +67,7 @@ const Login = props => {
 
     return (
         <Main>
+            {/* <ParticlesStyles /> */}
             <FormStyles>
                 <Formik
                     initialValues={user}
