@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { Field, Form, Formik, ErrorMessage } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import * as yup from 'yup'
 import { SIGNIN_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import { emailValidation, passwordValidation } from '../../lib/validationSchemas'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import FormStyles from '../styled/Form'
-import ParticlesStyles from '../Layout/Particles'
+
+const validationSchema = yup.object().shape({
+    email: emailValidation,
+    password: passwordValidation,
+})
 
 export const ResetStyles = styled.div`
     padding: 4px;
@@ -27,18 +32,6 @@ export const ResetStyles = styled.div`
         color: ${props => props.theme.colorGrey};
     }
 `
-
-const validationSchema = yup.object().shape({
-    email: yup
-        .string()
-        .email('Invalid email')
-        .required('Email is required'),
-    password: yup
-        .string()
-        .min(10, 'Password must be at least 10 characters long')
-        .max(25, 'Password must be max. 25 characters')
-        .required('Password is required'),
-})
 
 const Login = props => {
     const [user, setUser] = useState({ email: '', password: '' })

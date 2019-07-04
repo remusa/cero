@@ -1,26 +1,20 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
-import { toast } from 'react-toastify'
-import { Field, Form, Formik, ErrorMessage } from 'formik'
-import * as yup from 'yup'
+import { Form, Formik } from 'formik'
 import queryString from 'query-string'
+import { toast } from 'react-toastify'
+import * as yup from 'yup'
 import { RESET_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import { passwordValidation, confirmPasswordValidation } from '../../lib/validationSchemas'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import FormStyles from '../styled/Form'
 
 const validationSchema = yup.object().shape({
-    password: yup
-        .string()
-        .min(10, 'Password must be at least 10 characters long')
-        .max(25, 'Password must be max. 25 characters')
-        .required('Password is required'),
-    confirmPassword: yup
-        .string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match')
-        .required('Confirm Password is required'),
+    password: passwordValidation,
+    confirmPassword: confirmPasswordValidation,
 })
 
 const Reset = props => {

@@ -3,15 +3,25 @@ const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
 const { promisify } = require('util')
+const sgMail = require('@sendgrid/mail')
+const yup = require('yup')
 const { hasPermission } = require('../utils/utils')
 const { timeConversion } = require('../utils/timeConversion')
 const { transport, createEmail } = require('../utils/mail')
-const sgMail = require('@sendgrid/mail');
 // const stripe = require('../utils/stripe')
+
+const validationSchemas = require('../utils/validationSchemas')
+
+const {
+    usernameValidation,
+    emailValidation,
+    passwordValidation,
+    confirmPasswordValidation,
+} = validationSchemas
 
 const COOKIE_LENGTH = 1000 * 60 * 60 * 24 * 365 // 1 year cookie
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const Mutations = {
     async createFast(parent, args, ctx, info) {
@@ -92,16 +102,34 @@ const Mutations = {
         return deletedFast
     },
     async signup(parent, args, ctx, info) {
-        if (args.name.length < 3) {
-            throw new Error('Username must be at least 3 characters long')
-        }
-        if (args.password.length < 10) {
-            throw new Error('Password must be at least 10 characters long')
-        }
-        args.email = args.email.toLowerCase().trim()
-        if (args.email.indexOf('@') === -1) {
-            throw new Error('Invalid email')
-        }
+        const validationSchema = yup.object().shape({
+            name: usernameValidation,
+            email: emailValidation,
+            password: passwordValidation,
+            confirmPassword: confirmPasswordValidation,
+        })
+        let isValid = false
+        await validationSchema
+            .isValid({
+                name: args.name,
+                email: args.email,
+                password: args.password,
+                confirmPassword: args.confirmPassword,
+            })
+            .then(valid => (isValid = valid))
+        if (!isValid) throw new Error(`Validation error`)
+
+        // if (args.name.length < 3) {
+        //     throw new Error('Username must be at least 3 characters long')
+        // }
+        // if (args.password.length < 10) {
+        //     throw new Error('Password must be at least 10 characters long')
+        // }
+        // args.email = args.email.toLowerCase().trim()
+        // if (args.email.indexOf('@') === -1) {
+        //     throw new Error('Invalid email')
+        // }
+
         const password = await argon2.hash(args.password)
         const user = await ctx.db.mutation.createUser(
             {
@@ -121,13 +149,27 @@ const Mutations = {
         return user
     },
     async signin(parent, args, ctx, info) {
-        if (args.password.length < 10) {
-            throw new Error('Password must be at least 10 characters long')
-        }
+        const validationSchema = yup.object().shape({
+            email: emailValidation,
+            password: passwordValidation,
+        })
+        let isValid = false
+        await validationSchema
+            .isValid({
+                email: args.email,
+                password: args.password,
+            })
+            .then(valid => (isValid = valid))
+        if (!isValid) throw new Error(`Validation error`)
+
+        // if (args.password.length < 10) {
+        //     throw new Error('Password must be at least 10 characters long')
+        // }
         const email = args.email.toLowerCase().trim()
-        if (email.indexOf('@') === -1) {
-            throw new Error('Invalid email')
-        }
+        // if (email.indexOf('@') === -1) {
+        //     throw new Error('Invalid email')
+        // }
+
         const { password } = args
         const user = await ctx.db.query.user({ where: { email } })
         if (!user) {
@@ -149,6 +191,17 @@ const Mutations = {
         return { message: 'Goodbye' }
     },
     async requestReset(parent, args, ctx, info) {
+        const validationSchema = yup.object().shape({
+            email: emailValidation,
+        })
+        let isValid = false
+        await validationSchema
+            .isValid({
+                email: args.email,
+            })
+            .then(valid => (isValid = valid))
+        if (!isValid) throw new Error(`Validation error`)
+
         const user = await ctx.db.query.user({ where: { email: args.email } })
         if (!user) {
             throw new Error(`User with email ${args.email} doesn't exist`)
@@ -157,7 +210,7 @@ const Mutations = {
         const resetToken = (await randomBytesPromisified(20)).toString('hex')
         const resetTokenExpiry = Date.now() + 3600000 // 1 hour from now
         const res = await ctx.db.mutation.updateUser({
-            where: {email: args.email },
+            where: { email: args.email },
             data: { resetToken, resetTokenExpiry },
         })
         const mailOptions = {
@@ -166,18 +219,28 @@ const Mutations = {
             subject: 'Password Reset Token',
             html: createEmail(`Your Password Reset Token is Here!
             \n\n
-            <a href=${
-                    process.env.FRONTEND_URL
-                }/reset?resetToken=${resetToken}>Click here to reset</a>`),
+            <a href=${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}>Click here to reset</a>`),
         }
         // const mailRes = await transport.sendMail(mailOptions)
         sgMail.send(mailOptions)
         return { message: 'Thanks!' }
     },
     async resetPassword(parent, args, ctx, info) {
-        if (args.password !== args.confirmPassword) {
-            throw new Error("Passwords don't match")
-        }
+        // const validationSchema = yup.object().shape({
+        //     password: passwordValidation,
+        //     confirmPassword: confirmPasswordValidation,
+        // })
+        // let isValid = false
+        // await validationSchema
+        //     .isValid({
+        //         password: passwordValidation,
+        //         confirmPassword: confirmPasswordValidation,
+        //     })
+        //     .then(valid => (isValid = valid))
+        // if (!isValid) throw new Error(`Validation error`)
+
+        if (args.password !== args.confirmPassword) throw new Error("Passwords don't match")
+
         const [user] = await ctx.db.query.users({
             where: {
                 resetToken: args.resetToken,

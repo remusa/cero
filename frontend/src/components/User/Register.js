@@ -1,36 +1,27 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { toast } from 'react-toastify'
-import { Field, Form, Formik, ErrorMessage } from 'formik'
-import * as yup from 'yup'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import * as yup from 'yup'
 import { SIGNUP_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import {
+    confirmPasswordValidation,
+    emailValidation,
+    passwordValidation,
+    usernameValidation,
+} from '../../lib/validationSchemas'
 import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
 import FormStyles from '../styled/Form'
 import { ResetStyles } from './Login'
-import ParticlesStyles from '../Layout/Particles'
 
 const validationSchema = yup.object().shape({
-    name: yup
-        .string()
-        .min(3, 'Username must be at least 3 characters long')
-        .max(25, 'Username must be max. 25 characters')
-        .required('Username is required'),
-    email: yup
-        .string()
-        .email('Invalid email')
-        .required('Email is required'),
-    password: yup
-        .string()
-        .min(10, 'Password must be at least 10 characters long')
-        .max(25, 'Password must be max. 25 characters')
-        .required('Password is required'),
-    confirmPassword: yup
-        .string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match')
-        .required('Confirm Password is required'),
+    name: usernameValidation,
+    email: emailValidation,
+    password: passwordValidation,
+    confirmPassword: confirmPasswordValidation,
 })
 
 const Register = props => {
