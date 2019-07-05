@@ -38,11 +38,11 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
-        color: ${props => props.theme.colorHeader};
-        cursor: default;
+        font-weight: bold;
     }
 
-    h2 {
+    h1, h2 {
+        font-family: 'Montserrat', sans-serif;
         color: ${props => props.theme.colorHeader};
         cursor: default;
     }
@@ -99,8 +99,8 @@ const darkTheme = {
     ...theme,
 
     colorBackground: theme.colorGreyDark,
-    colorFont: theme.colorWhite,
     colorHeader: theme.colorWhiteDark,
+    colorFont: theme.colorWhite,
     boxShadow: theme.colorWhite,
     colorReset: theme.colorWhite,
 

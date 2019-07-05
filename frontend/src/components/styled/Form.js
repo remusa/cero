@@ -100,10 +100,7 @@ const FormStyles = styled.div`
                 opacity: 0.5;
             }
 
-
-            .fields {
-
-            }
+            .fields {}
 
             .buttons {
                 &::after {

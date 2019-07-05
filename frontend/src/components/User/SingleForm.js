@@ -42,13 +42,18 @@ const SingleFormStyles = styled.div`
         }
     }
 
+    form {
+        width: 290px;
+        height: 100%;
+    }
+
     .single-form {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 4px;
 
         height: 450px;
-        width: calc(290px * 2);
+        width: 580px;
 
         ::first-child {
             grid-column: 1;
@@ -56,11 +61,6 @@ const SingleFormStyles = styled.div`
 
         ::last-child {
             grid-column: 2;
-        }
-
-        form {
-            width: 290px;
-            height: 100%;
         }
 
         .mask {
@@ -82,6 +82,7 @@ const SingleFormStyles = styled.div`
             border-radius: 20px;
             cursor: pointer;
             padding: 32px;
+            /* z-index: 99; */
         }
 
         @media all and (max-width: 600px) {
