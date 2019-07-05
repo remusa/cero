@@ -172,7 +172,7 @@ const HeaderStyles = styled.header`
 const Navigation = () => {
     const [width, setWidth] = useState(window.innerWidth)
     const initialToggle = () => localStorage.getItem('toggled') || false
-    const [toggled, setToggled] = useState(false)
+    const [toggled, setToggled] = useState(initialToggle)
 
     const headerAnimations = useSpring({
         opacity: toggled ? 1 : 0,
@@ -291,9 +291,9 @@ const Navigation = () => {
                                                 onClick={handleClick}
                                             >
                                                 Login
-                                            </NavLink>
+                                            </NavLink> */}
 
-                                            <NavLink
+                                            {/* <NavLink
                                                 to='/register'
                                                 activeClassName='active'
                                                 onClick={handleClick}

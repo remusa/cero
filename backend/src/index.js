@@ -48,18 +48,18 @@ server.express.use(async (req, res, next) => {
     if (!req.userId) return next()
     const user = await db.query.user(
         { where: { id: req.userId } },
-        '{ id, email, name, permissions }'
+        '{ id, email, name, permissions, goal, subscription }'
     )
     req.user = user
     next()
 })
 
 const options = {
-//   port: 8000,
-//   endpoint: '/graphql',
-//   subscriptions: '/subscriptions',
-//   playground: '/playground',
-//   cors: false, // disable apollo server cors
+    //   port: 8000,
+    //   endpoint: '/graphql',
+    //   subscriptions: '/subscriptions',
+    //   playground: '/playground',
+    //   cors: false, // disable apollo server cors
 }
 
 server.start(

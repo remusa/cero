@@ -7,12 +7,12 @@ import Modal from './Modal'
 
 const ChartWrapper = styled.div`
     position: relative;
-    /* overflow-x: scroll; */
-    max-width: 300px;
+    overflow-x: scroll;
+    /* max-width: 300px; */
+    width: 300px;
     margin-bottom: 8px;
     padding: 4px;
-    border-radius: 4px;
-    /* box-shadow: 0 0 8px ${props => props.theme.colorGrey}; */
+    border-radius: 3px;
     box-shadow: 0 0 8px ${props => props.theme.boxShadow};
 
     @media all and (max-width: 500px) {

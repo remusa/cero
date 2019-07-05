@@ -8,7 +8,7 @@ const yup = require('yup')
 const { hasPermission } = require('../utils/utils')
 const { timeConversion } = require('../utils/timeConversion')
 const { transport, createEmail } = require('../utils/mail')
-// const stripe = require('../utils/stripe')
+const stripe = require('../utils/stripe')
 
 const validationSchemas = require('../utils/validationSchemas')
 
@@ -170,6 +170,7 @@ const Mutations = {
 
         const { password } = args
         const user = await ctx.db.query.user({ where: { email } })
+
         if (!user) {
             throw new Error(`An account with email: ${email} doesn't exist`)
         }
@@ -309,13 +310,13 @@ const Mutations = {
         return updatedUser
     },
     // async subscribeUser(parent, args, ctx, info) {
-    //     const {userId}= ctx.request
+    //     const { userId } = ctx.request
     //     if (!userId) {
     //         throw new Error('You must be logged in to do that!')
     //     }
     //     console.log(`SUBSCRIBING USER`)
     //     const user = await ctx.db.query.user(
-    //         { where: { id: userId}},
+    //         { where: { id: userId } },
     //         `{
     //             subscription
     //         }
@@ -325,7 +326,7 @@ const Mutations = {
     //     const charge = await stripe.charges.create({
     //         amount,
     //         currency: 'USD',
-    //         source: args.token
+    //         source: args.token,
     //     })
     //     const updates = {
     //         subscription: true,
@@ -335,7 +336,7 @@ const Mutations = {
     //         where: { id: userId },
     //     })
     //     return updatedUser
-    // }
+    // },
 }
 
 module.exports = Mutations

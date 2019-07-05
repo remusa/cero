@@ -76,8 +76,8 @@ const AnimatedRoutes = () => {
                         <FancyRoute path='/' exact component={Home} />
                         <FancyRoute path='/fast' component={FastPage} />
                         <FancyRoute path='/enter' component={SingleForm} />
-                        {/* <FancyRoute path='/login' component={Login} /> */}
-                        {/* <FancyRoute path='/register' component={Register} /> */}
+                        {/* <FancyRoute path='/login' component={Login} />
+                        <FancyRoute path='/register' component={Register} /> */}
                         <FancyRoute path='/profile' component={ProfilePage} />
                         <FancyRoute path='/requestreset' component={RequestReset} />
                         <FancyRoute path='/reset' component={Reset} />
@@ -96,8 +96,8 @@ const Router = () => (
         <FancyRoute path='/' exact component={Home} />
         <FancyRoute path='/fast' component={FastPage} />
         <FancyRoute path='/enter' component={SingleForm} />
-        {/* <FancyRoute path='/login' component={Login} /> */}
-        {/* <FancyRoute path='/register' component={Register} /> */}
+        {/* <FancyRoute path='/login' component={Login} />
+        <FancyRoute path='/register' component={Register} /> */}
         <FancyRoute path='/profile' component={ProfilePage} />
         <FancyRoute path='/requestreset' component={RequestReset} />
         <FancyRoute path='/reset' component={Reset} />

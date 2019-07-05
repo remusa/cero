@@ -14,7 +14,7 @@ require('dotenv').config({ path: '.env' })
 const URI =
     process.env.NODE_ENV === 'production'
         ? process.env.REACT_APP_END_POINT
-        : process.env.REACT_APP_LOCAL_HOSTw
+        : process.env.REACT_APP_LOCAL_HOST
 
 const client = new ApolloClient({
     uri: URI,

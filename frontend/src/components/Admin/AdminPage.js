@@ -18,7 +18,8 @@ const AdminStyles = styled.div`
 const PageStyles = styled.div`
     /* min-height: 80%; */
     padding: 36px;
-    border: 1px solid ${props => props.theme.colorPrimary};
+    /* border: 1px solid ${props => props.theme.colorPrimary}; */
+    box-shadow: 0 0 8px ${props => props.theme.boxShadow};
     border-radius: 20px;
 
     display: grid;
