@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import Main from '../Layout/Main'
 import Login from './Login'
 import Register from './Register'
@@ -17,6 +18,11 @@ function Mask({ changePage, text }) {
             {text}
         </div>
     )
+}
+
+Mask.propTypes = {
+    changePage: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired,
 }
 
 const SingleForm = props => {
