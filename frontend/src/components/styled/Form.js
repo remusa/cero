@@ -29,6 +29,7 @@ const FormStyles = styled.div`
         line-height: 1.5;
         font-weight: 600;
         max-width: 300px;
+        height: 100%;
 
         h2 {
             border-bottom: 3px solid ${props => props.theme.colorPrimary};

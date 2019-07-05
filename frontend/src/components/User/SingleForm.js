@@ -42,18 +42,13 @@ const SingleFormStyles = styled.div`
         }
     }
 
-    form {
-        width: 290px;
-        height: 100%;
-    }
-
-    .single-form {
+    .container {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 4px;
 
-        height: 450px;
         width: 580px;
+        height: 450px;
 
         ::first-child {
             grid-column: 1;
@@ -62,43 +57,63 @@ const SingleFormStyles = styled.div`
         ::last-child {
             grid-column: 2;
         }
+    }
 
-        .mask {
-            display: grid;
-            justify-content: center;
-            align-items: center;
+    form {
+        width: 290px;
+        height: 100%;
+    }
 
-            font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
-            line-height: 5rem;
-            letter-spacing: 1px;
+    .active {
+        z-index: 99;
+    }
 
-            width: auto;
-            height: 100%;
-            color: ${props => props.theme.colorWhite};
-            background: ${props => props.theme.colorPrimary};
-            box-shadow: 0 0 8px ${props => props.theme.boxShadow};
-            font-size: 3rem;
-            border-radius: 20px;
-            cursor: pointer;
-            padding: 32px;
-            /* z-index: 99; */
+    .mask {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        /* line-height: 5rem;
+        letter-spacing: 1px; */
+        font-size: 3rem;
+        border-radius: 20px;
+        cursor: pointer;
+        padding: 32px;
+
+        /* width: auto; */
+        /* height: 100%; */
+        /* z-index: 99; */
+
+        /* color: ${props => props.theme.colorWhite};
+        background: ${props => props.theme.colorPrimary};
+        box-shadow: 0 0 8px ${props => props.theme.boxShadow}; */
+        color: white;
+        background: hsl(146, 100%, 39%);
+        box-shadow: 0 0 8px ${props => props.theme.boxShadow};
+
+        &:hover,
+        &:focus {
+            background: hsl(146, 100%, 39%, 0.8);
         }
+    }
 
-        @media all and (max-width: 600px) {
+    @media all and (max-width: 600px) {
+        .container {
             display: flex;
             flex-flow: column wrap;
             align-content: center;
 
             width: auto;
+        }
 
-            form {
-                height: 420px;
-            }
+        form {
+            height: 420px;
+        }
 
-            .mask {
-                display: none;
-            }
+        .mask {
+            display: none;
         }
     }
 `
@@ -121,7 +136,7 @@ const SingleForm = props => {
                 {page === 'login' ? 'Register' : 'Login'}
             </button>
 
-            <div className='single-form'>
+            <div className='container'>
                 {page === 'login' && (
                     <>
                         <Login className='form' {...props} />
