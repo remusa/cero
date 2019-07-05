@@ -252,7 +252,7 @@ const Navigation = () => {
                                                         activeClassName='active'
                                                         onClick={handleClick}
                                                     >
-                                                        ✪ Admin
+                                                        💻 Admin
                                                     </NavLink>
                                                 </span>
                                             )}
@@ -267,7 +267,7 @@ const Navigation = () => {
                                                     activeClassName='active'
                                                     onClick={handleClick}
                                                 >
-                                                    ★ {me.name}
+                                                    ⭐ {me.name}
                                                 </NavLink>
                                             </span>
 

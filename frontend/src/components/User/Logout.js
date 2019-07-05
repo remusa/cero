@@ -4,8 +4,17 @@ import { withApollo } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import styled from 'styled-components'
 import { SIGNOUT_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import logoutIcon from '../../static/icons/logout-box-line.svg'
+
+const SpanStyles = styled.span`
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+`
 
 const Logout = () => {
     const [signout] = useMutation(SIGNOUT_MUTATION, {
@@ -32,9 +41,12 @@ const Logout = () => {
     }
 
     return (
+        // <SpanStyles>
         <Link to='/' onClick={handleSignOut}>
+            {/* <img height='16' width='16' src={logoutIcon} />  */}
             Logout
         </Link>
+        // </SpanStyles>
     )
 }
 
