@@ -14,6 +14,7 @@ import Reset from './components/User/Reset'
 import './static/nprogress.css'
 import styled from 'styled-components'
 import Main from './components/Layout/Main'
+import SingleForm from './components/User/SingleForm'
 
 const NotFound404 = ({ location }) => (
     <div>
@@ -74,6 +75,7 @@ const AnimatedRoutes = () => {
                     <Switch location={item}>
                         <FancyRoute path='/' exact component={Home} />
                         <FancyRoute path='/fast' component={FastPage} />
+                        <FancyRoute path='/enter' component={SingleForm} />
                         <FancyRoute path='/login' component={Login} />
                         <FancyRoute path='/register' component={Register} />
                         <FancyRoute path='/profile' component={ProfilePage} />
@@ -93,6 +95,7 @@ const Router = () => (
     <Switch>
         <FancyRoute path='/' exact component={Home} />
         <FancyRoute path='/fast' component={FastPage} />
+        <FancyRoute path='/enter' component={SingleForm} />
         <FancyRoute path='/login' component={Login} />
         <FancyRoute path='/register' component={Register} />
         <FancyRoute path='/profile' component={ProfilePage} />
