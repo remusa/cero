@@ -277,13 +277,13 @@ const Navigation = () => {
 
                                     {!me && (
                                         <>
-                                            {/* <NavLink
+                                            <NavLink
                                                 to='/enter'
                                                 activeClassName='active'
                                                 onClick={handleClick}
                                             >
                                                 Login / Register
-                                            </NavLink> */}
+                                            </NavLink>
 
                                             <NavLink
                                                 to='/login'
