@@ -58,9 +58,7 @@ const Login = props => {
         })
     }
 
-    // <Main>
     // <ParticlesStyles />
-    // </Main />
 
     return (
         // <Main>

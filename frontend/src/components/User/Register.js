@@ -49,9 +49,7 @@ const Register = props => {
         })
     }
 
-    // <Main>
     // <ParticlesStyles />
-    // </Main />
 
     return (
         // <Main>
