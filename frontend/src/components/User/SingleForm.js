@@ -128,23 +128,23 @@ const SingleForm = props => {
 
                 <div className='container'>
                     {page === 'login' && (
-                        <div>
+                        <>
                             <Login className='form' {...props} />
 
                             <div className='mask' onClick={changePage}>
                                 Create an account
                             </div>
-                        </div>
+                        </>
                     )}
 
                     {page === 'register' && (
-                        <div>
+                        <>
                             <div className='mask' onClick={changePage}>
                                 Login to your account
                             </div>
 
                             <Register className='form' {...props} />
-                        </div>
+                        </>
                     )}
                 </div>
             </SingleFormStyles>
