@@ -129,7 +129,12 @@ const SingleForm = props => {
                 <div className='container'>
                     {page === 'login' && (
                         <>
-                            <Login className='form' {...props} />
+                            {/* <Login className='form' {...props} /> */}
+                            <form action='submit'>
+                                <input type='email' name='' id='' />
+                                <input type='password' name='' id='' />
+                                <button type='submit'>Submit</button>
+                            </form>
 
                             <div className='mask' onClick={changePage}>
                                 Create an account
@@ -143,7 +148,12 @@ const SingleForm = props => {
                                 Login to your account
                             </div>
 
-                            <Register className='form' {...props} />
+                            {/* <Register className='form' {...props} /> */}
+                            <form action='submit'>
+                                <input type='email' name='' id='' />
+                                <input type='password' name='' id='' />
+                                <button type='submit'>Submit</button>
+                            </form>
                         </>
                     )}
                 </div>
