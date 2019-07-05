@@ -4,7 +4,7 @@ const { Prisma } = require('prisma-binding')
 const END_POINT =
     process.env.NODE_ENV !== 'development' ? process.env.PRISMA_ENDPOINT : process.env.DEV_ENDPOINT
 
-console.log( `ENVIRONMENT: ${process.env.NODE_ENV}`)
+console.log(`ENVIRONMENT: ${process.env.NODE_ENV}`)
 console.log(`END_POINT: ${END_POINT}`)
 
 const db = new Prisma({

@@ -14,6 +14,7 @@ import Loading from '../Loading'
 import FastTable from './FastTable'
 
 import '../../static/nprogress.css'
+import { UserContext } from '../../data/UserContext'
 
 const FastStyles = styled.div`
     grid-area: main;
@@ -50,18 +51,26 @@ const InfoStyles = styled.div`
     }
 `
 
-const FastPage = () => (
-    <PleaseSignIn>
-        <FastStyles>
-            <h1>Fast!</h1>
-            <div className='fast__info'>
-                <FastsProvider>
-                    <FastContainer />
-                </FastsProvider>
-            </div>
-        </FastStyles>
-    </PleaseSignIn>
-)
+const FastPage = props => {
+    const { user } = useContext(UserContext)
+
+    if (!user) {
+        props.history.push('/enter')
+    }
+
+    return (
+        <PleaseSignIn>
+            <FastStyles>
+                <h1>Fast!</h1>
+                <div className='fast__info'>
+                    <FastsProvider>
+                        <FastContainer />
+                    </FastsProvider>
+                </div>
+            </FastStyles>
+        </PleaseSignIn>
+    )
+}
 
 const FastContainer = () => {
     const { setActiveFast, setFasts } = useContext(FastsContext)

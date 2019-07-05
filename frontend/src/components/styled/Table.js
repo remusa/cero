@@ -2,15 +2,14 @@ import styled from 'styled-components'
 
 export const TableStyles = styled.table`
     overflow-y: scroll;
-    max-height: 250px;
-    padding: 4px;
+    max-height: 500px;
     box-shadow: 0 0 8px ${props => props.theme.boxShadow};
 
-    @media all and (max-width: 500px) {
+    /* @media all and (max-width: 500px) {
         margin-top: 8px;
         margin-bottom: 8px;
         padding-bottom: 8px;
-    }
+    } */
 
     border-spacing: 0;
     /* border: 1px solid ${props => props.theme.colorGrey}; */
@@ -18,8 +17,7 @@ export const TableStyles = styled.table`
     /* box-shadow: 0 0 20px ${props => props.theme.colorPrimary}; */
     border-radius: 4px;
     margin: 0 auto;
-    width: auto;
-    /* max-height: 500px; */
+    /* padding: 4px; */
     padding: 8px;
 
     thead {
@@ -51,10 +49,11 @@ export const TableStyles = styled.table`
     }
 
     tr {
-        &:hover {
+        &:hover,
+        &:focus {
             background: ${props => props.theme.colorPrimary};
             box-shadow: 0 0 20px ${props => props.theme.colorPrimaryDarker};
-            border-radius: 20px;
+            border-radius: 3px;
         }
     }
 `

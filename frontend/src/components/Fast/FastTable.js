@@ -5,13 +5,16 @@ import { FastsContext } from '../../data/FastsContext'
 import Modal from './Modal'
 import { TableStyles } from '../styled/Table'
 
-const RowsStyles = styled.div`
+const TableContainerStyles = styled.div`
     margin: 0 auto;
     overflow-y: scroll;
-    max-height: 250px;
-    /* padding: 4px; */
+    max-height: 310px;
+    border-radius: 3px;
     box-shadow: 0 0 8px ${props => props.theme.boxShadow};
-    /* border-radius: 4px; */
+
+    table {
+        width: 285px !important;
+    }
 
     @media all and (max-width: 500px) {
         margin-top: 8px;
@@ -46,7 +49,7 @@ const FastTable = () => {
     const rows = 1
 
     return (
-        <RowsStyles>
+        <TableContainerStyles>
             <Modal
                 show={isModalOpen}
                 onClose={toggleModal}
@@ -104,7 +107,7 @@ const FastTable = () => {
                     {/* .reverse()} */}
                 </tbody>
             </TableStyles>
-        </RowsStyles>
+        </TableContainerStyles>
     )
 }
 
