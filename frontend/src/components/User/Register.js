@@ -49,20 +49,23 @@ const Register = props => {
         })
     }
 
+    // <Main />
+    // <ParticlesStyles />
+    // </Main />
+
     return (
-        <Main>
-            {/* <ParticlesStyles /> */}
-            <FormStyles>
-                <Formik
-                    initialValues={user}
-                    validationSchema={validationSchema}
-                    onSubmit={(values, actions) => {
-                        handleSubmit(values, actions)
-                    }}
-                >
-                    {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
-                        <Form>
-                            <fieldset disabled={loading} aria-busy={loading}>
+        <FormStyles>
+            <Formik
+                initialValues={user}
+                validationSchema={validationSchema}
+                onSubmit={(values, actions) => {
+                    handleSubmit(values, actions)
+                }}
+            >
+                {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
+                    <Form>
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <div className='fields'>
                                 <h2>Register</h2>
 
                                 <Error error={error} />
@@ -134,7 +137,9 @@ const Register = props => {
                                         className='errorMessage'
                                     />
                                 </label>
+                            </div>
 
+                            <div className='buttons'>
                                 <button type='submit' disabled={loading || !dirty || isSubmitting}>
                                     Register
                                 </button>
@@ -152,16 +157,16 @@ const Register = props => {
                                     <ResetStyles>Forgot password?</ResetStyles>
                                 </Link>
 
-                                <div className='divider' />
+                                {/* <div className='divider' /> */}
+                            </div>
 
-                                {/* <pre>{JSON.stringify(values, null, 2)}</pre>
+                            {/* <pre>{JSON.stringify(values, null, 2)}</pre>
                                 <pre>{JSON.stringify(errors, null, 2)}</pre> */}
-                            </fieldset>
-                        </Form>
-                    )}
-                </Formik>
-            </FormStyles>
-        </Main>
+                        </fieldset>
+                    </Form>
+                )}
+            </Formik>
+        </FormStyles>
     )
 }
 

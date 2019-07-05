@@ -55,6 +55,11 @@ const FormStyles = styled.div`
             }
         }
 
+        button {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
+
         button[type='submit'],
         input[type='submit'] {
             outline: none;
@@ -83,26 +88,41 @@ const FormStyles = styled.div`
         }
 
         fieldset {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: space-between;
+
+            height: 100%;
             border: 0;
             padding: 0;
 
             &[disabled] {
                 opacity: 0.5;
             }
-            &::before {
-                height: 10px;
-                content: '';
-                display: block;
-                background-image: linear-gradient(
-                    to right,
-                    ${props => props.theme.colorPrimaryLighter} 0,
-                    ${props => props.theme.colorPrimary} 50%,
-                    ${props => props.theme.colorPrimaryDarker} 100%
-                );
+
+
+            .fields {
+
             }
-            &[aria-busy='true']::before {
-                background-size: 50% auto;
-                animation: ${loading} 0.5s linear infinite;
+
+            .buttons {
+                &::after {
+                    height: 10px;
+                    content: '';
+                    display: block;
+                    border-radius: 3px;
+                    background-image: linear-gradient(
+                        to right,
+                        ${props => props.theme.colorPrimaryLighter} 0,
+                        ${props => props.theme.colorPrimary} 50%,
+                        ${props => props.theme.colorPrimaryDarker} 100%
+                    );
+                }
+
+                &[aria-busy='true']::after {
+                    background-size: 50% auto;
+                    animation: ${loading} 0.5s linear infinite;
+                }
             }
         }
 

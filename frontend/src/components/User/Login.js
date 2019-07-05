@@ -58,20 +58,23 @@ const Login = props => {
         })
     }
 
+    // <Main />
+    // <ParticlesStyles />
+    // </Main />
+
     return (
-        <Main>
-            {/* <ParticlesStyles /> */}
-            <FormStyles>
-                <Formik
-                    initialValues={user}
-                    validationSchema={validationSchema}
-                    onSubmit={(values, actions) => {
-                        handleSubmit(values, actions)
-                    }}
-                >
-                    {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
-                        <Form>
-                            <fieldset disabled={loading} aria-busy={loading}>
+        <FormStyles>
+            <Formik
+                initialValues={user}
+                validationSchema={validationSchema}
+                onSubmit={(values, actions) => {
+                    handleSubmit(values, actions)
+                }}
+            >
+                {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
+                    <Form>
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <div className='fields'>
                                 <h2>Login</h2>
 
                                 <Error error={error} />
@@ -109,7 +112,9 @@ const Login = props => {
                                         className='errorMessage'
                                     />
                                 </label>
+                            </div>
 
+                            <div className='buttons'>
                                 <button type='submit' disabled={loading || !dirty || isSubmitting}>
                                     Login
                                 </button>
@@ -127,13 +132,13 @@ const Login = props => {
                                     <ResetStyles>Forgot password?</ResetStyles>
                                 </Link>
 
-                                <div className='divider' />
-                            </fieldset>
-                        </Form>
-                    )}
-                </Formik>
-            </FormStyles>
-        </Main>
+                                {/* <div className='divider' /> */}
+                            </div>
+                        </fieldset>
+                    </Form>
+                )}
+            </Formik>
+        </FormStyles>
     )
 }
 
