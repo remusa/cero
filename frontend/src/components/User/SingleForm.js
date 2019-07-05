@@ -5,34 +5,12 @@ import Login from './Login'
 import Register from './Register'
 
 const SingleFormStyles = styled.div`
-    /* grid-area: main; */
-    width: 100%;
-    margin: 0 auto;
+    grid-area: main;
 
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-
-    .button-toggle {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-
-        outline: none;
-        width: auto;
-        background: ${props => props.theme.colorPrimary};
-        color: ${props => props.theme.colorWhite};
-        border: 0;
-        border-radius: 3px;
-        font-size: 1.5rem;
-        font-weight: 600;
-        padding: 0.5rem 1.2rem;
-        margin: 8px 0 8px 0;
-
-        @media all and (min-width: 601px) {
-            display: none;
-        }
-    }
 
     .single-form-container {
         display: grid;
@@ -91,6 +69,26 @@ const SingleFormStyles = styled.div`
         }
     }
 
+    .button-toggle {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+
+        outline: none;
+        width: auto;
+        background: ${props => props.theme.colorPrimary};
+        color: ${props => props.theme.colorWhite};
+        border: 0;
+        border-radius: 3px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding: 0.5rem 1.2rem;
+        margin: 8px 0 8px 0;
+
+        @media all and (min-width: 601px) {
+            display: none;
+        }
+    }
+
     @media all and (max-width: 600px) {
         .single-form-container {
             display: flex;
@@ -129,35 +127,35 @@ const SingleForm = props => {
             </button>
 
             <div className='single-form-container'>
-                {page === 'login' && (
-                    <>
-                        {/* <Login className='form' {...props} /> */}
-                        <form action='submit'>
-                            <input type='email' name='' id='' />
-                            <input type='password' name='' id='' />
-                            <button type='submit'>Submit</button>
-                        </form>
+                {/* {page === 'login' && ( */}
+                <>
+                    {/* <Login className='form' {...props} /> */}
+                    <form action='submit'>
+                        <input type='email' name='' id='' />
+                        <input type='password' name='' id='' />
+                        <button type='submit'>Submit</button>
+                    </form>
 
-                        <div className='mask' onClick={changePage}>
-                            Create an account
-                        </div>
-                    </>
-                )}
+                    <div className='mask' onClick={changePage}>
+                        Create an account
+                    </div>
+                </>
+                {/* )} */}
 
-                {page === 'register' && (
-                    <>
-                        <div className='mask' onClick={changePage}>
-                            Login to your account
-                        </div>
+                {/* {page === 'register' && ( */}
+                <>
+                    <div className='mask' onClick={changePage}>
+                        Login to your account
+                    </div>
 
-                        {/* <Register className='form' {...props} /> */}
-                        <form action='submit'>
-                            <input type='email' name='' id='' />
-                            <input type='password' name='' id='' />
-                            <button type='submit'>Submit</button>
-                        </form>
-                    </>
-                )}
+                    {/* <Register className='form' {...props} /> */}
+                    <form action='submit'>
+                        <input type='email' name='' id='' />
+                        <input type='password' name='' id='' />
+                        <button type='submit'>Submit</button>
+                    </form>
+                </>
+                {/* )} */}
             </div>
         </SingleFormStyles>
     )
