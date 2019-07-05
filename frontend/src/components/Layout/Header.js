@@ -281,7 +281,6 @@ const Navigation = () => {
                                                 to='/enter'
                                                 activeClassName='active'
                                                 onClick={handleClick}
-                                                width={width}
                                             >
                                                 Login / Register
                                             </NavLink>

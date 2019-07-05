@@ -114,15 +114,16 @@ const GlobalStyle = createGlobalStyle`
 const ThemeContext = createContext()
 
 const ThemeProvider = ({ children }) => {
-    const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme') || 'light')
+    // const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme') || 'light')
+    const [currentTheme, setCurrentTheme] = useState('light')
 
     const setDarkMode = darkModeEnabled => {
         if (darkModeEnabled) {
             setCurrentTheme('light')
-            localStorage.setItem('theme', 'light')
+            // localStorage.setItem('theme', 'light')
         } else {
             setCurrentTheme('dark')
-            localStorage.setItem('theme', 'dark')
+            // localStorage.setItem('theme', 'dark')
         }
     }
 
