@@ -1,5 +1,5 @@
-# source: https://cero-production-e63af37be2.herokuapp.com/cero-prod/prod
-# timestamp: Mon Jun 24 2019 17:22:13 GMT-0600 (GMT-06:00)
+# source: https://us1.prisma.sh/rene-s/cero/dev
+# timestamp: Thu Jul 04 2019 19:07:56 GMT-0500 (Central Daylight Time)
 
 type AggregateFast {
   count: Int!
@@ -604,6 +604,7 @@ type User implements Node {
   email: String!
   password: String!
   goal: Int
+  subscription: Boolean
   resetToken: String
   resetTokenExpiry: Float
   createdAt: DateTime!
@@ -628,6 +629,7 @@ input UserCreateInput {
   email: String!
   password: String!
   goal: Int
+  subscription: Boolean
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
@@ -649,6 +651,7 @@ input UserCreateWithoutFastsInput {
   email: String!
   password: String!
   goal: Int
+  subscription: Boolean
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserCreatepermissionsInput
@@ -674,6 +677,8 @@ enum UserOrderByInput {
   password_DESC
   goal_ASC
   goal_DESC
+  subscription_ASC
+  subscription_DESC
   resetToken_ASC
   resetToken_DESC
   resetTokenExpiry_ASC
@@ -690,6 +695,7 @@ type UserPreviousValues {
   email: String!
   password: String!
   goal: Int
+  subscription: Boolean
   resetToken: String
   resetTokenExpiry: Float
   createdAt: DateTime!
@@ -739,6 +745,7 @@ input UserUpdateInput {
   email: String
   password: String
   goal: Int
+  subscription: Boolean
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
@@ -750,6 +757,7 @@ input UserUpdateManyMutationInput {
   email: String
   password: String
   goal: Int
+  subscription: Boolean
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
@@ -771,6 +779,7 @@ input UserUpdateWithoutFastsDataInput {
   email: String
   password: String
   goal: Int
+  subscription: Boolean
   resetToken: String
   resetTokenExpiry: Float
   permissions: UserUpdatepermissionsInput
@@ -972,6 +981,10 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   goal_gte: Int
+  subscription: Boolean
+
+  """All values that are not equal to given value."""
+  subscription_not: Boolean
   resetToken: String
 
   """All values that are not equal to given value."""
