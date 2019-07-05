@@ -62,13 +62,21 @@ const Screenshot = () => (
         </div>
     </ImageStyles>
 )
+const HomeStyles = styled.div`
+    h1,
+    h3 {
+        color: ${props => props.theme.colorWhiteDark};
+    }
+`
 
 const Home = () => (
     <Main>
-        <ParticlesStyles />
-        <h1>Cero</h1>
-        <h3>Cero is a simple intermittent fasting tracker app</h3>
-        <Screenshot />
+        <HomeStyles>
+            <ParticlesStyles />
+            <h1>Cero</h1>
+            <h3>Cero is a simple intermittent fasting tracker app</h3>
+            <Screenshot />
+        </HomeStyles>
     </Main>
 )
 

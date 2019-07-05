@@ -1,14 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
+import { withApollo } from 'react-apollo'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { SIGNOUT_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
-import 'react-toastify/dist/ReactToastify.css'
 
 const Logout = () => {
     const [signout] = useMutation(SIGNOUT_MUTATION, {
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        // update: cache => {
+        //     cache.writeQuery({
+        //         data: {},
+        //     })
+        // },
     })
 
     const handleSignOut = () => {
@@ -22,6 +28,7 @@ const Logout = () => {
             draggable: false,
         })
         localStorage.clear()
+        // props.client.resetStore()
     }
 
     return (
@@ -31,4 +38,4 @@ const Logout = () => {
     )
 }
 
-export default Logout
+export default withApollo(Logout)
