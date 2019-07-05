@@ -1,16 +1,6 @@
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import styled from 'styled-components'
-import * as yup from 'yup'
-import { onClickOutside } from 'react-onclickoutside'
-import { SIGNIN_MUTATION, SIGNUP_MUTATION } from '../../gql/UserMutation'
-import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
-import Error from '../ErrorMessage'
 import Main from '../Layout/Main'
-import FormStyles from '../styled/Form'
 import Login from './Login'
 import Register from './Register'
 
@@ -129,37 +119,37 @@ const SingleForm = props => {
         }
     }
 
-    // <Main>
     return (
-        <SingleFormStyles>
-            <button className='button-toggle' type='button' onClick={changePage}>
-                {page === 'login' ? 'Register' : 'Login'}
-            </button>
+        <Main>
+            <SingleFormStyles>
+                <button className='button-toggle' type='button' onClick={changePage}>
+                    {page === 'login' ? 'Register' : 'Login'}
+                </button>
 
-            <div className='container'>
-                {page === 'login' && (
-                    <>
-                        <Login className='form' {...props} />
+                <div className='container'>
+                    {page === 'login' && (
+                        <>
+                            <Login className='form' {...props} />
 
-                        <div className='mask' onClick={changePage}>
-                            Create an account
-                        </div>
-                    </>
-                )}
+                            <div className='mask' onClick={changePage}>
+                                Create an account
+                            </div>
+                        </>
+                    )}
 
-                {page === 'register' && (
-                    <>
-                        <div className='mask' onClick={changePage}>
-                            Login to your account
-                        </div>
+                    {page === 'register' && (
+                        <>
+                            <div className='mask' onClick={changePage}>
+                                Login to your account
+                            </div>
 
-                        <Register className='form' {...props} />
-                    </>
-                )}
-            </div>
-        </SingleFormStyles>
+                            <Register className='form' {...props} />
+                        </>
+                    )}
+                </div>
+            </SingleFormStyles>
+        </Main>
     )
-    // </Main>
 }
 
 export default SingleForm

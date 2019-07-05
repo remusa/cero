@@ -64,7 +64,8 @@ const Register = props => {
                     }}
                 >
                     {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
-                        <Form style={{ width: '290px', height: '420px' }}>
+                        <Form>
+                            {/* style={{ width: '290px', height: '420px' }} */}
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <div className='fields'>
                                     <h2>Register</h2>
