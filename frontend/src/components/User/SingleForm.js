@@ -4,6 +4,7 @@ import Login from './Login'
 import Register from './Register'
 
 import './SingleForm.scss'
+import ParticlesStyles from '../Layout/Particles'
 
 const SingleForm = props => {
     const [page, setPage] = useState('login')
@@ -18,6 +19,7 @@ const SingleForm = props => {
 
     return (
         <Main>
+            {/* <ParticlesStyles /> */}
             <div className='SingleFormStyles'>
                 <button className='button-toggle' type='button' onClick={changePage}>
                     {page === 'login' ? 'Register' : 'Login'}
