@@ -5,7 +5,9 @@ import Login from './Login'
 import Register from './Register'
 
 const SingleFormStyles = styled.div`
-    grid-area: main;
+    /* grid-area: main; */
+    width: 100%;
+    margin: 0 auto;
 
     display: flex;
     flex-flow: column wrap;
@@ -37,7 +39,7 @@ const SingleFormStyles = styled.div`
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 4px;
 
-        /* width: 580px; */
+        width: 580px;
         height: 450px;
 
         ::first-child {
