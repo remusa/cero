@@ -54,125 +54,122 @@ const Register = props => {
     // </Main />
 
     return (
-        <Main>
-            <FormStyles>
-                <Formik
-                    initialValues={user}
-                    validationSchema={validationSchema}
-                    onSubmit={(values, actions) => {
-                        handleSubmit(values, actions)
-                    }}
-                >
-                    {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
-                        <Form>
-                            {/* style={{ width: '290px', height: '420px' }} */}
-                            <fieldset disabled={loading} aria-busy={loading}>
-                                <div className='fields'>
-                                    <h2>Register</h2>
+        // <Main>
+        <FormStyles>
+            <Formik
+                initialValues={user}
+                validationSchema={validationSchema}
+                onSubmit={(values, actions) => {
+                    handleSubmit(values, actions)
+                }}
+            >
+                {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
+                    <Form>
+                        {/* style={{ width: '290px', height: '420px' }} */}
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <div className='fields'>
+                                <h2>Register</h2>
 
-                                    <Error error={error} />
+                                <Error error={error} />
 
-                                    <label htmlFor='name'>
-                                        Username
-                                        <Field
-                                            required
-                                            type='text'
-                                            name='name'
-                                            placeholder='Username'
-                                            value={values.name}
-                                            onChange={handleChange}
-                                        />
-                                        <ErrorMessage
-                                            name='name'
-                                            component='div'
-                                            className='errorMessage'
-                                        />
-                                    </label>
+                                <label htmlFor='name'>
+                                    Username
+                                    <Field
+                                        required
+                                        type='text'
+                                        name='name'
+                                        placeholder='Username'
+                                        value={values.name}
+                                        onChange={handleChange}
+                                    />
+                                    <ErrorMessage
+                                        name='name'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
 
-                                    <label htmlFor='email'>
-                                        Email
-                                        <Field
-                                            required
-                                            type='email'
-                                            name='email'
-                                            placeholder='your_email@example.com'
-                                            value={values.email}
-                                            onChange={handleChange}
-                                        />
-                                        <ErrorMessage
-                                            name='email'
-                                            component='div'
-                                            className='errorMessage'
-                                        />
-                                    </label>
+                                <label htmlFor='email'>
+                                    Email
+                                    <Field
+                                        required
+                                        type='email'
+                                        name='email'
+                                        placeholder='your_email@example.com'
+                                        value={values.email}
+                                        onChange={handleChange}
+                                    />
+                                    <ErrorMessage
+                                        name='email'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
 
-                                    <label htmlFor='password'>
-                                        Password
-                                        <Field
-                                            required
-                                            type='password'
-                                            name='password'
-                                            placeholder='*****'
-                                            value={values.password}
-                                            onChange={handleChange}
-                                        />
-                                        <ErrorMessage
-                                            name='password'
-                                            component='div'
-                                            className='errorMessage'
-                                        />
-                                    </label>
+                                <label htmlFor='password'>
+                                    Password
+                                    <Field
+                                        required
+                                        type='password'
+                                        name='password'
+                                        placeholder='*****'
+                                        value={values.password}
+                                        onChange={handleChange}
+                                    />
+                                    <ErrorMessage
+                                        name='password'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
 
-                                    <label htmlFor='confirmPassword'>
-                                        Confirm Password
-                                        <Field
-                                            required
-                                            type='password'
-                                            name='confirmPassword'
-                                            placeholder='*****'
-                                            value={values.confirmPassword}
-                                            onChange={handleChange}
-                                        />
-                                        <ErrorMessage
-                                            name='confirmPassword'
-                                            component='div'
-                                            className='errorMessage'
-                                        />
-                                    </label>
-                                </div>
+                                <label htmlFor='confirmPassword'>
+                                    Confirm Password
+                                    <Field
+                                        required
+                                        type='password'
+                                        name='confirmPassword'
+                                        placeholder='*****'
+                                        value={values.confirmPassword}
+                                        onChange={handleChange}
+                                    />
+                                    <ErrorMessage
+                                        name='confirmPassword'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
+                            </div>
 
-                                <div className='buttons'>
-                                    <button
-                                        type='submit'
-                                        disabled={loading || !dirty || isSubmitting}
-                                    >
-                                        Register
-                                    </button>
+                            <div className='buttons'>
+                                <button type='submit' disabled={loading || !dirty || isSubmitting}>
+                                    Register
+                                </button>
 
-                                    <button
-                                        type='button'
-                                        disabled={!dirty}
-                                        onClick={handleReset}
-                                        className='resetButton'
-                                    >
-                                        Reset
-                                    </button>
+                                <button
+                                    type='button'
+                                    disabled={!dirty}
+                                    onClick={handleReset}
+                                    className='resetButton'
+                                >
+                                    Reset
+                                </button>
 
-                                    <Link to='/requestreset'>
-                                        <ResetStyles>Forgot password?</ResetStyles>
-                                    </Link>
+                                <Link to='/requestreset'>
+                                    <ResetStyles>Forgot password?</ResetStyles>
+                                </Link>
 
-                                    {/* <div className='divider' /> */}
-                                </div>
+                                {/* <div className='divider' /> */}
+                            </div>
 
-                                {/* <pre>{JSON.stringify(values, null, 2)}</pre>
+                            {/* <pre>{JSON.stringify(values, null, 2)}</pre>
                                 <pre>{JSON.stringify(errors, null, 2)}</pre> */}
-                            </fieldset>
-                        </Form>
-                    )}
-                </Formik>
-            </FormStyles>
-        </Main>
+                        </fieldset>
+                    </Form>
+                )}
+            </Formik>
+        </FormStyles>
+        // </Main>
     )
 }
 

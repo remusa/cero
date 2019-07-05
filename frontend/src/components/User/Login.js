@@ -63,88 +63,85 @@ const Login = props => {
     // </Main />
 
     return (
-        <Main>
-            <FormStyles>
-                <Formik
-                    initialValues={user}
-                    validationSchema={validationSchema}
-                    onSubmit={(values, actions) => {
-                        handleSubmit(values, actions)
-                    }}
-                >
-                    {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
-                        <Form>
-                            {/* style={{ width: '290px', height: '420px' }} */}
-                            <fieldset disabled={loading} aria-busy={loading}>
-                                <div className='fields'>
-                                    <h2>Login</h2>
+        // <Main>
+        <FormStyles>
+            <Formik
+                initialValues={user}
+                validationSchema={validationSchema}
+                onSubmit={(values, actions) => {
+                    handleSubmit(values, actions)
+                }}
+            >
+                {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
+                    <Form>
+                        {/* style={{ width: '290px', height: '420px' }} */}
+                        <fieldset disabled={loading} aria-busy={loading}>
+                            <div className='fields'>
+                                <h2>Login</h2>
 
-                                    <Error error={error} />
+                                <Error error={error} />
 
-                                    <label htmlFor='email'>
-                                        Email
-                                        <Field
-                                            required
-                                            type='email'
-                                            name='email'
-                                            placeholder='your_email@example.com'
-                                            value={values.email}
-                                            onChange={handleChange}
-                                        />
-                                        <ErrorMessage
-                                            name='email'
-                                            component='div'
-                                            className='errorMessage'
-                                        />
-                                    </label>
+                                <label htmlFor='email'>
+                                    Email
+                                    <Field
+                                        required
+                                        type='email'
+                                        name='email'
+                                        placeholder='your_email@example.com'
+                                        value={values.email}
+                                        onChange={handleChange}
+                                    />
+                                    <ErrorMessage
+                                        name='email'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
 
-                                    <label htmlFor='password'>
-                                        Password
-                                        <Field
-                                            required
-                                            type='password'
-                                            name='password'
-                                            placeholder='*****'
-                                            value={values.password}
-                                            onChange={handleChange}
-                                        />
-                                        <ErrorMessage
-                                            name='password'
-                                            component='div'
-                                            className='errorMessage'
-                                        />
-                                    </label>
-                                </div>
+                                <label htmlFor='password'>
+                                    Password
+                                    <Field
+                                        required
+                                        type='password'
+                                        name='password'
+                                        placeholder='*****'
+                                        value={values.password}
+                                        onChange={handleChange}
+                                    />
+                                    <ErrorMessage
+                                        name='password'
+                                        component='div'
+                                        className='errorMessage'
+                                    />
+                                </label>
+                            </div>
 
-                                <div className='buttons'>
-                                    <button
-                                        type='submit'
-                                        disabled={loading || !dirty || isSubmitting}
-                                    >
-                                        Login
-                                    </button>
+                            <div className='buttons'>
+                                <button type='submit' disabled={loading || !dirty || isSubmitting}>
+                                    Login
+                                </button>
 
-                                    <button
-                                        type='button'
-                                        disabled={!dirty}
-                                        onClick={handleReset}
-                                        className='resetButton'
-                                    >
-                                        Reset
-                                    </button>
+                                <button
+                                    type='button'
+                                    disabled={!dirty}
+                                    onClick={handleReset}
+                                    className='resetButton'
+                                >
+                                    Reset
+                                </button>
 
-                                    <Link to='/requestreset'>
-                                        <ResetStyles>Forgot password?</ResetStyles>
-                                    </Link>
+                                <Link to='/requestreset'>
+                                    <ResetStyles>Forgot password?</ResetStyles>
+                                </Link>
 
-                                    {/* <div className='divider' /> */}
-                                </div>
-                            </fieldset>
-                        </Form>
-                    )}
-                </Formik>
-            </FormStyles>
-        </Main>
+                                {/* <div className='divider' /> */}
+                            </div>
+                        </fieldset>
+                    </Form>
+                )}
+            </Formik>
+        </FormStyles>
+        // </Main>
     )
 }
 
