@@ -4,13 +4,14 @@ import { ThemeProvider as StyledProvider, createGlobalStyle } from 'styled-compo
 
 const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-    @font-face {
+    /*@font-face {
         format: 'woff2';
         src: url('./static/fonts/Lato-Regular.woff2');
         font-family: 'Lato-Regular';
         font-weight: normal;
-    }
+    }*/
 
     html {
         box-sizing: border-box;
