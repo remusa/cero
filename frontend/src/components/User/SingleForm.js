@@ -4,19 +4,12 @@ import Main from '../Layout/Main'
 import Login from './Login'
 import Register from './Register'
 
-import './SingleForm.scss'
+// import './SingleForm.scss'
 
 const SingleFormStyles = styled.div`
-    grid-area: main;
-
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
-
     .single-form-container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
         grid-column-gap: 4px;
 
         width: 580px;
@@ -47,22 +40,19 @@ const SingleFormStyles = styled.div`
 
         font-family: 'Montserrat', sans-serif;
         font-weight: bold;
-        /* line-height: 5rem;
-        letter-spacing: 1px; */
+        line-height: 5rem;
+        letter-spacing: 1px;
         font-size: 3rem;
         border-radius: 20px;
         cursor: pointer;
         padding: 32px;
 
-        /* width: auto; */
-        /* height: 100%; */
-        /* z-index: 99; */
+        width: auto;
+        height: 100%;
+        z-index: 99;
 
-        /* color: ${props => props.theme.colorWhite};
+        color: ${props => props.theme.colorWhite};
         background: ${props => props.theme.colorPrimary};
-        box-shadow: 0 0 8px ${props => props.theme.boxShadow}; */
-        color: white;
-        background: hsl(146, 100%, 39%);
         box-shadow: 0 0 8px ${props => props.theme.boxShadow};
 
         &:hover,
@@ -123,7 +113,7 @@ const SingleForm = props => {
 
     return (
         <Main>
-            <div className='SingleFormStyles'>
+            <SingleFormStyles className='SingleFormStyles'>
                 <button className='button-toggle' type='button' onClick={changePage}>
                     {page === 'login' ? 'Register' : 'Login'}
                 </button>
@@ -133,7 +123,7 @@ const SingleForm = props => {
                         <>
                             <Login className='form' {...props} />
 
-                            <div className='mask col2' onClick={changePage}>
+                            <div className='mask' onClick={changePage}>
                                 Create an account
                             </div>
                         </>
@@ -141,7 +131,7 @@ const SingleForm = props => {
 
                     {page === 'register' && (
                         <>
-                            <div className='mask col1' onClick={changePage}>
+                            <div className='mask' onClick={changePage}>
                                 Login to your account
                             </div>
 
@@ -149,7 +139,7 @@ const SingleForm = props => {
                         </>
                     )}
                 </div>
-            </div>
+            </SingleFormStyles>
         </Main>
     )
 }

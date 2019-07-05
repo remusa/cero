@@ -2,13 +2,6 @@
     --colorPrimary: hsl(146, 100%, 39%);
     --colorPrimaryHover: hsl(146, 100%, 39%, 0.8);
     --colorGrey: hsl(0, 0%, 30%);
-
-    // grid-area: main;
-
-    // display: flex;
-    // flex-flow: column wrap;
-    // justify-content: center;
-    // align-items: center;
 }
 
 .single-form-container {
@@ -28,14 +21,6 @@
     }
 }
 
-// .col1 {
-//     order: 1;
-// }
-
-// .col2 {
-//     order: 2;
-// }
-
 form {
     width: 290px;
     height: 100%;
@@ -53,7 +38,7 @@ form {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     line-height: 5rem;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     font-size: 3rem;
     border-radius: 20px;
     cursor: pointer;
