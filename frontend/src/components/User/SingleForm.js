@@ -4,6 +4,8 @@ import Main from '../Layout/Main'
 import Login from './Login'
 import Register from './Register'
 
+import './SingleForm.scss'
+
 const SingleFormStyles = styled.div`
     grid-area: main;
 
@@ -121,43 +123,43 @@ const SingleForm = props => {
 
     // <Main>
     return (
-        <SingleFormStyles>
+        <div className='SingleFormStyles'>
             <button className='button-toggle' type='button' onClick={changePage}>
                 {page === 'login' ? 'Register' : 'Login'}
             </button>
 
             <div className='single-form-container'>
-                {/* {page === 'login' && ( */}
-                <>
-                    {/* <Login className='form' {...props} /> */}
-                    <form action='submit'>
-                        <input type='email' name='' id='' />
-                        <input type='password' name='' id='' />
-                        <button type='submit'>Submit</button>
-                    </form>
+                {page === 'login' && (
+                    <>
+                        {/* <Login className='form' {...props} /> */}
+                        <form action='submit'>
+                            <input type='email' name='' id='' />
+                            <input type='password' name='' id='' />
+                            <button type='submit'>Submit</button>
+                        </form>
 
-                    <div className='mask' onClick={changePage}>
-                        Create an account
-                    </div>
-                </>
-                {/* )} */}
+                        <div className='mask' onClick={changePage}>
+                            Create an account
+                        </div>
+                    </>
+                )}
 
-                {/* {page === 'register' && ( */}
-                <>
-                    <div className='mask' onClick={changePage}>
-                        Login to your account
-                    </div>
+                {page === 'register' && (
+                    <>
+                        <div className='mask' onClick={changePage}>
+                            Login to your account
+                        </div>
 
-                    {/* <Register className='form' {...props} /> */}
-                    <form action='submit'>
-                        <input type='email' name='' id='' />
-                        <input type='password' name='' id='' />
-                        <button type='submit'>Submit</button>
-                    </form>
-                </>
-                {/* )} */}
+                        {/* <Register className='form' {...props} /> */}
+                        <form action='submit'>
+                            <input type='email' name='' id='' />
+                            <input type='password' name='' id='' />
+                            <button type='submit'>Submit</button>
+                        </form>
+                    </>
+                )}
             </div>
-        </SingleFormStyles>
+        </div>
     )
     // </Main>
 }
