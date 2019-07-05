@@ -47,7 +47,7 @@ const FormStyles = styled.div`
         select {
             width: 100%;
             padding: 0.5rem;
-            font-size: 1rem;
+            font-size: 1.2rem;
             border: 1px solid black;
             border-radius: 3px;
 
