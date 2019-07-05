@@ -28,7 +28,10 @@ const FormStyles = styled.div`
         font-size: 1.5rem;
         line-height: 1.5;
         font-weight: 600;
+        height: 100%;
+
         max-width: 300px;
+        width: 290px;
 
         h2 {
             border-bottom: 3px solid ${props => props.theme.colorPrimary};
@@ -44,7 +47,7 @@ const FormStyles = styled.div`
         select {
             width: 100%;
             padding: 0.5rem;
-            font-size: 1rem;
+            font-size: 1.2rem;
             border: 1px solid black;
             border-radius: 3px;
 
@@ -70,7 +73,8 @@ const FormStyles = styled.div`
             border-radius: 3px;
             font-size: 1.5rem;
             font-weight: 600;
-            padding: 0.5rem 1.2rem;
+            /* padding: 0.5rem 1.2rem; */
+            padding: 8px 15px;
 
             margin-right: 8px;
         }
@@ -84,7 +88,8 @@ const FormStyles = styled.div`
             border-radius: 3px;
             font-size: 1.5rem;
             font-weight: 600;
-            padding: 0.5rem 1.2rem;
+            /* padding: 0.5rem 1.2rem; */
+            padding: 8px 15px;
         }
 
         fieldset {
@@ -100,10 +105,7 @@ const FormStyles = styled.div`
                 opacity: 0.5;
             }
 
-
-            .fields {
-
-            }
+            .fields {}
 
             .buttons {
                 &::after {

@@ -2,65 +2,6 @@ import React, { createContext, useState } from 'react'
 import { PropTypes } from 'prop-types'
 import { ThemeProvider as StyledProvider, createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
-    /*@font-face {
-        format: 'woff2';
-        src: url('./static/fonts/Lato-Regular.woff2');
-        font-family: 'Lato-Regular';
-        font-weight: normal;
-    }*/
-
-    html {
-        box-sizing: border-box;
-        font-size: 10px;
-    }
-
-    *,
-    *:before,
-    *:after {
-        box-sizing: inherit;
-    }
-
-    body {
-        background-color: ${props => props.theme.colorBackground};
-        color: ${props => props.theme.colorFont};
-        margin: 0;
-        padding: 0;
-        font-family: 'Lato-Regular', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 1.5rem;
-        line-height: 2;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    h1 {
-        color: ${props => props.theme.colorHeader};
-        cursor: default;
-    }
-
-    h2 {
-        color: ${props => props.theme.colorHeader};
-        cursor: default;
-    }
-
-    button {
-        outline: none;
-        cursor: pointer;
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-    p {
-        text-align: center;
-    }
-`
-
 const theme = {
     colorWhiteDark: 'hsl(0, 0%, 96%)',
     colorWhite: 'hsl(0, 0%, 99%)',
@@ -99,8 +40,8 @@ const darkTheme = {
     ...theme,
 
     colorBackground: theme.colorGreyDark,
-    colorFont: theme.colorWhite,
     colorHeader: theme.colorWhiteDark,
+    colorFont: theme.colorWhite,
     boxShadow: theme.colorWhite,
     colorReset: theme.colorWhite,
 
@@ -110,6 +51,65 @@ const darkTheme = {
     colorPrimaryDarker: theme.colorGreenDark,
     colorPrimaryDarkest: theme.colorGreenDarkest,
 }
+
+const GlobalStyle = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+    /*@font-face {
+        format: 'woff2';
+        src: url('./static/fonts/Lato-Regular.woff2');
+        font-family: 'Lato-Regular';
+        font-weight: normal;
+    }*/
+
+    html {
+        box-sizing: border-box;
+        font-size: 10px;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+
+    body {
+        background-color: ${props => props.theme.colorBackground};
+        color: ${props => props.theme.colorFont};
+        margin: 0;
+        padding: 0;
+        font-family: 'Lato-Regular', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 1.5rem;
+        line-height: 2;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1 {
+        font-weight: bold;
+    }
+
+    h1, h2 {
+        font-family: 'Montserrat', sans-serif;
+        color: ${props => props.theme.colorHeader};
+        cursor: default;
+    }
+
+    button {
+        outline: none;
+        cursor: pointer;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    p {
+        text-align: center;
+    }
+`
 
 const ThemeContext = createContext()
 

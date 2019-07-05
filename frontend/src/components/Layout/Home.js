@@ -67,7 +67,7 @@ const Home = () => (
     <Main>
         <ParticlesStyles />
         <h1>Cero</h1>
-        <h2>Cero is a simple intermittent fasting tracker app</h2>
+        <h3>Cero is a simple intermittent fasting tracker app</h3>
         <Screenshot />
     </Main>
 )

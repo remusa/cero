@@ -49,11 +49,10 @@ const Register = props => {
         })
     }
 
-    // <Main />
     // <ParticlesStyles />
-    // </Main />
 
     return (
+        // <Main>
         <FormStyles>
             <Formik
                 initialValues={user}
@@ -64,6 +63,7 @@ const Register = props => {
             >
                 {({ values, dirty, handleChange, handleReset, isSubmitting }) => (
                     <Form>
+                        {/* style={{ width: '290px', height: '420px' }} */}
                         <fieldset disabled={loading} aria-busy={loading}>
                             <div className='fields'>
                                 <h2>Register</h2>
@@ -167,6 +167,7 @@ const Register = props => {
                 )}
             </Formik>
         </FormStyles>
+        // </Main>
     )
 }
 
