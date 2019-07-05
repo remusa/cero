@@ -1,4 +1,5 @@
 # disableAuth: true
+# endpoint: ${env:DEV_ENDPOINT}
 endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.prisma
 secret: ${env:PRISMA_SECRET}
