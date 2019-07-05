@@ -278,6 +278,14 @@ const Navigation = () => {
                                     {!me && (
                                         <>
                                             <NavLink
+                                                to='/enter'
+                                                activeClassName='active'
+                                                onClick={handleClick}
+                                            >
+                                                Login / Register
+                                            </NavLink>
+
+                                            {/* <NavLink
                                                 to='/login'
                                                 activeClassName='active'
                                                 onClick={handleClick}
@@ -291,7 +299,7 @@ const Navigation = () => {
                                                 onClick={handleClick}
                                             >
                                                 Register
-                                            </NavLink>
+                                            </NavLink> */}
                                         </>
                                     )}
                                 </animated.div>

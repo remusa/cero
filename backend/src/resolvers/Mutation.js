@@ -106,7 +106,6 @@ const Mutations = {
             name: usernameValidation,
             email: emailValidation,
             password: passwordValidation,
-            confirmPassword: confirmPasswordValidation,
         })
         let isValid = false
         await validationSchema
@@ -114,7 +113,6 @@ const Mutations = {
                 name: args.name,
                 email: args.email,
                 password: args.password,
-                confirmPassword: args.confirmPassword,
             })
             .then(valid => (isValid = valid))
         if (!isValid) throw new Error(`Validation error`)

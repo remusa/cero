@@ -3,11 +3,17 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { DotLoader } from 'react-spinners'
 
-const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: ${props => props.theme.colorPrimary};
-`
+// const override = css`
+//     display: block;
+//     margin: 0 auto;
+//     border-color: ${props => props.theme.colorPrimary};
+// `
+
+const override = {
+    display: 'block',
+    margin: '0 auto',
+    borderColor: 'hsl(146, 100%, 39%)',
+}
 
 const ContainerStyles = styled.div`
     /* height: 100%; */
@@ -48,7 +54,11 @@ const ProgresBarStyles = styled.div`
             ${props => props.theme.colorGreenLighter},
             ${props => props.theme.colorGreen}
         );
-        background: linear-gradient(to bottom, ${props => props.theme.colorGreenLight}, ${props => props.theme.colorGreen});
+        background: linear-gradient(
+            to bottom,
+            ${props => props.theme.colorGreenLight},
+            ${props => props.theme.colorGreen}
+        );
         border-radius: 3px;
         width: 0;
         transition: width 0.5s ease-in;
@@ -109,7 +119,7 @@ const Loading = props => {
                     sizeUnit='px'
                     size={100}
                     height={8}
-                    color='${props => props.theme.colorPrimary}'
+                    color='hsl(146, 100%, 39%)'
                     loading={loading}
                 />
             </div>
