@@ -32,12 +32,12 @@ const SingleFormStyles = styled.div`
         }
     }
 
-    .container {
+    .single-form-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 4px;
 
-        width: 580px;
+        /* width: 580px; */
         height: 450px;
 
         ::first-child {
@@ -90,7 +90,7 @@ const SingleFormStyles = styled.div`
     }
 
     @media all and (max-width: 600px) {
-        .container {
+        .single-form-container {
             display: flex;
             flex-flow: column wrap;
             align-content: center;
@@ -126,7 +126,7 @@ const SingleForm = props => {
                 {page === 'login' ? 'Register' : 'Login'}
             </button>
 
-            <div className='container'>
+            <div className='single-form-container'>
                 {page === 'login' && (
                     <>
                         {/* <Login className='form' {...props} /> */}
