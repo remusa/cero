@@ -119,47 +119,47 @@ const SingleForm = props => {
         }
     }
 
+    // <Main>
     return (
-        <Main>
-            <SingleFormStyles>
-                <button className='button-toggle' type='button' onClick={changePage}>
-                    {page === 'login' ? 'Register' : 'Login'}
-                </button>
+        <SingleFormStyles>
+            <button className='button-toggle' type='button' onClick={changePage}>
+                {page === 'login' ? 'Register' : 'Login'}
+            </button>
 
-                <div className='container'>
-                    {page === 'login' && (
-                        <>
-                            {/* <Login className='form' {...props} /> */}
-                            <form action='submit'>
-                                <input type='email' name='' id='' />
-                                <input type='password' name='' id='' />
-                                <button type='submit'>Submit</button>
-                            </form>
+            <div className='container'>
+                {page === 'login' && (
+                    <>
+                        {/* <Login className='form' {...props} /> */}
+                        <form action='submit'>
+                            <input type='email' name='' id='' />
+                            <input type='password' name='' id='' />
+                            <button type='submit'>Submit</button>
+                        </form>
 
-                            <div className='mask' onClick={changePage}>
-                                Create an account
-                            </div>
-                        </>
-                    )}
+                        <div className='mask' onClick={changePage}>
+                            Create an account
+                        </div>
+                    </>
+                )}
 
-                    {page === 'register' && (
-                        <>
-                            <div className='mask' onClick={changePage}>
-                                Login to your account
-                            </div>
+                {page === 'register' && (
+                    <>
+                        <div className='mask' onClick={changePage}>
+                            Login to your account
+                        </div>
 
-                            {/* <Register className='form' {...props} /> */}
-                            <form action='submit'>
-                                <input type='email' name='' id='' />
-                                <input type='password' name='' id='' />
-                                <button type='submit'>Submit</button>
-                            </form>
-                        </>
-                    )}
-                </div>
-            </SingleFormStyles>
-        </Main>
+                        {/* <Register className='form' {...props} /> */}
+                        <form action='submit'>
+                            <input type='email' name='' id='' />
+                            <input type='password' name='' id='' />
+                            <button type='submit'>Submit</button>
+                        </form>
+                    </>
+                )}
+            </div>
+        </SingleFormStyles>
     )
+    // </Main>
 }
 
 export default SingleForm
