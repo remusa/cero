@@ -1,104 +1,9 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import Main from '../Layout/Main'
 import Login from './Login'
 import Register from './Register'
 
-// import './SingleForm.scss'
-
-const SingleFormStyles = styled.div`
-    .single-form-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-column-gap: 4px;
-
-        width: 580px;
-        height: 450px;
-
-        ::first-child {
-            grid-column: 1;
-        }
-
-        ::last-child {
-            grid-column: 2;
-        }
-    }
-
-    form {
-        width: 290px;
-        height: 100%;
-    }
-
-    .active {
-        z-index: 99;
-    }
-
-    .mask {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-        line-height: 5rem;
-        letter-spacing: 1px;
-        font-size: 3rem;
-        border-radius: 20px;
-        cursor: pointer;
-        padding: 32px;
-
-        width: auto;
-        height: 100%;
-        z-index: 99;
-
-        color: ${props => props.theme.colorWhite};
-        background: ${props => props.theme.colorPrimary};
-        box-shadow: 0 0 8px ${props => props.theme.boxShadow};
-
-        &:hover,
-        &:focus {
-            background: hsl(146, 100%, 39%, 0.8);
-        }
-    }
-
-    .button-toggle {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-
-        outline: none;
-        width: auto;
-        background: ${props => props.theme.colorPrimary};
-        color: ${props => props.theme.colorWhite};
-        border: 0;
-        border-radius: 3px;
-        font-size: 1.5rem;
-        font-weight: 600;
-        padding: 0.5rem 1.2rem;
-        margin: 8px 0 8px 0;
-
-        @media all and (min-width: 601px) {
-            display: none;
-        }
-    }
-
-    @media all and (max-width: 600px) {
-        .single-form-container {
-            display: flex;
-            flex-flow: column wrap;
-            align-content: center;
-
-            width: auto;
-        }
-
-        form {
-            height: 420px;
-        }
-
-        .mask {
-            display: none;
-        }
-    }
-`
+import './SingleForm.scss'
 
 const SingleForm = props => {
     const [page, setPage] = useState('login')
@@ -113,7 +18,7 @@ const SingleForm = props => {
 
     return (
         <Main>
-            <SingleFormStyles className='SingleFormStyles'>
+            <div className='SingleFormStyles'>
                 <button className='button-toggle' type='button' onClick={changePage}>
                     {page === 'login' ? 'Register' : 'Login'}
                 </button>
@@ -123,7 +28,13 @@ const SingleForm = props => {
                         <>
                             <Login className='form' {...props} />
 
-                            <div className='mask' onClick={changePage}>
+                            <div
+                                role='button'
+                                tabIndex={0}
+                                className='mask'
+                                onClick={changePage}
+                                onKeyPress={changePage}
+                            >
                                 Create an account
                             </div>
                         </>
@@ -131,7 +42,13 @@ const SingleForm = props => {
 
                     {page === 'register' && (
                         <>
-                            <div className='mask' onClick={changePage}>
+                            <div
+                                role='button'
+                                tabIndex={0}
+                                className='mask'
+                                onClick={changePage}
+                                onKeyPress={changePage}
+                            >
                                 Login to your account
                             </div>
 
@@ -139,7 +56,7 @@ const SingleForm = props => {
                         </>
                     )}
                 </div>
-            </SingleFormStyles>
+            </div>
         </Main>
     )
 }

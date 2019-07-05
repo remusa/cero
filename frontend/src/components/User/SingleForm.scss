@@ -48,6 +48,9 @@ form {
     height: 100%;
     z-index: 99;
 
+    // color: ${props => props.theme.colorWhite};
+    // background: ${props => props.theme.colorPrimary};
+    // box-shadow: 0 0 8px ${props => props.theme.boxShadow};
     color: white;
     background: var(--colorPrimary);
     box-shadow: 0 0 8px var(--colorGrey);
@@ -64,6 +67,8 @@ form {
 
     outline: none;
     width: auto;
+    // background: ${props => props.theme.colorPrimary};
+    // color: ${props => props.theme.colorWhite};
     background: var(--colorPrimary);
     color: white;
     border: 0;
