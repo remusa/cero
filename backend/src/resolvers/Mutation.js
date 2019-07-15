@@ -118,7 +118,7 @@ const Mutations = {
             .then(valid => (isValid = valid))
             .catch(e => (error = e))
         if (!isValid) {
-            console.log(`Error: ${error}`)
+            // console.log(`Error: ${error}`)
             throw new Error(`Validation error: ${error}`)
         }
 

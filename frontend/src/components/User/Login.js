@@ -33,6 +33,21 @@ export const ResetStyles = styled.div`
     }
 `
 
+const DemoStyles = styled.div`
+    line-height: 1rem;
+    margin: 18px 0;
+    padding: 0;
+
+    .demo-title {
+        font-weight: 900;
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+`
+
 const Login = props => {
     const [user, setUser] = useState({ email: '', password: '' })
 
@@ -133,6 +148,12 @@ const Login = props => {
                                 </Link>
 
                                 {/* <div className='divider' /> */}
+
+                                <DemoStyles>
+                                    <p className='demo-title'>Demo account:</p>
+                                    <p>demo@demo.com</p>
+                                    <p>demo123demo123</p>
+                                </DemoStyles>
                             </div>
                         </fieldset>
                     </Form>
