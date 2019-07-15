@@ -108,6 +108,7 @@ const Mutations = {
             password: passwordValidation,
         })
         let isValid = false
+        let error = ''
         await validationSchema
             .isValid({
                 name: args.name,
@@ -115,7 +116,11 @@ const Mutations = {
                 password: args.password,
             })
             .then(valid => (isValid = valid))
-        if (!isValid) throw new Error(`Validation error`)
+            .catch(e => (error = e))
+        if (!isValid) {
+            console.log(`Error: ${error}`)
+            throw new Error(`Validation error: ${error}`)
+        }
 
         // if (args.name.length < 3) {
         //     throw new Error('Username must be at least 3 characters long')
