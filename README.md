@@ -20,7 +20,7 @@ Cero is a fasting tracker built in React, Node.js (Express.js) and GraphQL.
 * GraphQL Yoga (Express server)
 * Prisma (Database interface)
 * Authentication done using JWT (JSON Web Tokens)
-  - User can sign up, login and request password reset via email.
+  - Users can sign up, login and request password reset via email.
 * Authorization via permissions
 * Using SendGrid for password resets
 * Security features: helmet + CORS
