@@ -110,7 +110,10 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
-interface IContext {}
+interface IContext {
+    theme: string
+    setDarkMode: (darkModeEnabled: boolean) => void
+}
 
 const ThemeContext = createContext({} as IContext)
 
