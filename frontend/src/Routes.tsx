@@ -1,22 +1,24 @@
-import React, { useContext } from 'react'
-import { Switch, Route, __RouterContext } from 'react-router-dom'
-import { animated, useTransition, config } from 'react-spring'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+import React, { useContext } from 'react'
+import { Route, Switch, __RouterContext } from 'react-router-dom'
+import { animated, useTransition } from 'react-spring'
+import styled from 'styled-components'
 import AdminPage from './components/Admin/AdminPage'
 import FastPage from './components/Fast/FastPage'
 import Home from './components/Layout/Home'
-import Login from './components/User/Login'
 import ProfilePage from './components/User/ProfilePage'
-import Register from './components/User/Register'
 import RequestReset from './components/User/RequestReset'
 import Reset from './components/User/Reset'
-import './static/nprogress.css'
-import styled from 'styled-components'
-import Main from './components/Layout/Main'
 import SingleForm from './components/User/SingleForm'
+import * as ROUTES from './constants/routes'
+import './static/nprogress.css'
 
-const NotFound404 = ({ location }) => (
+interface INotFound {
+    location: object
+}
+
+const NotFound404 = ({ location }: INotFound) => (
     <div>
         <h3>
             404, no match for <code>{location.pathname}</code>
@@ -38,6 +40,22 @@ class FancyRoute extends React.Component {
     }
 }
 
+// interface IProps {
+//     props?: any
+// }
+
+// const FancyRoute: React.FC = ({props}) => {
+//     useEffect(() => {
+//         nprogress.start()
+
+//         return () => {
+//             nprogress.done()
+//         }
+//     }, [])
+
+//     return <Route {...props} />
+// }
+
 const RouterStyles = styled.div`
     grid-area: main;
 
@@ -51,7 +69,7 @@ const RouterStyles = styled.div`
     }
 `
 
-const AnimatedRoutes = () => {
+const AnimatedRoutes: React.FC = () => {
     const { location } = useContext(__RouterContext)
     const transitions = useTransition(location, location => location.key, {
         // from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
@@ -73,16 +91,16 @@ const AnimatedRoutes = () => {
             {transitions.map(({ item, props: transition, key }) => (
                 <animated.div key={key} style={transition}>
                     <Switch location={item}>
-                        <FancyRoute path='/' exact component={Home} />
-                        <FancyRoute path='/fast' component={FastPage} />
-                        <FancyRoute path='/enter' component={SingleForm} />
-                        {/* <FancyRoute path='/login' component={Login} />
-                        <FancyRoute path='/register' component={Register} /> */}
-                        <FancyRoute path='/profile' component={ProfilePage} />
-                        <FancyRoute path='/requestreset' component={RequestReset} />
-                        <FancyRoute path='/reset' component={Reset} />
-                        <FancyRoute path='/profile' component={FastPage} />
-                        <FancyRoute path='/admin' component={AdminPage} />
+                        <FancyRoute path={ROUTES.HOME} exact component={Home} />
+                        <FancyRoute path={ROUTES.FAST} component={FastPage} />
+                        <FancyRoute path={ROUTES.ENTER} component={SingleForm} />
+                        {/* <FancyRoute path={ROUTES.LOGIN}component={Login} />
+                        <FancyRoute path={ROUTES.REGISTER} component={Register} /> */}
+                        <FancyRoute path={ROUTES.PROFILE} component={ProfilePage} />
+                        <FancyRoute path={ROUTES.REQUEST_RESET} component={RequestReset} />
+                        <FancyRoute path={ROUTES.RESET} component={Reset} />
+                        <FancyRoute path={ROUTES.FAST} component={FastPage} />
+                        <FancyRoute path={ROUTES.ADMIN} component={AdminPage} />
                         <FancyRoute component={NotFound404} />
                     </Switch>
                 </animated.div>
@@ -91,18 +109,18 @@ const AnimatedRoutes = () => {
     )
 }
 
-const Router = () => (
+const Router: React.FC = () => (
     <Switch>
-        <FancyRoute path='/' exact component={Home} />
-        <FancyRoute path='/fast' component={FastPage} />
-        <FancyRoute path='/enter' component={SingleForm} />
+        <FancyRoute path="/" exact component={Home} />
+        <FancyRoute path="/fast" component={FastPage} />
+        <FancyRoute path="/enter" component={SingleForm} />
         {/* <FancyRoute path='/login' component={Login} />
         <FancyRoute path='/register' component={Register} /> */}
-        <FancyRoute path='/profile' component={ProfilePage} />
-        <FancyRoute path='/requestreset' component={RequestReset} />
-        <FancyRoute path='/reset' component={Reset} />
-        <FancyRoute path='/profile' component={FastPage} />
-        <FancyRoute path='/admin' component={AdminPage} />
+        <FancyRoute path="/profile" component={ProfilePage} />
+        <FancyRoute path="/requestreset" component={RequestReset} />
+        <FancyRoute path="/reset" component={Reset} />
+        <FancyRoute path="/profile" component={FastPage} />
+        <FancyRoute path="/admin" component={AdminPage} />
         <FancyRoute component={NotFound404} />
     </Switch>
 )
