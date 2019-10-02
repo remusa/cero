@@ -1,9 +1,15 @@
-import React, { createContext, useState } from 'react'
 import { PropTypes } from 'prop-types'
+import React, { createContext, useState } from 'react'
 
-const FastsContext = createContext()
+interface IContext {}
 
-const FastsProvider = ({ children }) => {
+const FastsContext = createContext({} as IContext)
+
+interface IProps {
+    children: HTMLElement
+}
+
+const FastsProvider: React.FC<IProps> = ({ children }) => {
     const [fasts, setFasts] = useState([])
     const [activeFast, setActiveFast] = useState('')
 
