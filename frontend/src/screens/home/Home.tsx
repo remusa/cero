@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import screenshot from '../static/images/cero.png'
-import Main from './Main'
-import ParticlesStyles from './Particles'
+import screenshot from '../../static/images/cero.png'
+import Main from './../../components/Main'
+import ParticlesStyles from './../../components/Particles'
 
 const ImageStyles = styled.div`
     .project-list__card {
@@ -72,8 +72,11 @@ const Home = () => (
     <Main>
         <HomeStyles>
             <ParticlesStyles />
+
             <h1>Cero</h1>
+
             <h3>Cero is a simple intermittent fasting tracker app</h3>
+
             <Screenshot />
         </HomeStyles>
     </Main>
