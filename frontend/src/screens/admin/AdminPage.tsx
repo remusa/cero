@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import Error from '../../components/ErrorMessage'
+import { TableStyles } from '../../components/styled/Table'
+import User from '../../components/User/User'
 import { ALL_USERS_QUERY } from '../../gql/UserQuery'
-import Error from '../ErrorMessage'
-import Permissions from './Permissions'
-import { TableStyles } from '../styled/Table'
-import User from '../User/User'
+import Permissions from '../permissions/Permissions'
 
 const AdminStyles = styled.div`
     grid-area: main;
@@ -78,7 +78,7 @@ const NotAdmin = styled.div`
     }
 `
 
-const Users = () => {
+const Users: React.FC = () => {
     const { data, error, loading } = useQuery(ALL_USERS_QUERY)
 
     if (loading) return <div>Loading...</div>
@@ -94,8 +94,7 @@ const Users = () => {
                 </tr>
 
                 <tr>
-                    <td colSpan={3}>
-                        <div colSpan={3} className='divider' />
+                    <td colSpan={3} className="divider" >
                     </td>
                 </tr>
             </thead>
@@ -119,10 +118,10 @@ const Users = () => {
     )
 }
 
-const AdminPage = () => {
-    const [page, setPage] = useState(localStorage.getItem('admin-page') || 'permissions')
+const AdminPage: React.FC = () => {
+    const [page, setPage] = useState<string>(localStorage.getItem('admin-page') || 'permissions')
 
-    const handlePage = pg => {
+    const handlePage = (pg: string) => {
         setPage(pg)
         localStorage.setItem('admin-page', pg)
     }
