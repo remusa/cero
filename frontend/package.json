@@ -58,6 +58,7 @@
         "@types/react-dom": "^16.9.1",
         "@types/react-router-dom": "^5.1.0",
         "@types/styled-components": "^4.1.19",
+        "@types/yup": "^0.26.24",
         "cross-env": "^6.0.2",
         "eslint": "^6.5.1",
         "eslint-config-airbnb": "^18.0.1",
