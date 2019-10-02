@@ -4,13 +4,13 @@ import React, { useContext } from 'react'
 import { Route, Switch, __RouterContext } from 'react-router-dom'
 import { animated, useTransition } from 'react-spring'
 import styled from 'styled-components'
-import FastPage from './components/Fast/FastPage'
-import Home from './components/Layout/Home'
-import RequestReset from './components/User/RequestReset'
-import Reset from './components/User/Reset'
-import SingleForm from './components/User/SingleForm'
+import Home from './components/Home'
+import SingleForm from './components/SingleForm'
 import * as ROUTES from './constants/routes'
 import AdminPage from './screens/admin/AdminPage'
+import RequestReset from './screens/auth/RequestReset'
+import Reset from './screens/auth/Reset'
+import FastPage from './screens/fast/FastPage'
 import ProfilePage from './screens/profile/ProfilePage'
 import './static/nprogress.css'
 
@@ -113,16 +113,16 @@ const AnimatedRoutes: React.FC = () => {
 
 const Router: React.FC = () => (
     <Switch>
-        <FancyRoute path="/" exact component={Home} />
-        <FancyRoute path="/fast" component={FastPage} />
-        <FancyRoute path="/enter" component={SingleForm} />
-        {/* <FancyRoute path='/login' component={Login} />
-        <FancyRoute path='/register' component={Register} /> */}
-        <FancyRoute path="/profile" component={ProfilePage} />
-        <FancyRoute path="/requestreset" component={RequestReset} />
-        <FancyRoute path="/reset" component={Reset} />
-        <FancyRoute path="/profile" component={FastPage} />
-        <FancyRoute path="/admin" component={AdminPage} />
+        <FancyRoute path={ROUTES.HOME} exact component={Home} />
+        <FancyRoute path={ROUTES.FAST} component={FastPage} />
+        <FancyRoute path={ROUTES.ENTER} component={SingleForm} />
+        {/* <FancyRoute path={ROUTES.LOGIN}component={Login} />
+                        <FancyRoute path={ROUTES.REGISTER} component={Register} /> */}
+        <FancyRoute path={ROUTES.PROFILE} component={ProfilePage} />
+        <FancyRoute path={ROUTES.REQUEST_RESET} component={RequestReset} />
+        <FancyRoute path={ROUTES.RESET} component={Reset} />
+        <FancyRoute path={ROUTES.FAST} component={FastPage} />
+        <FancyRoute path={ROUTES.ADMIN} component={AdminPage} />
         <FancyRoute component={NotFound404} />
     </Switch>
 )
