@@ -7,7 +7,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import { ThemeProvider } from './data/ThemeContext'
 import { UserProvider } from './data/UserContext'
-import Routes from './Routes'
+import Routes from './Router'
 
 const AppStyles = styled.div`
     text-align: center;

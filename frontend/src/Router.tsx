@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { Route, Switch, __RouterContext } from 'react-router-dom'
 import { animated, useTransition } from 'react-spring'
 import styled from 'styled-components'
-import Home from './components/Home'
+import Home from './screens/home/Home'
 import SingleForm from './components/SingleForm'
 import * as ROUTES from './constants/routes'
 import AdminPage from './screens/admin/AdminPage'
@@ -46,7 +46,7 @@ class FancyRoute extends React.Component {
 //     props?: any
 // }
 
-// const FancyRoute: React.FC = ({props}) => {
+// const FancyRoute: React.FC = ({ props }) => {
 //     useEffect(() => {
 //         nprogress.start()
 
