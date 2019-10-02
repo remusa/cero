@@ -172,7 +172,7 @@ const HeaderStyles = styled.header`
 const Navigation: React.FC = () => {
     const [width, setWidth] = useState<number>(window.innerWidth)
     const initialToggle = () => localStorage.getItem('toggled') || false
-    const [toggled, setToggled] = useState(initialToggle)
+    const [toggled, setToggled] = useState<string | boolean>(initialToggle)
 
     const headerAnimations = useSpring({
         opacity: toggled ? 1 : 0,
