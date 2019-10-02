@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const SIGNIN_MUTATION = gql`
+export const SIGNIN_MUTATION = gql`
     mutation SIGNIN_MUTATION($email: String!, $password: String!) {
         signin(email: $email, password: $password) {
             id
@@ -10,7 +10,7 @@ const SIGNIN_MUTATION = gql`
     }
 `
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
     mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
         signup(email: $email, name: $name, password: $password) {
             id
@@ -20,7 +20,7 @@ const SIGNUP_MUTATION = gql`
     }
 `
 
-const SIGNOUT_MUTATION = gql`
+export const SIGNOUT_MUTATION = gql`
     mutation SIGNOUT_MUTATION {
         signout {
             message
@@ -28,7 +28,7 @@ const SIGNOUT_MUTATION = gql`
     }
 `
 
-const RESET_MUTATION = gql`
+export const RESET_MUTATION = gql`
     mutation RESET_MUTATION($resetToken: String!, $password: String!, $confirmPassword: String!) {
         resetPassword(
             resetToken: $resetToken
@@ -42,7 +42,7 @@ const RESET_MUTATION = gql`
     }
 `
 
-const REQUEST_RESET_MUTATION = gql`
+export const REQUEST_RESET_MUTATION = gql`
     mutation REQUEST_RESET_MUTATION($email: String!) {
         requestReset(email: $email) {
             message
@@ -50,7 +50,7 @@ const REQUEST_RESET_MUTATION = gql`
     }
 `
 
-const UPDATE_PERMISSIONS_MUTATION = gql`
+export const UPDATE_PERMISSIONS_MUTATION = gql`
     mutation updatePermissions($userId: ID!, $permissions: [Permission]) {
         updatePermissions(userId: $userId, permissions: $permissions) {
             id
@@ -61,7 +61,7 @@ const UPDATE_PERMISSIONS_MUTATION = gql`
     }
 `
 
-const UPDATE_USER_MUTATION = gql`
+export const UPDATE_USER_MUTATION = gql`
     mutation updateUser($goal: Int) {
         updateUser(goal: $goal) {
             id
@@ -72,7 +72,7 @@ const UPDATE_USER_MUTATION = gql`
     }
 `
 
-// const SUBSCRIPTION_MUTATION = gql`
+// export const SUBSCRIPTION_MUTATION = gql`
 //     mutation subscribeUser {
 //         subscribeUser {
 //             id
@@ -83,13 +83,3 @@ const UPDATE_USER_MUTATION = gql`
 //     }
 // `
 
-export {
-    SIGNIN_MUTATION,
-    SIGNUP_MUTATION,
-    SIGNOUT_MUTATION,
-    RESET_MUTATION,
-    REQUEST_RESET_MUTATION,
-    UPDATE_PERMISSIONS_MUTATION,
-    UPDATE_USER_MUTATION,
-    // SUBSCRIPTION_MUTATION,
-}

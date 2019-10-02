@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const CREATE_FAST_MUTATION = gql`
+export const CREATE_FAST_MUTATION = gql`
     mutation CREATE_FAST_MUTATION($startDate: DateTime!, $endDate: DateTime, $isActive: Boolean) {
         createFast(startDate: $startDate, endDate: $endDate, isActive: $isActive) {
             id
@@ -12,7 +12,7 @@ const CREATE_FAST_MUTATION = gql`
     }
 `
 
-const STOP_FAST_MUTATION = gql`
+export const STOP_FAST_MUTATION = gql`
     mutation STOP_FAST_MUTATION($id: ID!) {
         stopFast(id: $id) {
             id
@@ -24,7 +24,7 @@ const STOP_FAST_MUTATION = gql`
     }
 `
 
-const UPDATE_FAST_MUTATION = gql`
+export const UPDATE_FAST_MUTATION = gql`
     mutation UPDATE_FAST_MUTATION(
         $id: ID!
         $startDate: DateTime
@@ -48,7 +48,7 @@ const UPDATE_FAST_MUTATION = gql`
     }
 `
 
-const DELETE_FAST_MUTATION = gql`
+export const DELETE_FAST_MUTATION = gql`
     mutation DELETE_FAST_MUTATION($id: ID!) {
         deleteFast(id: $id) {
             id
@@ -59,5 +59,3 @@ const DELETE_FAST_MUTATION = gql`
         }
     }
 `
-
-export { CREATE_FAST_MUTATION, UPDATE_FAST_MUTATION, STOP_FAST_MUTATION, DELETE_FAST_MUTATION }

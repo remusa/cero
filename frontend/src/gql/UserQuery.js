@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const CURRENT_USER_QUERY = gql`
+export const CURRENT_USER_QUERY = gql`
     query CURRENT_USER_QUERY {
         me {
             id
@@ -19,7 +19,7 @@ const CURRENT_USER_QUERY = gql`
     }
 `
 
-const ALL_USERS_QUERY = gql`
+export const ALL_USERS_QUERY = gql`
     query ALL_USERS_QUERY {
         users {
             id
@@ -30,4 +30,3 @@ const ALL_USERS_QUERY = gql`
     }
 `
 
-export { CURRENT_USER_QUERY, ALL_USERS_QUERY }

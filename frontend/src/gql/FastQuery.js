@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const ALL_FASTS_QUERY = gql`
+export const ALL_FASTS_QUERY = gql`
     query ALL_FASTS_QUERY($last: Int) {
         fasts(orderBy: startDate_ASC, last: $last) {
             id
@@ -12,5 +12,3 @@ const ALL_FASTS_QUERY = gql`
         }
     }
 `
-
-export { ALL_FASTS_QUERY }
