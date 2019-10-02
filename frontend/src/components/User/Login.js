@@ -64,7 +64,7 @@ const Login = props => {
         await signin()
         await actions.setSubmitting(false)
         await toast.success('Welcome!', {
-            position: 'top-right',
+            position: 'bottom-right',
             autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,

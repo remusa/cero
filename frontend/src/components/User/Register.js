@@ -40,7 +40,7 @@ const Register = props => {
         await signup()
         await actions.setSubmitting(false)
         await toast.success('Welcome!', {
-            position: 'top-right',
+            position: 'bottom-right',
             autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -65,95 +65,95 @@ const Register = props => {
                     <Form>
                         {/* style={{ width: '290px', height: '420px' }} */}
                         <fieldset disabled={loading} aria-busy={loading}>
-                            <div className='fields'>
+                            <div className="fields">
                                 <h2>Register</h2>
 
                                 <Error error={error} />
 
-                                <label htmlFor='name'>
+                                <label htmlFor="name">
                                     Username
                                     <Field
                                         required
-                                        type='text'
-                                        name='name'
-                                        placeholder='Username'
+                                        type="text"
+                                        name="name"
+                                        placeholder="Username"
                                         value={values.name}
                                         onChange={handleChange}
                                     />
                                     <ErrorMessage
-                                        name='name'
-                                        component='div'
-                                        className='errorMessage'
+                                        name="name"
+                                        component="div"
+                                        className="errorMessage"
                                     />
                                 </label>
 
-                                <label htmlFor='email'>
+                                <label htmlFor="email">
                                     Email
                                     <Field
                                         required
-                                        type='email'
-                                        name='email'
-                                        placeholder='your_email@example.com'
+                                        type="email"
+                                        name="email"
+                                        placeholder="your_email@example.com"
                                         value={values.email}
                                         onChange={handleChange}
                                     />
                                     <ErrorMessage
-                                        name='email'
-                                        component='div'
-                                        className='errorMessage'
+                                        name="email"
+                                        component="div"
+                                        className="errorMessage"
                                     />
                                 </label>
 
-                                <label htmlFor='password'>
+                                <label htmlFor="password">
                                     Password
                                     <Field
                                         required
-                                        type='password'
-                                        name='password'
-                                        placeholder='*****'
+                                        type="password"
+                                        name="password"
+                                        placeholder="*****"
                                         value={values.password}
                                         onChange={handleChange}
                                     />
                                     <ErrorMessage
-                                        name='password'
-                                        component='div'
-                                        className='errorMessage'
+                                        name="password"
+                                        component="div"
+                                        className="errorMessage"
                                     />
                                 </label>
 
-                                <label htmlFor='confirmPassword'>
+                                <label htmlFor="confirmPassword">
                                     Confirm Password
                                     <Field
                                         required
-                                        type='password'
-                                        name='confirmPassword'
-                                        placeholder='*****'
+                                        type="password"
+                                        name="confirmPassword"
+                                        placeholder="*****"
                                         value={values.confirmPassword}
                                         onChange={handleChange}
                                     />
                                     <ErrorMessage
-                                        name='confirmPassword'
-                                        component='div'
-                                        className='errorMessage'
+                                        name="confirmPassword"
+                                        component="div"
+                                        className="errorMessage"
                                     />
                                 </label>
                             </div>
 
-                            <div className='buttons'>
-                                <button type='submit' disabled={loading || !dirty || isSubmitting}>
+                            <div className="buttons">
+                                <button type="submit" disabled={loading || !dirty || isSubmitting}>
                                     Register
                                 </button>
 
                                 <button
-                                    type='button'
+                                    type="button"
                                     disabled={!dirty}
                                     onClick={handleReset}
-                                    className='resetButton'
+                                    className="resetButton"
                                 >
                                     Reset
                                 </button>
 
-                                <Link to='/requestreset'>
+                                <Link to="/requestreset">
                                     <ResetStyles>Forgot password?</ResetStyles>
                                 </Link>
 

@@ -41,7 +41,7 @@ const Reset = props => {
         await actions.setSubmitting(false)
         await actions.resetForm()
         await toast.success('Your password has been reset', {
-            position: 'top-right',
+            position: 'bottom-right',
             autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,

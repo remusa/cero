@@ -29,7 +29,7 @@ const RequestReset = () => {
         await actions.setSubmitting(false)
         await actions.resetForm()
         await toast.warn('Check your email for confirmation', {
-            position: 'top-right',
+            position: 'bottom-right',
             autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -59,32 +59,32 @@ const RequestReset = () => {
                                     <p>Success! Check your email for the reset link!</p>
                                 )}
 
-                                <label htmlFor='email'>
+                                <label htmlFor="email">
                                     Email
                                     <Field
                                         required
-                                        type='email'
-                                        name='email'
-                                        placeholder='your_email@example.com'
+                                        type="email"
+                                        name="email"
+                                        placeholder="your_email@example.com"
                                         value={values.email}
                                         onChange={handleChange}
                                     />
                                     <ErrorMessage
-                                        name='email'
-                                        component='div'
-                                        className='errorMessage'
+                                        name="email"
+                                        component="div"
+                                        className="errorMessage"
                                     />
                                 </label>
 
                                 <button
-                                    type='submit'
+                                    type="submit"
                                     disabled={loading || !dirty || isSubmitting}
-                                    className='reset'
+                                    className="reset"
                                 >
                                     Reset password
                                 </button>
 
-                                <div className='divider' />
+                                <div className="divider" />
                             </fieldset>
                         </Form>
                     )}

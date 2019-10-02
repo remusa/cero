@@ -1,13 +1,13 @@
+import 'normalize.css'
 import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
 import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import styled from 'styled-components'
 import Footer from './components/Layout/Footer'
 import Header from './components/Layout/Header'
-import Routes, { AnimatedRoutes } from './Routes'
-import 'normalize.css'
-import 'react-toastify/dist/ReactToastify.css'
-import { UserProvider } from './data/UserContext'
 import { ThemeProvider } from './data/ThemeContext'
+import { UserProvider } from './data/UserContext'
+import Routes from './Routes'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -25,7 +25,7 @@ const AppStyles = styled.div`
 // }
 
 toast.configure({
-    position: 'top-right',
+    position: 'bottom-right',
     autoClose: 3000,
     hideProgressBar: false,
     newestOnTop: true,
@@ -39,7 +39,7 @@ toast.configure({
 const App: React.FC = () => (
     <ThemeProvider>
         <UserProvider>
-            <AppStyles className='App'>
+            <AppStyles className="App">
                 <Header />
 
                 <Routes />

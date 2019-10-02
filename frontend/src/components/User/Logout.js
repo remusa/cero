@@ -29,7 +29,7 @@ const Logout = () => {
     const handleSignOut = () => {
         signout()
         toast.error('Goodbye!', {
-            position: 'top-right',
+            position: 'bottom-right',
             autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -42,7 +42,7 @@ const Logout = () => {
 
     return (
         // <SpanStyles>
-        <Link to='/' onClick={handleSignOut}>
+        <Link to="/" onClick={handleSignOut}>
             {/* <img height='16' width='16' src={logoutIcon} />  */}
             Logout
         </Link>

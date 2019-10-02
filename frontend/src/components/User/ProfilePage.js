@@ -49,7 +49,7 @@ const ProfilePage = () => {
             )} set to ${value}`
 
             toast.info(message, {
-                position: 'top-right',
+                position: 'bottom-right',
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -83,7 +83,7 @@ const ProfilePage = () => {
 
                 <FormStyles>
                     <form
-                        method='POST'
+                        method="POST"
                         onSubmit={e => {
                             handleSubmit(e, updateUser)
                         }}
@@ -93,19 +93,19 @@ const ProfilePage = () => {
 
                             <Error error={error} />
 
-                            <label htmlFor='goal'>
+                            <label htmlFor="goal">
                                 Target fast
                                 <input
-                                    type='number'
-                                    min='1'
-                                    name='goal'
+                                    type="number"
+                                    min="1"
+                                    name="goal"
                                     placeholder={user.goal}
                                     value={goal}
                                     onChange={handleChange}
                                 />
                             </label>
 
-                            <button type='submit'>Update</button>
+                            <button type="submit">Update</button>
                         </fieldset>
                     </form>
                 </FormStyles>
