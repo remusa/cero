@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import screenshot from '../static/images/cero.png'
 import Main from './Main'
 import ParticlesStyles from './Particles'
-
-import screenshot from '../../static/images/cero.png'
 
 const ImageStyles = styled.div`
     .project-list__card {
@@ -50,13 +49,13 @@ const ImageStyles = styled.div`
 
 const Screenshot = () => (
     <ImageStyles>
-        <div className='project-list__card'>
-            <div className='project-list__card__image'>
+        <div className="project-list__card">
+            <div className="project-list__card__image">
                 <img
                     src={screenshot}
-                    title='cero'
-                    alt='cero screenshot'
-                    className='project-list__card__image__src'
+                    title="cero"
+                    alt="cero screenshot"
+                    className="project-list__card__image__src"
                 />
             </div>
         </div>

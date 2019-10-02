@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import PleaseSignIn from '../../components/User/PleaseSignIn'
+import PleaseSignIn from '../../components/PleaseSignIn'
 import Permissions from './Permissions'
 
 const PermissionsStyles = styled.div`

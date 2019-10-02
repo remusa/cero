@@ -12,9 +12,8 @@ import {
     passwordValidation,
     usernameValidation,
 } from '../../lib/validationSchemas'
-import Error from '../ErrorMessage'
-import Main from '../Layout/Main'
-import FormStyles from '../styled/Form'
+import Error from './../../components/ErrorMessage'
+import FormStyles from '../../components/styled/Form'
 import { ResetStyles } from './Login'
 
 const validationSchema = yup.object().shape({

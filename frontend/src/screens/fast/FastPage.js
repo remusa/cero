@@ -6,15 +6,15 @@ import nprogress from 'nprogress'
 import { FastsContext, FastsProvider } from '../../data/FastsContext'
 import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
-import Error from '../ErrorMessage'
+import Error from '../../components/ErrorMessage'
 import FastCharts from './FastCharts'
 import FastTimer from './FastTimer'
-import PleaseSignIn from '../User/PleaseSignIn'
-import Loading from '../Loading'
+import Loading from '../../components/Loading'
 import FastTable from './FastTable'
 
 import '../../static/nprogress.css'
 import { UserContext } from '../../data/UserContext'
+import PleaseSignIn from './../../components/PleaseSignIn'
 
 const FastStyles = styled.div`
     grid-area: main;

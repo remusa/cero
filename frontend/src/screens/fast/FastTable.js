@@ -2,8 +2,8 @@ import React, { useContext, useState } from 'react'
 import { differenceInHours } from 'date-fns'
 import styled from 'styled-components'
 import { FastsContext } from '../../data/FastsContext'
-import Modal from './Modal'
-import { TableStyles } from '../styled/Table'
+import Modal from '../../components/Modal'
+import { TableStyles } from '../../components/styled/Table'
 
 const TableContainerStyles = styled.div`
     margin: 0 auto;
@@ -73,8 +73,8 @@ const FastTable = () => {
                     </tr>
 
                     <tr>
-                        <td colSpan='4'>
-                            <div colSpan='4' className='divider' />
+                        <td colSpan="4">
+                            <div colSpan="4" className="divider" />
                         </td>
                     </tr>
                 </thead>

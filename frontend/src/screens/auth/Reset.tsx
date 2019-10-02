@@ -1,24 +1,29 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
 import { Form, Formik } from 'formik'
+import PropTypes from 'prop-types'
 import queryString from 'query-string'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { RESET_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
-import { passwordValidation, confirmPasswordValidation } from '../../lib/validationSchemas'
-import Error from '../ErrorMessage'
-import Main from '../Layout/Main'
-import FormStyles from '../styled/Form'
+import { confirmPasswordValidation, passwordValidation } from '../../lib/validationSchemas'
+import Main from './../../components/Main'
+import FormStyles from './../../components/styled/Form'
+import Error from './../../components/ErrorMessage'
 
 const validationSchema = yup.object().shape({
     password: passwordValidation,
     confirmPassword: confirmPasswordValidation,
 })
 
-const Reset = props => {
-    const [user, setUser] = useState({
+interface Props {
+    location: object
+    history: any
+}
+
+const Reset = ({ props }: Props) => {
+    const [user, setUser] = useState<object>({
         password: '',
         confirmPassword: '',
     })
@@ -67,34 +72,34 @@ const Reset = props => {
 
                                 <Error error={error} />
 
-                                <label htmlFor='password'>
+                                <label htmlFor="password">
                                     Password
                                     <input
                                         required
-                                        type='password'
-                                        name='password'
-                                        placeholder='*****'
+                                        type="password"
+                                        name="password"
+                                        placeholder="*****"
                                         value={values.password}
                                         onChange={handleChange}
                                     />
                                 </label>
 
-                                <label htmlFor='confirmPassword'>
+                                <label htmlFor="confirmPassword">
                                     Confirm Password
                                     <input
                                         required
-                                        type='password'
-                                        name='confirmPassword'
-                                        placeholder='*****'
+                                        type="password"
+                                        name="confirmPassword"
+                                        placeholder="*****"
                                         value={values.confirmPassword}
                                         onChange={handleChange}
                                     />
                                 </label>
 
                                 <button
-                                    type='submit'
+                                    type="submit"
                                     disabled={loading || !dirty || isSubmitting}
-                                    className='reset'
+                                    className="reset"
                                 >
                                     Reset password
                                 </button>

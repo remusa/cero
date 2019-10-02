@@ -5,9 +5,9 @@ import { toast } from 'react-toastify'
 import * as yup from 'yup'
 import { REQUEST_RESET_MUTATION } from '../../gql/UserMutation'
 import { emailValidation } from '../../lib/validationSchemas'
-import Error from '../ErrorMessage'
-import Main from '../Layout/Main'
-import FormStyles from '../styled/Form'
+import Error from './../../components/ErrorMessage'
+import Main from './../../components/Main'
+import FormStyles from '../../components/styled/Form'
 
 const validationSchema = yup.object().shape({
     email: emailValidation,

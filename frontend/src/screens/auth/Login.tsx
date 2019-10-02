@@ -8,9 +8,8 @@ import * as yup from 'yup'
 import { SIGNIN_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import { emailValidation, passwordValidation } from '../../lib/validationSchemas'
-import Error from '../ErrorMessage'
-import Main from '../Layout/Main'
-import FormStyles from '../styled/Form'
+import Error from './../../components/ErrorMessage'
+import FormStyles from '../../components/styled/Form'
 
 const validationSchema = yup.object().shape({
     email: emailValidation,
@@ -89,68 +88,68 @@ const Login = props => {
                     <Form>
                         {/* style={{ width: '290px', height: '420px' }} */}
                         <fieldset disabled={loading} aria-busy={loading}>
-                            <div className='fields'>
+                            <div className="fields">
                                 <h2>Login</h2>
 
                                 <Error error={error} />
 
-                                <label htmlFor='email'>
+                                <label htmlFor="email">
                                     Email
                                     <Field
                                         required
-                                        type='email'
-                                        name='email'
-                                        placeholder='your_email@example.com'
+                                        type="email"
+                                        name="email"
+                                        placeholder="your_email@example.com"
                                         value={values.email}
                                         onChange={handleChange}
                                     />
                                     <ErrorMessage
-                                        name='email'
-                                        component='div'
-                                        className='errorMessage'
+                                        name="email"
+                                        component="div"
+                                        className="errorMessage"
                                     />
                                 </label>
 
-                                <label htmlFor='password'>
+                                <label htmlFor="password">
                                     Password
                                     <Field
                                         required
-                                        type='password'
-                                        name='password'
-                                        placeholder='*****'
+                                        type="password"
+                                        name="password"
+                                        placeholder="*****"
                                         value={values.password}
                                         onChange={handleChange}
                                     />
                                     <ErrorMessage
-                                        name='password'
-                                        component='div'
-                                        className='errorMessage'
+                                        name="password"
+                                        component="div"
+                                        className="errorMessage"
                                     />
                                 </label>
                             </div>
 
-                            <div className='buttons'>
-                                <button type='submit' disabled={loading || !dirty || isSubmitting}>
+                            <div className="buttons">
+                                <button type="submit" disabled={loading || !dirty || isSubmitting}>
                                     Login
                                 </button>
 
                                 <button
-                                    type='button'
+                                    type="button"
                                     disabled={!dirty}
                                     onClick={handleReset}
-                                    className='resetButton'
+                                    className="resetButton"
                                 >
                                     Reset
                                 </button>
 
-                                <Link to='/requestreset'>
+                                <Link to="/requestreset">
                                     <ResetStyles>Forgot password?</ResetStyles>
                                 </Link>
 
                                 {/* <div className='divider' /> */}
 
                                 <DemoStyles>
-                                    <p className='demo-title'>Demo account:</p>
+                                    <p className="demo-title">Demo account:</p>
                                     <p>demo@demo.com</p>
                                     <p>demo123demo123</p>
                                 </DemoStyles>

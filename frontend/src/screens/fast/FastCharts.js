@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2'
 import { differenceInHours } from 'date-fns'
 import styled from 'styled-components'
 import { FastsContext } from '../../data/FastsContext'
-import Modal from './Modal'
+import Modal from '../../components/Modal'
 
 const ChartWrapper = styled.div`
     position: relative;

@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import Main from '../Layout/Main'
-import Login from './Login'
-import Register from './Register'
-
+import React, { useState } from 'react'
+import Login from '../screens/auth/Login'
+import Register from './../screens/auth/Register'
+import Main from './Main'
 import './SingleForm.scss'
 
 function Mask({ changePage, text }) {
     return (
         <div
-            role='button'
+            role="button"
             tabIndex={0}
-            className='mask'
+            className="mask"
             onClick={changePage}
             onKeyPress={changePage}
         >
@@ -39,23 +38,23 @@ const SingleForm = props => {
     return (
         <Main>
             {/* <ParticlesStyles /> */}
-            <div className='SingleFormStyles'>
-                <button className='button-toggle' type='button' onClick={changePage}>
+            <div className="SingleFormStyles">
+                <button className="button-toggle" type="button" onClick={changePage}>
                     {page === 'login' ? 'Register' : 'Login'}
                 </button>
 
-                <div className='single-form-container'>
+                <div className="single-form-container">
                     {page === 'login' && (
                         <>
-                            <Login className='form' {...props} />
-                            <Mask changePage={changePage} text='Create an account' />
+                            <Login className="form" {...props} />
+                            <Mask changePage={changePage} text="Create an account" />
                         </>
                     )}
 
                     {page === 'register' && (
                         <>
-                            <Mask changePage={changePage} text='Login to your account' />
-                            <Register className='form' {...props} />
+                            <Mask changePage={changePage} text="Login to your account" />
+                            <Register className="form" {...props} />
                         </>
                     )}
                 </div>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { ThemeContext } from '../../data/ThemeContext'
+import { ThemeContext } from '../data/ThemeContext'
 
 const FooterStyles = styled.div`
     grid-area: footer;
@@ -100,7 +100,7 @@ const FooterStyles = styled.div`
     }
 `
 
-const Footer = () => {
+const Footer: React.FC = () => {
     const { theme, setDarkMode } = useContext(ThemeContext)
 
     return (

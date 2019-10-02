@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Query, QueryResult } from 'react-apollo'
-import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 import { JSXElement } from '@babel/types'
 
 interface Props {

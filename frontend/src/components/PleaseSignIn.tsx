@@ -1,13 +1,11 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { useQuery } from '@apollo/react-hooks'
-import Error from '../ErrorMessage'
-import Main from '../Layout/Main'
-import Login from './Login'
-import User from './User'
-import { UserContext } from '../../data/UserContext'
-import Loading from '../Loading'
-import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+import { UserContext } from '../data/UserContext'
+import { CURRENT_USER_QUERY } from '../gql/UserQuery'
+import Login from '../screens/auth/Login'
+import Error from './ErrorMessage'
+import Main from './Main'
 
 const PleaseSignIn = props => {
     const { setUser } = useContext(UserContext)

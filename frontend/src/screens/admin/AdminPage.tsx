@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Error from '../../components/ErrorMessage'
 import { TableStyles } from '../../components/styled/Table'
-import User from '../../components/User/User'
+import User from '../../components/User'
 import { ALL_USERS_QUERY } from '../../gql/UserQuery'
 import Permissions from '../permissions/Permissions'
 

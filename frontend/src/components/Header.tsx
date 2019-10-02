@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { animated, useSpring } from 'react-spring'
 import styled from 'styled-components'
-import logo from '../../static/logo.svg'
-import Logout from '../User/Logout'
-import User from '../User/User'
+import Logout from '../screens/auth/Logout'
+import logo from '../static/logo.svg'
+import User from './User'
 
 const ButtonStyles = styled.button`
     outline: 0;
@@ -169,8 +169,8 @@ const HeaderStyles = styled.header`
     }
 `
 
-const Navigation = () => {
-    const [width, setWidth] = useState(window.innerWidth)
+const Navigation: React.FC = () => {
+    const [width, setWidth] = useState<number>(window.innerWidth)
     const initialToggle = () => localStorage.getItem('toggled') || false
     const [toggled, setToggled] = useState(initialToggle)
 

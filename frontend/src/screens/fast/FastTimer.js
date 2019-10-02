@@ -11,7 +11,7 @@ import { timeDifference } from '../../lib/timeConversion'
 import playIcon from '../../static/icons/play.svg'
 import stopIcon from '../../static/icons/stop.svg'
 import tomato from '../../static/icons/tomato.svg'
-import Error from '../ErrorMessage'
+import Error from '../../components/ErrorMessage'
 import TimerDuration from './TimerDuration'
 
 const ContainerStyles = styled.div`
