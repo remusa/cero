@@ -51,7 +51,7 @@ const Permissions = () => {
                             <th key={permission}>{permission}</th>
                         ))}
                         <th>
-                            <img src={checkmarkIcon} alt='startStopIcon' />
+                            <img src={checkmarkIcon} alt='checkmark-icon' />
                         </th>
                     </tr>
                 </thead>

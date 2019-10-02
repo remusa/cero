@@ -134,7 +134,7 @@ const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => {
             >
                 <img
                     src={playIcon}
-                    alt='startStopIcon'
+                    alt='startStop-icon'
                     className='container__buttons__button__icon'
                 />
             </ButtonStyles>
