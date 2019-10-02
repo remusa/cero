@@ -4,18 +4,20 @@ import React, { useContext } from 'react'
 import { Route, Switch, __RouterContext } from 'react-router-dom'
 import { animated, useTransition } from 'react-spring'
 import styled from 'styled-components'
-import AdminPage from './components/Admin/AdminPage'
 import FastPage from './components/Fast/FastPage'
 import Home from './components/Layout/Home'
-import ProfilePage from './components/User/ProfilePage'
 import RequestReset from './components/User/RequestReset'
 import Reset from './components/User/Reset'
 import SingleForm from './components/User/SingleForm'
 import * as ROUTES from './constants/routes'
+import AdminPage from './screens/admin/AdminPage'
+import ProfilePage from './screens/profile/ProfilePage'
 import './static/nprogress.css'
 
 interface INotFound {
-    location: object
+    location: {
+        pathname: string
+    }
 }
 
 const NotFound404 = ({ location }: INotFound) => (
@@ -127,3 +129,4 @@ const Router: React.FC = () => (
 
 export default Router
 export { AnimatedRoutes }
+
