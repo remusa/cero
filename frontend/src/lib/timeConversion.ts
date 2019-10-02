@@ -1,4 +1,4 @@
-import { differenceInMilliseconds, differenceInHours, format } from 'date-fns'
+import { differenceInHours, differenceInMilliseconds, format } from 'date-fns'
 
 // function timeConversion(time) {
 //     const diffMs = time
@@ -26,20 +26,22 @@ import { differenceInMilliseconds, differenceInHours, format } from 'date-fns'
 //     return timeConversion(diffMs)
 // }
 
-function timeDifference(startDate, endDate) {
-    if (startDate >= endDate) return null
+function timeDifference(startDate: Date, endDate: Date): object | null {
+    if (startDate >= endDate) {
+        return null
+    }
 
-    const diffMs = differenceInMilliseconds(endDate, startDate)
+    const diffMs: number = differenceInMilliseconds(endDate, startDate)
 
-    const diffDays = Math.floor(diffMs / 86400000)
-    const diffHrs = Math.floor((diffMs % 86400000) / 3600000)
-    // const diffDays = format(diffMs, 'DD')
-    // const diffHrs = format(diffMs, 'HH')
-    const diffMins = format(diffMs, 'mm')
-    const diffSecs = format(diffMs, 'ss')
-    const totalHrs = differenceInHours(endDate, startDate)
+    const diffDays: number = Math.floor(diffMs / 86400000)
+    const diffHrs: number = Math.floor((diffMs % 86400000) / 3600000)
+    // const diffDays: string = format(diffMs, 'DD')
+    // const diffHrs: string = format(diffMs, 'HH')
+    const diffMins: string = format(diffMs, 'mm')
+    const diffSecs: string = format(diffMs, 'ss')
+    const totalHrs: number = differenceInHours(endDate, startDate)
 
-    const duration = {
+    const duration: object = {
         milliseconds: diffMs,
         days: diffDays.toString().padStart(2, '0'),
         hours: diffHrs.toString().padStart(2, '0'),
