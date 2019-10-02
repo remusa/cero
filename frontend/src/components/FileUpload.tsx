@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
 
-const FileInput = () => {
+const FileInput: React.FC = () => {
     const fileInput: React.RefObject<HTMLInputElement> = createRef()
 
     const handleSubmit = (e: any) => {
