@@ -1,4 +1,3 @@
-import { PropTypes } from 'prop-types'
 import React, { createContext, useState } from 'react'
 
 interface IContext {}
@@ -10,18 +9,14 @@ interface IProps {
 }
 
 const FastsProvider: React.FC<IProps> = ({ children }) => {
-    const [fasts, setFasts] = useState([])
-    const [activeFast, setActiveFast] = useState('')
+    const [fasts, setFasts] = useState<Array<any>>([])
+    const [activeFast, setActiveFast] = useState<string>('')
 
     return (
         <FastsContext.Provider value={{ fasts, setFasts, activeFast, setActiveFast }}>
             {children}
         </FastsContext.Provider>
     )
-}
-
-FastsProvider.propTypes = {
-    children: PropTypes.element.isRequired,
 }
 
 export { FastsContext, FastsProvider }

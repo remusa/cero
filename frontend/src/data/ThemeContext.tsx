@@ -1,4 +1,3 @@
-import { PropTypes } from 'prop-types'
 import React, { createContext, useState } from 'react'
 import { createGlobalStyle, ThemeProvider as StyledProvider } from 'styled-components'
 
@@ -120,9 +119,11 @@ interface IProps {
 }
 
 const ThemeProvider: React.FC<IProps> = ({ children }) => {
-    const [currentTheme, setCurrentTheme] = useState(localStorage.getItem('theme') || 'light')
+    const [currentTheme, setCurrentTheme] = useState<string>(
+        localStorage.getItem('theme') || 'light'
+    )
 
-    const setDarkMode = darkModeEnabled => {
+    const setDarkMode = (darkModeEnabled: boolean) => {
         if (darkModeEnabled) {
             setCurrentTheme('light')
             localStorage.setItem('theme', 'light')
@@ -144,10 +145,6 @@ const ThemeProvider: React.FC<IProps> = ({ children }) => {
             </StyledProvider>
         </ThemeContext.Provider>
     )
-}
-
-ThemeProvider.propTypes = {
-    children: PropTypes.element.isRequired,
 }
 
 export { ThemeContext, ThemeProvider, GlobalStyle }
