@@ -1,10 +1,16 @@
 import React, { createContext, useState } from 'react'
 import { PropTypes } from 'prop-types'
 
-const UserContext = createContext()
+interface IContext {}
 
-const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({})
+const UserContext = createContext({} as IContext)
+
+interface Props {
+    children?: any
+}
+
+const UserProvider: React.FC<Props> = ({ children }) => {
+    const [user, setUser] = useState<object>({})
 
     return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
 }
