@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import PleaseSignIn from '../../components/User/PleaseSignIn'
 import Permissions from './Permissions'
-import PleaseSignIn from '../User/PleaseSignIn'
 
 const PermissionsStyles = styled.div`
     grid-area: main;
 `
 
-const PermissionsPage = () => (
+const PermissionsPage: React.FC = () => (
     <PermissionsStyles>
         <PleaseSignIn>
             <Permissions />

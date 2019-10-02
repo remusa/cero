@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import nprogress from 'nprogress'
+import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import Error from '../../components/ErrorMessage'
+import Loading from '../../components/Loading'
+import PermissionsButton from '../../components/styled/PermissionsButton'
+import PermissionsTable from '../../components/styled/PermissionsTable'
 import { UPDATE_PERMISSIONS_MUTATION } from '../../gql/UserMutation'
 import { ALL_USERS_QUERY } from '../../gql/UserQuery'
 import checkmarkIcon from '../../static/icons/checkmark.svg'
 import '../../static/nprogress.css'
-import Error from '../ErrorMessage'
-import Loading from '../Loading'
-import PermissionsButton from '../styled/PermissionsButton'
-import PermissionsTable from '../styled/PermissionsTable'
 
-const POSSIBLE_PERMISSIONS = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
+const POSSIBLE_PERMISSIONS: string[] = ['ADMIN', 'USER', 'PERMISSIONUPDATE']
 
 const LoadingStyles = styled.div`
     display: flex;
@@ -21,7 +21,7 @@ const LoadingStyles = styled.div`
     align-items: center;
 `
 
-const Permissions = () => {
+const Permissions: React.FC = () => {
     const { data, error, loading } = useQuery(ALL_USERS_QUERY)
 
     if (loading) {
@@ -42,6 +42,7 @@ const Permissions = () => {
     return (
         <>
             <h2>Manage Permissions</h2>
+
             <PermissionsTable>
                 <thead>
                     <tr>
@@ -51,10 +52,11 @@ const Permissions = () => {
                             <th key={permission}>{permission}</th>
                         ))}
                         <th>
-                            <img src={checkmarkIcon} alt='checkmark-icon' />
+                            <img src={checkmarkIcon} alt="checkmark-icon" />
                         </th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {data.users.map(user => (
                         <UserPermissions user={user} key={user.id} />
@@ -65,11 +67,19 @@ const Permissions = () => {
     )
 }
 
-const UserPermissions = props => {
-    const { user } = props
-    const [permissions, setPermissions] = useState(user.permissions)
+interface Props {
+    user: {
+        id: string
+        name: string
+        email: string
+        permissions: string[]
+    }
+}
 
-    const handlePermissionChange = e => {
+const UserPermissions = ({ user }: Props) => {
+    const [permissions, setPermissions] = useState<string[]>(user.permissions)
+
+    const handlePermissionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const checkbox = e.target
         let updatedPermissions = [...permissions]
         if (checkbox.checked) {
@@ -103,7 +113,7 @@ const UserPermissions = props => {
                         <label htmlFor={`${user.id}-permission-${permission}`}>
                             <input
                                 id={`${user.id}-permission-${permission}`}
-                                type='checkbox'
+                                type="checkbox"
                                 checked={permissions.includes(permission)}
                                 value={permission}
                                 onChange={handlePermissionChange}
@@ -112,7 +122,7 @@ const UserPermissions = props => {
                     </td>
                 ))}
                 <td>
-                    <PermissionsButton type='button' disabled={loading} onClick={updatePermissions}>
+                    <PermissionsButton type="button" disabled={loading} onClick={updatePermissions}>
                         Updat{loading ? 'ing' : 'e'}
                     </PermissionsButton>
                 </td>
