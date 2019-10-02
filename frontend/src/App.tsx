@@ -36,13 +36,15 @@ toast.configure({
     pauseOnHover: false,
 })
 
-const App = () => (
+const App: React.FC = () => (
     <ThemeProvider>
         <UserProvider>
             <AppStyles className='App'>
                 <Header />
+
                 <Routes />
                 {/* <AnimatedRoutes /> */}
+
                 <Footer />
             </AppStyles>
         </UserProvider>
