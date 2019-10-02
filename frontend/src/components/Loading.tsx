@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import React, { useEffect, useState } from 'react'
 import { DotLoader } from 'react-spinners'
+import styled, { css } from 'styled-components'
 
-// const override = css`
-//     display: block;
-//     margin: 0 auto;
-//     border-color: ${props => props.theme.colorPrimary};
-// `
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: ${props => props.theme.colorPrimary};
+`
 
-const override = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'hsl(146, 100%, 39%)',
-}
+// const override = {
+//     display: 'block',
+//     margin: '0 auto',
+//     borderColor: 'hsl(146, 100%, 39%)',
+// }
 
 const ContainerStyles = styled.div`
     /* height: 100%; */
@@ -67,8 +67,8 @@ const ProgresBarStyles = styled.div`
 
 const ProgressBar = ({ width }) => (
     <ProgresBarStyles>
-        <div className='progress-bar'>
-            <div data-size={width} className='progress' />
+        <div className="progress-bar">
+            <div data-size={width} className="progress" />
         </div>
     </ProgresBarStyles>
 )
@@ -77,21 +77,26 @@ ProgressBar.propTypes = {
     width: PropTypes.number.isRequired,
 }
 
-const Loading = props => {
-    const [text, setText] = useState(props.text || 'Loading')
-    const [speed, setSpeed] = useState(props.speed || 300)
+interface IProps {
+    text?: string
+    speed?: number
+}
+
+const Loading: React.FC<IProps> = ({ text, speed }) => {
+    const [currText, setCurrText] = useState(text || 'Loading')
+    const [currSpeed, setCurrSpeed] = useState(speed || 300)
     const [loading, setLoading] = useState(true)
     const [width, setWidth] = useState(0)
 
     /* eslint-disable */
     useEffect(() => {
-        const stopper = `${props.text}...`
+        const stopper = `${text}...`
 
         const interval = window.setInterval(() => {
-            if (text === stopper) {
-                setText(props.text)
+            if (currText === stopper) {
+                setCurrText('Loading')
             } else {
-                setText(text.concat('.'))
+                setCurrText(currText.concat('.'))
                 setWidth(width + 60)
             }
         }, speed)
@@ -113,13 +118,13 @@ const Loading = props => {
 
     return (
         <ContainerStyles>
-            <div className='sweet-loading'>
+            <div className="sweet-loading">
                 <DotLoader
                     css={override}
-                    sizeUnit='px'
+                    sizeUnit="px"
                     size={100}
                     height={8}
-                    color='hsl(146, 100%, 39%)'
+                    color="hsl(146, 100%, 39%)"
                     loading={loading}
                 />
             </div>
