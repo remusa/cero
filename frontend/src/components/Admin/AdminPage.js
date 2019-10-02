@@ -12,7 +12,7 @@ const AdminStyles = styled.div`
 
     display: flex;
     flex-flow: column wrap;
-    justify-contents: center;
+    justify-content: center;
 `
 
 const PageStyles = styled.div`
