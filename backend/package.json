@@ -12,8 +12,11 @@
     ],
     "main": "server.js",
     "scripts": {
-        "start": "nodemon -e js,graphql -x node src/index.ts",
-        "dev": "cross-env NODE_ENV=development nodemon -e js,graphql -x node --inspect src/index.ts",
+        "build": "tsc",
+        "ts:start": "ts-node-dev --respawn src/index.ts",
+        "ts:dev": "cross-env NODE_ENV=development nodemon -exec ts-node,graphql -x node --inspect src/index.ts",
+        "start": "nodemon -e js,graphql -x node src/index.js",
+        "dev": "cross-env NODE_ENV=development nodemon -e js,graphql -x node --inspect src/index.js",
         "test": "cross-env NODE_ENV=test npm run test:watch",
         "test:watch": "cross-env NODE_ENV=test jest --silent --watch",
         "test:coverage": "cross-env NODE_ENV=test jest --silent --coverage",
@@ -49,8 +52,10 @@
         "yup": "^0.27.0"
     },
     "devDependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/preset-env": "^7.6.2",
         "@types/node": "^12.7.9",
+        "@types/nodemailer": "^6.2.1",
         "babel-eslint": "^10.0.3",
         "cross-env": "^6.0.2",
         "eslint": "^6.5.1",
@@ -65,16 +70,31 @@
         "eslint-plugin-react-hooks": "^2.1.1",
         "graphql-cli": "^3.0.14",
         "prettier": "^1.18.2",
+        "ts-node": "^8.4.1",
+        "ts-node-dev": "^1.0.0-pre.43",
         "typescript": "^3.6.3"
     },
     "eslintConfig": {
         "extends": [
             "wesbos"
-        ]
+        ],
+        "rules": {
+            "react/jsx-filename-extension": [
+                {
+                    "extensions": [
+                        ".ts",
+                        ".tsx"
+                    ]
+                }
+            ]
+        }
     },
     "babel": {
         "presets": [
             "@babel/preset-env"
+        ],
+        "plugins": [
+            "@babel/plugin-syntax-dynamic-import"
         ]
     }
 }
