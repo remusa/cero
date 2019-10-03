@@ -1,21 +1,35 @@
-import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import { timeDifference } from '../../lib/timeConversion'
 import TimerCircles from './TimerCircles'
 
-const TimerDuration = props => {
-    const { activeFast } = props
+interface ITimerDuration {
+    activeFast: {
+        startDate: string
+        endDate: string
+        duration: {
+            days: string
+            hours: string
+            minutes: string
+            seconds: string
+        }
+    }
+}
+
+const TimerDuration: React.FC<ITimerDuration> = ({ activeFast }) => {
     const { startDate } = activeFast
 
-    const [endDate, setEndDate] = useState(activeFast ? activeFast.endDate : '')
-    const [duration, setDuration] = useState(activeFast ? activeFast.duration : {})
+    const [endDate, setEndDate] = useState<string | Date>(activeFast ? activeFast.endDate : '')
+    const [duration, setDuration] = useState<object | number | null>(
+        activeFast ? activeFast.duration : {}
+    )
 
     useEffect(() => {
         const timerControl = () => {
             const end = new Date()
             setEndDate(end)
-            const d = timeDifference(new Date(startDate), end)
-            setDuration(d)
+            const timeDiff = timeDifference(new Date(startDate), end)
+            setDuration(timeDiff)
         }
 
         const interval = setInterval(() => timerControl(), 1000)
