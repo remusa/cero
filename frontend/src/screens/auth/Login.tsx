@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import * as yup from 'yup'
+import FormStyles from '../../components/styled/Form'
 import { SIGNIN_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import { emailValidation, passwordValidation } from '../../lib/validationSchemas'
 import Error from './../../components/ErrorMessage'
-import FormStyles from '../../components/styled/Form'
 
 const validationSchema = yup.object().shape({
     email: emailValidation,
@@ -47,8 +47,13 @@ const DemoStyles = styled.div`
     }
 `
 
+export interface IUser {
+    email: string
+    password: string
+}
+
 const Login = props => {
-    const [user, setUser] = useState({ email: '', password: '' })
+    const [user, setUser] = useState<IUser>({ email: '', password: '' })
 
     const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION, {
         variables: user,
@@ -56,7 +61,7 @@ const Login = props => {
         onCompleted: () => props.history.push('/fast'),
     })
 
-    const handleSubmit = async ({ email, password }, actions) => {
+    const handleSubmit = async ({ email, password }: IUser, actions) => {
         setUser({ email, password })
         actions.setSubmitting(true)
 

@@ -1,20 +1,15 @@
-import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
+import FormStyles from '../../components/styled/Form'
 import { SIGNUP_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
-import {
-    confirmPasswordValidation,
-    emailValidation,
-    passwordValidation,
-    usernameValidation,
-} from '../../lib/validationSchemas'
+import { confirmPasswordValidation, emailValidation, passwordValidation, usernameValidation } from '../../lib/validationSchemas'
 import Error from './../../components/ErrorMessage'
-import FormStyles from '../../components/styled/Form'
-import { ResetStyles } from './Login'
+import { IUser, ResetStyles } from './Login'
 
 const validationSchema = yup.object().shape({
     name: usernameValidation,
@@ -23,8 +18,19 @@ const validationSchema = yup.object().shape({
     confirmPassword: confirmPasswordValidation,
 })
 
-const Register = props => {
-    const [user, setUser] = useState({ email: '', name: '', password: '', confirmPassword: '' })
+
+interface IRUser extends IUser {
+    name: string
+    confirmPassword: string
+}
+
+const Register: React.FC = props => {
+    const [user, setUser] = useState<IRUser>({
+        email: '',
+        name: '',
+        password: '',
+        confirmPassword: '',
+    })
 
     const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {
         variables: user,
@@ -32,7 +38,7 @@ const Register = props => {
         onCompleted: () => props.history.push('/fast'),
     })
 
-    const handleSubmit = async ({ email, name, password, confirmPassword }, actions) => {
+    const handleSubmit = async ({ email, name, password, confirmPassword }: IRUser, actions) => {
         setUser({ email, name, password, confirmPassword })
         actions.setSubmitting(true)
 
