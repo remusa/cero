@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
 import { differenceInHours } from 'date-fns'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { FastsContext } from '../../data/FastsContext'
-import Modal from '../../components/Modal'
+import Modal from '../../components/modal/Modal'
 import { TableStyles } from '../../components/styled/Table'
+import { FastsContext } from '../../data/FastsContext'
 
 const TableContainerStyles = styled.div`
     margin: 0 auto;
@@ -23,13 +23,20 @@ const TableContainerStyles = styled.div`
     }
 `
 
-const FastTable = () => {
+interface IFast {
+    id: string
+    startDate: string
+    endDate: string
+    isActive: boolean
+}
+
+const FastTable: React.FC = () => {
     const { fasts } = useContext(FastsContext)
 
-    const [id, setId] = useState(null)
-    const [startDate, setStartDate] = useState('')
-    const [endDate, setEndDate] = useState('')
-    const [isActive, setIsActive] = useState(false)
+    const [id, setId] = useState<string>('')
+    const [startDate, setStartDate] = useState<string>('')
+    const [endDate, setEndDate] = useState<string>('')
+    const [isActive, setIsActive] = useState<boolean>(false)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -37,12 +44,14 @@ const FastTable = () => {
         setIsModalOpen(!isModalOpen)
     }
 
-    const handleClick = (e, fast) => {
+    const handleClick = (e: React.MouseEvent, fast: IFast) => {
         if (!e) return
+
         setId(fast.id)
         setStartDate(fast.startDate)
         setEndDate(fast.endDate)
         setIsActive(fast.isActive)
+
         toggleModal()
     }
 
@@ -73,9 +82,7 @@ const FastTable = () => {
                     </tr>
 
                     <tr>
-                        <td colSpan="4">
-                            <div colSpan="4" className="divider" />
-                        </td>
+                        <td colSpan={4} className="divider" />
                     </tr>
                 </thead>
 
