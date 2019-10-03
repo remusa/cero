@@ -1,12 +1,16 @@
-// import React from 'react'
-// import { useMutation } from 'react-apollo'
-// import StripeCheckout from 'react-stripe-checkout'
 // import nprogress from 'nprogress'
-// import { SUBSCRIPTION_MUTATION } from '../../gql/UserMutation'
-// import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+// import React from 'react'
+// import { Mutation, useMutation } from 'react-apollo'
+// import StripeCheckout from 'react-stripe-checkout'
+// import { SUBSCRIPTION_MUTATION } from '../gql/UserMutation'
+// import { CURRENT_USER_QUERY } fro../gql/UserQueryery'
 // import User from './User'
 
-// const Subscribe = props => {
+// interface ISubscribe {
+//     children: React.ReactNode
+// }
+
+// const Subscribe: React.FC<ISubscribe> = ({ children }) => {
 //     const [subscribe, { error, loading }] = useMutation(SUBSCRIPTION_MUTATION, {
 //         refetchQueries: [{ query: CURRENT_USER_QUERY }],
 //     })
@@ -30,36 +34,37 @@
 
 //                 return (
 //                     <Mutation
-//                             mutation={CREATE_ORDER_MUTATION}
-//                             refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-//                         >
-//                             {createOrder => (
-//                                 <StripeCheckout
-//                                     amount={1}
-//                                     name='Cero'
-//                                     description='Subscription'
-//                                     image={null}
-//                                     stripeKey='pk_test_fFdB3wMRGV1QMkh3kPrKLcaL'
-//                                     currency='USD'
-//                                     email={me.email}
-//                                     token={res => this.onToken(res, subscribe)}
-//                                 >
-//                                     {this.props.children}
-//                                 </StripeCheckout>
-//                             )}
-//                         </Mutation>
-//                     <StripeCheckout
-//                         amount={1}
-//                         name='Cero'
-//                         description='Subscription'
-//                         image={null}
-//                         stripeKey='pk_test_fFdB3wMRGV1QMkh3kPrKLcaL'
-//                         currency='USD'
-//                         email={me.email}
-//                         token={res => onToken(res, subscribe)}
+//                         mutation={CREATE_ORDER_MUTATION}
+//                         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
 //                     >
-//                         {props.children}
-//                     </StripeCheckout>
+//                         {createOrder => (
+//                             <StripeCheckout
+//                                 amount={1}
+//                                 name="Cero"
+//                                 description="Subscription"
+//                                 image={null}
+//                                 stripeKey="pk_test_fFdB3wMRGV1QMkh3kPrKLcaL"
+//                                 currency="USD"
+//                                 email={me.email}
+//                                 token={res => this.onToken(res, subscribe)}
+//                             >
+//                                 {children}
+//                             </StripeCheckout>
+//                         )}
+//                     </Mutation>
+
+//                     // <StripeCheckout
+//                     //     amount={1}
+//                     //     name='Cero'
+//                     //     description='Subscription'
+//                     //     image={null}
+//                     //     stripeKey='pk_test_fFdB3wMRGV1QMkh3kPrKLcaL'
+//                     //     currency='USD'
+//                     //     email={me.email}
+//                     //     token={res => onToken(res, subscribe)}
+//                     // >
+//                     //     {props.children}
+//                     // </StripeCheckout>
 //                 )
 //             }}
 //         </User>
