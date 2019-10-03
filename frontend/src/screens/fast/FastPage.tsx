@@ -1,20 +1,18 @@
-import React, { useContext } from 'react'
-import { Query } from 'react-apollo'
 import { useQuery } from '@apollo/react-hooks'
-import styled from 'styled-components'
 import nprogress from 'nprogress'
+import React, { useContext } from 'react'
+import styled from 'styled-components'
+import Error from '../../components/ErrorMessage'
+import Loading from '../../components/Loading'
+import PleaseSignIn from '../../components/PleaseSignIn'
 import { FastsContext, FastsProvider } from '../../data/FastsContext'
+import { UserContext } from '../../data/UserContext'
 import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
-import Error from '../../components/ErrorMessage'
-import FastCharts from './FastCharts'
-import FastTimer from './FastTimer'
-import Loading from '../../components/Loading'
-import FastTable from './FastTable'
-
 import '../../static/nprogress.css'
-import { UserContext } from '../../data/UserContext'
-import PleaseSignIn from './../../components/PleaseSignIn'
+import FastCharts from './FastCharts'
+import FastTable from './FastTable'
+import FastTimer from './FastTimer'
 
 const FastStyles = styled.div`
     grid-area: main;
@@ -51,18 +49,23 @@ const InfoStyles = styled.div`
     }
 `
 
-const FastPage = props => {
+interface IFastPage {
+    history: any
+}
+
+const FastPage: React.FC<IFastPage> = ({ history }) => {
     const { user } = useContext(UserContext)
 
     if (!user) {
-        props.history.push('/enter')
+        history.push('/enter')
     }
 
     return (
         <PleaseSignIn>
             <FastStyles>
                 <h1>Fast!</h1>
-                <div className='fast__info'>
+
+                <div className="fast__info">
                     <FastsProvider>
                         <FastContainer />
                     </FastsProvider>
@@ -72,7 +75,7 @@ const FastPage = props => {
     )
 }
 
-const FastContainer = () => {
+const FastContainer: React.FC = () => {
     const { setActiveFast, setFasts } = useContext(FastsContext)
 
     const { data, loading, error } = useQuery(ALL_FASTS_QUERY, {
@@ -98,8 +101,10 @@ const FastContainer = () => {
     return (
         <>
             <FastTimer />
+
             <InfoStyles>
                 <FastCharts />
+
                 <FastTable />
             </InfoStyles>
         </>
