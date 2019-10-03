@@ -72,14 +72,13 @@ export const UPDATE_USER_MUTATION = gql`
     }
 `
 
-// export const SUBSCRIPTION_MUTATION = gql`
-//     mutation subscribeUser {
-//         subscribeUser {
-//             id
-//             email
-//             name
-//             subscription
-//         }
-//     }
-// `
-
+export const SUBSCRIPTION_MUTATION = gql`
+    mutation subscribeUser {
+        subscribeUser {
+            id
+            email
+            name
+            subscription
+        }
+    }
+`
