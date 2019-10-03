@@ -1,5 +1,5 @@
-import React from 'react'
 import { PropTypes } from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 
 const MainStyles = styled.main`
@@ -23,7 +23,7 @@ interface IProps {
 const Main: React.FC<IProps> = ({ children }) => <MainStyles>{children}</MainStyles>
 
 Main.propTypes = {
-    children: PropTypes.any,
+    children: PropTypes.element,
 }
 
 export default Main
