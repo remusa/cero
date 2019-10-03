@@ -1,15 +1,14 @@
-import React, { useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { Field, Form, Formik, ErrorMessage } from 'formik'
-import * as yup from 'yup'
-import styled from 'styled-components'
+import React, { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
-import PleaseSignIn from '../../components/PleaseSignIn'
-import { UPDATE_USER_MUTATION } from '../../gql/UserMutation'
-import FormStyles from '../../components/styled/Form'
+import styled from 'styled-components'
+import * as yup from 'yup'
 import Error from '../../components/ErrorMessage'
-import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
+import PleaseSignIn from '../../components/PleaseSignIn'
+import FormStyles from '../../components/styled/Form'
 import { UserContext } from '../../data/UserContext'
+import { UPDATE_USER_MUTATION } from '../../gql/UserMutation'
+import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 
 const ProfileStyles = styled.div`
     grid-area: main;
@@ -27,11 +26,12 @@ const validationSchema = yup.object().shape({
         .max(4, 'Goal must be max. 4 characters'),
 })
 
-const ProfilePage = () => {
-    const [goal, setGoal] = useState('')
+const ProfilePage: React.FC = () => {
+    const [goal, setGoal] = useState<string>('')
     const { user } = useContext(UserContext)
 
     const updates = {}
+
     if (Number.parseInt(goal) > 0) {
         updates.goal = Number.parseInt(goal)
     }
@@ -40,7 +40,7 @@ const ProfilePage = () => {
         setGoal('')
     }
 
-    const showToasts = updatedValues => {
+    const showToasts = (updatedValues: object) => {
         const entries = Object.entries(updatedValues)
 
         for (const [property, value] of entries) {
@@ -59,12 +59,12 @@ const ProfilePage = () => {
         }
     }
 
-    const handleChange = e => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         if (name === 'goal') setGoal(value)
     }
 
-    const handleSubmit = async (e, action) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, action: any) => {
         e.preventDefault()
         if (Number.parseInt(goal) <= 0 || goal === '') return
         await action().then(resetState())
