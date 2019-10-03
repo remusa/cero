@@ -81,17 +81,7 @@
     "eslintConfig": {
         "extends": [
             "wesbos"
-        ],
-        "rules": {
-            "react/jsx-filename-extension": [
-                {
-                    "extensions": [
-                        ".ts",
-                        ".tsx"
-                    ]
-                }
-            ]
-        }
+        ]
     },
     "babel": {
         "presets": [
