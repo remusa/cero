@@ -1,0 +1,8 @@
+"//moduleNameMapper": {
+    "\\.(css|sass|scss|less)$": "<rootDir>/src/test/jest/__mocks__/styleMock.js",
+    "\\.(svg|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/test/jest/__mocks__/fileMock.js"
+}
+
+
+ "^.+.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+        },
