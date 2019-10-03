@@ -14,7 +14,7 @@
     "scripts": {
         "build": "tsc",
         "ts:start": "ts-node-dev --respawn src/index.ts",
-        "ts:dev": "cross-env NODE_ENV=development nodemon -exec ts-node,graphql -x node --inspect src/index.ts",
+        "ts:dev": "cross-env NODE_ENV=development nodemon -e ts-node,graphql -x node --inspect src/index.ts",
         "start": "nodemon -e js,graphql -x node src/index.js",
         "dev": "cross-env NODE_ENV=development nodemon -e js,graphql -x node --inspect src/index.js",
         "test": "cross-env NODE_ENV=test npm run test:watch",
