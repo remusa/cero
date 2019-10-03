@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 import { describeArc, mapNumber } from '../../lib/svgCircle'
 
@@ -70,12 +70,16 @@ const CountDownStyles = styled.div`
     }
 `
 
-const SVGCircle = ({ radius }) => (
-    <svg className='countdown-svg'>
+interface ISVGCircle {
+    radius: number
+}
+
+const SVGCircle: React.FC<ISVGCircle> = ({ radius }) => (
+    <svg className="countdown-svg">
         <path
-            fill='none'
-            stroke='var(--colorStroke)'
-            strokeWidth='4'
+            fill="none"
+            stroke="var(--colorStroke)"
+            strokeWidth="4"
             d={describeArc(50, 50, 48, 0, radius)}
         />
     </svg>
@@ -85,13 +89,22 @@ SVGCircle.propTypes = {
     radius: PropTypes.number.isRequired,
 }
 
-const TimerCircles = ({ duration }) => {
+interface ITimerCircles {
+    duration: {
+        days: number
+        hours: number
+        minutes: number
+        seconds: number
+    }
+}
+
+const TimerCircles: React.FC<ITimerCircles> = ({ duration }) => {
     const { days, hours, minutes, seconds } = duration
 
-    const daysRadius = mapNumber(days, 30, 0, 0, 360)
-    const hoursRadius = mapNumber(hours, 24, 0, 0, 360)
-    const minutesRadius = mapNumber(minutes, 60, 0, 0, 360)
-    const secondsRadius = mapNumber(seconds, 60, 0, 0, 360)
+    const daysRadius: number = mapNumber(days, 30, 0, 0, 360)
+    const hoursRadius: number = mapNumber(hours, 24, 0, 0, 360)
+    const minutesRadius: number = mapNumber(minutes, 60, 0, 0, 360)
+    const secondsRadius: number = mapNumber(seconds, 60, 0, 0, 360)
 
     if (!seconds) {
         return null
@@ -99,9 +112,9 @@ const TimerCircles = ({ duration }) => {
 
     return (
         <CountDownStyles>
-            <div className='countdown-container'>
+            <div className="countdown-container">
                 {days > 0 && (
-                    <div className='countdown-item'>
+                    <div className="countdown-item">
                         <SVGCircle radius={daysRadius} />
                         {days}
                         <span>day{days > 1 && 's'}</span>
@@ -109,7 +122,7 @@ const TimerCircles = ({ duration }) => {
                 )}
 
                 {hours > 0 && (
-                    <div className='countdown-item'>
+                    <div className="countdown-item">
                         <SVGCircle radius={hoursRadius} />
                         {hours}
                         <span>hour{hours > 1 && 's'}</span>
@@ -117,7 +130,7 @@ const TimerCircles = ({ duration }) => {
                 )}
 
                 {minutes && (
-                    <div className='countdown-item'>
+                    <div className="countdown-item">
                         <SVGCircle radius={minutesRadius} />
                         {minutes}
                         <span>minute{minutes > 1 && 's'}</span>
@@ -125,7 +138,7 @@ const TimerCircles = ({ duration }) => {
                 )}
 
                 {seconds && (
-                    <div className='countdown-item'>
+                    <div className="countdown-item">
                         <SVGCircle radius={secondsRadius} />
                         {seconds}
                         <span>seconds</span>
