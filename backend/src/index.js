@@ -17,6 +17,7 @@ server.express.use(cookieParser())
 
 const FRONTEND_URL =
     process.env.NODE_ENV !== 'development' ? process.env.FRONTEND_URL : process.env.LOCAL_HOST
+
 console.log(`FRONTEND_URL: ${FRONTEND_URL}`)
 
 server.express.use(cors({ credentials: true, origin: FRONTEND_URL }))

@@ -14,12 +14,7 @@
     "scripts": {
         "start": "nodemon -e js,graphql -x node src/index.js",
         "dev": "cross-env NODE_ENV=development nodemon -e js,graphql -x node --inspect src/index.js",
-        "build": "tsc",
-        "ts:start": "cross-env NODE_ENV=development ts-node-dev --respawn src/index.ts",
-        "ts:dev": "cross-env NODE_ENV=development nodemon -e ts-node,graphql -x node --inspect src/index.ts",
-        "test": "cross-env NODE_ENV=test npm run test:watch",
-        "test:watch": "cross-env NODE_ENV=test jest --silent --watch",
-        "test:coverage": "cross-env NODE_ENV=test jest --silent --coverage",
+        "test": "cross-env NODE_ENV=test jest --watch",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier \"src/**/*.{js,html}\" --write",
@@ -30,7 +25,8 @@
         "prisma:init": "prisma init",
         "prisma:generate": "prisma generate",
         "prisma:deploy-dev": "cross-env NODE_ENV=production prisma deploy",
-        "prisma:deploy-prod": "cross-env NODE_ENV=development prisma deploy"
+        "prisma:deploy-prod": "cross-env NODE_ENV=development prisma deploy",
+        "frontend": "cd .. & cd frontend/ & npm run dev"
     },
     "dependencies": {
         "@sendgrid/mail": "^6.4.0",
@@ -52,14 +48,7 @@
         "yup": "^0.27.0"
     },
     "devDependencies": {
-        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/preset-env": "^7.6.2",
-        "@types/cookie-parser": "^1.4.2",
-        "@types/dotenv": "^6.1.1",
-        "@types/helmet": "^0.0.44",
-        "@types/jsonwebtoken": "^8.3.4",
-        "@types/node": "^12.7.9",
-        "@types/nodemailer": "^6.2.1",
         "babel-eslint": "^10.0.3",
         "cross-env": "^6.0.2",
         "eslint": "^6.5.1",
@@ -73,32 +62,16 @@
         "eslint-plugin-react": "^7.15.1",
         "eslint-plugin-react-hooks": "^2.1.1",
         "graphql-cli": "^3.0.14",
-        "prettier": "^1.18.2",
-        "ts-node": "^8.4.1",
-        "ts-node-dev": "^1.0.0-pre.43",
-        "typescript": "^3.6.3"
+        "prettier": "^1.18.2"
     },
     "eslintConfig": {
         "extends": [
             "wesbos"
-        ],
-        "rules": {
-            "react/jsx-filename-extension": [
-                {
-                    "extensions": [
-                        ".ts",
-                        ".tsx"
-                    ]
-                }
-            ]
-        }
+        ]
     },
     "babel": {
         "presets": [
             "@babel/preset-env"
-        ],
-        "plugins": [
-            "@babel/plugin-syntax-dynamic-import"
         ]
     }
 }
