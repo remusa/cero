@@ -1,9 +1,10 @@
 # [Cero - A fasting tracker](https://cero.netlify.com/)
 
-Cero is a fasting tracker built in React, Node.js (Express.js) and GraphQL.
+Cero is a fasting tracker built in React, Node.js (Express.js), GraphQL and TypeScript.
 
 ### Front-end
 
+* TypeScript
 * React (with hooks!)
 * Apollo Client for GraphQL queries and mutations
 * Context API for light/dark themes and authentication
