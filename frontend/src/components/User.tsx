@@ -4,9 +4,7 @@ import { Query, QueryResult } from 'react-apollo'
 import { CURRENT_USER_QUERY } from '../gql/UserQuery'
 
 interface Props {
-    props: {
-        children: React.ReactNode
-    }
+    children: React.ReactNode
 }
 
 const User: React.FC<Props> = props => (
