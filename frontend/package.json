@@ -15,6 +15,7 @@
         "test:coverage": "cross-env NODE_ENV=test jest --silent --coverage",
         "deploy": "npm run build && npm run netlify:deploy",
         "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
+        "backend": "cd .. && cd backend/ && npm run dev"
     },
     "dependencies": {
         "@apollo/react-hooks": "0.1.0-beta.10",
@@ -60,7 +61,15 @@
         "@types/react-router-dom": "^5.1.0",
         "@types/styled-components": "^4.1.19",
         "@types/yup": "^0.26.24",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-jest": "^23.6.0",
+        "babel-plugin-module-resolver": "^3.1.1",
+        "babel-plugin-styled-components": "^1.7.1",
+        "casual": "^1.5.19",
         "cross-env": "^6.0.2",
+        "enzyme": "^3.6.0",
+        "enzyme-adapter-react-16": "^1.5.0",
+        "enzyme-to-json": "^3.3.4",
         "eslint": "^6.5.1",
         "eslint-config-airbnb": "^18.0.1",
         "eslint-config-prettier": "^6.3.0",
@@ -71,12 +80,14 @@
         "eslint-plugin-prettier": "^3.1.1",
         "eslint-plugin-react": "^7.15.1",
         "eslint-plugin-react-hooks": "^2.1.1",
+        "graphql-tools": "^4.0.0",
         "jest": "^25.0.0",
         "jest-transform-graphql": "^2.1.0",
         "netlify-cli": "^2.15.0",
         "node-sass": "^4.12.0",
         "prettier": "^1.18.2",
-        "typescript": "^3.6.3"
+        "typescript": "^3.6.3",
+        "waait": "^1.0.2"
     },
     "eslintConfig": {
         "extends": [
@@ -100,6 +111,7 @@
         "verbose": true
     },
     "jest": {
+        "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
         "testEnvironment": "jsdom",
         "testPathIgnorePatterns": [
             "<rootDir>/node_modules/",
