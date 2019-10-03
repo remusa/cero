@@ -1,6 +1,9 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, Dispatch, SetStateAction, useState } from 'react'
 
-interface IContext {}
+interface IContext {
+    user: object
+    setUser: Dispatch<SetStateAction<object>>
+}
 
 const UserContext = createContext({} as IContext)
 
