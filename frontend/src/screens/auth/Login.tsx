@@ -1,15 +1,15 @@
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import * as yup from 'yup'
-import FormStyles from '../../components/styled/Form'
 import { SIGNIN_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import { emailValidation, passwordValidation } from '../../lib/validationSchemas'
 import Error from './../../components/ErrorMessage'
+import FormStyles from '../../components/styled/Form'
 
 const validationSchema = yup.object().shape({
     email: emailValidation,
@@ -47,13 +47,13 @@ const DemoStyles = styled.div`
     }
 `
 
-const Login = ({ history }: any) => {
+const Login = props => {
     const [user, setUser] = useState({ email: '', password: '' })
 
     const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION, {
         variables: user,
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
-        onCompleted: () => history.push('/fast'),
+        onCompleted: () => props.history.push('/fast'),
     })
 
     const handleSubmit = async ({ email, password }, actions) => {
