@@ -117,7 +117,7 @@ const Router: React.FC = () => (
         <FancyRoute path={ROUTES.FAST} component={FastPage} />
         <FancyRoute path={ROUTES.ENTER} component={SingleForm} />
         {/* <FancyRoute path={ROUTES.LOGIN}component={Login} />
-                        <FancyRoute path={ROUTES.REGISTER} component={Register} /> */}
+        <FancyRoute path={ROUTES.REGISTER} component={Register} /> */}
         <FancyRoute path={ROUTES.PROFILE} component={ProfilePage} />
         <FancyRoute path={ROUTES.REQUEST_RESET} component={RequestReset} />
         <FancyRoute path={ROUTES.RESET} component={Reset} />
