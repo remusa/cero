@@ -7,7 +7,11 @@ import Login from '../screens/auth/Login'
 import Error from './ErrorMessage'
 import Main from './Main'
 
-const PleaseSignIn = props => {
+interface IProps {
+    children: React.ReactNode
+}
+
+const PleaseSignIn: React.FC<IProps> = ({ children }) => {
     const { setUser } = useContext(UserContext)
 
     const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
@@ -35,7 +39,7 @@ const PleaseSignIn = props => {
 
     setUser(data.me)
 
-    return props.children
+    return children
 }
 
 PleaseSignIn.propTypes = {
