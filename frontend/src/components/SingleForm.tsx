@@ -5,7 +5,12 @@ import Register from './../screens/auth/Register'
 import Main from './Main'
 import './SingleForm.scss'
 
-function Mask({ changePage, text }) {
+interface IMask {
+    changePage: any
+    text: string
+}
+
+function Mask({ changePage, text }: IMask) {
     return (
         <div
             role="button"
@@ -24,7 +29,11 @@ Mask.propTypes = {
     text: PropTypes.string.isRequired,
 }
 
-const SingleForm = props => {
+interface ISingleForm {
+    props: any
+}
+
+const SingleForm = ({ props }: ISingleForm) => {
     const [page, setPage] = useState('login')
 
     const changePage = () => {
@@ -47,6 +56,7 @@ const SingleForm = props => {
                     {page === 'login' && (
                         <>
                             <Login className="form" {...props} />
+                            
                             <Mask changePage={changePage} text="Create an account" />
                         </>
                     )}
@@ -54,6 +64,7 @@ const SingleForm = props => {
                     {page === 'register' && (
                         <>
                             <Mask changePage={changePage} text="Login to your account" />
+
                             <Register className="form" {...props} />
                         </>
                     )}
