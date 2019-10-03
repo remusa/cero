@@ -156,7 +156,7 @@ StartButton.propTypes = {
     setStartDate: PropTypes.func.isRequired,
     setIsActive: PropTypes.func.isRequired,
     setDuration: PropTypes.func.isRequired,
-}e
+}
 
 interface IStopButton extends IStartButton {
     setEndDate: React.Dispatch<React.SetStateAction<string| Date>>
