@@ -1,6 +1,5 @@
 import casual from 'casual';
 
-// seed it so we get consistent results
 casual.seed(777);
 
 const fakeItem = () => ({

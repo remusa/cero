@@ -7,12 +7,12 @@
         "build": "react-scripts build",
         "test2": "react-scripts test",
         "eject": "react-scripts eject",
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix",
         "dev": "cross-env NODE_ENV=development react-scripts start",
         "test": "cross-env NODE_ENV=test npm run test:watch",
         "test:watch": "cross-env NODE_ENV=test jest --silent --watch",
         "test:coverage": "cross-env NODE_ENV=test jest --silent --coverage",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "deploy": "npm run build && npm run netlify:deploy",
         "netlify:deploy": "netlify deploy --dir=./build -p -m \"$(git log -1 --pretty=%B)\"",
         "backend": "cd .. && cd backend/ && npm run dev"
@@ -95,6 +95,7 @@
         ],
         "rules": {
             "react/jsx-filename-extension": [
+                1,
                 {
                     "extensions": [
                         ".ts",
@@ -111,7 +112,7 @@
         "verbose": true
     },
     "jest": {
-        "setupTestFrameworkScriptFile": "<rootDir>/jest.setup.js",
+        "setupTestFrameworkScriptFile": "<rootDir>/frontend/jest.setup.js",
         "testEnvironment": "jsdom",
         "testPathIgnorePatterns": [
             "<rootDir>/node_modules/",
