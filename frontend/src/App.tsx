@@ -7,7 +7,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import { ThemeProvider } from './data/ThemeContext'
 import { UserProvider } from './data/UserContext'
-import Routes from './Router'
+import Router from './Router'
 
 const AppStyles = styled.div`
     text-align: center;
@@ -42,7 +42,7 @@ const App: React.FC = () => (
             <AppStyles className="App">
                 <Header />
 
-                <Routes />
+                <Router />
                 {/* <AnimatedRoutes /> */}
 
                 <Footer />
