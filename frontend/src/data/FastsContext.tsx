@@ -1,9 +1,16 @@
 import React, { createContext, useState } from 'react'
 
+export interface IFast {
+    id: string
+    startDate: string
+    endDate: string
+    isActive: boolean
+}
+
 interface IFastsContext {
     activeFast: string
-    fasts: Array<object>
-    setFasts: React.Dispatch<React.SetStateAction<object[]>>
+    fasts: Array<IFast>
+    setFasts: React.Dispatch<React.SetStateAction<IFast[]>>
     setActiveFast: React.Dispatch<React.SetStateAction<string>>
 }
 
@@ -14,7 +21,7 @@ interface IProps {
 }
 
 const FastsProvider: React.FC<IProps> = ({ children }) => {
-    const [fasts, setFasts] = useState<Array<object>>([])
+    const [fasts, setFasts] = useState<IFast[]>([])
     const [activeFast, setActiveFast] = useState<string>('')
 
     return (

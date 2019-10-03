@@ -1,9 +1,10 @@
+import { differenceInHours } from 'date-fns'
 import React, { useContext, useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
-import { differenceInHours } from 'date-fns'
 import styled from 'styled-components'
+import Modal from '../../components/modal/Modal'
 import { FastsContext } from '../../data/FastsContext'
-import Modal from '../../components/Modal'
+import { IFast } from './../../data/FastsContext'
 
 const ChartWrapper = styled.div`
     position: relative;
@@ -20,8 +21,8 @@ const ChartWrapper = styled.div`
     }
 `
 
-function getFastData(fasts) {
-    const labels = []
+function getFastData(fasts: IFast[]) {
+    const labels: string[] = []
     // let count = 1
 
     const chartFasts = fasts.map(fast => {
@@ -30,10 +31,10 @@ function getFastData(fasts) {
         // if (count > 7) return
         // count++
 
-        const startDate = new Date(fast.startDate)
-        const endDate = new Date(fast.endDate)
-        const dayName = startDate.toString().split(' ')[0]
-        const dayNumber = startDate.toString().split(' ')[2]
+        const startDate: Date = new Date(fast.startDate)
+        const endDate: Date = new Date(fast.endDate)
+        const dayName: string = startDate.toString().split(' ')[0]
+        const dayNumber: string = startDate.toString().split(' ')[2]
 
         labels.push(`${dayName}/${dayNumber}`)
         return differenceInHours(endDate, startDate)
@@ -42,14 +43,14 @@ function getFastData(fasts) {
     return [chartFasts, labels]
 }
 
-const FastCharts = () => {
+const FastCharts: React.FC = () => {
     const { fasts } = useContext(FastsContext)
 
     const [chartFasts, chartLabels] = getFastData(fasts)
     const [d, setF] = useState(chartFasts)
     const [l, setL] = useState(chartLabels)
 
-    const [id, setId] = useState(null)
+    const [id, setId] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [isActive, setIsActive] = useState(false)
@@ -58,21 +59,25 @@ const FastCharts = () => {
 
     useEffect(() => {
         const [t1, t2] = getFastData(fasts)
+
         setF(t1)
         setL(t2)
     }, [fasts])
 
-    const toggleModal = e => setIsModalOpen(!isModalOpen)
+    const toggleModal = () => setIsModalOpen(!isModalOpen)
 
     // FastCharts.handleClickOutside = () => setIsModalOpen(false)
 
-    const handleClick = e => {
+    const handleClick = (e: any) => {
         if (!e[0]) return
-        const index = e[0]._index
+
+        const index: number = e[0]._index
+
         setId(fasts[index].id)
         setStartDate(fasts[index].startDate)
         setEndDate(fasts[index].endDate)
         setIsActive(fasts[index].isActive)
+
         toggleModal()
     }
 

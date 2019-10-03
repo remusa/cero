@@ -14,7 +14,8 @@ const TableContainerStyles = styled.div`
 
     table {
         width: 285px !important;
-    }
+    }import { IFast } from './../../data/FastsContext'
+
 
     @media all and (max-width: 500px) {
         margin-top: 8px;
@@ -22,13 +23,6 @@ const TableContainerStyles = styled.div`
         padding-bottom: 8px;
     }
 `
-
-interface IFast {
-    id: string
-    startDate: string
-    endDate: string
-    isActive: boolean
-}
 
 const FastTable: React.FC = () => {
     const { fasts } = useContext(FastsContext)
