@@ -55,6 +55,6 @@ const particlesOptions = {
     },
 }
 
-const ParticlesStyles = () => <Particles className='particles' params={particlesOptions} />
+const ParticlesStyles: React.FC = () => <Particles className='particles' params={particlesOptions} />
 
 export default ParticlesStyles
