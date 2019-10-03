@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { PropTypes } from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
-import styled from 'styled-components'
 import { addHours, format } from 'date-fns'
+import { PropTypes } from 'prop-types'
+import React, { useContext, useEffect, useState } from 'react'
+import styled from 'styled-components'
+import Error from '../../components/ErrorMessage'
 import { FastsContext } from '../../data/FastsContext'
 import { UserContext } from '../../data/UserContext'
 import { CREATE_FAST_MUTATION, STOP_FAST_MUTATION } from '../../gql/FastMutation'
 import { ALL_FASTS_QUERY } from '../../gql/FastQuery'
-import { timeDifference } from '../../lib/timeConversion'
 import playIcon from '../../static/icons/play.svg'
 import stopIcon from '../../static/icons/stop.svg'
 import tomato from '../../static/icons/tomato.svg'
-import Error from '../../components/ErrorMessage'
 import TimerDuration from './TimerDuration'
 
 const ContainerStyles = styled.div`
@@ -104,13 +103,21 @@ const ButtonStyles = styled.button`
     }
 `
 
-const TimerIcon = () => (
-    <div className='container__header'>
-        <img src={tomato} alt='Pomodoro Clock' className='container__header__icon' />
+const TimerIcon: React.FC = () => (
+    <div className="container__header">
+        <img src={tomato} alt="Pomodoro Clock" className="container__header__icon" />
     </div>
 )
 
-const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => {
+interface IStartButton {
+    id: string
+    setId: React.Dispatch<React.SetStateAction<string>>
+    setStartDate: React.Dispatch<React.SetStateAction<string | Date>>
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+    setDuration: React.Dispatch<React.SetStateAction<string | number>>
+}
+
+const StartButton: React.FC<IStartButton> = ({ setId, setStartDate, setIsActive, setDuration }) => {
     const [createFast, { error, loading }] = useMutation(CREATE_FAST_MUTATION, {
         variables: { startDate: new Date(), isActive: true },
         refetchQueries: [{ query: ALL_FASTS_QUERY }],
@@ -119,23 +126,25 @@ const StartButton = ({ setId, setStartDate, setIsActive, setDuration }) => {
     if (error) return <Error error={error} />
 
     return (
-        <div className='container__buttons'>
+        <div className="container__buttons">
             <ButtonStyles
-                className='container__buttons__button'
+                className="container__buttons__button"
                 onClick={async () => {
                     await createFast().then(res => {
                         setId(res.data.createFast.id)
                     })
+
                     setIsActive(true)
                     setDuration(0)
                     setStartDate(new Date())
+
                     localStorage.setItem('active', true)
                 }}
             >
                 <img
                     src={playIcon}
-                    alt='startStop-icon'
-                    className='container__buttons__button__icon'
+                    alt="startStop-icon"
+                    className="container__buttons__button__icon"
                 />
             </ButtonStyles>
         </div>
@@ -147,9 +156,20 @@ StartButton.propTypes = {
     setStartDate: PropTypes.func.isRequired,
     setIsActive: PropTypes.func.isRequired,
     setDuration: PropTypes.func.isRequired,
+}e
+
+interface IStopButton extends IStartButton {
+    setEndDate: React.Dispatch<React.SetStateAction<string| Date>>
 }
 
-const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsActive }) => {
+const StopButton: React.FC<IStopButton> = ({
+    id,
+    setId,
+    setStartDate,
+    setEndDate,
+    setDuration,
+    setIsActive,
+}) => {
     const [stopFast, { error, loading }] = useMutation(STOP_FAST_MUTATION, {
         variables: { id },
         refetchQueries: [{ query: ALL_FASTS_QUERY }],
@@ -158,23 +178,25 @@ const StopButton = ({ id, setId, setStartDate, setEndDate, setDuration, setIsAct
     if (error) return <Error error={error} />
 
     return (
-        <div className='container__buttons'>
+        <div className="container__buttons">
             <ButtonStyles
-                className='container__buttons__button'
+                className="container__buttons__button"
                 onClick={async () => {
                     await stopFast()
+
                     setId('')
                     setStartDate('')
                     setEndDate('')
                     setDuration(0)
                     setIsActive(false)
+
                     localStorage.setItem('active', false)
                 }}
             >
                 <img
                     src={stopIcon}
-                    alt='startStopIcon'
-                    className='container__buttons__button__icon'
+                    alt="startStopIcon"
+                    className="container__buttons__button__icon"
                 />
             </ButtonStyles>
         </div>
@@ -190,12 +212,12 @@ StopButton.propTypes = {
     setDuration: PropTypes.func.isRequired,
 }
 
-const FastTimer = props => {
+const FastTimer: React.FC = () => {
     const { activeFast } = useContext(FastsContext)
     const { user } = useContext(UserContext)
 
     const [id, setId] = useState(activeFast ? activeFast.id : '')
-    const [startDate, setStartDate] = useState(activeFast ? activeFast.startDate : '')
+    const [startDate, setStartDate] = useState<string | Date> (activeFast ? activeFast.startDate : '')
     const [endDate, setEndDate] = useState(activeFast ? activeFast.endDate : '')
     const [isActive, setIsActive] = useState(activeFast ? activeFast.isActive : false)
     const [duration, setDuration] = useState(activeFast ? activeFast.duration : '')
@@ -218,7 +240,7 @@ const FastTimer = props => {
     )
 
     return (
-        <ContainerStyles className='container'>
+        <ContainerStyles className="container">
             {!isActive && <TimerIcon />}
 
             {!isActive ? (
