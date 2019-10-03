@@ -65,7 +65,11 @@ const ProgresBarStyles = styled.div`
     }
 `
 
-const ProgressBar = ({ width }) => (
+interface IProgressBar {
+    width: number
+}
+
+const ProgressBar: React.FC<IProgressBar> = ({ width }) => (
     <ProgresBarStyles>
         <div className="progress-bar">
             <div data-size={width} className="progress" />
@@ -90,7 +94,7 @@ const Loading: React.FC<IProps> = ({ text, speed }) => {
 
     /* eslint-disable */
     useEffect(() => {
-        const stopper = `${text}...`
+        const stopper: string = `${text}...`
 
         const interval = window.setInterval(() => {
             if (currText === stopper) {
@@ -109,9 +113,9 @@ const Loading: React.FC<IProps> = ({ text, speed }) => {
     }, [])
     /* eslint-enable */
 
-    const progressBars = document.querySelectorAll('.progress')
+    const progressBars: NodeListOf<Element> = document.querySelectorAll('.progress')
 
-    progressBars.forEach(bar => {
+    progressBars.forEach((bar: Element) => {
         const { size } = bar.dataset
         bar.style.width = `${size}%`
     })
