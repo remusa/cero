@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
+import FormStyles from '../../components/styled/Form'
 import { REQUEST_RESET_MUTATION } from '../../gql/UserMutation'
 import { emailValidation } from '../../lib/validationSchemas'
 import Error from './../../components/ErrorMessage'
 import Main from './../../components/Main'
-import FormStyles from '../../components/styled/Form'
 
 const validationSchema = yup.object().shape({
     email: emailValidation,

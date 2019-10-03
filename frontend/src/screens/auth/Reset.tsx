@@ -8,9 +8,9 @@ import * as yup from 'yup'
 import { RESET_MUTATION } from '../../gql/UserMutation'
 import { CURRENT_USER_QUERY } from '../../gql/UserQuery'
 import { confirmPasswordValidation, passwordValidation } from '../../lib/validationSchemas'
+import Error from './../../components/ErrorMessage'
 import Main from './../../components/Main'
 import FormStyles from './../../components/styled/Form'
-import Error from './../../components/ErrorMessage'
 
 const validationSchema = yup.object().shape({
     password: passwordValidation,

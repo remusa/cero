@@ -52,7 +52,7 @@ export interface IUser {
     password: string
 }
 
-const Login = props => {
+const Login: React.FC = props => {
     const [user, setUser] = useState<IUser>({ email: '', password: '' })
 
     const [signin, { error, loading }] = useMutation(SIGNIN_MUTATION, {
