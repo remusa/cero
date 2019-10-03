@@ -29,11 +29,7 @@ Mask.propTypes = {
     text: PropTypes.string.isRequired,
 }
 
-interface ISingleForm {
-    props: any
-}
-
-const SingleForm = ({ props }: ISingleForm) => {
+const SingleForm: React.FC = props => {
     const [page, setPage] = useState('login')
 
     const changePage = () => {
@@ -56,7 +52,7 @@ const SingleForm = ({ props }: ISingleForm) => {
                     {page === 'login' && (
                         <>
                             <Login className="form" {...props} />
-                            
+
                             <Mask changePage={changePage} text="Create an account" />
                         </>
                     )}
