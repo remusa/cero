@@ -16,7 +16,11 @@ const MainStyles = styled.main`
     }
 `
 
-const Main = ({ children }) => <MainStyles>{children}</MainStyles>
+interface IProps {
+    children: React.ReactNode
+}
+
+const Main: React.FC<IProps> = ({ children }) => <MainStyles>{children}</MainStyles>
 
 Main.propTypes = {
     children: PropTypes.any,
