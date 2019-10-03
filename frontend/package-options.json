@@ -1,0 +1,31 @@
+"//moduleNameMapper": {
+    "\\.(css|sass|scss|less)$": "<rootDir>/src/test/jest/__mocks__/styleMock.js",
+    "\\.(svg|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/test/jest/__mocks__/fileMock.js"
+}
+
+
+ "^.+.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+        },
+
+
+
+
+        "transform": {
+            "\\.(gql|graphql)$": "jest-transform-graphql",
+            ".*": "babel-jest",
+            "^.+\\.js?$": "babel-jest",
+            "^.+\\.jsx?$": "babel-jest",
+            "^.+\\.ts?$": "babel-jest",
+            "^.+\\.tsx?$": "babel-jest",
+            ".+\\.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+        },
+        "moduleNameMapper": {
+            "^.+.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+        },
+
+
+
+        "moduleNameMapper": {
+            "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
+            "\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js"
+        },
