@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@apollo/react-hooks": "0.1.0-beta.10",
+        "@babel/runtime": "^7.6.2",
         "apollo-boost": "^0.4.4",
         "apollo-client": "^2.6.4",
         "chart.js": "^2.8.0",
@@ -48,10 +49,13 @@
         "yup": "^0.27.0"
     },
     "devDependencies": {
+        "@apollo/react-testing": "^3.1.2",
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/plugin-transform-runtime": "^7.6.2",
         "@babel/preset-typescript": "^7.6.0",
         "@testing-library/react": "^9.2.0",
+        "@types/enzyme": "^3.10.3",
         "@types/jest": "^24.0.18",
         "@types/node": "^12.7.9",
         "@types/nprogress": "^0.2.0",
@@ -105,23 +109,33 @@
             ]
         }
     },
-    "//": {
-        "setupFilesAfterEnv": [
-            "<rootDir>/src/jest.setup.js"
-        ],
-        "verbose": true
-    },
     "jest": {
-        "setupTestFrameworkScriptFile": "<rootDir>/frontend/jest.setup.js",
+        "verbose": true,
+        "setupFilesAfterEnv": [
+            "<rootDir>/jest.setup.js"
+        ],
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ],
         "testEnvironment": "jsdom",
         "testPathIgnorePatterns": [
             "<rootDir>/node_modules/",
             "<rootDir>/build/",
             "<rootDir>/dist/"
         ],
+        "moduleFileExtensions": [
+            "json",
+            "js",
+            "jsx",
+            "ts",
+            "tsx"
+        ],
         "transform": {
             "\\.(gql|graphql)$": "jest-transform-graphql",
-            ".*": "babel-jest"
+            ".*": "babel-jest",
+            "^.+\\.js?$": "babel-jest",
+            "^.+\\.ts?$": "babel-jest",
+            "^.+\\.tsx?$": "babel-jest"
         }
     },
     "babel": {
@@ -132,7 +146,8 @@
         ],
         "plugins": [
             "@babel/plugin-proposal-class-properties",
-            "@babel/plugin-syntax-dynamic-import"
+            "@babel/plugin-syntax-dynamic-import",
+            "@babel/transform-runtime"
         ]
     },
     "browserslist": [
