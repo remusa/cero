@@ -31,6 +31,7 @@ toast.configure({
     newestOnTop: true,
     closeOnClick: true,
     rtl: false,
+    pauseOnVisibilityChange: false,
     draggable: false,
     pauseOnHover: false,
 })
