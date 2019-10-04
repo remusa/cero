@@ -21,7 +21,7 @@ const signedInMocks = [
     },
 ]
 
-it.skip('should render the minimal header when logged out', async () => {
+it.only('should render the minimal header when logged out', async () => {
     const { getByText, container } = render(
         <MockedProvider mocks={notSignedInMocks} addTypename={false}>
             <Navigation />
