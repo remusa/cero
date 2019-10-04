@@ -19,11 +19,6 @@ const AppStyles = styled.div`
     grid-template-areas: 'header header header' '. main .' 'footer footer footer';
 `
 
-// if (process.env.NODE_ENV !== 'production') {
-//     const { whyDidYouUpdate } = require('why-did-you-update')
-//     whyDidYouUpdate(React)
-// }
-
 toast.configure({
     position: 'bottom-right',
     autoClose: 3000,
@@ -31,7 +26,7 @@ toast.configure({
     newestOnTop: true,
     closeOnClick: true,
     rtl: false,
-    pauseOnVisibilityChange: false,
+    // pauseOnVisibilityChange: false,
     draggable: false,
     pauseOnHover: false,
 })
