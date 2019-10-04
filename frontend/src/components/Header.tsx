@@ -216,7 +216,7 @@ const Navigation: React.FC = () => {
 
                 return (
                     <HeaderStyles>
-                        <nav id='navigation'>
+                        <nav>
                             <div
                                 className='nav__toggle'
                                 style={toggled ? { marginBottom: '4px' } : { marginBottom: 0 }}

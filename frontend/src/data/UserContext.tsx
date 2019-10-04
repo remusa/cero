@@ -19,7 +19,7 @@ interface Props {
     children: HTMLElement
 }
 
-const UserProvider: React.FC = ({ children }) => {
+const UserProvider: React.FC<Props> = ({ children }) => {
     const [user, setUser] = useState<IUser>({
         id: '',
         email: '',

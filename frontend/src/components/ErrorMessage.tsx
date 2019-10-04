@@ -21,10 +21,10 @@ const ErrorStyles = styled.div`
 `
 
 interface IDisplayError {
-    error: ApolloError | null
+    error: ApolloError
 }
 
-const DisplayError: React.FC = ({ error }) => {
+const DisplayError = ({ error }: IDisplayError) => {
     if (!error || !error.message) {
         return null
     }
@@ -43,7 +43,6 @@ const DisplayError: React.FC = ({ error }) => {
             </ErrorStyles>
         ))
     }
-
     return (
         <ErrorStyles>
             <p data-test="graphql-error">
