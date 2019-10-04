@@ -1,6 +1,5 @@
 // const { forwardTo } = require('prisma-binding')
 const argon2 = require('argon2')
-// import * as argon2 from "argon2";
 const jwt = require('jsonwebtoken')
 const { randomBytes } = require('crypto')
 const { promisify } = require('util')
