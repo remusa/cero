@@ -121,7 +121,7 @@ interface IProps {
     children: HTMLElement
 }
 
-const ThemeProvider: React.FC<IProps> = ({ children }) => {
+const ThemeProvider: React.FC = ({ children }) => {
     const [currentTheme, setCurrentTheme] = useState<string>(
         localStorage.getItem('theme') || 'light'
     )
