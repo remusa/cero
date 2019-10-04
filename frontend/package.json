@@ -133,12 +133,12 @@
             "tsx"
         ],
         "transform": {
-            "\\.(gql|graphql)$": "jest-transform-graphql",
             ".*": "babel-jest",
             "^.+\\.js?$": "babel-jest",
             "^.+\\.jsx?$": "babel-jest",
             "^.+\\.ts?$": "babel-jest",
-            "^.+\\.tsx?$": "babel-jest"
+            "^.+\\.tsx?$": "babel-jest",
+            "\\.(gql|graphql)$": "jest-transform-graphql"
         },
         "moduleNameMapper": {
             "\\.(css|less)$": "identity-obj-proxy",
