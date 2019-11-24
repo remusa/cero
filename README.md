@@ -16,13 +16,13 @@ Cero is a fasting tracker built in React, Node.js (Express.js), GraphQL and Type
 ### Front-end
 
 * TypeScript
-* React (with hooks!)
+* React 16 (with hooks!)
 * Apollo Client for GraphQL queries and mutations
 * Context API for light/dark themes and authentication
 * Styling with styled-components and SASS
-* Formik + Yup for easy form management and validation
+* Formik + Yup for form management and validation
 * React-Spring for animations
-* Deploying to Netlify
+* Deployed to Netlify
 * Charting done with Chart.js
 * Other awesome packages used: date-fns, react-tostify, react-spinners, react-particles-js and nprogress.
 
